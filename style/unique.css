@@ -37,6 +37,8 @@ html {
 	width: 12px;
 }
 
+#onlineCount * {border-radius: 5px !important;} 
+
 *::-webkit-scrollbar-track {
 	background: #39304f;
 }
