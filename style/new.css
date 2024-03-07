@@ -1,0 +1,388 @@
+/*
+ * Stylesheet for new useable elements
+ */
+
+.scrambled,
+scrambled {
+	direction: rtl;
+	unicode-bidi: bidi-override;
+}
+
+.flipped,
+flip {
+	transform: rotate(180deg);
+}
+
+always,
+.always {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: white;
+	color: black;
+	z-index: 20;
+}
+
+bottom,
+[bottom]{
+		position: fixed; 
+		bottom:0%;
+}
+
+shadow,
+.shadow {
+	box-shadow:
+		0 4px 8px 0 rgba(0, 0, 0, 0.2),
+		0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+textShadow,
+.textShadow {
+	text-shadow:
+		1px 1px 2px black,
+		0 0 25px blue,
+		0 0 5px darkblue;
+}
+
+reflect,
+.reflect,
+rf,
+.rf,
+[reflect],
+mirror,
+.mirror,
+[mirror] {
+	-webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+}
+
+dosShadow,
+.dosShadow {
+	color: black;
+	font-family: "Bound";
+	padding: 10px;
+	background-color: white;
+	border: black 3px solid;
+	box-sizing: border-box;
+	box-shadow: 5px 5px;
+	width: min-content;
+}
+
+glow,
+.glow {
+	box-shadow: 19px 19x 10px red;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+@keyframes blinkBorder {
+	0% {
+		backdrop-filter: hue-rotate(0deg) contrast(150%);
+	}
+
+	50% {
+		backdrop-filter: hue-rotate(180deg) contrast(150%);
+	}
+
+	100% {
+		backdrop-filter: hue-rotate(360deg) contrast(150%);
+	}
+}
+
+shadow {
+	text-shadow: 4px 3px 2px rgba(75, 7, 43, 0.6);
+}
+
+rotator {
+	position: relative;
+	display: block;
+	block-size: max-content;
+	width: max-content;
+	transform-origin: 150% 150%;
+	animation: rotatePoint 5s linear infinite;
+}
+
+@keyframes rotatePoint {
+	from {
+		transform: rotate(360deg);
+	}
+
+	50% {
+		transform: rotate(180deg);
+	}
+}
+
+rotator3D,
+.rotator3D,
+r3,
+.r3,
+[r3],
+spin,
+spinning,
+.spin,
+.spinning,
+[spin],
+r3d,
+[r3d] {
+	perspective: 650px;
+	position: relative;
+	display: block;
+	block-size: max-content;
+	width: max-content;
+	transform-origin: 50% 50%;
+	animation: rotateY 5s linear infinite;
+}
+
+@keyframes rotateY {
+	from {
+		transform: perspective(1000px) rotateY(0deg);
+	}
+
+	to {
+		transform: perspective(1000px) rotateY(360deg);
+	}
+}
+
+colorful,
+.colorful {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 5s ease infinite;
+	height: 100vh;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+flashlight,
+.flashlight,
+fs,
+.fs,
+[fs] {
+	background: radial-gradient(circle, white 0%, transparent 50%);
+	background-size: 400% 400%;
+	animation: gradient 5s ease infinite;
+	height: 100vh;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+ns,
+.ns,
+[ns] {
+	text-shadow: none;
+}
+
+test,
+.test {
+	font-size: x-large;
+	font-family: sans-serif;
+	text-shadow: none;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+[curBlock] {
+	cursor: url(../cursor/block.cur"),
+		auto;
+}
+
+sauce,
+[sauce] {
+	background: url(https://www.fineberry.ca/uploads/3/2/3/0/32309911/apple-paste-apple-puree-canadian-supplier-bulk-buy-wholesale-1_orig.jpg);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+bouy,
+.bouy,
+buoy,
+.buoy,
+[buoy] {
+	position: relative;
+	width: 100px;
+	height: 100px;
+	animation: bouyAnim 8s infinite alternate ease-in-out;
+}
+
+[flicker],
+flicker {
+	text-shadow: 0 0 4px #fff;
+	animation: flicker 4s infinite 8s;
+}
+
+@keyframes flicker {
+	0% {
+		opacity: 0.5;
+	}
+
+	5% {
+		opacity: 0.7;
+	}
+
+	7% {
+		opacity: 0.3;
+	}
+
+	9% {
+		opacity: 1;
+	}
+
+	10% {
+		opacity: 0.8;
+	}
+
+	11% {
+		opacity: 1;
+	}
+
+	40% {
+		opacity: 0.7;
+	}
+
+	70% {
+		opacity: 0.6;
+	}
+
+	100% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes bouyAnim {
+	0% {
+		/*
+						transform: translate(0, 10px);*/
+		bottom: 10px;
+	}
+
+	100% {
+		/*
+						transform: translate(0, -10px);*/
+		bottom: -10px;
+	}
+}
+
+coomer,
+.coomer {
+	text-shadow:
+		1px 0 0 black,
+		0 1px 0 black,
+		-1px 0 0 black,
+		0 -1px 0 black;
+	color: lime;
+	font-family: coomer, sans-serif;
+	/*GMOD font*/
+}
+
+blur,
+.blur,
+[blur],
+spoiler,
+.spoiler,
+[spoiler] {
+	filter: blur(8px);
+	transition: all 0.2s;
+
+	:hover {
+		filter: blur(0px);
+	}
+}
+[extrablur]{
+	filter: blur(2rem);
+	transition: all 1s;
+
+}
+
+.blur:hover,
+blur:hover,
+[spoiler]:hover,
+[blur]:hover,
+spoiler:hover,
+[extrablur]:hover,
+.spoiler:hover {
+	filter: blur(0px);
+}
+
+.important,
+imp {
+	background-color: yellow;
+	color: black;
+}
+
+center,
+[center] {
+	text-align: center;
+	width: 80%;
+	padding: auto;
+}
+
+danger {
+	background-color: #ffdddd;
+	border-left: 6px solid #f44336;
+	color: black;
+}
+
+success {
+	background-color: #ddffdd;
+	border-left: 6px solid #04aa6d;
+	color: black;
+}
+
+info {
+	background-color: #e7f3fe;
+	border-left: 6px solid #2196f3;
+	color: black;
+}
+
+warning {
+	background-color: #ffffcc;
+	border-left: 6px solid #ffeb3b;
+	color: black;
+}
+
+
+/***--- properties ---***/
+[noicon] {
+	text-decoration: underline;
+}
+
+[novis] {
+	display: none;
+}
+
+[novis]::before {
+	content: "\213B";
+	display: inline;
+}
+[nodraw] {
+	display: none;
+}
+
+[javascript]::before,
+[js]::before {
+	content: "\26FE [JS]";
+}
+
+[java]::before {
+	content: "\2615 [Java]";
+}
+
+omit{
+	display:none;
+}

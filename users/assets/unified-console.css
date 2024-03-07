@@ -1,0 +1,53 @@
+/* UNIFIED CONSOLE THEME - MaximusMiller2*/
+
+.message{
+ background-color: black;
+ font-family: Coomer;
+ background-image: none;
+ color: white;
+ text-shadow: none;
+ font-size: 15px;
+ border-radius: 0px;
+}
+.message button{
+ background-color: black !important;
+ font-family: Coomer;
+ color: white !important;
+ outline: solid white;
+ border-radius: 0px;
+}
+abbr {display: none;}
+.message:has(.ping) { background-color: white !important;color: black !important;}
+html{background-color:black;background-image: none;}
+#menu{border-radius: 0px; border-color: white;background-color: black;border-width: 5px;border-style:solid;}
+
+
+/* Mobile text box at bottom */
+		#soapMode { position:fixed; bottom:0;left:0;width:120%;}
+		#menu{backdrop-filter:none;}html{margin-bottom: 50px;}
+
+[reflect]{
+ -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.0));
+}
+
+        /* Transparent Message Box */
+          #soapMode {
+ background-color: black;
+ font-family: Coomer;
+ background-image: none;
+ color: white;
+ text-shadow: none;
+ font-size: 15px;
+ border-radius: 0px;
+        }
+h1{
+ color: white; text-shadow: none; background-color: #1c1c1c;font-family: Coomer;
+} 
+
+summary{
+ font-family: Coomer;background-color: #1c1c1c; border: none;
+}
+
+#status{
+ color: white !important; font-family: Coomer; background: none !important;
+}

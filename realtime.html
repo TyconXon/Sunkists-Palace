@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Realtime Text</title>
+	</head>
+	<body>
+		<h1>Realtime typing</h1>
+
+
+		<script src="/socket.io/socket.io.js" nodraw></script>
+		<script src='script/realtime.js'></script>
+		<script>
+
+			var orange = document.createElement("style");
+
+			orange.innerHTML = window.localStorage.getItem("style");
+			orange.setAttribute('nodraw', true);
+			document.body.appendChild(orange);
+
+		</script>
+	</body>
+</html>

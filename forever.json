@@ -1,0 +1,7 @@
+{
+	"secondary" : [],
+	"tertiary" : [],
+	"devtest" : [
+		"<div id='splash' class='message splash console'> Tell me if you see this</div>"
+	]
+}

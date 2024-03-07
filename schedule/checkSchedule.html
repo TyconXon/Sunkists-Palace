@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>QSchedule</title>
+	
+
+	<link rel="icon" type="image/x-icon" href="Assets/Images/favicon.png">
+	<style>
+		body{
+			background-image: url("Assets/Images/background.png");
+			background-attachment: fixed;
+			background-size: 20%;
+			font-size: 250%;
+			image-rendering:auto;
+		}
+		#Main{
+			border: 2px;
+			border-style: ridge;
+			background-color: rgba(32, 51, 255, 0.516);
+			backdrop-filter: blur(2px);
+			background-image: url('Assets/Images/glasswindow069a_normal.png');
+
+
+			padding-left: 5%; padding-right: 5%;
+			padding-top: 0.1%;
+			padding-bottom: 0.1%;
+			margin: 0.1%;
+
+
+		}	
+
+
+		#Options{
+			border: 2px;
+			border-style: ridge;
+			background-color: rgba(255, 0, 191, 0.5);
+			backdrop-filter: blur(2px);
+			/*filter:invert(80%);*/
+			margin-top: 100px;
+			padding: 5%;
+			font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+
+
+		}	
+
+		.input{
+			border-style: dashed;
+			padding: 2%;
+			background:
+				radial-gradient(black 15%, transparent 16%) 0 0,
+				radial-gradient(black 15%, transparent 16%) 8px 8px,
+				radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+				radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+				background-color:#282828;
+				background-size:16px 16px;
+			color: aliceblue;
+		}
+		.encap{
+			border-style:inset;
+			padding: 2%;
+			background:
+				linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+				linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+				linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+				linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+				linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+				linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+				background-color: #131313;
+				background-size: 20px 20px;
+			color: aliceblue;
+		}
+		.encap > button{
+			font-size: 70%;
+		}
+		.input > p{
+			font-size: 40%;
+			break-after: avoid;
+		}
+		.input > input, select {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			padding: 0.21%;
+			vertical-align:middle;
+		}
+
+
+		#Time{
+			text-align: center;
+			font-size: 200%;
+			font-family: 'Courier New', Courier, monospace;
+			font-style: oblique;
+		}
+		#Clock{
+			text-align: center;
+			color:#ff0000;
+			background-color: #29010185;
+			font-family: 'Courier New', Courier, monospace;
+			font-size: 350%;
+			padding: -40%;
+			font-weight: bold;
+			text-shadow: 0 0px 15px red;
+		}
+		#mainTitleHeader{
+			break-after:avoid;
+			white-space: nowrap;
+			display: inline-block;
+			font-family: 'Courier New', Courier, monospace;
+
+		}
+
+		#Specifics{
+			white-space: nowrap;
+			text-align: right;
+			right: 40px;
+			float: right;
+			font-family: 'Courier New', Courier, monospace;
+			background-color: rgba(73, 208, 208, 0.409);
+		} 
+
+		#credit{
+			opacity: 64%;
+		}
+		button{
+			border-style:double;
+			border-color: rgb(108, 154, 139);
+			border-radius: 5px;
+
+			font-size: medium;
+			backdrop-filter: blur(2px);
+
+			background-color: rgba(214, 245, 245, 0.655);
+			filter:drop-shadow(30%);
+
+			transition-duration: 0.05s;
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		button:hover{
+			transform: translateY(-3px);
+		}
+		button:active{
+			transform: translateY(6px);
+		}
+		#credit{
+			background:
+				linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+				linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+				linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+				linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+				linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+				linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+				background-color: #131313;
+				background-size: 20px 20px;
+				background-attachment: fixed;
+			color: azure;
+			font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+			text-align: center;
+		}
+		#sting{
+			border-image-slice:6 5 5 5 fill;
+			border-image-width:10px 10px 10px 10px;
+			border-image-outset:0px 0px 0px 0px;
+			border-image-repeat:round round;
+			border-style:solid;
+			color: blue;
+			font-family: 'Courier New', Courier, monospace;
+		}
+	</style>
+	
+
+</head>
+<body id="html.body">
+	<div id="Main"><h1 id="DeleteOnJavascript">Error! Javascript not loaded... Did you unzip the file yet?</h1>
+		
+		<h1 id="Clock">Clock (id="Clock")</h1>
+		<h2 id="Time">Time left (id="Time")</h2>
+		
+		<div style="white-space: nowrap;">
+			<h2 id="mainTitleHeader">Class (id="mainTitleHeader)</h2> 
+
+			<h2 id="Specifics">Class times (id="Specifics")</h2>
+		</div>
+		<h2 id="battery" hidden>Battery</h2>
+
+	</div>
+	<div id="Options">
+		<div id="schedType">
+			<div class="input">
+				<h3 id="schedTypeDisplay">PM blocks</h3>
+				<button onclick="schedType = 'PM';sType.innerText = 'PM blocks'">PM</button>
+				<button onclick="schedType = 'AM';sType.innerText = 'AM blocks'">AM</button>
+				<button onclick="schedType = 'PERIODS';sType.innerText = 'Periods only'">Only periods</button>
+				<button onclick="schedType = 'BLOCKS';sType.innerText = 'Blocks only'">Only blocks</button>
+			</div>
+			<div class="encap">
+			<h3>Decor</h3>
+				<div id="input.bgcolor.div" style="border-style: dashed;" class="input">
+
+					<label for="Background color">Panel Background color:</label>
+						<input type="color" name="Background color" id="input.bgcolor"><br>
+					<label for="Color Transparency">Panel Transparency:</label>
+						<input type="range" name="Color Transparency" id="input.bgcolor.transparency" value="51.6"><br>
+					<label for="Blur">Panel Blur (0-10):</label>
+						<input type="range" name="Blur" id="input.bgcolor.blur" min="0" max="10" value="2"><br>
+					<label for="panelimg">Panel image:</label>
+						<input type="file" name="panelimg" id="input.panelimg" accept="image/*" >
+						<p>Transparency works better when embedded into photo</p>
+					<label for="glowclock">Clock glow:</label>
+						<input type="range" name="glowclock" id="glowclock" max="100" step="1" value="15"> <br>
+					<label for="clockcolor">Clock Color:</label>
+						<input type="color" name="clockcolor" id="clockcolor" value="#ff0000">
+						<label for="bgclockcolor">Background:</label>
+						<input type="color" name="bgclockcolor" id="bgclockcolor" value="#29010185">
+						<label for="bgtrans">Transparency:</label>
+						<input type="range" name="bgtrans" id="clocktrans" min="0" max="1" step="0.1" value="1">
+							
+				</div>
+				<br>
+				<div id="input.bgimg.div" style="border-style: dashed;" class="input">
+					<label for="bgimg">Background image:</label>
+						<input type="file" name="bgimg" id="input.bgimg" accept="image/*" >	
+						<br>
+						<label for="repeat-type">Tile type:</label>
+						<select name="repeat-type" id="input.bgimg.repeat">
+							<option value="repeat">Tile on X and Y</option>
+							<option value="repeat-x">Tile only on X</option>
+							<option value="repeat-y">Tile only on Y</option>
+							<option value="no-repeat">Don't tile</option>
+						</select>
+
+						<label for="bgatt">Attachment:</label>
+						<select name="bgatt" id="input.bgimg.attachment">
+							<option value="scroll">Normal</option>
+							<option value="fixed">Attached to viewspace</option>
+							<option value="local">idk lol</option>
+						</select>
+
+						<label for="bgfilter">Filtering Mode</label>
+						<select name="bgfilter" id="bgfilter">
+							<option value="pixelated">Pixelated (Nearest)</option>
+							<option value="crisp-edges">Crisp-edges</option>
+							<option value="auto">auto</option>
+							<option value="OptimizeQuality">Optimize for Quality</option>
+						</select>
+
+						<br>
+						<label for="size">Background Image Size:</label>
+						<input type="range" name="size" id="input.bgimg.size" max="100">
+
+						<br>
+						<label for="bgcolor">Background color:</label>
+						<input type="color" name="bgcolor" id="input.bgimg.bgcolor"><br>
+				</div>
+				<button onclick="inputBgcolorSubmit()" style="margin-left: 15%;">Submit</button>
+			</div>
+		</div>
+	</div>
+
+	
+	<p id="credit">By: Maximus Fayte Miller</p>
+	<p id="dev" style="background-color:aliceblue;color:black">No errors!</p>
+	<p id="sting" style="word-break: break-all;">No setting data saved..? Should have initialized...</p>
+	<img src="Assets/Images/regtest.png" id="cat" alt="What cat?">
+	<script src="Assets/Scripts/ScheduleObject.js"></script>
+	<script src="Assets/Scripts/checkSchedule.js"></script>	
+
+	<script>
+
+		var orange = document.createElement("style");
+
+		orange.innerHTML = window.localStorage.getItem("style");
+		orange.setAttribute('nodraw', true);
+		document.body.appendChild(orange);
+
+	</script>
+</body>
+</html>

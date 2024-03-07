@@ -1,0 +1,158 @@
+body{
+	background-image: url("Images/background.png");
+	background-attachment: fixed;
+	background-size: 20%;
+	font-size: 250%;
+	image-rendering:auto;
+}
+#Main{
+	border: 2px;
+	border-style: ridge;
+	background-color: rgba(32, 51, 255, 0.516);
+	backdrop-filter: blur(2px);
+	background-image: url('Images/glasswindow069a_normal.png');
+	
+
+	padding-left: 5%; padding-right: 5%;
+	padding-top: 0.1%;
+	padding-bottom: 0.1%;
+	margin: 0.1%;
+	
+
+}	
+
+
+#Options{
+	border: 2px;
+	border-style: ridge;
+	background-color: rgba(255, 0, 191, 0.5);
+	backdrop-filter: blur(2px);
+	/*filter:invert(80%);*/
+	margin-top: 100px;
+	padding: 5%;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	
+	
+
+}	
+
+.input{
+	border-style: dashed;
+	padding: 2%;
+	background:
+		radial-gradient(black 15%, transparent 16%) 0 0,
+		radial-gradient(black 15%, transparent 16%) 8px 8px,
+		radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+		radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+		background-color:#282828;
+		background-size:16px 16px;
+	color: aliceblue;
+}
+.encap{
+	border-style:inset;
+	padding: 2%;
+	background:
+		linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+		linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+		linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+		linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+		linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+		linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+		background-color: #131313;
+		background-size: 20px 20px;
+	color: aliceblue;
+}
+.encap > button{
+	font-size: 70%;
+}
+.input > p{
+	font-size: 40%;
+	break-after: avoid;
+}
+.input > input, select {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	padding: 0.21%;
+	vertical-align:middle;
+}
+
+
+#Time{
+	text-align: center;
+	font-size: 200%;
+	font-family: 'Courier New', Courier, monospace;
+	font-style: oblique;
+}
+#Clock{
+	text-align: center;
+	color:#ff0000;
+	background-color: #29010185;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 350%;
+	padding: -40%;
+	font-weight: bold;
+	text-shadow: 0 0px 15px red;
+}
+#mainTitleHeader{
+	break-after:avoid;
+	white-space: nowrap;
+	display: inline-block;
+	font-family: 'Courier New', Courier, monospace;
+
+}
+
+#Specifics{
+	white-space: nowrap;
+	text-align: right;
+	right: 40px;
+	float: right;
+	font-family: 'Courier New', Courier, monospace;
+	background-color: rgba(73, 208, 208, 0.409);
+} 
+
+#credit{
+	opacity: 64%;
+}
+button{
+	border-style:double;
+	border-color: rgb(108, 154, 139);
+	border-radius: 5px;
+
+	font-size: medium;
+	backdrop-filter: blur(2px);
+
+	background-color: rgba(214, 245, 245, 0.655);
+	filter:drop-shadow(30%);
+
+	transition-duration: 0.05s;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+button:hover{
+	transform: translateY(-3px);
+}
+button:active{
+	transform: translateY(6px);
+}
+#credit{
+	background:
+		linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+		linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+		linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+		linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+		linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+		linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+		background-color: #131313;
+		background-size: 20px 20px;
+		background-attachment: fixed;
+	color: azure;
+	font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	text-align: center;
+}
+#sting{
+	border-image-slice:6 5 5 5 fill;
+	border-image-width:10px 10px 10px 10px;
+	border-image-outset:0px 0px 0px 0px;
+	border-image-repeat:round round;
+	border-style:solid;
+	color: blue;
+	font-family: 'Courier New', Courier, monospace;
+}

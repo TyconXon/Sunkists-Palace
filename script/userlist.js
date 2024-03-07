@@ -1,0 +1,17 @@
+const VALID_USERS = [
+	"MaximusMiller2",
+	"Max",
+	"Afton",
+	"Boxel",
+	"Rat",
+	"Rat Goon",
+	"Sushi",
+	"Avonya",
+	"RoseGold",
+	"FatRhabbit",
+	"via",
+	"Sky",
+	"TheKingOfPlants",
+  "fffruittssaladd",
+  "Fr0ggy08",
+];

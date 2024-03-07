@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Boxel</title>
+		<link rel="preload" as="image" href="assets/boxel/images/bg2.jpeg" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa"/>
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" nodraw=""></script>
+		<script nodraw="">hljs.highlightAll();</script>
+	</head>
+	
+	<style>
+
+
+		
+		html {
+			height: 100%;
+			width: 100%;
+		}
+
+		body {
+			text-align: center;
+			margin: auto;
+			font-family: 'Comfortaa', comfortaa, arial;
+			color: white;
+			width: 50vmax;
+			padding-bottom: 30px;
+			background: #38576c url(assets/boxel/images/bg2.jpeg) no-repeat fixed center;
+			background-size: 100% 100%;
+		}
+
+		button {
+		background-color: rgba(240, 240, 240, 1);
+		color:black;
+		border: none;
+		border-radius:10px;
+		padding:10px 50px;
+		cursor: pointer;;
+		}
+		button:hover {
+			background-color: rgba(255, 255, 255, 1);
+		}
+		button:active {
+			background-color: rgba(230,230,230,1);
+			transform:translateY(2px);
+		}
+
+		.container{
+			background-color: rgba(0, 0, 0, 0.6);
+			margin-top: 20px;
+			padding: 40px;
+			border-radius: 10px;
+			text-align: left;
+			backdrop-filter:blur(5px);
+			/* background-image:radial-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)); */
+		}
+
+		img {
+			width: 30%;
+			transform-origin: 50% 55%;
+			transition: all 0.3s cubic-bezier(.60, .20, .50, .75);
+			filter: saturate(1.75) drop-shadow(0px 10px 0px rgba(0, 0, 0, 0.5));
+		}
+
+		img:hover {
+			transform: rotate(-15deg) scale(1.3);
+		}
+
+		#featuredQuote {
+			transition: cubic-bezier(.60, .20, .50, .75) 0.3s;
+			user: select initial;;
+		}
+
+		.animate {
+			opacity: 0%;
+		}
+
+		.row {
+			text-align:center;
+			cursor:pointer;
+		}
+
+		.row img {
+			cursor:pointer;
+			border-radius:25px;
+			margin:1%;
+			text: align center;
+			float:left;
+			width:28%;
+			height:28%;
+			aspect-ratio:1/1;
+			object-fit: contain;
+
+		}
+
+		.row img:active {
+			transform: rotate(-10deg) scale(1.1);
+			filter: saturate(1.75) drop-shadow(0px 10px 0px rgba(0, 0, 0, 0.5)) brightness(1.3);
+
+		}
+
+		.row input {float:left;width:1.5%;height:1.5%;}
+
+		textarea{
+			border-radius:5px;
+			height:100px;
+			background:rgba(0,0,0,0.5);
+			color: white;
+			width: 100%;
+			resize: none;
+		}
+
+		important {
+			position:absolute;
+			transform:translateX(-550%) translateY(100%) scale(2);
+		}
+
+		input[type=color] {
+			width:100%;
+			border-radius:5px;
+			background:rgba(0,0,0,0.5)
+		}
+
+		input[type=range] {
+			-webkit-appearance: none !important;
+			width: 100%;
+			height:10px;
+			background: rgba(0, 0, 0, 0.5);;
+			border-radius:25px;
+			padding: 0 10px;
+			margin-left:-10px;
+
+		}
+
+		input[type='range']::-webkit-slider-thumb {
+				-webkit-appearance: none !important;
+				background:rgba(80,80,80,1);
+				border-radius:25px;
+				height:25px;
+				width:50px;
+		}
+
+		hr {width:100%;}
+
+		summary {user-select:none;cursor: pointer;padding:30px 10px; border-radius:25px;}
+		summary:hover {
+			background-color:rgba(255,255,255,0.2);
+		}
+
+		#rainbg {
+			/* display:none; */
+			position: fixed;
+			width: 150%;
+			height: 150%;
+			left:0;
+			/* margin-top:-25%; */
+			z-index:-1;
+			filter:saturate(0) opacity(0.25) blur(2px) brightness(2);
+			transform:rotate(25deg);
+		}
+
+		#rainbg:hover {
+			transform: rotate(25deg);
+		}
+
+		.divider {opacity:25%;margin:20px 0}
+
+		p,h1,h2,h3,li {user-select:none;}
+
+		#giveCSS {width:100%;background-color:rgba(0,0,0,0.6);border:solid gray 0.5px;color:white;border-radius:3px}
+
+
+		
+	</style>
+	<style>
+
+
+		
+		.message {/*Every message has this class*/
+			line-height: 2.5;
+			/* Position Fix */
+			padding: 0.5% 5% 0.5% 0.5%;
+			border-radius: 5px;
+			transition: all 0.3s;
+			vertical-align: top;
+			image-rendering: auto;
+			white-space: pre-wrap;
+			/*Allow new lines*/
+			overflow-wrap: break-word;
+			font-family: 'Arial', monospace, emoji;
+
+			background-color: lightgray;
+			color: black;
+		}
+		.message:hover{
+			filter: brightness(0.9);
+		}
+
+		:root {
+			--iconsize: 35px;
+		}
+
+		.message::before {/*PFP settings*/
+			margin-bottom: -12.5px;
+			/* Position Fix */
+			border: ridge 2px white;
+			border-radius: 3px;
+			background-size: var(--iconsize) var(--iconsize);
+			display: inline-block;
+			width: var(--iconsize);
+			height: var(--iconsize);
+			content: "";
+			font-size: 100%;
+			/*Default image*/
+			background-image: url("https://media.tenor.com/m56fWQ4A39sAAAAd/survive-the-internet-jackbox.gif");
+
+		}
+
+
+		
+	</style>
+
+	<body onload="quote()">
+
+
+		<!-- Header Stuff -->
+		<div>
+			<img src="../images/rain.gif" id="rainbg">
+			<h1>Boxel</h1>
+			<hr />
+			<img src="assets/boxel/images/boxelIcon.png" alt="BoxelIcon" id="headerIcon" />
+			<hr />
+			<h3 id="featuredQuote"></h3>
+			<button onclick="quote()">Refresh</button>
+		</div>
+		
+		<!-- Who am I? -->
+		<div class="container">
+			<h3>Who am I?</h3>
+			<hr>
+			<p>I'm Boxel/Soapy/Whatever name you wanna use</p>
+		</div>
+		
+		<!-- What do I do? -->
+		<div class="container">
+			<h3>What do I do?</h3>
+			<hr />
+			<ul>
+				<li>
+					I do art, photography, and make videos for different platforms. I also
+					enjoy playing video games.
+				</li>
+			</ul>
+		</div>
+		
+		<!-- My interests -->
+		<div class="container">
+			<h3>My interests and likings</h3>
+			<hr />
+			<ul>
+				<li>LittleBigPlanet</li>
+				<li>Doctor Who</li>
+				<li>Art</li>
+				<li>Photography</li>
+				<li>Programming</li>
+				<li>Minecraft</li>
+				<li>Homebrew</li>
+			</ul>
+		</div>
+		
+		<!-- Quotes -->
+		<div class="container">
+			<h3>Quotes</h3>
+			<hr />
+			<p>
+				I'm not gonna add them all manually, just refresh the page to see the
+				featured quote
+			</p>
+		</div>
+		
+		<hr>
+		<!-- Textbox Editor -->
+		<div class="container" style="padding:10px 40px">
+			<important>&#9733;</important>
+			<details>
+				<summary> Textbox Editor</summary>
+				<br>
+				<br>
+				<div class="row">
+
+					<input type="radio" id="none" name="companion" value="none" oninput="giveCSS()" style="opacity:0;">
+					<label for="none"><img  src="assets/boxel/companions/none.png" alt="None"></label>
+					<input type="radio" id="ralsei" name="companion" value="ralsei.png" oninput="giveCSS()">
+					<label for="ralsei"><img  src="assets/boxel/companions/ralsei.png" alt="Ralsei"></label>
+					<input type="radio" id="sunkist" name="companion" value="sunkist.png" oninput="giveCSS()">
+					<label for="sunkist"><img src="assets/boxel/companions/sunkist.png" alt="Sunkist"></label>
+					<input type="radio" id="lloyd" name="companion" value="lloyd.png" oninput="giveCSS()">
+					<label for="lloyd"><img src="assets/boxel/companions/lloyd.png" alt="Lloyd"></label>
+					<input type="radio" id="boxel" name="companion" value="boxel.png" oninput="giveCSS()">
+					<label for="boxel"><img src="assets/boxel/companions/boxel.png" alt="Boxel"></label>
+					<input type="radio" id="adam" name="companion" value="adam.png" oninput="giveCSS()">
+					<label for="adam"><img src="assets/boxel/companions/adam.png" alt="Adam"></label>
+				
+				</div>
+					
+				<hr style="padding-top:30px;border-top:none;border-left:none;border-right:none;">
+				<p>Color</p>
+				<input type="color" id="boxCPicker" value="rgb(0,0,0)" oninput="giveCSS()">
+					
+				<hr class="divider">
+					
+				<p id="heightCount">Height : 7</p>
+				<p style="color:rgb(180,180,180);font-size:15px;font-family:monospace;">(Recommended 15)</p>
+				<input type="range" min="7" max="15" id="boxHPicker" value="7" oninput="updateVal(); giveCSS()">
+				
+				<hr class="divider">
+					
+				<!-- <p style="color:rgb(180,180,180);font-size:15px;font-family:monospace;">INSTRUCTIONS - Adjust settings to preferences, then click the companion you want to use. It will output your CSS in the textbox below, and you just need to paste that into the CSS Loader.</p> -->
+
+				<!-- <button id="giveCSS" onclick="giveCSS()">Submit</button> -->
+
+
+				
+				<textarea style="margin-top:30px;"rows="8" id="CSSOutput" placeholder="Settings first, then Companion." readonly"></textarea>
+			</details>
+		</div>
+		<hr>
+		
+		<!-- Style Editor -->
+		<!-- <div class="container" style="padding:10px 40px">
+			<important>&#9733;</important>
+			<details>
+				<summary> Style Editor </summary>
+				<p style="color:rgb(180,180,180);font-size:15px;font-family:monospace;">THIS IS A WORK IN PROGRESS AND MAY NOT FUNCTION. COME BACK LATER TO SEE IF THIS MESSAGE IS REMOVED.</p>
+				<br>
+				<br>
+				<p id="heightCount">Background Colour</p>
+				<input type="color">
+				<hr class="divider">
+				<p id="heightCount">Text Colour</p>
+				<input type="color">
+
+				<p class="message" id="messagePreview">This is a preview message.</p>
+				
+			</details>
+		</div>
+		<hr> -->
+		
+		<!-- Code Chunks -->
+		<div class="container">
+			<h3>My CSS Customizations</h3>
+			<hr>
+			<pre><code>
+				/* Transparent Message Box */
+					textarea {
+					background-image: linear-gradient(
+					rgba(0,0,0,0.3),
+					rgba(0,0,0,0.3)
+					)!important;
+					border-radius:3px;
+				}
+			</code></pre>
+			<hr style="border-color:gray;">
+			<pre><code>
+				/*Dusk Horizon Theme (Uses modified Bottom Mobile Textbox made by MaximusMiller2)*/
+				#soapMode {
+					margin:0.75vw!important;
+					position:fixed;
+					bottom:0;
+					left:0;
+					background-image: linear-gradient(
+						rgba(0,0,0,0.5),
+						rgba(0,0,0,0.5)
+					)!important;
+					padding:5px;
+					backdrop-filter:blur(5px);
+					width:98.5%!important;
+				}
+
+				html {
+					margin-bottom: 70px;
+					background: url(../images/.gif),
+						linear-gradient(180deg,
+						rgba(36, 63, 65, 1) 0%,
+						rgba(15, 33, 46, 1) 50%,
+						rgba(20, 19, 20, 1) 100%);
+				}
+
+				html a {
+					background: none repeat scroll 0 0 rgba(0,0,0,0.5);
+					padding:10px;
+					color:white;
+					border-radius:5px;
+				}
+
+				textarea {
+					background-image:linear-gradient(
+						rgba(0,0,0,0.3),
+						rgba(0,0,0,0.3)
+					);
+				}
+
+				#menu {
+					user-select:none;
+					background: none repeat scroll 0 0 rgba(0,0,0,0.5);
+					backdrop-filter:none;
+				}
+
+				details {
+					color:white;
+					border:white;
+					backdrop-filter: blur(5px);
+					background-color: rgba(0, 0, 0, 0.3);
+				}
+
+				details button {
+					color:white;
+					background: none repeat scroll 0 0 rgba(0,0,0,0.5);
+					border: white;
+				}
+
+				details button:hover {
+					color:initial;
+					background: none repeat scroll 0 0 rgba(0,0,0,0.5);
+					border: initial;
+				}
+
+				details a {
+					display:none;
+					color:white;
+					background-color:rgba(0,0,0,0.5);
+					border: white;
+				}
+
+				#menuTitle {
+					display:inline;
+					background:none;
+				}
+
+				#status {
+					backdrop-filter:blur(3px)!important;
+					background: none repeat scroll 0 0 rgba(0,0,0,0.5);
+				}
+
+				#sCss, #sJsMenu {
+					background: none repeat scroll 0 0 
+					rgba(0,0,0,0.5)!important;
+					backdrop-filter:blur(8px);
+				}
+
+				.rightist,right {
+					color:white;
+					background: none repeat scroll 0 0 
+						 rgba(0,0,0,0.5)!important;
+					border: white!important;
+					font-family: 'Arial'!important;
+					text-shadow: none!important;
+				}
+
+				#lastRead {
+					display:none;
+					border-radius: 5px!important;
+					border-style: solid;
+					border-color: white;
+					border-width: 1px;
+					background-color: rgba(0,0,0,0.5);
+					text-align: center;
+				}
+
+				.console {background: none repeat scroll 0 0 rgba(0,0,0,0.5);}
+			</code></pre>
+		</div>
+
+		
+
+		<!-- Quotes Script -->
+		<script>
+
+
+			
+			const featuredQuote = document.getElementById("featuredQuote");
+			const quotes = [
+				'"That hit my uvula like a friggin bullet ÆUCK COUGH COUGH"',
+				'"B and a half?"',
+				'"Your grandma is too old to have opinions"',
+				'"Thahimemehmeemee wh-what did I just say"',
+				'"I was just testing the door"',
+				'"DANIEL PEMBERTONNN!!!!"',
+				'"Ah, hello Gordon!"',
+				"<i>*Community reference*</i>",
+				"<i>*Doctor Who reference*</i>",
+				`"Bruv ''swiftie'' sounds so dumb and why does Taylor Swift get her own word like why not call a Justin Bieber fan a Biebie"`,
+			];
+			
+			function quote() {
+				featuredQuote.className = "animate";
+				setTimeout(function () {
+					featuredQuote.innerHTML =
+						quotes[Math.floor(Math.random() * quotes.length)];
+					featuredQuote.className = "";
+				}, 1000);
+			}
+
+
+			
+		</script>
+		<!-- Textbox Editor Script -->
+		<script>
+
+
+			
+			function updateVal() {
+			document.getElementById('heightCount').innerHTML = 'Height : ' + document.getElementById('boxHPicker').value;
+		}
+
+		function giveCSS() {
+			if (document.querySelector('input[name=companion]:checked') == undefined || document.querySelector('input[name=companion]:checked') == none) {
+				document.getElementById('CSSOutput').value = 
+				"#soapMode {background:" + document.getElementById('boxCPicker').value + "80!important; background-size:auto 100%!important;height:" + document.getElementById('boxHPicker').value + "%!important;}";
+			}
+			else {
+				document.getElementById('CSSOutput').value = 
+				"#soapMode {background:" + document.getElementById('boxCPicker').value + "80 no-repeat url('users/assets/boxel/companions/" + document.querySelector('input[name=companion]:checked').value + "') right bottom!important; background-size:auto 100%!important;height:" + document.getElementById('boxHPicker').value + "%!important;}";
+			}
+		}
+
+
+			
+		</script>
+		
+	</body>
+	
+</html>

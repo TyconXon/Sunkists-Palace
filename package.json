@@ -1,0 +1,21 @@
+{
+  "name": "sunkist-server",
+  "version": "1.0.0",
+  "description": "A server where security vulnrabilities are ignored.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@replit/database": "^2.0.5",
+    "@types/node": "^18.0.6",
+    "busboy": "^1.6.0",
+    "discord.js": "^14.14.1",
+    "node-fetch": "^3.2.6",
+    "request": "^2.88.2",
+    "socket.io": "^4.7.2"
+  }
+}

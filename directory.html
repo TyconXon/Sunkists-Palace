@@ -1,0 +1,33 @@
+<html id="userindex">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Sunkist directory</title>
+	</head>
+	<body>
+
+		<h1>Sunkist-Palace.net directory</h1>
+
+		<directory>
+			<h2>IRC</h2>
+			<a href='/' >Server</a> <br>
+			<a href='/?slow' >Slow mode (takes less time to load & no auto update)</a> <br>
+			<a href='/?channel=secondary' >Channel: secondary</a> <br>
+			<a href='/?channel=devtest' >Channel: devtest</a> <br>
+			<h2>Other</h2>
+			<a href='./schedule/checkSchedule.html' >Schdeule</a> <br>
+			<a href='./realtime.html' >Realtime Text</a> <br>
+			<a href='./users/index.html' >User page index</a> <br>
+		</directory>
+		
+		<script>
+
+			var orange = document.createElement("style");
+
+			orange.innerHTML = window.localStorage.getItem("style");
+			orange.setAttribute('nodraw', true);
+			document.body.appendChild(orange);
+
+		</script>
+
+	</body>
+</html>

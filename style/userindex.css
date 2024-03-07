@@ -1,0 +1,50 @@
+body {
+  font-family: 'Arial';
+  text-align: center;
+  background-color: #080b14;
+  color: white;
+}
+
+a {
+  transition: all 50ms ease-in-out;
+  float:left;
+  border-radius:10px;
+  font-size:5vh!important;
+  background-color: #1b2647;
+  color: rgb(200,200,200);
+  text-decoration: none;
+  padding:15px 15px 9px 15px!important;
+  margin:10px;
+}    
+@media only screen and (max-width: 1000px) {a {font-size:3vh!important;}a::before {--iconsize:5vh!important;}}
+
+a:hover{
+  filter:brightness(3);
+  transform:scale(1.3);
+}
+
+a:active{
+  filter:brightness(0.5);
+  transform:scale(0.9);
+}
+
+a::before{
+  margin-right:10px;
+  --iconsize:9vh;
+}
+
+#backbtn {
+  top:5;
+  left:5;
+  position:absolute;
+  background-color:rgba(255,255,255,0.1);
+}
+
+.users {
+  margin-top:5vh;
+}
+
+h1 {
+  font-size: 4vh;
+}
+}

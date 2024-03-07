@@ -1,0 +1,32 @@
+entrypoint = "index.js"
+modules = ["nodejs-18:v3-20230608-f4cd419"]
+hidden = [".config", "package-lock.json"]
+
+[nix]
+channel = "stable-23_05"
+
+[unitTest]
+language = "nodejs"
+
+[deployment]
+run = ["node", "index.js"]
+deploymentTarget = "cloudrun"
+ignorePorts = false
+
+[auth]
+pageEnabled = false
+buttonEnabled = true
+
+[rules]
+
+[rules.formatter]
+
+[rules.formatter.fileExtensions]
+
+[rules.formatter.fileExtensions.".js"]
+id = "module:nodejs-18:v21-20231211-ac14ad7/languageServer:typescript-language-server"
+
+[[ports]]
+localPort = 8080
+externalPort = 80
+

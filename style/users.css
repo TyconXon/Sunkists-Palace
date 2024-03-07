@@ -1,0 +1,451 @@
+/*
+ * Stylesheet for user messages
+ */
+
+/***--- Message Defaults       ---***/
+
+.message {/*Every message has this class*/
+	line-height: 2.5;
+	/* Position Fix */
+	padding: 0.5% 5% 0.5% 0.5%;
+	border-radius: 5px;
+	transition: all 0.3s;
+	vertical-align: top;
+	image-rendering: auto;
+	white-space: pre-wrap;
+	/*Allow new lines*/
+	overflow-wrap: break-word;
+	font-family: inherit, monospace, emoji;
+
+	background-color: lightgray;
+	color: black;
+}
+.message:hover{
+	filter: brightness(0.9);
+}
+
+:root {
+	--iconsize: 35px;
+}
+
+.message::before {/*PFP settings*/
+	margin-bottom: -12.5px;
+	/* Position Fix */
+	border: ridge 2px white;
+	border-radius: 3px;
+	background-size: var(--iconsize) var(--iconsize);
+	display: inline-block;
+	width: var(--iconsize);
+	height: var(--iconsize);
+	content: "";
+	font-size: 100%;
+	/*Default image*/
+	background-image: url("https://media.tenor.com/m56fWQ4A39sAAAAd/survive-the-internet-jackbox.gif");
+
+}
+.collapsed::before{
+	visibility: hidden !important;
+}
+.collapsed .identifier {/*
+	visibility: hidden !important;*/
+	color: transparent;
+	text-shadow: 0 0 0 transparent;
+}
+.collapsed:hover .identifier{/*
+	visibility: hidden !important;*/
+	color: gray;
+	text-shadow: 3 3 3 gray;
+}
+.collapsed{
+	line-height: 1;
+
+}
+
+msgtxt {
+	z-index: 10;
+	position: relative;
+}
+
+.phone:after {
+	content: "\2706";
+}
+
+/*Reply button*/
+.rightist,
+right {
+	right: 10px;
+	color: black;
+	position: absolute;
+	width: 10px;
+	z-index: 9;
+}
+
+.identifier {
+	/*filter: invert(100%);*/
+	/*filter: grayscale(100%);*/
+	/*filter: hue-rotate(90deg);*/
+	filter: opacity(55%);
+}
+.identifier,
+.rightist {
+	cursor: url(../images/cur/portal.png), auto;
+}
+
+room { /*Room indicator*/
+	color: cyan;
+	text-decoration: underline overline;
+}
+
+.guest {
+	background-color: lightgray;
+	color: black;
+}
+.dev{
+	display:none;
+}
+
+[class^="rightist"]:hover:before{
+	content:'\2BA9';
+	color: blue;
+}
+[class^="rightist"]:hover{
+	color: transparent;
+}
+
+/***--- Message Body          ---***/
+
+.MaximusMiller2,
+Max,
+MaximusMiller2,
+.Max,
+.Maximus {
+	background-color: rgba(30, 60, 80, 0.65);
+	color: white;
+	font-size: 20px;
+	font-family: "Bound", emoji;
+	/*Earthbound*/
+	font-weight: 100;
+	text-shadow: 0px 0px 5px #006cff;
+	cursor: url(../images/cur/catter.png), auto;
+
+	/*
+	@media screen and (min-width: 1600px) {
+		background-image: url(../images/background/underwater.gif);
+		background-attachment: fixed;
+		background-blend-mode: multiply;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}*/
+
+}
+
+.Afton,
+afton {
+	background-color: rgb(0, 204, 204, 0.45);
+	color: black;
+	font-family: 'Undertale',"Orbitron", serif, emoji;
+	cursor: url(../images/cur/Cat_Paw.png), auto;
+}
+
+.Console,
+.console {
+	text-align: center;
+	color: rgb(221, 221, 221);
+	background-color: rgba(0, 0, 0, 0.5);
+	font-family: tahoma;
+	border-radius: 10px;
+	cursor: url(../images/cur/crowbar.png), auto;
+	background-image: url(../images/background/Art-therapy-example01.jpg);
+	background-attachment: fixed;
+	background-blend-mode: darken;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin: auto;
+	margin-bottom: 15px;
+	margin-top: 15px;
+	width: 95%;
+}
+
+.Boxel,
+Boxel {
+	background-color: rgba(20,15,35,0.5);
+	background-image: linear-gradient(to right,
+			rgba(20, 15, 35, 0.5),
+			rgba(255, 25, 244, 0.5)
+		);
+	text-shadow: 0px 0px 5px #ffffff60;
+	color: white;
+	font-family: coomer, sans-serif, emoji;
+	cursor: url('../images/cur/paw.png'), auto;
+}
+
+.Rat,
+rat,
+vincent {
+	background-color: red;
+	font-family: "Passing Notes";
+}
+
+.RoseGold,
+rosegold,
+rose {
+	background-color: rgba(50, 168, 82, 0.5);
+	font-family: "Architect", emoji;
+	font-size: 20px;
+}
+
+.FatRhabit,
+fatrhabit {
+	font-family: "Comic Sans MS";
+}
+
+.via,
+via {
+	color: #93a87e;
+	background:linear-gradient(to right,
+	#505c45,
+	#384031 );
+	/*text-shadow: 0px 0px 5px rgba(255, 216, 240, 0.5);*/
+	font-weight:bold;
+	font-family: 'Oswald',"DM Serif", emoji;
+}
+
+.Sushi,
+Sushi, sushi {
+  background: linear-gradient(90deg, 
+  rgba(79,57,131,.75) 0%,
+  rgba(118,57,131,.75) 100%
+  );
+  font-family: coomer, sans-serif, emoji;
+  cursor: url(../images/cur/catter.png), auto;
+  color: lightgrey;
+}
+
+.Sushi:active, 
+sushi:active {
+  cursor: url(../images/cur/pawwer.png), auto;
+}
+
+.Avonya,
+avonya,
+.Avonya_Herobrine,
+Avonya_Herobrine,
+.avonya_herobrine,
+.avonyaHerobrine {
+	color: #212f4a;
+	background: rgba(121, 163, 247, 0.8);
+	background: linear-gradient(90deg,
+			rgba(121, 163, 247, 0.9) 0%,
+			rgba(189, 201, 223, 0.8) 100%);
+	text-shadow: 0px 0px 10px #bccbeb;
+	font-family: "Minecraft";
+}
+
+.Sky,
+sky {
+	color: #ffffff;
+	background-image: linear-gradient(to right,
+			rgba(255, 64, 105, 0.75),
+			rgba(166, 22, 53, 0.5));
+	font-family: "Comic Sans MS", emoji;
+	text-shadow: 0px 0px 5px rgba(247, 84, 119);
+	cursor: auto;
+
+}
+
+.TheKingOfPlants,
+thekingofplants,
+rey {
+  font-family: 'bookmanoldstyle';
+	color: white;
+	background-color: maroon;
+	text-shadow: 0px 0px 5px rgba(214, 95, 86);
+}
+
+.ffruittssaladd, ffruittssaladd, .fruitsalad, fruitsalad {
+  font-family: 'Arial';
+  color:#f0719c;
+  font-weight:bold;
+  background-color:rgba(69, 20, 35, 0.75);
+  text-shadow: 0px 0px 5px #6b1c37;
+  font-size:20px;
+}
+
+.Fr0ggy08, Fr0ggy08 {
+  font-family 'ojuju';
+  color:#d676b1;
+  background-color:#0d0b0b;
+  text-shadow: 0 0 5px #961485;
+}
+
+/***--- Message Icon         ---***/
+
+.MaximusMiller2::before,
+.Max::before {
+	background-image: url("../images/pfp/Sunkister.png");
+	cursor: url(../cursor/RopeSnakeItem.png), auto;
+	border-color: gold;
+	border-style: outset;
+	border-image-slice: 42 42 42 42;
+	border-image-width: 12px 12px 12px 12px;
+	border-image-outset: 6px 6px 6px 6px;
+	border-image-repeat: stretch stretch;
+	border-image-source: url("../images/border/water.png");
+	border-style: solid;
+}
+
+.TheKingOfPlants::before {
+	border-color: #301212;
+	border-style: double;
+  background-image: url("../images/pfp/rey.jpg");
+}
+
+.Afton::before {
+	background-image: url("../images/pfp/cater.png");
+	border-color: rgba(113, 38, 55);
+	border-image-slice: 42 42 42 42 fill;
+	border-image-width: 12px 12px 12px 12px;
+	border-image-outset: 6px 6px 6px 6px;
+	border-image-repeat: stretch stretch;
+	border-image-source: url("../images/border/tech.png");
+	border-style: solid;
+}
+
+.Avonya::before {
+	background-image: url("../images/pfp/sasscoin.jpg");
+	border-color: #bccbeb;
+	border-style: outset;
+}
+
+.Console::before,
+.console::before {
+	background-image: url("../images/pfp/node.png");
+	border-style: none;
+}
+.guest::before{
+	background-image: url("https://media.tenor.com/m56fWQ4A39sAAAAd/survive-the-internet-jackbox.gif");
+}
+.Elsen::before {
+	background-image: url("../images/ELSEN.png");
+}
+
+.via::before {
+			background-image: url("../images/pfp/via.png");
+			border-color: #e3ebbd;
+			border-style: ridge;
+			border-image-slice: 42 42 42 42 fill;
+			border-image-width: 12px 12px 12px 12px;
+			border-image-outset: 6px 6px 6px 6px;
+			border-image-repeat: stretch stretch;
+			border-image-source: url("https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/599140/5aa92af1cf3dfab9603ac4edd95a935933302c81.png");
+			border-style: solid;
+}
+
+.Boxel::before {
+	/*PFP*/
+	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9);
+  background-image: url("../images/pfp/boxel.png");
+	background-repeat: no-repeat;
+	border-image-slice: 42 42 42 42 fill;
+	border-image-width: 12px 12px 12px 12px;
+	border-image-outset: 6px 6px 6px 6px;
+	border-image-repeat: stretch stretch;
+	border-image-source: url("../images/border/pwa.png");
+	border-style: solid;
+
+}
+
+.Sushi::before {
+  /*win*/
+  background-image: url("../images/pfp/sushi.jpg");
+  background-repeat: no-repeat;
+  border-image-slice: 42 42 42 42 fill;
+  border-image-width: 12px 12px 12px 12px;
+  border-image-outset: 6px 6px 6px 6px;
+  border-image-repeat: stretch stretch;
+  border-image-source: url("../images/border/nyakuza.png");
+  border-style: solid;
+}
+
+.Sky::before {
+	border-color: #000;
+	border-style: ridge;
+	background-image: url("../images/pfp/skylar.jpg");
+}
+
+.ffruittssaladd::before {
+  border-color: #6b1c37;
+  border-style:solid;
+  background-image: url("../images/pfp/Cass.png");
+}
+
+.Fr0ggy08::before {
+  background-image: url("../images/pfp/rory.jpg");
+  border-color:#003b6f;
+  border-style:dashed;
+}
+
+/***--- Message Button      ---***/
+
+.MaximusMiller2 button{
+	background-blend-mode: multiply;
+	font-family: "Bound";
+	background-color: lightblue;
+}
+
+.Afton button{
+	background-color: cyan;
+	background-blend-mode: multiply;
+	font-family: "TF2 Build", emoji;
+}
+
+.Boxel button{
+	font-family: "Passing Notes";
+	background-blend-mode: multiply;
+	background-color: purple;
+	color: white;
+}
+
+.Sky button{
+	background-image:none;
+	background-color:pink;
+}
+
+/***--- Message Highlight ---***/
+
+.MaximusMiller2 msgtxt::selection,
+.MaximusMiller2::selection{
+	background-color: rgba(90,188,216,0.5);
+}
+
+.Afton msgtxt::selection,
+.Afton::selection{
+	background-color: rgba(90,188,216,0.5);
+}
+
+.Console::selection,
+.console::selection{
+	background-color: orange;
+}
+
+.Boxel msgtxt::selection,
+.Boxel::selection{
+	background-color: rgba(87, 14, 156,0.5);
+}
+
+/***--- Message Cursor   ---***/
+
+.MaximusMiller2:active{
+	cursor: url(../images/cur/pawwer.png), auto;
+}
+
+.Afton:active{
+	cursor: url(../images/cur/Cat_Paw_Cursor.png), auto;
+}
+
+.Console:active,
+.console:active{
+	cursor: url(../images/cur/hit.png), auto;
+}

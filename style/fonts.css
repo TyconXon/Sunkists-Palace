@@ -1,0 +1,106 @@
+
+@font-face {
+	font-family: "Bound";
+	font-display: swap;
+	src: url(../fonts/earthbound-dialogue.ttf");
+}
+
+@font-face {
+	font-family: "Undertale";
+	font-display: swap;
+	src: url(../fonts/DTM-Mono.ttf);
+}
+@font-face {
+	font-family: "Atlas";
+	font-display: swap;
+	src: url(../fonts/AtlasSolid.ttf);
+}
+
+@font-face {
+	font-family: boxrocket;
+	src: url(../fonts/boxrocket.ttf);
+}
+
+@font-face {
+	font-family: "OFF";
+	font-display: swap;
+	src: url("../fonts/off-game-font.ttf");
+}
+
+@font-face {
+	font-family: "Passing Notes";
+	font-display: swap;
+	src: url("../fonts/Passing-Notes.ttf");
+}
+
+@font-face {
+	font-family: sunkist;
+	font-display: swap;
+	src: url("../fonts/finurlig-DEMO.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Lethal";
+	font-display: swap;
+	src: url(../fonts/vcr_osd_mono.ttf);
+}
+
+@font-face {
+	font-family: coomer;
+	src: url("../fonts/Retron2000.ttf");
+}
+
+@font-face {
+	font-family: Coolvetica;
+	font-display: swap;
+	src: url(../fonts/coolvetica_rg.ttf);
+}
+
+@font-face {
+	font-family: Architect;
+	font-display: swap;
+	src: url("../fonts/ArchitectsDaughter-Regular.ttf");
+}
+
+@font-face {
+	font-family: Minecraft;
+	font-display: swap;
+	src: url("../fonts/minecraft.ttf");
+}
+
+@font-face {
+	font-family: Earth;
+	src: url(../fonts/earthbound-menu-extended.ttf);
+	text-rendering: geometricPrecision;
+}
+
+@font-face {
+	font-family: Bound;
+	src: url(../fonts/earthbound-dialogue.ttf);
+}
+
+@font-face {
+	font-family: "DM Serif";
+	font-display: swap;
+	src: url("../fonts/DMSerifDisplay-Regular.ttf");
+}
+
+@font-face {
+	font-family: marlett;
+	src: url("../fonts/marlett.ttf");
+}
+@font-face {
+	font-family: "emoji";
+	src: url(../fonts/emoji.woff) format("woff");
+	text-decoration:none;font-style: normal
+}
+
+@font-face {
+  font-family: mountains;
+  src: url("../fonts/MountainsofChristmas-Regular.ttf");
+}
+
+@font-face {
+  font-family: ojuju;
+  src: url("../fonts/Ojuju-Regular.ttf");
+}

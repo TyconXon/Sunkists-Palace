@@ -1,0 +1,226 @@
+/*
+ * 	Stylesheet for elements unique to chat
+ */
+
+html {
+	/*Background:*/
+	/*Rain gif and gradient*/
+	background: url(../images/rain.gif),
+		linear-gradient(180deg,
+			rgba(56, 93, 95, 1) 0%,
+			rgba(45, 63, 76, 1) 50%,
+			rgba(50, 49, 50, 1) 100%);
+	background-size: 40%, 100%;
+	image-rendering: pixelated;
+	background-blend-mode: lighten;
+	/*Rain scrolls, gradient does not*/
+	background-attachment: scroll, fixed;
+	/*General page settings*/
+	overflow: auto;
+	text-align: top;
+	scroll-behavior: auto;
+	font-family: tahoma;
+
+	
+}
+
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+	scrollbar-width: auto;
+	scrollbar-color: #9104dc #39304f;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+	background: #39304f;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #9104dc;
+	border-radius: 12px;
+	border: 3px inset #5125b6;
+}
+
+/***--- Menu Stuffs ---***/
+
+#menu { /*Menu container*/
+	position: sticky;
+	z-index: 15;
+	border-radius: 3px;
+	backdrop-filter: blur(8px);
+	top: 10;
+	background-color: rgba(100, 100, 100, 0.3);
+	margin: auto;
+	width: 80%;
+	padding: 5px;
+	border: ridge rgba(100, 50, 170, 0.8) 2px;
+	text-align: center;
+}
+
+#status { /*Who's online*/
+	width: 98%;
+	font-family: sans-serif;
+	color: lightblue;
+	border-radius: 3px;
+	padding: 1px;
+	margin: auto;
+	background-color: rgba(15, 15, 15, 0.3);
+	backdrop-filter: blur(8px);
+	text-align: left;
+}
+
+#typingP { /*Who's typing*/
+	float: right;
+	color: yellow;
+}
+
+h1 { /*Sunkist Palace text*/
+	/*Dark, ambient shadow purple*/
+	background-color: rgba(60, 45, 75, 0.8);
+	/*Pure yellow*/
+	color: yellow;
+	font-family: "Sunkist";
+	/*Yellow glow*/
+	text-shadow: 0px 0px 5px #ffc300;
+	/*Rounded border*/
+	border-radius: 5px;
+}
+
+/***--- Special Stuffs ---***/
+
+#lastRead,
+[lastread] {
+	border-color: red;
+	border-width: 4px;
+	background-color: rgba(100, 100, 100, 0.5);
+	text-align: center;
+}
+
+#lastRead:before,
+[lastread]:before {
+	content: "New messages:";
+	text-align: center;
+	font-family: "OFF";
+	font-size: 30px;
+	color: red;
+	text-shadow: 0px 0px 5px red;
+}
+
+[chr]{
+	border-color: black;
+	border-width: 4px;
+	background-color: rgba(100, 100, 100, 0.5);
+	text-align: center;
+}
+[chr]:before{
+	content: attr(chr);
+	text-align: center;
+	font-family: "Atlas";
+	font-size: 15px;
+	color: white;
+	text-shadow: 0px 0px 5px #cbf0f0;
+}
+
+[restart] {
+	border-color: blue;
+	border-width: 4px;
+	background-color: rgba(100, 100, 100, 0.5);
+	text-align: center;
+}
+
+[restart]:before {
+	content: "Server restarted";
+	text-align: center;
+	font-family: "TF2 Build";
+	font-size: 30px;
+	color: white;
+	text-shadow: 0px 0px 5px blue;
+}
+
+.reply {
+	border: 15px double cyan /*#ff6550*/;
+	backdrop-filter: hue-rotate(180deg);
+	background-repeat: no-repeat;
+}
+
+.ping {
+	border-radius: 5px;
+	background-color: rgba(51, 51, 89, 0.5);
+	color: #b9bce9;
+	backdrop-filter: invert(100%) contrast(150%);
+	animation: blinkBorder 2s infinite;
+	border-color: gold;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+
+	border-style: solid;
+	box-sizing: border-box;
+}
+
+.ping:before {
+	content: "@";
+}
+
+.message:has(.ping) {
+	border-left: gold 10px solid;
+	backdrop-filter: invert(100%) saturate(50%);
+	animation: fadeBG 2s infinite;
+}
+
+/***--- Other Stuffs ---***/
+
+.favorite-item{
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+
+.removed { /*Moderated messages*/
+	color: red;
+}
+
+.console.room.general{display:none;}
+.console.room.admin{display:none;}
+
+summary {
+	backdrop-filter: hue-rotate(180deg);
+	transition: all 2s;
+	cursor: pointer;
+	border-bottom: white solid 1px;
+	font-family: tahoma;
+	color: white;
+}
+label {
+	font-family: tahoma;
+}
+details {
+	backdrop-filter: sepia(100%);
+	background-color: rgba(150, 150, 150, 0.2);
+	transition: all 2s;
+	margin: 5px;
+	padding: 5px;
+}
+
+.TF2 {
+	font-family: "TF2 Build", emoji;
+}
+
+.settings {
+	overflow: auto;
+	max-height: 30%;
+}
+
+bx {
+	font-family: boxrocket;
+	font-size: x-large;
+}
+
+ml {
+	font-family: marlett;
+}

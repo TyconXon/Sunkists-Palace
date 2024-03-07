@@ -1,0 +1,114 @@
+/*
+ * Stylesheet for already existing elements
+ */
+
+/***--- Link Element ---***/
+
+a {
+	background-color: white;
+}
+
+a>img {
+	background-color: transparent;
+}
+
+a:not([target="_blank"], [onclick]):before {
+	content: "\1F5D6";
+}
+
+/*a*/[target="_blank"]:before {
+	content: "\1F5D7";
+}
+
+/*a*/[download]:before {
+	content: "\1F5AB" !important;
+}
+
+/*a*/[loop]:before {
+	content: "\1F503";
+}
+
+/*a*/[onclick*="newPopup"]:before {
+	content: "\00BB";
+}
+
+/***--- Stuff --***/
+summary {
+	font-family: "TF2 Build";
+}
+
+img {
+	display: inline;
+	border-radius: 3px;
+	max-width: 50%;
+}
+
+pre code {
+	text-shadow: none;
+}
+
+button {
+	cursor: pointer;
+}
+
+audio::-webkit-media-controls-panel {
+	background-color: #56AEFF;
+}
+audio::-webkit-media-controls-current-time-display {
+	color: #fff;
+}
+
+abbr {
+	cursor: help;
+}
+
+abbr:not([noicon]):before {
+	content: "\1F6C8";
+}
+
+script::before {
+	content: "\26FE [JS]";
+}
+
+script:hover {
+	color: green;
+} /*ong*/
+
+script {
+	display: block;
+	color: lightblue;
+	font-family: "Fira Code", monospace;
+	background-color: rgba(30, 30, 30, 0.5);
+	border: 5px green inset;
+	padding: 10px;
+	text-shadow: 0px 0px 5px green;
+}
+
+style::before {
+	content: "\1F3A8 [CSS]";
+}
+style {
+	display: block;
+	color: lightblue;
+	font-family: "Fira Code", monospace;
+	background-color: rgba(30, 30, 30, 0.5);
+	border: 5px lightblue inset;
+	padding: 10px;
+	text-shadow: 0px 0px 5px lightblue;
+}
+
+[popover]::backdrop{background-color: rgba(42, 9, 71, 0.5);}
+[popovertarget]:after{content:'\25A3';}
+
+code {
+	background-color: rgba(30, 30, 30, 0.5);
+	font-family: "Fira Code", monospace;
+}
+img>a {
+	background-color: transparent;
+}
+textarea {
+	background-color: rgba(30, 30, 30, 0.5);
+	color: white;
+	caret-color: lightblue;
+}

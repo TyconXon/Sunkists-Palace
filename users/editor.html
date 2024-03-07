@@ -1,0 +1,82 @@
+
+<html>
+<head>
+
+	<link rel="stylesheet" href="../style/fonts.css">
+	<link rel="stylesheet" href="../style/new.css">
+	<link rel="stylesheet" href="../style/restyle.css">
+	<link rel="stylesheet" href="../style/users.css">	
+	<link rel="stylesheet" href="../style/unique.css">
+</head>
+<body>
+	<h1>Prototype style editor</h1>
+	<div class='message devstyle' id='devstyle'><strong class='identifier' contenteditable> Username @ <abbr noicon>12:34:56 AM:</abbr></strong> <msgtxt contenteditable>Test message</msgtxt> <button class='rightist'>0</button> </div>
+	<h2>Basics</h2>
+	<h3>Background</h3>
+	
+	<!-- radio: gradient, flat color, image (caution to not do lag) -->
+	<input type="radio" name="background" value="gradient" id="gradientBg">
+	<label for="gradientBg">Gradient</label><br>
+	<input type="radio" name="background" value="flat color" id="flatColorBg">
+	<label for="flatColorBg">Flat Color</label><br>
+	<input type="radio" name="background" value="image" id="imageBg">
+	<label for="imageBg">Image (caution to not do lag)</label><br>
+
+
+	<h3>Color</h3>
+	
+	<!-- radio: flat color, gradient, image (caution to not do lag) -->
+	<input type="radio" name="background" value="gradient" id="gradientTxt">
+	<label for="gradientTxt">Gradient</label><br>
+	<input type="radio" name="background" value="flat color" id="flatColorTxt">
+	<label for="flatColorTxt">Flat Color</label><br>
+	<input type="radio" name="background" value="image" id="imageTxt">
+	<label for="imageTxt">Image (caution to not do lag)</label><br>
+
+	
+	<h3>Font</h3>
+	<h4>Font family</h4>
+	
+	text input/radio/select from google
+
+	
+	<h4>Shadow</h4>
+	
+	figure out later
+
+	
+	<h4>-Size</h4>
+	
+	slider/num input (please respect appropriate size)
+
+	
+	<h3>Cursor</h3>
+	
+	<!-- radio/image + instructions -->
+	<select id="cursor" name="cursor">
+		<option value="placeholder">placeholder</option>
+		<option value="placeholder">placeholder</option>
+		<option value="placeholder">placeholder</option>
+	</select>
+
+	
+	<h3>PFP</h3>
+	for testing:
+	<input type="image">
+	for output, you should upload the image into the files or through the server and use that file path
+	<h3>Seleciton color</h3>
+	<input type="color" id='general.selectioncolor'>
+	<h2>Border</h2>
+	radio: steam instructions-catalouge for gif/ image/ basic 
+	
+	<h2>Button</h2>
+	font hover color etc
+	<br>
+	<h1>Output</h1>
+	<h2>CSS</h2>
+	<textarea id="output.css" cols="30" rows="10"></textarea>
+	<h2>Command</h2>
+	<textarea id="output.cmd" cols="30" rows="10"></textarea>
+
+</body>
+</html>
