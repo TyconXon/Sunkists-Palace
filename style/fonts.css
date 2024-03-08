@@ -104,3 +104,8 @@
   font-family: ojuju;
   src: url("../fonts/Ojuju-Regular.ttf");
 }
+
+@font-face {
+  font-family: Amatic SC;
+  src: url("../fonts/AmaticSC-Regular.ttf");
+}

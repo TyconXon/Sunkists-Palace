@@ -62,6 +62,7 @@ const splashText = [
 	"It's peanut butter jelly time!",
 	"This sentence is false.",
 	"So there's this man, he has a time machine. Up and down history he goes, zip, zip, zip, zip, zip, getting into scrapes. Another thing he has is a a passion for the works of Ludwig van Beethoven. And one day he thinks, 'What's the point of having a time machine if you don't get to meet your heroes?' So off he goes to 18th century Germany, but he can't find Beethoven anywhere. No one's heard of him. Not even his family have any idea who the time traveller is talking about. Beethoven literally... doesn't exist. This didn't happen by the way. I've met Beethoven. Nice chap, very intense. Loved an arm wrestle. No, this is called the bootstrap paradox. Google it. The time traveller panics. He can't bear the thought of a world without the music of Beethoven. Luckily he brought all of his Beethoven sheet music for Ludwig to sign. So he copies out all the concertos and the symphonies, and he gets them published. He becomes Beethoven. And history continues with barely a feather ruffled. But my question is this - who put those notes and phrases together? Who really composed Beethoven's 5th?",
+  "Don't forget to click below to subscribe to the official Doctor Who YouTube channel",
 	`${Math.floor(Math.random() * 10000)} is your lucky number`,
 	"I might rap like an english chap",
 	"Hey ho, don't cha know, it's a good old fashion puppet show, thats right quite the set, it's the marionette quintet",

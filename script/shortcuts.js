@@ -220,7 +220,23 @@ function formatCommands(msg){
 			`<style> .${window.localStorage.getItem("username")}::before{content:'$&';} </style>`
 		)
 		.replace(
-			/(?<=^\/clear quick )[^]+$/,
+			/(?<=^\/idle)$/,
+			`<style nodraw> .${window.localStorage.getItem("username")}::before{content:'🌙';} </style>`
+		)
+		.replace(
+			/(?<=^\/programming)$/,
+			`<style nodraw> .${window.localStorage.getItem("username")}::before{content:'💻';} </style>`
+		)
+		.replace(
+			/(?<=^\/dnd)$/,
+			`<style nodraw> .${window.localStorage.getItem("username")}::before{content:'🔕';} </style>`
+		)
+		.replace(
+			/(?<=^\/class)$/,
+			`<style nodraw> .${window.localStorage.getItem("username")}::before{content:'🏫';} </style>`
+		)
+		.replace(
+			/(?<=^\/clear)$/,
 				`<style> .${window.localStorage.getItem("username")}::before{content:'';} </style>`
 		)
 		.replace(
@@ -229,7 +245,9 @@ function formatCommands(msg){
 		)
 		.replace(
 			/(?<=^\/cd )[^]+$/,
-			`<style> html{background-image: url(images/rain.gif),url('$&') !important;}</style>`
+			`(Setting background image to $&...)<style nodraw> 
+			html{background-image: url(images/rain.gif),url('$&') !important;background-attachment: fixed;background-size: cover;image-rendering: auto;}
+			</style>`
 		)
 		.replace(
 			/(?<=^\/dvd )[^]+$/,

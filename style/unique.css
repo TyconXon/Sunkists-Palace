@@ -49,6 +49,11 @@ html {
 	border: 3px inset #5125b6;
 }
 
+#onlineCount *:before, #talkorinos *:before{
+		border: none !important;
+		background-image: none !important;
+}
+
 /***--- Menu Stuffs ---***/
 
 #menu { /*Menu container*/

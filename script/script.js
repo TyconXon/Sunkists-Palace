@@ -675,7 +675,7 @@ document.getElementById("uploadForm").addEventListener("submit", (event)=>{
 			let Celement = isImageFile(filename) ? 'img' : isAudioFile(filename) ? 'audio' : isVideoFile(filename) ? 'video' : 'a';
 			let other = isImageFile(filename) ? false : isAudioFile(filename) ? false : isVideoFile(filename) ? false : true;
 			textBox.value += (`${other ? '' : '<br>'}<${Celement} ${other ? 'download' : ''} class='${other ? '' : 'openInTab'}' controls title='${filename}' href='temp/${filename}' src='temp/${filename}'>${other ? filename : ''}</${Celement}>`);
-			textBox.style.backgroundImage = 'null';
+			textBox.style.backgroundImage = 'none';
 		};
 
 		request.onerror = function() {
