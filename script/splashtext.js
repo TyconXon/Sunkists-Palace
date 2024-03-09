@@ -77,6 +77,14 @@ const splashText = [
   'Part one.',
   'Part two.',
   'Part three.',
+  "I ever tell you about the time me and Keith made a homemade bumper car ride with   ridin' mowers in his backyard? Mower blade wounds over 90% of his body.",
+  "I ever tell you about the time my buddy Keith drowned in the Tunnel of Love? You   wouldn't think it could happen 'cause the water's so shallow, but that's how it     gets you, man. Overconfidence. Keith was with his lady at the time, and he was      yellin' for her to save him, but she didn't want to get wet.",
+  `I ever tell you about the time Keith and I made fireworks? Now, I didn't know   shit about chemistry, but Keith figured "Gasoline burns, doesn't it?" Heh, third-  degree burns on 95 percent of his body.`,
+  "I ever tell you about the time Keith tried to deep-fry a turkey? Third-degree   burns over 90 percent of his body.",
+  "I ever tell you about the time my buddy Keith fell down an open manhole? He was unconscious down there for like a week.",
+  "One time, the Army bombed my buddy Keith. He went camping and didn't bother to read the signs, and I guess they were just testing bombs that day.",
+  "Yo, my buddy Keith had his car drop in a lake off a bridge just like this one here... Yeah, see, he was driving over it late at night and there in the middle of the bridge was what looked like, In Keith's estimation, like a dead bear, so Keith gets out his car to find a stick to poke at it, right? Well, it turns out it's just some lady's fur coat that musta fallen out her car, so, hey, free coat, right? Now, owls won't normally attack a man, but in this case, they were hungry, and that made them reckless, man. Keith reckons that they musta been there for hours watchin' what they thought was a bear carcass, 'cause as soon as he picked it up, them owls had claws in him inch deep. Well, Keith figures his best bet is to jump in a lake, 'cause owls can't swim. Well, them owls could. He fought them for like 20 minutes treading water, and during that time, a boat came, the bridge went up and down went Keith's car. Man, sometimes nature's just tryin' to teach us, if we'd only listen.",
+  
 	
 ];
 function refreshSplash(){

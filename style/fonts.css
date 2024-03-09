@@ -109,3 +109,8 @@
   font-family: Amatic SC;
   src: url("../fonts/AmaticSC-Regular.ttf");
 }
+
+@font-face {
+  font-family: Omnes;
+  src: url("../fonts/Omnes Regular.ttf");
+}
