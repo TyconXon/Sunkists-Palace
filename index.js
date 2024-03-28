@@ -393,8 +393,18 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 	}else if(message.startsWith('sv_cheats 1')){
 		io.emit(
 			"outMessage",
-			`<div class='console message'><ml>q</ml>Server cheats is now set to 1.</div>`
+			`<div class='console message'><img src="images/sv_cheats1.png"></div>`
 		);
+	}else if(message == 'test'){
+		io.emit(
+			"outMessage",
+			`<div class='console message'><img src="images/Clean_example.jpg"></div>`
+		);
+	}else if(message == 'apple'){
+	io.emit(
+		"outMessage",
+		`<div class='console message'><img src="images/apple.gif"></div>`
+	);
 	}else if (message.startsWith("/to")) {
 		try {
 			var rm = message.split(' ')[1];

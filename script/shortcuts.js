@@ -24,22 +24,18 @@ document.addEventListener("keydown", (c) => {
 				break;
 				//Toggle autoscroll
 			case ".":
+				c.preventDefault();
 				switch (altMode) {
 					case true:
 						altMode = false;
-						let msgAp = new Audio(
-							"https://OLDWEB.maximusmiller2.repl.co/AudioClip/Error1.wav",
-						);
 						msgAp.play();
 						break;
 					case false:
 						altMode = true;
-						let msgLo = new Audio(
-							"https://OLDWEB.maximusmiller2.repl.co/AudioClip/Error2.wav",
-						);
 						msgLo.play();
 						break;
 				}
+				alert(altMode);
 			default:
 				if(!c.ctrlKey && !c.altKey){
 					textBox.focus();

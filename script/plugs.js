@@ -331,7 +331,7 @@ socket.on("outMessage", (message) => {
 		// Set the HTML content of the new div
 		newDiv.innerHTML = message;
 
-		if (!document.hasFocus()) {
+		if (!document.hasFocus() || !altMode) {
 			if (unfocusedLevel == 0) {
 				var rule = document.createElement('hr');
 				var readMessage = document.createElement('button');
@@ -447,9 +447,7 @@ socket.on("getOnliners", (onliners) => {
 socket.on("requestUpdate", () => {
 	//Only show notifications if the client isn't focused on auto, or not on auto
 	if (
-		(!document.hasFocus() &&
-			window.localStorage.getItem("autoUpdate") == "true") ||
-		window.localStorage.getItem("autoUpdate") != "true"
+		!document.hasFocus() || !altMode
 	) {
 		newMessageCount++;
 		document.getElementById("title").innerText =
