@@ -31,6 +31,15 @@ document.getElementById('suffix').oninput = function () {
 	document.title = document.getElementById('suffix').value;
 	document.getElementById("menuTitle").innerText = document.getElementById('suffix').value;
 }
+
+var rightNow = new Date();
+if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1){
+	sunkistsPalace = 'tommy';
+	document.getElementById("menuTitle").innerText = 'tommy';
+	document.title = 'tommy land';
+	
+}
+
 var URLparams = new URLSearchParams(document.location.search);
 if(URLparams.get('channel') != undefined){
 	addEventListener('load', ()=>{
@@ -704,4 +713,53 @@ function isVideoFile(filename) {
 	const videoExtensions = ['mp4', 'avi', 'mkv', 'mov', 'webm'];
 	const fileExtension = filename.split('.').pop().toLowerCase();
 	return videoExtensions.includes(fileExtension);
+}
+
+if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1){
+	document.getElementById('soapMode').style.backgroundImage = "url('../images/Tommy.png')";
+	document.getElementById('menuTitle').style.backgroundImage = "url('../images/tommy.jpg')";
+	document.getElementById('menuTitle').style.backgroundSize = "20%";
+	document.getElementById('soapMode').style.backgroundSize = "10%";
+	document.getElementById('soapMode').style.backgroundBlendMode = "multiply";
+	document.getElementById('soapMode').classList.add("colorful");
+	document.getElementById('soapMode').classList.add("ns");
+	document.getElementById('soapMode').style.textShadow = 'none';
+	document.getElementById('soapMode').style.color = "transparent";
+	sunkistsPalace = 'tommy';
+	document.getElementById("menuTitle").innerText = 'tommy';
+	document.title = 'tommy land';
+	
+	switch(Math.round(Math.random()*10)){
+		case 3:
+			document.querySelectorAll('a, button, input, .Boxel, details, summary, textarea, select, option, label, span, p, h1, h2, h').forEach((e)=>{
+				e.innerText = 'tommy';
+			});
+			break;
+		case 5:
+			document.querySelectorAll('*').forEach((e)=>{
+				e.style.backgroundImage = 'url("../images/tommy.webp")';
+			});
+			break;
+			case 6:
+			document.getElementById("menuTitle").innerText = 'sunkist sunkist sunkist sunkist sunkist sunkist sunkist sunkist sunkist sunkist sunkist sunkist sunkist sunkist';
+			document.querySelectorAll('*').forEach((e)=>{
+				e.style.backgroundImage = 'url("../images/2Sunkist.png")';
+			});
+			break;
+			case 7:
+			document.querySelectorAll('*').forEach((e)=>{
+				e.classList.add('scrambled');
+			});
+			break;
+		case 2:
+			console.log('seasick')
+			document.querySelector('html').style.transition = '2s ease';
+			setTimeout(()=>{
+			setInterval(()=>{
+				Math.random() > 0.5 ? document.querySelector('html').style.rotate = Math.random()*2+'deg' : document.querySelector('html').style.rotate = Math.random()*-2+'deg';
+			}, 100+Math.random()*5000);
+			}, 1000+Math.random()*2000);
+			break;
+	}
+	
 }

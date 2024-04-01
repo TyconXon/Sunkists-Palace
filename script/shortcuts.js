@@ -25,17 +25,9 @@ document.addEventListener("keydown", (c) => {
 				//Toggle autoscroll
 			case ".":
 				c.preventDefault();
-				switch (altMode) {
-					case true:
-						altMode = false;
-						msgAp.play();
-						break;
-					case false:
-						altMode = true;
-						msgLo.play();
-						break;
-				}
+				altMode = !altMode;
 				alert(altMode);
+				break;
 			default:
 				if(!c.ctrlKey && !c.altKey){
 					textBox.focus();

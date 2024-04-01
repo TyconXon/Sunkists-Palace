@@ -87,8 +87,31 @@ const splashText = [
   
 	
 ];
+const tommyVoice = [
+	"Right, very carefully, slower than molasses drips off a spoon. :)",
+	"I'm an orphan, but I have a dog!",
+	"When it's L-...purple, like the evening, of a spring evening, then it means he's okay.",
+	"I'm always squeezing the trigger! Should I not be do that-? …doing that?",
+	"It's all- this is all mechanically necessary!" ,
+	"They don't- There's no article about that on Wikipedia, the free encyclopedia!",
+	"I drink soda for lunch!",
+	"Mr. Freeman! Be careful! More careful... than a badger going after a... a den of snakes!",
+	"Black Mesa makes ALL the Powerade™!",
+	"This is all instinct, Mr. Freeman! I'm scared!",
+	"I can recognize Beyblades when I see 'em!",
+	"Yup! And it's all built to code. The U.S. lets us do this. This is all to regulation. Everything.",
+	"This is all built to CODE!! It'll be okay.",
+	"When we get outta here I'm gonna write the Wikipedia article for the the uh the Black Mesa Golem Ape!",
+	"Grab a soda, Mr. Freeman! It'll help you see faster!" ,
+	
+];
 function refreshSplash(){
 	//Display the splashtext
+	if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1){
+		textBox.placeholder = tommyVoice[Math.floor(Math.random() * tommyVoice.length)];
+		return;
+	}
+	
 	textBox.placeholder = splashText[Math.floor(Math.random() * splashText.length)];
 }
 refreshSplash();

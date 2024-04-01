@@ -331,6 +331,8 @@ socket.on("outMessage", (message) => {
 		// Set the HTML content of the new div
 		newDiv.innerHTML = message;
 
+		
+
 		if (!document.hasFocus() || !altMode) {
 			if (unfocusedLevel == 0) {
 				var rule = document.createElement('hr');
@@ -356,6 +358,32 @@ socket.on("outMessage", (message) => {
 
 		// Append the new div to the body
 		const finalMsg = document.body.appendChild(newDiv);
+		
+		if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1 && Math.random()>0.5){
+			for(let i = 0; i < Math.round(Math.random()*8); i++){
+				var request = new XMLHttpRequest();
+				request.open('GET', 'https://random-word-api.herokuapp.com/word', true);
+				request.onreadystatechange = function() { // request successful
+				// we can use server response to our request now
+					if (this.readyState == 4 && this.status == 200) {
+						let someonesLastMessage = document.getElementsByClassName('message');
+						let someonesVeryLastMessage = someonesLastMessage[someonesLastMessage.length - 1]
+						if(Math.random()>0.5){
+							someonesVeryLastMessage.innerHTML = someonesVeryLastMessage.innerHTML.replace('<msgtxt>', '<msgtxt>' + /[a-z]+/.exec(this.responseText)[0] + " ");
+						}else{
+							someonesVeryLastMessage.innerHTML = someonesVeryLastMessage.innerHTML.replace('</msgtxt>', " " + /[a-z]+/.exec(this.responseText)[0] + " </msgtxt>");
+						}
+						
+					}
+				};
+		
+				request.onerror = function() {
+					// request failed
+				};
+		
+				request.send();
+			}
+		}
 
 		if (window.localStorage.getItem("autoFormat")) {
 			hljs.highlightAll();

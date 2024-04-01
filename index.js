@@ -29,7 +29,7 @@
 
 //
 const MEM = true; /** Memory-Mode: Are messages stored in memory or forgotten after relay? */
-const splashTexxt = "<a href='./directory.html'>Page directory</a>" /** MOTD */
+const splashTexxt = "<a href='./directory.html'>Page directory</a> | Various actual changes, lots of april fools stuff." /** MOTD */
 
 //Requires
 var http = require("http");
@@ -233,7 +233,8 @@ const server = http.createServer(function(req, res) {
 	res.writeHead(200, { "Content-Type": "text/html" });
 	fs.readFile("index.html", function(err, data) {
 		if (qData.slow == undefined) {
-
+			
+			
 			res.write(data);
 		} else {
 			io.emit(
@@ -250,8 +251,18 @@ const server = http.createServer(function(req, res) {
 		`);
 		}
 		if (MEM && qData.cls == undefined) {
+			
+			let rightNow = new Date();
+			if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1 && Math.random()>0.6){
+				
+				let aprilList = list.slice(-5);
+				for (let msg in aprilList) {
+					res.write(aprilList[msg]);
+				}
+				res.write('See the last five messages for free! Pay to see more...');
 
-			if (qData.channel == undefined) {
+			}else if(qData.channel == undefined) {
+				
 				for (let msg in list) {
 					res.write(list[msg]);
 				}

@@ -49,6 +49,8 @@ pre code {
 
 button {
 	cursor: pointer;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 audio::-webkit-media-controls-panel {
