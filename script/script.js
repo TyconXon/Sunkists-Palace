@@ -668,6 +668,23 @@ function nickname(){
 	alert('You can clear your nickname by relogging in');
 }
 
+var wasIdle = false;
+window.onblur = ()=>{
+ setTimeout(()=>{
+	 if (!document.hasFocus()){
+			 message(`<i class="identifier"> is now idle.</i><style nodraw> .${window.localStorage.getItem("username")}::before{content:'🌙';} </style>`);
+			 wasIdle = true;
+			 document.title += "🌙";
+	 }
+ }, 60000)
+}
+window.onfocus = ()=>{
+ if(wasIdle){
+	 message(`<i class="identifier"> is back.</i><style nodraw> .${window.localStorage.getItem("username")}::before{content:' ';} </style>`);
+ 	 wasIdle = false;
+	 document.title = document.title.replace("🌙", "");
+ }
+}
 
 document.getElementById("uploadForm").addEventListener("submit", (event)=>{
 	

@@ -345,6 +345,10 @@ socket.on("outMessage", (message) => {
 				document.body.appendChild(readMessage);
 
 				unfocusedLevel = 1;
+				document.title.replace(sunkistsPalace, splitString(message).usrIdentifier);
+				setTimeout(()=>{
+					document.title.replace(splitString(message).usrIdentifier, sunkistsPalace);
+				}, 5000);
 			}
 		} else {
 			try {

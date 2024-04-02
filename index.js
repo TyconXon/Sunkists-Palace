@@ -241,30 +241,42 @@ const server = http.createServer(function(req, res) {
 				"outMessage",
 				`<details><summary>Slowmode refresh</summary>${req.headers['user-agent']}</details>`
 			);
-			res.write(`
+			res.write(`<div style="position:fixed;background-color:white;">
 			<script>
 			function text(){var e=window.prompt("Say:");window.location.assign("https://sunkist-palace.net/?slow&message="+e+"&user="+window.localStorage.getItem("username"))}document.addEventListener("keyup",e=>{switch(e.key){case"Enter":text();break;case"Shift":window.location.assign("https://server--maximusmiller2.repl.co/?slow=a")}});
 			</script>
 			<button onclick="text()" href="#aaa" style="position: sticky;">Add to chat.</button>
 		<a href="https://sunkist-palace.net/?slow">Refresh text without responding</a>
 		<a href="https://sunkist-palace.net/">Go back to normal mode</a>
+		<i>Online people: ${Object.keys(onliners)}</i></div>
 		`);
 		}
 		if (MEM && qData.cls == undefined) {
 			
-			let rightNow = new Date();
-			if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1 && Math.random()>0.6){
-				
-				let aprilList = list.slice(-5);
-				for (let msg in aprilList) {
-					res.write(aprilList[msg]);
-				}
-				res.write('See the last five messages for free! Pay to see more...');
+			if(qData.channel == undefined) {
 
-			}else if(qData.channel == undefined) {
-				
-				for (let msg in list) {
-					res.write(list[msg]);
+				let rightNow = new Date();
+				if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1 && Math.random()>0.6){
+
+					let aprilList = list.slice(-5);
+					for (let msg in aprilList) {
+						res.write(aprilList[msg]);
+					}
+					res.write('See the last five messages for free! Pay to see more...');
+
+				}else if(qData.limit){
+
+					let aprilList = list.slice(-qData.limit);
+					for (let msg in aprilList) {
+						res.write(aprilList[msg]);
+					}
+					res.write('Limited output to the last '+qData.limit+' messages.');
+				}
+				else{
+					//normal loading
+						for (let msg in list) {
+							res.write(list[msg]);
+						}
 				}
 			}
 
@@ -283,6 +295,7 @@ const server = http.createServer(function(req, res) {
 
 		}
 		res.write("<hr id='lastRead'>");
+		res.write("<script>document.body.scrollTop = document.body.scrollHeight;</script>")
 		//res.write(list.toString().replaceAll(',', ','));
 
 		return res.end();
