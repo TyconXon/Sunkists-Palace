@@ -668,6 +668,8 @@ function nickname(){
 	alert('You can clear your nickname by relogging in');
 }
 
+//TODO: idle detection and blurred title changes need to be timedout to be after the new message title change.
+/*
 var wasIdle = false;
 window.onblur = ()=>{
  setTimeout(()=>{
@@ -684,7 +686,7 @@ window.onfocus = ()=>{
  	 wasIdle = false;
 	 document.title = document.title.replace("🌙", "");
  }
-}
+}*/
 
 document.getElementById("uploadForm").addEventListener("submit", (event)=>{
 	

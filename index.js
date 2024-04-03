@@ -233,22 +233,39 @@ const server = http.createServer(function(req, res) {
 	res.writeHead(200, { "Content-Type": "text/html" });
 	fs.readFile("index.html", function(err, data) {
 		if (qData.slow == undefined) {
-			
-			
-			res.write(data);
+			if(qData.getMessage == undefined){
+				res.write(data);
+			}else{
+				try{res.write(list[qData.getMessage])}catch(e){
+					console.log(e);
+					res.write(e.toString());
+				}
+				return res.end();
+			}
+			if(qData.getList != undefined){
+				try{
+					res.write(list.toString());
+				}catch(e){
+					console.log(e);
+				}
+				return res.end();
+
+			}
+		
 		} else {
 			io.emit(
 				"outMessage",
 				`<details><summary>Slowmode refresh</summary>${req.headers['user-agent']}</details>`
 			);
-			res.write(`<div style="position:fixed;background-color:white;">
+			res.write(`<html><head><meta charset="utf-8" /></head><body>
+			<div style="position:sticky;background-color:grey; font-size:150%;">
 			<script>
-			function text(){var e=window.prompt("Say:");window.location.assign("https://sunkist-palace.net/?slow&message="+e+"&user="+window.localStorage.getItem("username"))}document.addEventListener("keyup",e=>{switch(e.key){case"Enter":text();break;case"Shift":window.location.assign("https://server--maximusmiller2.repl.co/?slow=a")}});
+			function text(){var e=window.prompt("Say:");window.location.assign("https://sunkist-palace.net/?slow&message="+encodeURIComponent(e)+"%E2%9B%96&user="+window.localStorage.getItem("username"))}document.addEventListener("keyup",e=>{switch(e.key){case"Enter":text();break;case"Shift":window.location.assign("https://server--maximusmiller2.repl.co/?slow=a")}});
 			</script>
 			<button onclick="text()" href="#aaa" style="position: sticky;">Add to chat.</button>
 		<a href="https://sunkist-palace.net/?slow">Refresh text without responding</a>
 		<a href="https://sunkist-palace.net/">Go back to normal mode</a>
-		<i>Online people: ${Object.keys(onliners)}</i></div>
+		<i>Online people: ${Object.keys(onliners).toString()}</i></div>
 		`);
 		}
 		if (MEM && qData.cls == undefined) {
@@ -295,7 +312,7 @@ const server = http.createServer(function(req, res) {
 
 		}
 		res.write("<hr id='lastRead'>");
-		res.write("<script>document.body.scrollTop = document.body.scrollHeight;</script>")
+		//res.write("<script>document.body.scrollTop = document.body.scrollHeight;</script>")
 		//res.write(list.toString().replaceAll(',', ','));
 
 		return res.end();
