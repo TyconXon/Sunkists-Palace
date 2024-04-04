@@ -212,6 +212,15 @@ via {
 	font-family: 'Oswald',"DM Serif", emoji;
 }
 
+.WigglyStuf,
+WigglyStuf {
+	font-family: 'Coolvetica';
+	color: white;
+	background-color: rgba(24,64,128,0.7);
+	text-shadow: 0px 0px 5px #0088ff;
+	
+}
+
 .Sushi,
 Sushi, sushi {
   background: linear-gradient(90deg, 
@@ -317,6 +326,9 @@ rey {
 	background-image: url("../images/pfp/sasscoin.jpg");
 	border-color: #bccbeb;
 	border-style: outset;
+}
+.WigglyStuf::before{
+	background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIe_-A5UKPm1iBBCk6OmFa6FbjerOdrdhZCWpU06il5w&s');
 }
 
 .Console::before,

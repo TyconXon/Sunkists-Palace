@@ -230,10 +230,11 @@ const server = http.createServer(function(req, res) {
 		return;
 	}
 
-	res.writeHead(200, { "Content-Type": "text/html" });
+	
 	fs.readFile("index.html", function(err, data) {
 		if (qData.slow == undefined) {
-			if(qData.getMessage == undefined){
+			if(qData.getMessage == undefined && qData.getList == undefined){
+				res.writeHead(200, { "Content-Type": "text/html" });
 				res.write(data);
 			}else{
 				try{res.write(list[qData.getMessage])}catch(e){
@@ -253,6 +254,7 @@ const server = http.createServer(function(req, res) {
 			}
 		
 		} else {
+			res.writeHead(200, { "Content-Type": "text/html" });
 			io.emit(
 				"outMessage",
 				`<details><summary>Slowmode refresh</summary>${req.headers['user-agent']}</details>`
