@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@replit/database": "^2.0.5",
+    "@replit/object-storage": "^1.0.0",
     "@types/node": "^18.0.6",
     "busboy": "^1.6.0",
     "discord.js": "^14.14.1",

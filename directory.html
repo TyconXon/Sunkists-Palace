@@ -2,23 +2,126 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Sunkist directory</title>
+		<meta charset="utf-8" />
+		<link rel="icon" href="images/favicon.ico" />
+		<link rel="icon" href="images/dir.png" />
+
+		<style>
+
+			html {
+					background: url(/images/lava.gif),url(/images/ash.gif), linear-gradient(187deg, rgb(92 10 92) 0%, rgb(75 5 80) 50%, rgb(62 5 32) 100%);
+					background-size: 25%,40%, 100%;
+					background-position: bottom, bottom, bottom;
+					background-attachment: fixed, auto, fixed;
+				background-repeat: repeat-x,repeat, no-repeat;
+
+			}
+			
+			
+			*{
+				padding-left: 10px;
+				padding-right: 10px;
+
+			}
+			a{
+				background-color: rgba(255,255,255,0.65);
+				font-size: 150%;
+			}
+			a:hover{
+				filter: invert(25%);
+			}
+			a::before{
+				content: "☂";
+			}
+			h2::before, h2::after{
+				content: " ☁ ";
+			}
+			h2{
+				color: rgb(147 251 271);
+				background: linear-gradient(90deg, rgba(24, 84, 128, 1) 0%, rgba(87, 201, 231, 0.1) 50%, rgba(92, 10, 92, 0) 100%);
+				font-size: 200%;
+			}
+			h1 {
+					color: #008aff;
+					text-shadow: #7a0ea799 4px 1.5px 1.5px;
+					margin-bottom: 0px;
+					border-bottom-left-radius: 0px;
+					border-bottom-right-radius: 0px;
+					font-family: 'coomer';
+				background: linear-gradient(90deg, rgba(56, 93, 95, 0.25) 0%, rgba(183, 232, 235, 0.65) 50%, rgba(56, 93, 95, 0.25) 100%);
+				text-align: center;	
+				font-size: 250%;
+				margin-top: 5px;
+
+			}
+
+			span{
+				background: url(../images/ocean.gif),
+				linear-gradient(180deg,
+					rgba(56, 93, 95, 1) 0%,
+					rgba(45, 63, 76, 1) 50%,
+					rgba(50, 49, 50, 1) 100%);
+				background-size: 40%, 100%;
+				image-rendering: pixelated;
+				/*Rain scrolls, gradient does not*/
+				background-attachment: scroll, fixed;
+				-webkit-background-clip: text; /* clip the background to the text inside the tag*/
+				 -webkit-text-fill-color: transparent; /* make the text transparent so 
+																								* the background shows through*/
+			}
+			span:hover{
+
+			}
+
+			img{
+				width: 25%;
+			}
+			marquee{
+				color: rgba(147, 251, 271, 0.15);
+				padding: 0px;
+				margin: 0px;
+				position: relative;
+				line-height: 10px;
+				
+			}
+
+
+			
+		</style>
 	</head>
 	<body>
+		<marquee behavior="alternate" scrollamount="8"></marquee>
+		<marquee behavior="alternate" scrollamount="2"></marquee>
+		<marquee behavior="alternate" direction="right" scrollamount="6"></marquee>
+		<h1><span>Sunkist-Palace.net directory</span></h1>
+		<marquee behavior="alternate" scrollamount="6" direction="right"></marquee>
+		<marquee behavior="alternate" scrollamount="2" direction="right"></marquee>
+		<marquee behavior="alternate" scrollamount="8"></marquee>
 
-		<h1>Sunkist-Palace.net directory</h1>
 
 		<directory>
-			<h2>IRC</h2>
-			<a href='/' >Server</a> <br>
-			<a href='/?slow' >Slow mode (takes less time to load & no auto update)</a> <br>
-			<a href='/?channel=secondary' >Channel: secondary</a> <br>
-			<a href='/?channel=devtest' >Channel: devtest</a> <br>
+			<h2>Chatroom</h2>
+			<a href='/' ><b>Sunkist's Palace</b></a> <br>
+			<a href='/?slow' >Slow Mode (for bad-internet)</a> <br>
+			<a href='/skins/indextest.html' >Traditional chat ui</a> <br>
+			<a href="https://docs.google.com/document/d/1tbv-MJ7Hfz0bctJpbg6RaGocuWXjS4qIJ4t9DzLH8Co/edit">List of commands and help page</a>
+			
 			<h2>Other</h2>
-			<a href='./schedule/checkSchedule.html' >Schdeule</a> <br>
+			<a href='./users/index.html' ><b>User page index</b></a> <br>
+			<a href='./schedule/checkSchedule.html' ><b>School bell schedule (aka HowMuchTimeIsLeft?)</b></a> <br>
+			<a href='./workshop.html' ><b>Sunkist Workshop (mods)</b></a> <br>
 			<a href='./realtime.html' >Realtime Text</a> <br>
-			<a href='./users/index.html' >User page index</a> <br>
+			<a href='./users/Userstyler.html' >Userstyle editor with preview</a> <br>
+			<h2>Puzzles</h2>
+			<a href="https://d81ed078-2e8a-40e6-ba26-90916ff5dbad-00-2h5bbzr27dwq6.riker.replit.dev/"><img src="images/TERMINX.png" alt="Terminal Extractions"></a><br>
+			<a href="https://3c35e842-1a8e-429d-9888-baa068475acf-00-fnrban7dduiq.worf.replit.dev/"><img src="images/OLDWEB.png" alt="OldWeb"></a>
 		</directory>
-		
+
+		<br>
+		<br>
+		<br>
+		<audio src="sound/usr/Storm.ogg" autoplay loop controls></audio>
+		<footer></footer>
 		<script>
 
 			var orange = document.createElement("style");
@@ -26,6 +129,52 @@
 			orange.innerHTML = window.localStorage.getItem("style");
 			orange.setAttribute('nodraw', true);
 			document.body.appendChild(orange);
+
+			var nodeList = document.querySelectorAll('marquee');
+			nodeList.forEach((node)=>{
+				for (let index = 0; index < 900; index++) {
+					node.innerHTML += " ☁☁☁";
+				}
+				node.onclick = ()=>{
+				}
+			});
+			var cList = document.querySelectorAll('audio');
+			cList.forEach((node)=>{
+				node.volume = 0.1;
+			});
+
+			document.querySelector('h1').onclick = ()=>{
+				let thunder = new Audio("sound/say/valve/halflife/thunder2.wav");
+				thunder.volume = 0.4;
+				thunder.play();
+			}
+
+			var aList = document.querySelectorAll('a');
+			aList.forEach((node)=>{
+				node.onmouseover = () =>{
+						new Audio("sound/usr/rollover.ogg").play();
+				}
+				node.onmousedown = () =>{
+					new Audio("sound/usr/decrement.ogg").play();
+				}
+			});
+			var bList = document.querySelectorAll('h2');
+			bList.forEach((node)=>{
+				node.onmousedown = () =>{
+					new Audio("sound/say/valve/source/wpn_denyselect.wav").play();
+				}
+			});
+
+			setTimeout(()=>{
+				let spkr = new Audio("sound/say/valve/halflife/voice/f_localunrest_spkr.wav");
+				spkr.volume = 0.15;
+				spkr.play();
+			}, 5000);
+			setTimeout(()=>{
+				let spkr = new Audio("sound/say/valve/halflife/voice/f_anticivil1_5_spkr.wav");
+				spkr.volume = 0.15;
+				spkr.play();
+			}, 50000);
 
 		</script>
 

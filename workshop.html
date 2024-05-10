@@ -1,0 +1,198 @@
+<html id="marketplacePage">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="images/sm.png" />
+		<title>Sunkist's Marketplace</title>
+
+		<link rel="stylesheet" href="style/fonts.css" />
+		<link rel="stylesheet" href="style/unique.css" />
+		<link rel="stylesheet" href="style/new.css" />
+		<link rel="stylesheet" href="style/restyle.css" />
+		<link rel="stylesheet" href="style/users.css" />
+		<link rel="stylesheet" href="style/marketplace.css" />
+
+		<script nodraw>
+			var subscribedMods = [];
+			const bc = new BroadcastChannel("sunkist");
+
+
+			var style = window.localStorage.getItem("style");
+			if(style == null){
+				window.localStorage.setItem("style", '/* Hey! */ ');
+			}
+			
+
+			// subscribedMods.concat(style.match(/(?<=START)[^]+(?=*\/)/g))
+			// alert(subscribedMods);
+			fetch("/users/mods/mods.json")
+				.then((res) => res.json())
+				.then((data) => {
+					data.themes.forEach((mod) => {
+						//Create an element
+						var newMod = document.createElement("div");
+						newMod.classList.add("modContainer");
+						newMod.innerHTML = `<img src="${mod.image}" class="modPreview" />
+									<h3>${mod.name}</h3>
+									<${mod.author} class='${mod.author} message' style="padding:2px;border-radius:3px;">${mod.author}</${mod.author}>
+									<br>
+									<button class="modSubscription" location="${mod.file}">Subscribe</button>
+									<details>
+										<summary>${mod.tags.toString().replaceAll(',', ', ')}</summary>
+										${mod.description}
+									</details>`;
+						newMod.classList.add(...(mod.tags.toString().replace(' ','').split(','))  )
+						document.querySelector('market').appendChild(newMod);
+						afterLoad();
+					});
+				})
+				.catch((error) => {
+					alert(error);
+				});
+
+			function afterLoad(){
+				document.querySelectorAll(".modcontainer").forEach((button)=>{
+					button.onmouseover = ()=>{
+						button.children[5].open = true;
+					}
+					button.onmouseleave = ()=>{
+						button.children[5].open = false;
+					}
+				});
+				
+				document.querySelectorAll(".modSubscription").forEach((button)=>{
+					var rawmod = button.parentElement.children[1].innerText;
+					var mod = button.parentElement.children[1].innerText.replace(' ', '-').toLowerCase();
+					var alreadySubbed = window.localStorage.getItem("style").includes(rawmod);
+					button.innerText = alreadySubbed? "Unsubscribe" : "Subscribe";
+					if(alreadySubbed){
+						button.parentElement.classList.add('on');
+					}
+					
+					button.onclick = ()=>{
+						button.parentElement.classList.add('loading');
+						button.innerText = 'Loading...';
+
+						let zhttp = new XMLHttpRequest();
+						zhttp.onreadystatechange = function() {
+							if (this.readyState == 4 && this.status == 200) {
+								button.parentElement.classList.remove('loading');
+								var alreadySubbed = window.localStorage.getItem("style").includes(rawmod);
+								if(!alreadySubbed){
+									var alreadySubbed = true;
+									button.innerText = 'Unsubscribe';
+									button.parentElement.classList.add('on');
+									window.localStorage.setItem("style", window.localStorage.getItem("style") + ' ' + this.responseText );
+								}else{
+									var alreadySubbed = false;
+									button.innerText = 'Subscribe';
+									button.parentElement.classList.remove('on');
+
+									window.localStorage.setItem("style", window.localStorage.getItem("style").replace(this.responseText, ''));
+								}
+								bc.postMessage('style');
+								harvestOranges();
+							}else{
+								console.log(this.status);
+							}
+						}
+						zhttp.open("GET", button.getAttribute('location'), true);
+						zhttp.send();
+					
+					}
+				})
+			}
+		</script>
+	</head>
+	<body>
+
+			<h1>Sunkist Marketplace</h1>
+		<div id="heading">
+			<h2>Find themes, plugins, and other snippits for Sunkist's Palace!</h2>
+			<button id="unsub">Unsubscribe from all</button> <input type="text" placeholder="Search..." id="search">
+		</div>
+		
+		<market>
+			
+		</market>
+
+
+		<!-- the style thingy to style pages or whatever idk gang -->
+		<script style="display:none;">
+
+
+			function harvestOranges(){
+				var orange = document.createElement("style");
+				if(document.querySelector('[autogen]') != null){
+					document.querySelector('[autogen]').outerHTML = '';
+				}
+
+				orange.innerHTML = window.localStorage.getItem("style");
+				orange.setAttribute('nodraw', true);
+				orange.setAttribute('autogen' , true);
+				document.body.appendChild(orange);
+
+
+				document.body.appendChild(orange);
+			}
+			harvestOranges();
+
+			document.getElementById('unsub').onclick = ()=>{
+				window.localStorage.setItem("style", '/* Hey! */ ');
+				window.location.reload();
+			}
+			var search = document.getElementById('search');
+			search.onkeyup = ()=>{
+
+				let searchQuery = search.value.toLowerCase();
+
+				if(searchQuery.hx() == '00680065006c006c'){
+					document.write(`<style>*{background-color:black;color:white;}</style>`);
+				}
+				
+				let mods = document.querySelectorAll('market > div');
+				
+				mods.forEach((mod)=>{
+					if(searchQuery == ''){
+						mod.style.display = "block";
+
+					}
+					if(mod.innerHTML.includes(searchQuery)){
+						mod.style.display = "block";
+					}else{
+						mod.style.display = "none";
+
+					}
+				});
+				
+				};
+
+
+
+			String.prototype.hx = function(){
+					var hex, i;
+
+					var result = "";
+					for (i=0; i<this.length; i++) {
+							hex = this.charCodeAt(i).toString(16);
+							result += ("000"+hex).slice(-4);
+					}
+
+					return result
+			}
+			String.prototype.hd = function(){
+					var j;
+					var hexes = this.match(/.{1,4}/g) || [];
+					var back = "";
+					for(j = 0; j<hexes.length; j++) {
+							back += String.fromCharCode(parseInt(hexes[j], 16));
+					}
+
+					return back;
+			}
+		</script>
+
+
+
+	</body>
+</html>

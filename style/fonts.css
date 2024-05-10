@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap'); 		
 
 @font-face {
 	font-family: "Bound";
@@ -117,4 +118,22 @@
 @font-face{
   font-family: Orbitron;
   src: url("../fonts/ORBITRON-REGULAR.TTF");
+}
+@font-face{
+  font-family: Sedan;
+  src: url("../fonts/Sedan-Regular.ttf");
+}
+@font-face{
+  font-family: Papyrus;
+  src: url("../fonts/papyrus.ttf");
+}
+
+@font-face{
+	font-family: Broshkill;
+	src: url("../fonts/BroshKill-Regular.otf");
+}
+
+@font-face{
+	font-family: Deltarune;
+	src: url("../fonts/deltarune.ttf");
 }

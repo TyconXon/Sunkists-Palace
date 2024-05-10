@@ -1,0 +1,29 @@
+/* START Dusk Horizon TTAB Patch */
+
+#sunkistPalaceHTML {
+#soapMode {
+ background: rgba(0,0,0,0.8);
+ box-shadow: 0 0 30px 15px rgba(0,0,0,0.9), 0 0 10px 7px rgba(0,0,0,0.5);
+ padding: 10px;
+ border: solid 1px rgba(0,0,0,0.3);
+ height:9vh!important;
+}
+
+#menu {
+ background: rgba(0,0,0,0.8);
+ border: none;
+ width: 100%;
+ backdrop-filter: none;
+}
+#menuTitle {margin-top: 0; padding-top:10px;} 
+}
+
+html {
+ padding-bottom:initial!important;
+}
+
+#sunkistPalaceHTML { 
+ padding-bottom:11vh!important;
+}
+
+/* END Dusk Horizon TTAB Patch */

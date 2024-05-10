@@ -1,0 +1,198 @@
+ <!--Given to you by Maximus Miller, Afton & Boxel-->
+
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- Meta tag stuff -->
+	<meta name="keywords" 		content="Maximus Miller, Afton Rath, Apple, Hamburger, HTML" />
+	<meta name="author" 			content="Maximus fayte Miller" />
+	<meta name="theme-color" 	content="rgba(60,45,75,0.8)" />
+	<meta id="metatitle" name="title" content="Sunkist's Palace" />
+	<meta name="description" 					content="A simple chat room for messing with HTML and 'conversing'. Word of the day is 'Hamburger'." />
+	<meta property="image" 				content="images/pre.gif" />
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" href="../images/favi.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!--Fonts-->
+	<!-- <link rel="icon" id="icon" href="/images/favi.svg" type="image/svg+xml" /> -->
+  <link rel="icon" id="icon" href="../images/favi.png" type="image/png"/>
+	
+	<!-- Possible method for functional stylesheet -->
+	<link href="https://fonts.cdnfonts.com/css/tf2-build" rel="stylesheet" /><!--
+	<link rel="stylesheet" href="https://unpkg.com/7.css/dist/7.scoped.css" />
+	<link rel="stylesheet" href="https://unpkg.com/7.css/dist/gui/_variables.scss" />
+	<link rel="stylesheet" href="https://unpkg.com/7.css/dist/gui/button.css" />-->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+	<link href="https://blogfonts.com/css/aWQ9MTQ3OTI5JnN1Yj05MjkmYz1mJnR0Zj1maW51cmxpZy1kZW1vLnJlZ3VsYXIub3RmJm49ZmludXJsaWctZGVtby1yZWd1bGFy/Finurlig DEMO Regular.otf" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css" />
+	<!--Syntax highlighter-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" nodraw></script>
+	<script nodraw>
+		hljs.highlightAll();
+	</script>
+	
+	<!--IMPORTANT STUFF-->
+
+	<title id="title" >Sunkist's Palace</title>
+	
+	<link rel="stylesheet" href="../style/fonts.css">
+	<link rel="stylesheet" href="../style/unique.css">
+	<link rel="stylesheet" href="../style/new.css">
+	<link rel="stylesheet" href="../style/restyle.css">
+	<link rel="stylesheet" href="../style/users.css">
+	<link rel="manifest" href="../manifest.json">
+	
+</head>
+  <style nodraw>
+    #thingamabob {
+      background-color: rgba(0,0,0,0.75);
+      border: none;
+      border-radius:10px;
+      padding:15px;
+    }
+    .settings {
+      margin:20px;
+      background-color: rgba(50,50,50,0.5);
+      padding:15px;
+      border-radius:10px;
+      color:white;
+    }
+    summary {
+      transition: none;
+    }
+    summary:hover {
+      filter:brightness(2);
+    }
+  </style>
+
+	<!--BODY-->
+	
+<body id="body" style="padding-bottom: 150px;margin-top:50px;margin:0px;" onload=" document.body.scrollTop = document.body.scrollHeight; checkPings();">
+	
+	
+		<h1 id="menuTitle" style="position:fixed; top:0;left:0;z-index:-4;">Sunkist's Palace (test layout theme)</h1>
+
+		<style nodraw>
+			.message{
+				margin-left:1%;
+				margin-right:1%;
+				border-radius: 0px;
+			}
+			.rightist{
+				width:auto;
+				transition: linear 0.1s;
+			}
+		</style>
+
+		
+
+	<div id="waterfall"></div>
+
+	<div id="footer" style="display:block;padding:5px;position:fixed;bottom:0;z-index:99999;width:100%;margin-left:0px;background-color:gray;">
+		<p class="infobar" id="status" style="width: 100%;margin:0px;">
+			<span id="statusOnline">
+				ONLINE [<span id="onlineNumber"></span>]:<span id="onlineCount"></span></span>
+			<wbr /><span id="typingP"><span id="talkorinos"></span> :TYPING</span>
+		</p>
+		<textarea autofocus autocomplete="on" type="text" id="soapMode" style="height: 8%; width: 100%;padding:1%;display:inline-block;box-shadow: none;" ns></textarea>
+		<button popovertarget="thingamabob" style="width: 100%;margin:0px;">SETTINGS, UTILITIES, FAVORITES</button>
+
+	</div>
+
+		<!--SETTINGS AND SUCH-->
+	<div id="thingamabob" popover>
+		<div id='settingGrid' style="display: grid; grid-template-columns: auto auto">
+			<!--Settings-->
+			<details class="settings" style="max-height: 200px" id='thesettings'>
+
+				<summary>Settings</summary>
+				<br />
+				<button style="height: 7.5%; width: 4vw" onclick="setUsr()">
+					Login
+				</button>
+				<button class="win7" onclick="text()" style="height: 7.5%">
+					Add to chat (press Enter)
+				</button>
+				<button style="height: 7.5%; width: 4vw" onclick="window.location.assign('https://server--maximusmiller2.repl.co/')">
+					Refresh
+				</button>
+				<br />
+				<a href="https://sunkist-palace.net/?slow">Slow-internet (legacy) mode</a>
+				<a href="https://docs.google.com/document/d/1tbv-MJ7Hfz0bctJpbg6RaGocuWXjS4qIJ4t9DzLH8Co/edit?usp=sharing" target="_blank">Documentation</a>
+				<br />
+				<form action="/upload" enctype="multipart/form-data" method="post" id='uploadForm'>
+					<input type="file" name="someCoolFiles" id='uploadFile'>
+					<button id='upload'>Upload</button>
+				</form>
+
+				<button popovertarget="sCss"> Open CSS</button>
+				<div popover id="sCss">
+					<textarea name="sStyle" id="sStyle" width='500px' height='500px'></textarea>
+					<br>
+					<button id="sSub">Save & Run CSS</button>
+				</div>
+
+				<button popovertarget="sJsMenu">Open JS</button>
+				<div id='sJsMenu' popover>
+					<textarea name="sJs" id="sJs" width='500px' height='500px'></textarea><br>
+					<button id='sSubJs'>Save JS</button>
+				</div>
+				<br>
+				<br />
+				<label for="prefix">Message prefix:</label>
+				<textarea type="text" id='prefix' name='prefix'></textarea>
+				<br />
+				<label for="suffix">Rename title: </label>
+				<textarea type="text" id='suffix' name='suffix'>Sunkist's Palace</textarea>
+				<br>
+				<br>
+				<button onclick="nickname()">Set nickname</button>
+				<button onclick='markAsRead();'> Read all</button>
+				<br>
+				<button popovertarget="volumeSection">Open sound settings</button>
+				<div popover id="volumeSection">
+					<label for="vol">Text Volume:</label>
+					<input type="range" max="1" min="0" id="soundVolume" onchange="settingChange('soundVolume')" name='vol' step='0.05'> <br>
+					<label for="vol1">Ping volume:</label>
+					<input type="range" max="1" min="0" id="pingSoundVolume" name='vol1' onchange="settingChange('pingSoundVolume')" step='0.05'> <br>
+					<label for="vol2">Special Volume:</label>
+					<input type="range" max="1" min="0" id="specialSoundVolume" name='vol2' onchange="settingChange('specialSoundVolume')" step='0.05'> <br>
+					<label for="pingSound">Ping sound:</label>
+					<input type="checkbox" onchange='settingChange("pingSound")' id="pingSound">
+					<input type="text" onchange='settingChange("pingSoundUrl")' id="pingSoundUrl" disabled>
+				</div>
+
+
+			</details>
+			<details class="settings" style="max-height: 200px">
+				<summary>Favorites</summary>
+				<br />
+				<button id="fSub" onclick='addToFavorites()'>Submit</button>
+				<textarea name="fAdd" id="text-input" cols="30" rows="1"></textarea>
+				<br />
+				<div id='favorites-list'>
+
+				</div>
+			</details>
+		</div>
+		</div>
+
+	<script src="../socket.io/socket.io.js" nodraw></script>
+	<script src="../script/script.js" nodraw></script>
+	<script src="../script/splashtext.js" nodraw></script>
+	<script src="../skins/script/plug2.js" nodraw></script>
+
+	<script src="../script/userlist.js" nodraw></script>
+	<script src="../script/login.js" nodraw></script>
+	<script src="../script/user.js" nodraw></script>
+	<script src="../script/shortcuts.js" nodraw></script>
+
+</body>
+
+</html>

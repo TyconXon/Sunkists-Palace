@@ -1,0 +1,48 @@
+/* START Rain Rain Go Away */
+
+#sunkistPalaceHTML {
+ background:
+  linear-gradient(180deg,
+   rgba(56, 93, 95, 1) 0%,
+   rgba(45, 63, 76, 1) 50%,
+   rgba(50, 49, 50, 1) 100%);
+ background-size: 100%;
+ background-attachment: fixed;
+}
+
+#directoryPage {
+ background: url(/images/lava.gif), 
+  linear-gradient(187deg, rgb(92 10 92) 0%, rgb(75 5 80) 
+  50%, rgb(62 5 32) 100%);
+ background-size: 25%, 100%;
+ background-position: bottom;
+ background-attachment: auto, fixed;
+ background-repeat: repeat-x, no-repeat;
+}
+
+
+
+#marketplacePage {
+ background: url(/images/ocean.gif),
+  linear-gradient(180deg,
+   rgb(172, 250, 112) 10%,
+   rgb(105, 232, 130) 12%,
+   rgb(0, 212, 147) 15%,
+   rgb(0, 188, 161) 30%,
+   rgb(0, 163, 164) 50%,
+   rgb(0, 139, 160)60%,
+   rgb(0, 116, 152)70%,
+   rgb(0, 92, 139)80%,
+   rgb(30, 69, 114)90%,
+   rgb(41, 47, 86)100%
+  );
+ background-size: 25%, 100%;
+ background-position: bottom;
+ background-attachment: fixed;
+ background-repeat: repeat-x, no-repeat;
+ image-rendering: pixelated;
+ background-blend-mode: normal;
+ background-attachment: scroll, fixed;
+}
+
+/* END Rain Rain Go Away */

@@ -1,4 +1,4 @@
-/*
+		/*
  * Stylesheet for already existing elements
  */
 
@@ -6,6 +6,7 @@
 
 a {
 	background-color: white;
+	padding: 3px;
 }
 
 a>img {
@@ -113,4 +114,12 @@ textarea {
 	background-color: rgba(30, 30, 30, 0.5);
 	color: white;
 	caret-color: lightblue;
+}
+#sStyle{
+	width: 80vw;
+	height: 60vh;
+}
+#sSub{
+	width: 80vw;
+	margin-top:5px;
 }

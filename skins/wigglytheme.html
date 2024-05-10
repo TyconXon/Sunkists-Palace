@@ -1,0 +1,166 @@
+ <!--Given to you by Maximus Miller, Afton & Boxel-->
+
+<html id="sunkistPalaceHTML">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- Meta tag stuff d-->
+	<meta name="keywords" 		content="Maximus Miller, Afton Rath, Apple, Hamburger, HTML" />
+	<meta name="author" 			content="Maximus fayte Miller" />
+	<meta name="theme-color" 	content="rgba(60,45,75,0.8)" />
+	<meta id="metatitle" name="title" content="Sunkist's Palace" />
+	<meta name="description" 					content="A simple chat room for messing with HTML and 'conversing'. Word of the day is 'Hamburger'." />
+	<meta property="image" 				content="images/pre.gif" />
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" href="../images/favi.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!--Fonts-->
+	<!-- <link rel="icon" id="icon" href="/images/favi.svg" type="image/svg+xml" /> -->
+  <link rel="icon" id="icon" href="../images/favi.png" type="image/png"/>
+	
+	<!-- Possible method for functional stylesheet -->
+	<link href="https://fonts.cdnfonts.com/css/tf2-build" rel="stylesheet" />
+	<link rel="stylesheet" href="https://unpkg.com/7.css/dist/7.scoped.css" />
+	<link rel="stylesheet" href="https://unpkg.com/7.css/dist/gui/_variables.scss" />
+	<link rel="stylesheet" href="https://unpkg.com/7.css/dist/gui/button.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+	<link href="https://blogfonts.com/css/aWQ9MTQ3OTI5JnN1Yj05MjkmYz1mJnR0Zj1maW51cmxpZy1kZW1vLnJlZ3VsYXIub3RmJm49ZmludXJsaWctZGVtby1yZWd1bGFy/Finurlig DEMO Regular.otf" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css" />
+	<!--Syntax highlighter-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" nodraw></script>
+	<script nodraw>
+		hljs.highlightAll();
+	</script>
+	
+	<!--IMPORTANT STUFF-->
+
+	<title id="title">Sunkist's Palace</title>
+	
+	<link rel="stylesheet" href="../style/fonts.css">
+	<link rel="stylesheet" href="../style/unique.css">
+	<link rel="stylesheet" href="../style/new.css">
+	<link rel="stylesheet" href="../style/restyle.css">
+	<link rel="stylesheet" href="../style/users.css">
+	<link rel="manifest" href="../manifest.json">
+	
+</head>
+<script src="https://replit.com/public/js/repl-auth-v2.js" nodraw></script>
+
+
+	<!--BODY-->
+	
+<body id="body" onload=" document.body.scrollTop = document.body.scrollHeight; checkPings();">
+	
+	<div id="menu">
+		<h1 id="menuTitle" reflect>Sunkist's Palace</h1>
+
+		<p class="infobar" id="status">
+			<span id="statusOnline">
+				ONLINE [<span id="onlineNumber"></span>]:<span id="onlineCount"></span></span>
+			<wbr /><span id="typingP"><span id="talkorinos"></span> :TYPING</span>
+		</p>
+
+		
+		<textarea autofocus autocomplete="on" type="text" id="soapMode" style="height: 8%; width: 100%" reflect></textarea>
+
+		<!--SETTINGS AND SUCH-->
+		<div id='settingGrid' style="display: grid; grid-template-columns: auto auto">
+			<!--Settings-->
+			<details class="settings" style="max-height: 200px" id='thesettings'>
+				
+				<summary>Settings</summary>
+				<br />
+				<button style="height: 7.5%; width: 4vw" onclick="setUsr()">
+					Login
+				</button>
+				<button class="win7" onclick="text()" style="height: 7.5%">
+					Add to chat (press Enter)
+				</button>
+				<button style="height: 7.5%; width: 4vw" onclick="window.location.assign('https://server--maximusmiller2.repl.co/')">
+					Refresh
+				</button>
+				<br />
+				<a href="/?slow">Slow-internet (legacy) mode</a>
+				<a href="https://docs.google.com/document/d/1tbv-MJ7Hfz0bctJpbg6RaGocuWXjS4qIJ4t9DzLH8Co/edit?usp=sharing" target="_blank">Documentation</a>
+				<br />
+				<form action="/upload" enctype="multipart/form-data" method="post" id='uploadForm'>
+					<input type="file" name="someCoolFiles" id='uploadFile'>
+					<button id='upload'>Upload</button>
+				</form>
+				
+				<button popovertarget="sCss"> Open CSS</button>
+				<div popover id="sCss">
+					<textarea name="sStyle" id="sStyle" width='500px' height='500px'></textarea>
+					<br>
+					<button id="sSub">Save & Run CSS</button>
+				</div>
+				
+				<button popovertarget="sJsMenu">Open JS</button>
+				<div id='sJsMenu' popover>
+					<textarea name="sJs" id="sJs" width='500px' height='500px'></textarea><br>
+					<button id='sSubJs'>Save JS</button>
+				</div>
+				<br />
+				<label for="prefix">Message prefix:</label>
+				<textarea type="text" id='prefix' name='prefix'></textarea>
+				<br />
+				<label for="suffix">Rename title: </label>
+				<textarea type="text" id='suffix' name='suffix'>Sunkist's Palace</textarea>
+				<br>
+				<button onclick="nickname()">Set nickname</button>
+				<button onclick='markAsRead();'> Read all</button>
+				<br>
+				<label for="titlePrefix">Show onlinecount in title:</label>
+				<input type="checkbox" onchange='settingChange("titlePrefix")' id="titlePrefix">
+				<br>
+				<button popovertarget="volumeSection" disabled>Open sound settings (removed)</button>
+				<div popover id="volumeSection">
+					<label for="vol">Text Volume:</label>
+					<input type="range" max="1" min="0" id="soundVolume" onchange="settingChange('soundVolume')" name='vol' step='0.05'> <br>
+					<label for="vol1">Ping volume:</label>
+					<input type="range" max="1" min="0" id="pingSoundVolume" name='vol1' onchange="settingChange('pingSoundVolume')" step='0.05'> <br>
+					<label for="vol2">Special Volume:</label>
+					<input type="range" max="1" min="0" id="specialSoundVolume" name='vol2' onchange="settingChange('specialSoundVolume')" step='0.05'> <br>
+					<label for="pingSound">Ping sound:</label>
+					<input type="checkbox" onchange='settingChange("pingSound")' id="pingSound">
+					<input type="text" onchange='settingChange("pingSoundUrl")' id="pingSoundUrl" disabled>
+				</div>
+
+				
+			</details>
+			<details class="settings" style="max-height: 200px">
+				<summary>Favorites</summary>
+				<br />
+				<button id="fSub" onclick='addToFavorites()'>Submit</button>
+				<textarea name="fAdd" id="text-input" cols="30" rows="1"></textarea>
+				<br />
+				<div id='favorites-list'>
+					
+				</div>
+			</details>
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+
+	<script src="../socket.io/socket.io.js" nodraw></script>
+	<script src="../script/script.js" nodraw></script>
+	<script src="../script/splashtext.js" nodraw></script>
+	<script src="../script/plugs.js" nodraw></script>
+	<script src="../script/userlist.js" nodraw></script>
+	<script src="../script/login.js" nodraw></script>
+	<script src="../script/user.js" nodraw></script>
+	<script src="../script/shortcuts.js" nodraw></script>
+	
+	<script src="../messageFormatting.js" nodraw></script>
+
+	
+</body>
+
+</html>

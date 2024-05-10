@@ -10,7 +10,15 @@ var sanLevel = 0;
 const textBox = document.getElementById("soapMode");
 var sunkistsPalace = 'Sunkist\'s Palace';
 var altpressed = false;
+var shiftpressed = false;
 let devmode = false;
+const bc = new BroadcastChannel("sunkist");
+
+bc.onmessage = (message)=>{
+	if(message.data == 'style'){
+		harvestOranges();
+	}
+}
 
 setTimeout(()=>{
 	document.documentElement.style.scrollBehavior = 'smooth';
@@ -31,14 +39,14 @@ document.getElementById('suffix').oninput = function () {
 	document.title = document.getElementById('suffix').value;
 	document.getElementById("menuTitle").innerText = document.getElementById('suffix').value;
 }
-
+/*
 var rightNow = new Date();
 if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1){
 	sunkistsPalace = 'tommy';
 	document.getElementById("menuTitle").innerText = 'tommy';
 	document.title = 'tommy land';
 	
-}
+}*/
 
 var URLparams = new URLSearchParams(document.location.search);
 if(URLparams.get('channel') != undefined){
@@ -106,9 +114,9 @@ function saveFavorites(favorites) {
 }
 
 function settingChange(stng){
-	if(stng == 'pingSound'){
+	if(stng == 'pingSound' || stng == 'titlePrefix'){
 		localStorage.setItem(stng, document.getElementById(stng).checked);
-		if(document.getElementById(stng).checked){
+		if(document.getElementById(stng).checked && stng == 'pingSound'){
 			document.getElementById('pingSoundUrl').disabled = false;
 		}else{
 			document.getElementById('pingSoundUrl').disabled = true;
@@ -117,17 +125,23 @@ function settingChange(stng){
 	}
 	localStorage.setItem(stng, document.getElementById(stng).value);
 }
+localStorage.setItem('soundVolume', 0.35)
+localStorage.setItem('pingSoundVolume', 0.5)
+localStorage.setItem('pingSound', false)
+localStorage.setItem('pingSoundUrl', '')
+// document.getElementById('soundVolume').value = localStorage.getItem('soundVolume') ? localStorage.getItem('soundVolume') : 0.7;
+// document.getElementById('pingSoundVolume').value = localStorage.getItem('pingSoundVolume') ? localStorage.getItem('pingSoundVolume') : 1;
+// document.getElementById('pingSound').checked = localStorage.getItem('pingSound') ? localStorage.getItem('pingSound') : false;
+// document.getElementById('pingSoundUrl').value = localStorage.getItem('pingSoundUrl') ? localStorage.getItem('pingSoundUrl') : '';
 
-document.getElementById('soundVolume').value = localStorage.getItem('soundVolume') ? localStorage.getItem('soundVolume') : 0.7;
-document.getElementById('pingSoundVolume').value = localStorage.getItem('pingSoundVolume') ? localStorage.getItem('pingSoundVolume') : 1;
-document.getElementById('pingSound').checked = localStorage.getItem('pingSound') ? localStorage.getItem('pingSound') : false;
-document.getElementById('pingSoundUrl').value = localStorage.getItem('pingSoundUrl') ? localStorage.getItem('pingSoundUrl') : '';
+ document.getElementById('titlePrefix').checked = localStorage.getItem('titlePrefix') ? localStorage.getItem('titlePrefix') : false;
 
-if(document.getElementById('pingSound').checked){
-	document.getElementById('pingSoundUrl').disabled = false;
-}else{
-	document.getElementById('pingSoundUrl').disabled = true;
-}
+
+// if(document.getElementById('pingSound').checked){
+// 	document.getElementById('pingSoundUrl').disabled = false;
+// }else{
+// 	document.getElementById('pingSoundUrl').disabled = true;
+// }
 
 function renderFavorites() {
 		var favoritesList = document.getElementById("favorites-list");
@@ -193,11 +207,7 @@ document.getElementById("sStyle").value =
 document.getElementById("sJs").value =
 	window.localStorage.getItem("js");
 
-var orange = document.createElement("style");
-
-orange.innerHTML = window.localStorage.getItem("style");
-orange.setAttribute('nodraw', true);
-document.body.appendChild(orange);
+harvestOranges();
 
 addEventListener('load', ()=>{
 	var lemon = document.createElement("script");
@@ -213,13 +223,13 @@ document.getElementById("sSub").onclick = function() {
 		);
 		return;
 	}
-	var apple = document.createElement("style");
-	apple.innerHTML = document.getElementById("sStyle").value;
+
 	window.localStorage.setItem(
 		"style",
 		document.getElementById("sStyle").value,
 	);
-	document.body.appendChild(apple);
+	harvestOranges();
+	
 };
 document.getElementById("sSubJs").onclick = function() {
 	if (document.getElementById("sJs").value.includes("novis")) {
@@ -233,6 +243,21 @@ document.getElementById("sSubJs").onclick = function() {
 		document.getElementById("sJs").value,
 	);
 };
+
+function harvestOranges(){
+	var orange = document.createElement("style");
+	if(document.querySelector('[autogen]') != null){
+		document.querySelector('[autogen]').outerHTML = '';
+	}
+
+	orange.innerHTML = window.localStorage.getItem("style");
+	orange.setAttribute('nodraw', true);
+	orange.setAttribute('autogen' , true);
+	document.body.appendChild(orange);
+
+
+	document.body.appendChild(orange);
+}
 
 function imgify(text) {
 	var urlRegex = /(https?:\/\/[^\s]+(\.png|\.jpg|\.gif|\.webp|\.jpeg))/g;
@@ -264,6 +289,7 @@ function splitString(inputString) {
 			/*curTime: inputString.match(/(?<=title=')[0-9]+/[0-9]+/[0-9]+, [0-9]+:[0-9]+:[0-9]+ (AM|PM)(?=')/g)[0],*/
 			message: inputString.match(/(?<=<msgtxt>)[^]+(?=<\/msgtxt>)/g)[0],
 		};
+		console.log(result);
 		return result;
 	} catch (err) {
 		console.error(err + ' | ' + inputString);
@@ -318,14 +344,7 @@ function checkPings() {
 			} catch (error) {
 				
 			}
-			
-
-			if(localStorage.getItem('pingSound') == true){
-					var msgHo = new Audio(localStorage.getItem('pingSoundUrl'));
-					msgHo.volume = localStorage.getItem('pingSoundVolume');
-					msgHo.play();
-				return;
-			}
+		
 			//Play a random, cool sound
 			switch (Math.floor(Math.random() * 5)) {
 				case 0:
@@ -349,7 +368,7 @@ function checkPings() {
 					);
 					break;
 			}
-			msgHo.volume = localStorage.getItem('pingSoundVolume');
+			msgHo.volume = 0.50;
 
 			msgHo.play();
 		}
@@ -488,19 +507,14 @@ function replyGen(msgId) {
 	let userReplied = document
 		.getElementById(msgId)
 		.firstElementChild.innerHTML.split(" ")[0];
+	console.log(userReplied);
+	console.log(document
+						 .getElementById(msgId)
+						 .firstElementChild.innerHTML)
 	let textToCopy = `<button onclick='reply("${msgId}")' title='${msgId}'>&#11177; <${userReplied}>${userReplied}</${userReplied}>:<${userReplied}>${extractContent(splitString(document.getElementById(msgId).outerHTML).message).substr(0,25)}</${userReplied}></button>`;
 	textBox.value += textToCopy;
 
 	
-	let textArea = document.createElement("textarea");
-	textArea.value = textToCopy;
-
-	document.body.appendChild(textArea);
-
-	navigator.clipboard
-		.writeText(textToCopy)
-		.then(() => {
-
 			let rng = Math.random();
 			if (rng <= 0.166) {
 				soundURL =
@@ -531,23 +545,19 @@ function replyGen(msgId) {
 				document.getElementById("menuTitle").innerText = oldTitle;
 			}, 500);
 			textBox.focus();
-
-		})
-		.catch((err) => {
-			alert("Failed to copy text: ", err);
-		})
-		.finally(() => {
-			document.body.removeChild(textArea);
-			//text(textToCopy);
-		});
+		
 }
 
 function onIdentifer(user){
+	if(shiftpressed){
+		newTab(window.location.origin + '/users/'+user+'.html');
+		return;
+	}
 	newPopup(window.location.origin + '/?channel='+user+'&cls')//Could go to their own bio page when that is a normal thing
 }
 
 function maple(num) {
-	if(!altpressed){
+	if(true){
 		replyGen(num);
 	}else{
 		copy(`/edit ${num} `);
@@ -669,24 +679,24 @@ function nickname(){
 }
 
 //TODO: idle detection and blurred title changes need to be timedout to be after the new message title change.
-/*
+
 var wasIdle = false;
 window.onblur = ()=>{
  setTimeout(()=>{
-	 if (!document.hasFocus()){
-			 message(`<i class="identifier"> is now idle.</i><style nodraw> .${window.localStorage.getItem("username")}::before{content:'🌙';} </style>`);
+	 if (!document.hasFocus() && !wasIdle){/*
+			 socket.emit("attention", window.localStorage.getItem("username"), "idle");
 			 wasIdle = true;
-			 document.title += "🌙";
+			 document.title += "🌙";*/
 	 }
  }, 60000)
 }
 window.onfocus = ()=>{
- if(wasIdle){
-	 message(`<i class="identifier"> is back.</i><style nodraw> .${window.localStorage.getItem("username")}::before{content:' ';} </style>`);
- 	 wasIdle = false;
-	 document.title = document.title.replace("🌙", "");
+ if(wasIdle){/*
+	 socket.emit("attention", window.localStorage.getItem("username"), "focused");
+	 wasIdle = false;
+	 document.title = document.title.replaceAll("🌙", "");*/
  }
-}*/
+}
 
 document.getElementById("uploadForm").addEventListener("submit", (event)=>{
 	
@@ -734,6 +744,7 @@ function isVideoFile(filename) {
 	return videoExtensions.includes(fileExtension);
 }
 
+/*
 if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1){
 	document.getElementById('soapMode').style.backgroundImage = "url('../images/Tommy.png')";
 	document.getElementById('menuTitle').style.backgroundImage = "url('../images/tommy.jpg')";
@@ -781,4 +792,4 @@ if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1){
 			break;
 	}
 	
-}
+}*/

@@ -1,0 +1,7 @@
+/* START Compact Mode */
+
+.message::before {display: none;}
+.message {line-height: 1;}
+.identifier{display:none;}
+
+/* END Compact Mode */

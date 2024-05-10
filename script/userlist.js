@@ -14,4 +14,5 @@ const VALID_USERS = [
 	"TheKingOfPlants",
   "fffruittssaladd",
   "Fr0ggy08",
+  "samm",
 ];

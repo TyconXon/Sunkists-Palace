@@ -21,6 +21,7 @@ const splashText = [
 	"Hey, catch me later I'll buy you a beer.",
 	"Pick me up!",
 	"Put me down!",
+  "Bad Wolf",
 	"Hahe!",
 	"Sbarros tommorow, quiznos today!",
 	"Drink the sodaa, it'll make you see fasterrr!!",
@@ -34,7 +35,6 @@ const splashText = [
 	"I read about this on Wikipedia, the FREE online encyclopedia that ANYONE can edit!",
 	"Is it bigger than a breadbox?",
 	"Good news everyone!",
-	"Meow",
 	"What cat?",
 	"PK FIRE!",
 	'PK THUNDER!',
@@ -46,7 +46,6 @@ const splashText = [
 	'Sentry mode activated',
 	'Ha ha, caught another one!',
 	'Sorry, I\'m on duty, Mr. Freeman.',
-	':3',
 	'Hey, Mr. Freeman, I had a bunch of messages for you but we had a system crash about 20 minutes ago and I\'m still trying to find my files. Just one of those days I guess. They were having some problems down in the test chamber too, but I think that\'s all straightened out. They told me to make sure you headed down there as soon as you got into your hazard suit.',
 	'Good morning and welcome to the Black Mesa Transit system',
 	"Welcome to Half-Life 2, Episode 2. We are at the mid-point in our trilogy of episodes which will conclude in Episode 3. To listen to a commentary node, put your crosshair over the floating commentary symbol and press your use key. To stop a commentary node, put your crosshair over the rotating node and press the use key again. Some commentary nodes may take control of the game in order to show something to you. In these cases, simply  press your use key again to stop the commentary. Please let me know what you think after you've had a chance to play this. I can be reached at gaben@valvesoftware.com, I get about 10,000 emails each time we release a game, and while I can't respond to all of them, I do read all of them. Thanks, and have fun!",
@@ -58,7 +57,6 @@ const splashText = [
 	"Bortles!",
 	"Oh dip!",
 	"My name is Zubin and I can swim!!!",
-	"Hit the whip!",
 	"It's peanut butter jelly time!",
 	"This sentence is false.",
 	"So there's this man, he has a time machine. Up and down history he goes, zip, zip, zip, zip, zip, getting into scrapes. Another thing he has is a a passion for the works of Ludwig van Beethoven. And one day he thinks, 'What's the point of having a time machine if you don't get to meet your heroes?' So off he goes to 18th century Germany, but he can't find Beethoven anywhere. No one's heard of him. Not even his family have any idea who the time traveller is talking about. Beethoven literally... doesn't exist. This didn't happen by the way. I've met Beethoven. Nice chap, very intense. Loved an arm wrestle. No, this is called the bootstrap paradox. Google it. The time traveller panics. He can't bear the thought of a world without the music of Beethoven. Luckily he brought all of his Beethoven sheet music for Ludwig to sign. So he copies out all the concertos and the symphonies, and he gets them published. He becomes Beethoven. And history continues with barely a feather ruffled. But my question is this - who put those notes and phrases together? Who really composed Beethoven's 5th?",
@@ -68,15 +66,10 @@ const splashText = [
 	"Hey ho, don't cha know, it's a good old fashion puppet show, thats right quite the set, it's the marionette quintet",
 	"Ah, Hello Gordon!",
 	"Another day another dollar!", //thats what we say here at the black mesa research facility! Ha ha!
-	"I drink soda for lunch",
+	"I drink soda for lunch!",
 	"Why do we have to all wear these ridiculous ties?!",
 	"Do you know who ate all the donuts?",
 	"Have you seen my coffee cup?",
-  "Stop fucking with the microwave!",
-  '"Who is Gordon?" - Rey',
-  'Part one.',
-  'Part two.',
-  'Part three.',
   "I ever tell you about the time me and Keith made a homemade bumper car ride with   ridin' mowers in his backyard? Mower blade wounds over 90% of his body.",
   "I ever tell you about the time my buddy Keith drowned in the Tunnel of Love? You   wouldn't think it could happen 'cause the water's so shallow, but that's how it     gets you, man. Overconfidence. Keith was with his lady at the time, and he was      yellin' for her to save him, but she didn't want to get wet.",
   `I ever tell you about the time Keith and I made fireworks? Now, I didn't know   shit about chemistry, but Keith figured "Gasoline burns, doesn't it?" Heh, third-  degree burns on 95 percent of his body.`,
@@ -106,12 +99,6 @@ const tommyVoice = [
 	
 ];
 function refreshSplash(){
-	//Display the splashtext
-	if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1){
-		textBox.placeholder = tommyVoice[Math.floor(Math.random() * tommyVoice.length)];
-		return;
-	}
-	
 	textBox.placeholder = splashText[Math.floor(Math.random() * splashText.length)];
 }
 refreshSplash();

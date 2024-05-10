@@ -1,0 +1,227 @@
+* {
+	box-sizing: border-box;
+	text-align: center;
+}
+
+market {
+	display:grid;
+	grid-template-columns: auto auto auto auto;
+}
+
+#heading{
+	background-color: azure;
+	padding:5;
+}
+
+input{
+	width: 75%;
+}
+#heading button{
+	width: 15%;
+}
+
+html{
+	scrollbar-width: auto;
+	scrollbar-color: #08CBD3 #173A3C;
+	background: url(/images/ocean.gif), url(../images/rain.gif),
+	linear-gradient(180deg,
+									rgb(172, 250, 112) 10%,
+									rgb(105, 232, 130) 12%,
+									rgb(0, 212, 147) 15%,
+									rgb(0, 188, 161) 30%,
+									rgb(0, 163, 164) 50%,
+									rgb(0, 139, 160)60%,
+									rgb(0, 116, 152)70%,
+									rgb(0, 92, 139)80%,
+									rgb(30, 69, 114)90%,
+									rgb(41, 47, 86)100%
+								 );
+		background-size: 25%,40%, 100%;
+		background-position: bottom, bottom, bottom;
+		background-attachment: fixed, auto, fixed;
+	background-repeat: repeat-x,repeat, no-repeat;
+	image-rendering: pixelated;
+	background-blend-mode: normal;
+	/*Rain scrolls, gradient does not*/
+	background-attachment: scroll, fixed;
+}
+
+h1{
+	color: rgb(17, 204, 232);
+	text-shadow: rgb(16, 59, 66, 0.3) 4px 4px 2px;
+	font-family: atlas;
+	background-color: #5f4935cc
+}
+
+.modContainer {
+	background-color: rgba(100, 100, 100, 0.3);
+	border-radius: 3px;
+	padding:10px;
+	backdrop-filter: blur(4px);
+	border: ridge rgba(100,50,170,0) 2px;
+	margin:10px;
+	max-width: 25vw;
+	position:relative;
+	transition: all 0.5s;
+}
+
+.modContainer:hover {
+	backdrop-filter: blur(0px) invert(25%) brightness(50%);
+	border-radius: 10px;
+}
+.modContainer::after{
+	content: "";
+	clear: both;
+	display: table;
+}
+
+h3, h5 {
+	margin-top:0;
+	margin-bottom:0;
+	font-family: "Sedan";
+}
+
+.modPreview {
+	margin-top: 1lh;
+	width:300px;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	image-rendering: auto;
+	aspect-ratio:1/1;
+	object-fit:cover;
+	background-color:rgba(0,0,0,0.5);
+}
+.modPreview:hover {
+	position:relative;
+	z-index: 10;
+}
+
+details {
+		position: absolute;
+		top: -5;
+		background-color: rgba(150, 150, 150, 0.4);
+		backdrop-filter: blur(2px);
+		color: white;
+	font-family: papyrus;
+	width: -webkit-fill-available;
+}
+[open]{
+	background-color: rgba(50, 50, 50, 0.75);
+	transition: all 0.5s;
+}
+summary {
+		font-family: sedan;
+		text-transform: capitalize;
+		font-variant-caps: small-caps;
+		max-height: 1.25lh;
+	overflow-x: scroll;
+	scrollbar-width: none;  /* Firefox */
+}
+summary::-webkit-scrollbar {
+	display: none;
+}
+summary:hover{
+	max-height: 500lh;
+}
+
+.modContainer button{
+	margin:0;
+	width: 80%;
+	margin-top:5px;
+	height: 3vh;
+	border-radius: 5px;
+	border: none;
+	transition: all 0.05s;
+}
+button:hover{
+		border-radius: 5px;
+}
+
+.on button{
+	background-color: lime;
+}
+.off button{
+	background-color: white;
+}
+.loading button{
+	background-color: yellow;
+}
+
+#unsub{
+	background-color: #e1607a;
+	transition: all 0.1s;
+}
+#unsub:hover{
+	background-color: #e42148;
+}
+#unsub:active{
+	background-color: #ff0000;
+	border-radius: 10px;
+}
+
+/*Responsive design*/
+
+@media screen and (max-width: 800px) {
+	market {
+		display:grid;
+		grid-template-columns:auto;
+	}
+	.modContainer {
+		max-width: 100vw;
+		width: 85vw;
+	}
+}
+
+/*TAG CSS*/
+.red{
+	color: #491d1d;
+}
+.identifier {
+	filter: opacity(0.75);
+}
+ultra{
+	background:none;
+	 backdrop-filter: blur(8px);
+	 color: rgba(225,0,0,1)!important;
+	 font-family: Broshkill;
+	 font-size:64px;
+	 margin:10px;
+	 letter-spacing:1px;
+	 text-shadow: 
+		0 2px black,
+		0 -2px rgba(225,75,0,1),
+		-1px 0 rgba(180, 0, 0,1),
+		1px 0 black,
+		0 0 20px black
+		!important;
+	 font-weight:normal;
+	 -webkit-box-reflect: below 5px linear-gradient(
+		to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0))!important;
+}
+.modContainer.red.gametheme.dark.theme h3{
+	font-family: Broshkill;
+	font-size: 200%;
+}
+
+under {
+ background:black;
+ border: gray 2px solid;
+ border-radius: 0px;
+ color: white!important;
+ font-family: Deltarune;
+ font-size:64px;
+ margin:10px;
+ padding-top:15px;
+ letter-spacing:1px;
+ font-weight:normal;
+ -webkit-box-reflect: below 5px linear-gradient(
+	to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0))!important;
+ text-shadow:none!important;
+}
+
+.modContainer.blue.gametheme h3{
+	font-family: Deltarune;
+	font-size: 200%;
+}

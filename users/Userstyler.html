@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>
+			Userstyler
+		</title>
+
+		<link rel="stylesheet" href="../style/fonts.css">
+		<link rel="stylesheet" href="../style/new.css">
+		<link rel="stylesheet" href="../style/restyle.css">
+		<link rel="stylesheet" href="../style/users.css">	
+		<link rel="stylesheet" href="../style/unique.css">
+		
+		<link rel="stylesheet" href="https://unpkg.com/7.css/dist/7.scoped.css" />
+		<link rel="stylesheet" href="https://unpkg.com/7.css/dist/gui/_variables.scss" />
+		<link rel="stylesheet" href="https://unpkg.com/7.css/dist/gui/button.css" />
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" nodraw></script>
+		<script nodraw>
+			hljs.highlightAll();
+		</script>
+		
+	</head>
+	<body>
+		<div class='message devstyle' id='devstyle'><strong class='identifier' contenteditable> Username @ <abbr noicon>12:34:56 AM:</abbr></strong> <msgtxt contenteditable>Test message</msgtxt> <button class='rightist'>0</button> </div>
+
+		<pre><code name="code" contenteditable id="userstyle" style="width:-webkit-fill-available;height:90%;" rows="10">
+			.devstyle,
+			devstyle {
+				background-color: rgba(20,15,35,0.5);
+				background-image: linear-gradient(to right,
+						rgba(20, 15, 35, 0.5),
+						rgba(255, 25, 244, 0.5)
+					);
+				text-shadow: 0px 0px 5px #ffffff60;
+				color: white;
+				font-family: coomer, sans-serif, emoji;
+				cursor: url('../../images/cur/paw.png'), auto;
+			}
+
+			.devstyle::before {
+				/*PFP*/
+				box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9);
+				background-image: url("../../images/pfp/node.png");
+				background-repeat: no-repeat;
+				border-image-slice: 42 42 42 42 fill;
+				border-image-width: 12px 12px 12px 12px;
+				border-image-outset: 6px 6px 6px 6px;
+				border-image-repeat: stretch stretch;
+				border-image-source: url("../../images/border/magma.png");
+				border-style: solid;
+			}
+
+			.devstyle button{
+				font-family: "Passing Notes";
+				background-blend-mode: multiply;
+				background-color: purple;
+				color: white;
+			}
+
+			.devstyle msgtxt::selection,
+			.devstyle::selection{
+				background-color: rgba(90,188,216,0.5);
+			}
+
+			.devstyle:active{
+				cursor: url(../images/cur/pawwer.png), auto;
+			}
+		</code></pre>
+		<style id='ug.out'>
+			
+		</style>
+
+		<script>
+			document.getElementById('ug.out').innerText = document.getElementById('userstyle').value;
+			document.getElementById('userstyle').onkeydown = ()=>{
+				document.getElementById('ug.out').innerText = document.getElementById('userstyle').value;
+				hljs.highlightAll();
+			}
+		</script>
+	</body>
+</html>

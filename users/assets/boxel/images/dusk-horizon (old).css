@@ -1,0 +1,88 @@
+/*START Dusk Horizon*/
+
+#body {
+.message {backdrop-filter:blur(3px) brightness(0.8);}
+
+#soapMode {
+ backdrop-filter: blur(8px);
+ background: rgba(0,0,0,0.5);
+ margin: 10px;
+ padding: 5px;
+ width: 98%!important;
+}
+
+a {
+ backdrop-filter: blur(8px);
+ background: rgba(0,0,0,0.5);
+ color: white;
+ border-radius: 5px;
+ padding: 10px;
+}
+
+textarea {
+ backdrop-filter: blur(8px);
+ background: rgba(0,0,0,0.5);
+}
+
+#menu {
+ backdrop-filter: blur(8px);
+ background: rgba(0,0,0,0.5);
+ user-select: none;
+}
+
+details {
+ backdrop-filter: blur(8px);
+ background: rgba(0,0,0,0.1);
+ color: white;
+ border: white;
+}
+
+details button {
+ background: rgba(0,0,0,0.5);
+ color: white;
+ border: white;
+}
+
+details button:hover {
+ color: initial;
+ border: initial;
+}
+
+details a {
+ display: none;
+}
+
+#menuTitle {
+ background: none;
+}
+
+#status {
+ backdrop-filter: blur(8px);
+ background: rgba(0,0,0,0.5);
+}
+
+#sCss, #sJsMenu {
+ backdrop-filter: blur(2px);
+ background: rgba(0,0,0,0.5);
+}
+
+.rightist, right {
+ backdrop-filter: blur(8px)!important;
+ background: rgba(0,0,0,0.5)!important;
+ color: white!important;
+ border: white!important;
+ font-family: 'Arial'!important;
+ text-shadow: none!important;
+}
+
+#lastRead {
+ display: none;
+}
+
+.console {
+ backdrop-filter: blur(8px);
+ background: rgba(0,0,0,0.5);
+}
+}
+
+/*END Dusk Horizon*/

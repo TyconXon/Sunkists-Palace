@@ -263,7 +263,7 @@
 				<li>Programming</li>
 				<li>Minecraft</li>
 				<li>Homebrew</li>
-        <!--no community :pensive:-->
+        <li>Community</li>
 			</ul>
 		</div>
 		<!-- Quotes -->
@@ -484,6 +484,33 @@ details a {
           </code></pre>
         </details>
       </div>
+      <hr>
+      <div class="container">
+        <details>
+          <summary>Unfinished</summary>
+          <pre><code>
+#body {
+  backdrop-filter:blur(3px) brightness(0.75);
+}
+
+.message {
+ background:rgba(0,0,0,0.5);
+ border: 1px solid;
+ border-bottom:none!important;
+ border-bottom-right-radius: 0;
+ border-bottom-left-radius: 0;
+ margin-top:25px;
+}
+
+.collapsed {
+ margin:0px!important;
+ border-top:none;
+ border-radius:0px;
+ border-bottom: none;
+}
+          </code></pre>
+        </details>
+      </div>
     </div>
 		<!-- Quotes Script -->
 		<script>
@@ -542,3 +569,71 @@ details a {
 	</body>
 	
 </html>
+
+
+
+
+<!-- #soapMode {background:rgba(0,0,0,0.5);}
+
+#body {
+  backdrop-filter:blur(3px) brightness(0.75);
+  filter:saturate(1.5);
+  padding:10px;
+  margin:0;
+}
+
+
+
+
+
+/*Polaroid Images*/
+#body img {border: solid white; border-width: 15px 15px 55px 15px; rotate:3deg;scale: 0.9;}
+
+
+/*Cleaner Messages*/
+.collapsed .identifier {display:none}
+.collapsed {margin:0px!important;}
+.collapsed:before {display:none}
+.message {margin-top:25px;}
+.message:has(.ping) {background:rgba(255,210,0,0.5); color:white;}
+
+
+/*Round PFP*/
+.message:before {border-radius:100%;}
+
+
+/*Reply Hider*/
+.message .rightist {opacity:1%;}
+.message:hover .rightist {opacity:25%;background:none;}
+
+
+/*Simpler Menu*/
+summary {
+font-family: 'Arial';
+background-color:rgba(255,255,255,0.2);
+border:none;
+border-radius:25px;
+transition:none;
+}
+summary:hover {
+background-color:rgba(255,255,255,0.4);
+}
+
+details {
+color:rgba(200,200,200,1);
+backdrop-filter: blur(8px);
+background-color: rgba(0, 0, 0, 0.5);
+transition: none;
+margin: 5px;
+padding: 0;
+border-radius:10px;
+}
+details button {background:rgba(255,255,255,0.2);color:white!important;}
+details a {display:none}
+
+#menu {
+background-color:rgba(50,50,50);
+border:white 1px solid;
+border-radius:5px;
+padding:10px;
+} -->

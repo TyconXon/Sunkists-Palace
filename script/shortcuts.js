@@ -1,10 +1,7 @@
 document.addEventListener("keydown", (c) => {
 
-	if(c.altKey){
-		altpressed = true;
-	}else{
-		altpressed = false;
-	}
+	altpressed = c.altKey;
+	shiftpressed = c.shiftKey;
 	
 	if (document.activeElement.tagName != "TEXTAREA") {
 		//WEBPAGE
@@ -26,7 +23,7 @@ document.addEventListener("keydown", (c) => {
 			case ".":
 				c.preventDefault();
 				altMode = !altMode;
-				alert(altMode);
+				alert(altMode?"Autoscroll disabled":"Autoscroll enabled");
 				break;
 			default:
 				if(!c.ctrlKey && !c.altKey){
@@ -79,6 +76,8 @@ document.addEventListener("keydown", (c) => {
 		//Auto URL
 		if (c.key == "/" && c.altKey) {
 			textBox.value = urlify(textBox.value);
+			textBox.focus();
+			textBox.setSelection(textBox.value.indexOf('target="_blank">')+15, textBox.value.indexOf('target="_blank">')+15)
 		}
 		if(c.key == 'Escape'){
 			textBox.blur();
@@ -104,6 +103,12 @@ document.addEventListener("keydown", (c) => {
 		if((c.key == "\\" && c.altKey)||(c.key == 'i' && c.altKey)){
 			document.getElementById('upload').click();
 		}
+		if(c.key == 'r' && c.altKey){
+			harvestOranges();
+		}
+		if(c.key == 'm' && c.altKey){
+			newPopup(window.location.origin + '/workshop.html')
+		}
 		if(c.key == 'ArrowDown' && c.altKey){
 			markAsRead();
 		}
@@ -113,6 +118,11 @@ document.addEventListener("keydown", (c) => {
 			var lastMessage = allMyMessages[allMyMessages.length - 1];
 			if (c.ctrlKey){
 					lastMessage = document.getElementById(`${prompt('ID of message to edit: ')}`)
+			}
+			if(c.shiftKey){
+				replyGen(prompt('ID of the message to reply to: '));
+				c.preventDefault();
+				return;
 			}
 			//if last of allmessages == mine {
 
@@ -277,3 +287,30 @@ function formatCommands(msg){
 	return newMsg;
 
 }
+
+textBox.addEventListener('paste', (e) =>{
+
+	let pastedText = e.clipboardData.getData('Text');
+
+	if(shiftpressed){
+		return;
+	}
+	
+	if (pastedText.startsWith('https://') && (!isImageFile(pastedText))){
+		setTimeout(()=>{
+			let startOfURL = textBox.value.lastIndexOf(pastedText);
+			let splitTextbox = textBox.value.split('');
+			splitTextbox.splice(startOfURL, pastedText.length, urlify(pastedText));
+			textBox.value = splitTextbox.join('');
+		textBox.setSelectionRange(textBox.value.lastIndexOf(pastedText), textBox.value.lastIndexOf(pastedText) + pastedText.length)
+		},10)
+	}
+	if(isImageFile(pastedText)){
+		setTimeout(()=>{
+			let startOfURL = textBox.value.lastIndexOf(pastedText);
+			let splitTextbox = textBox.value.split('');
+			splitTextbox.splice(startOfURL, pastedText.length, imgify(pastedText));
+			textBox.value = splitTextbox.join('');
+		},10)
+	}
+});

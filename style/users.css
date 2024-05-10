@@ -85,6 +85,7 @@ right {
 	/*filter: grayscale(100%);*/
 	/*filter: hue-rotate(90deg);*/
 	filter: opacity(55%);
+	padding-left: 6px;
 }
 .identifier,
 .rightist {
@@ -124,8 +125,8 @@ MaximusMiller2,
 	font-size: 20px;
 	font-family: "Bound", emoji;
 	/*Earthbound*/
-	font-weight: 100;
-	text-shadow: 0px 0px 5px #006cff;
+	font-weight: 100;/*
+	text-shadow: 0px 0px 5px #006cff;*/
 	cursor: url(../images/cur/catter.png), auto;
 
 	/*
@@ -147,6 +148,7 @@ afton {
 	font-family: 'Undertale',"Orbitron", serif, emoji;
 	cursor: url(../images/cur/Cat_Paw.png), auto;
 }
+.Afton:not(span){background: linear-gradient(0deg, rgba(45,232,253,0.5) 0%, rgba(25,6,101,0.5) 100%);background-attachment: fixed;} 
 
 .Console,
 .console {
@@ -178,6 +180,7 @@ Boxel {
 	text-shadow: 0px 0px 5px #ffffff60;
 	color: white;
 	font-family: coomer, sans-serif, emoji;
+	/* font-family: Lethal, sans-serif, emoji; */
 	cursor: url('../images/cur/paw.png'), auto;
 }
 
@@ -264,6 +267,14 @@ sky {
 
 }
 
+.BadWolf,
+badwolf {
+  font-family: 'marlett';
+  color: turquoise;
+  background-color: #0e1111 ;
+ ;
+}
+
 .TheKingOfPlants,
 thekingofplants,
 rey {
@@ -287,6 +298,14 @@ rey {
   color:#d676b1;
   background-color:#0d0b0b;
   text-shadow: 0 0 5px #961485;
+}
+
+.samm,
+samm {
+  background-color: #47215488;
+  text-shadow: 0px 0px 5px #ffffff60;
+  color: #bda1c9;
+  font-family: 'Sedan', sans-serif, emoji;
 }
 
 /***--- Message Icon         ---***/
@@ -321,7 +340,15 @@ rey {
 	border-image-source: url("../images/border/tech.png");
 	border-style: solid;
 }
-
+.BadWolf::before {
+  background-image: url("../images/pfp/BadWolf.png");
+  border-color: white;
+  border-image-slice: 42 42 42 42 fill;
+  border-image-width: 12px 12px 12px 12px;
+  border-image-outset: 6px 6px 6px 6px;
+  border-image-repeat: stretch stretch;
+  border-style: solid;
+}
 .Avonya::before {
 	background-image: url("../images/pfp/sasscoin.jpg");
 	border-color: #bccbeb;
@@ -399,6 +426,12 @@ rey {
   border-style:dashed;
 }
 
+.samm::before {
+  border-color: #bda1c9;
+  border-style:solid;
+  background-image: url("../images/pfp/samm.jpg");
+}
+
 /***--- Message Button      ---***/
 
 .MaximusMiller2 button{
@@ -460,4 +493,72 @@ rey {
 .Console:active,
 .console:active{
 	cursor: url(../images/cur/hit.png), auto;
+}
+
+
+/*Add gradient text
+*/
+
+.devstyle, devstyle {
+				background: rgb(42,245,255);
+background: linear-gradient(90deg, rgba(42,245,255,0.5) 0%, rgba(40,194,255,0.5) 50%, rgba(96,175,255,0.5) 100%);
+				text-shadow: 0px 0px 5px #e8ebed80;
+				color: #e8ebed;
+				font-family: "Nothing You Could Do", sans-serif, emoji;
+																font-weight: bold;
+				cursor: url('../../images/cur/paw.png'), auto;
+			}
+
+			.devstyle::before {
+				/*PFP*/
+				box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9);
+					background-image: url("../images/pfp/Sunkister.png");
+				background-repeat: no-repeat;
+				border-image-slice: 42 42 42 42 fill;
+				border-image-width: 12px 12px 12px 12px;
+				border-image-outset: 6px 6px 6px 6px;
+				border-image-repeat: stretch stretch;
+				border-image-source: url("../images/border/water.png");
+				border-style: solid;
+			}
+
+			.devstyle button{
+				font-family: "Passing Notes";
+				background-blend-mode: multiply;
+																color: #963484;
+background-color: lightgray;
+			}
+
+			.devstyle msgtxt::selection,
+			.devstyle::selection{
+				background-color: #963484;
+			}
+
+			.devstyle:active{
+				cursor: url(../images/cur/pawwer.png), auto;
+			}
+
+.gay, .homo, .pride {
+	background: linear-gradient(0deg, rgba(160,34,195,0.2) 0%, rgba(253,45,68,0.25) 20%, rgba(253,162,45,0.25) 40%, rgba(45,253,92,0.25) 60%, rgba(45,183,253,0.25) 80%, rgba(89,45,253,0.25) 100%) !important;
+	background-attachment: fixed !important;
+}
+div#\31 00::after {
+		content: "100th message!";
+		float: right;
+		filter: opacity(25%);
+}
+div#\35 00::after {
+		content: "500th message!";
+		float: right;
+		filter: opacity(30%);
+}
+div#\31 000::after {
+		content: "1000th message!";
+		font-family: coomer;
+		float: right;
+		filter: opacity(30%);
+}
+
+.TerminalExtractions{
+	
 }

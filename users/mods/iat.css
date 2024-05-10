@@ -1,0 +1,22 @@
+/* START Identifier Above Text */
+
+.identifier {
+ position: relative;
+ top: -30;
+ background-color: gray;
+}
+.collapsed .identifier {
+ background-color: transparent;
+}
+.message::before {
+ position: relative;
+ top: -30;
+}
+msgtxt {position: absolute; left: 75;}
+
+.phone:after {
+ position: absolute;
+ left: 50;
+}
+
+/* END Identifier Above Text */

@@ -1,3 +1,5 @@
+
+
 /***
 *      _________             __   .__          __
 *     /   _____/__ __  ____ |  | _|__| _______/  |_
@@ -6,7 +8,7 @@
 *    /_______  /____/|___|  /__|_ \__/____  > |__|
 *            \/           \/     \/       \/
 */
-/***  Max, Aft, Box, Sky, Avn, Vin, Tar, Leo, Rey, Kat, Aid
+/***  Max, Aft, Box, Sky, Avn, Vin, Tar, Leo, Rey, Kat, Aid, Wig, Cas
  *    ___________    .__  .__
  *    \_   _____/___ |  | |  |   ______  _  __ ___________  ______
  *     |    __)/  _ \|  | |  |  /  _ \ \/ \/ // __ \_  __ \/  ___/
@@ -29,7 +31,7 @@
 
 //
 const MEM = true; /** Memory-Mode: Are messages stored in memory or forgotten after relay? */
-const splashTexxt = "<a href='./directory.html'>Page directory</a> | Various actual changes, lots of april fools stuff." /** MOTD */
+const splashTexxt = "<a href='./directory.html'>Page directory</a> | Expirementally disabling IDLE system." /** MOTD */
 
 //Requires
 var http = require("http");
@@ -50,6 +52,10 @@ const Client = require("@replit/database");
 const client = new Client();
 
 var subscriptionList = [];
+var idleList = [];
+var userBans = {
+	superSafePasswordsChannel : ["hacker"]
+};
 
 const directory = "temp";
 
@@ -166,10 +172,12 @@ const server = http.createServer(function(req, res) {
 			res.setHeader("Content-Type", "image/png");
 		} else if (q.path.includes('.jpg')) {
 			res.setHeader("Content-Type", "image/jpeg");
+		}else if (q.path.includes('.html')) {
+			res.setHeader("Content-Type", "text/html");
 		}
 		//res.writeHead(200, { "Content-Type": "image/png" });
 		try {
-			res.write(fs.readFileSync('.' + q.path.replace(/%20/g, ' ')));
+			res.write(fs.readFileSync('.' + q.pathname.replace(/%20/g, ' ')));
 
 		} catch (e) {
 			res.writeHead(404, { "Content-Type": "text/plain" });
@@ -189,6 +197,7 @@ const server = http.createServer(function(req, res) {
 	if (qData.moderate != undefined) {
 		moderate(qData.moderate);
 	}
+	
 
 	//Work on later
 	
@@ -236,7 +245,8 @@ const server = http.createServer(function(req, res) {
 			if(qData.getMessage == undefined && qData.getList == undefined){
 				res.writeHead(200, { "Content-Type": "text/html" });
 				res.write(data);
-			}else{
+				//Use getmessage 
+			}else if(qData.getMessage == undefined){
 				try{res.write(list[qData.getMessage])}catch(e){
 					console.log(e);
 					res.write(e.toString());
@@ -245,7 +255,8 @@ const server = http.createServer(function(req, res) {
 			}
 			if(qData.getList != undefined){
 				try{
-					res.write(list.toString());
+					res.writeHead(200);
+					res.write(" " +list.toString());
 				}catch(e){
 					console.log(e);
 				}
@@ -255,25 +266,26 @@ const server = http.createServer(function(req, res) {
 		
 		} else {
 			res.writeHead(200, { "Content-Type": "text/html" });
-			io.emit(
-				"outMessage",
-				`<details><summary>Slowmode refresh</summary>${req.headers['user-agent']}</details>`
-			);
-			res.write(`<html><head><meta charset="utf-8" /></head><body>
-			<div style="position:sticky;background-color:grey; font-size:150%;">
+			res.write(`<html style="padding-top:25px;"><head><meta charset="utf-8" /><meta http-equiv="refresh" content="5;URL='/?slow&autorefreshed'" />
+			<style>
+			.MaximusMiller2{background-color:lightblue;} .Afton{background-color:cyan;}.Boxel{background-color:purple;color:white;}
+	
+			</style>
+			</head><body>
+			<div style="position:sticky;background-color:grey; font-size:150%;top:0;">
 			<script>
-			function text(){var e=window.prompt("Say:");window.location.assign("https://sunkist-palace.net/?slow&message="+encodeURIComponent(e)+"%E2%9B%96&user="+window.localStorage.getItem("username"))}document.addEventListener("keyup",e=>{switch(e.key){case"Enter":text();break;case"Shift":window.location.assign("https://server--maximusmiller2.repl.co/?slow=a")}});
+			function text(){var e=window.prompt("Say:");window.location.assign("/?slow&message="+encodeURIComponent(e)+"%E2%9B%96&user="+window.localStorage.getItem("username"))}document.addEventListener("keyup",e=>{switch(e.key){case"Enter":text();break;case"Shift":window.location.assign("/?slow&limit=20")}});
 			</script>
 			<button onclick="text()" href="#aaa" style="position: sticky;">Add to chat.</button>
 		<a href="https://sunkist-palace.net/?slow">Refresh text without responding</a>
-		<a href="https://sunkist-palace.net/">Go back to normal mode</a>
-		<i>Online people: ${Object.keys(onliners).toString()}</i></div>
+		<a href="https://sunkist-palace.net/">Go back to normal mode</a></div>
 		`);
 		}
 		if (MEM && qData.cls == undefined) {
 			
 			if(qData.channel == undefined) {
 
+				/*
 				let rightNow = new Date();
 				if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1 && Math.random()>0.6){
 
@@ -283,7 +295,7 @@ const server = http.createServer(function(req, res) {
 					}
 					res.write('See the last five messages for free! Pay to see more...');
 
-				}else if(qData.limit){
+				}else */if(qData.limit){
 
 					let aprilList = list.slice(-qData.limit);
 					for (let msg in aprilList) {
@@ -314,20 +326,30 @@ const server = http.createServer(function(req, res) {
 
 		}
 		res.write("<hr id='lastRead'>");
-		//res.write("<script>document.body.scrollTop = document.body.scrollHeight;</script>")
+		if(qData.slow != undefined){
+			res.write("<script>document.body.scrollTop = document.body.scrollHeight;</script>")
+		}
 		//res.write(list.toString().replaceAll(',', ','));
 
 		return res.end();
 	});
 }).listen(8080);
 
-const io = new Server(server);
+const io = new Server(server, {
+	connectionStateRecovery: {
+		// the backup duration of the sessions and the packets
+		maxDisconnectionDuration: 2 * 60 * 1000,
+		// whether to skip middlewares upon successful recovery
+		skipMiddlewares: true,
+	}
+});
 
 function sendMessage(usr, message, phone, sckt, room = null) {
 	let curTime = new Date();
 
 	if (message.startsWith("/moderate")) {
 		//if (usr.endsWith("2") || (usr.startsWith("A") && usr.endsWith("n"))) {
+		let id = message.split(" ")[1];
 
 		if (list[id] == undefined) {
 			askUpdate();
@@ -356,7 +378,41 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 			return 1;
 		}
 
-	} else if (message.startsWith('/edit')) {
+	}else if (message.startsWith("/kick")) {
+		//Who doesn't want a backdoor available to practically everyone?
+		if (usr.endsWith("2")) {
+			let target = message.split(" ")[1];
+			let reason = message.split(" ").slice(2).join(" ");
+			io.to(target).emit("kicked", reason);
+			io.emit(
+				"outMessage",
+				`<div class='console message removed'><ml>q</ml> ${target} was kicked.</div>`
+			);
+			return 1;
+		}
+	}else if (message.startsWith("/ban")) {
+	try{
+	if (usr.endsWith("2")) {
+		let target = message.split(" ")[1];
+		let tchannel = message.split(" ")[2];
+		let reason = message.split(" ").slice(3).join(" ");
+		io.to(target).emit("banned", reason);
+
+		//map with username -> array of banned channels and redirect banned connections to banned.html
+		if(userBans[tchannel] == undefined){
+			userBans[tchannel] = [];
+		}
+		userBans[tchannel].push(usr);
+		io.to("admin").emit(
+			"outMessage",
+			`<div class='console message removed'><ml>q</ml> ${target} was banned from ${tchannel}.</div>`
+		);
+		return 1;
+	}
+	}catch(e){
+		console.log(e);
+	}
+	}else if (message.startsWith('/edit')) {
 		var id = message.split(' ')[1];
 		var txt = message.split(' ').slice(2).join(' ');
 
@@ -370,7 +426,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 			} else {
 				if (forever[room][id].includes(usr) || (usr.endsWith("2") || (usr.startsWith("A") && usr.endsWith("n")))) {
 					forever[room][id] = `<div id='${id}' class='message ${usr} ${phone ? "phone" : ""
-						}'> <strong class='identifier' onClick='pingGen("${usr}")'> ${usr} @ <abbr noicon title='${curTime.toLocaleString(
+						}'> <strong class='identifier' onClick='pingGen("${usr}")'>${usr}  @ <abbr noicon title='${curTime.toLocaleString(
 							"en-US",
 							{ timeZone: "US/Arizona" }
 						)}'> ${curTime.toLocaleTimeString("en-US", {
@@ -392,7 +448,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 
 		if (list[id].includes(usr) || (usr.endsWith("2") || (usr.startsWith("A") && usr.endsWith("n")))) {
 			list[id] = `<div id='${id}' class='message ${usr} ${phone ? "phone" : ""
-				}'> <strong class='identifier' onClick='pingGen("${usr}")'> ${usr} @ <abbr noicon title='${curTime.toLocaleString(
+				}'> <strong class='identifier' onClick='pingGen("${usr}")'>${usr} @ <abbr noicon title='${curTime.toLocaleString(
 					"en-US",
 					{ timeZone: "US/Arizona" }
 				)}'> ${curTime.toLocaleTimeString("en-US", {
@@ -411,20 +467,21 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 	} else if (message.startsWith("/join")) {
 		var rm = message.split(' ')[1];
 		try {
-			if ((rm == 'afxon') && (usr != 'Afton' && usr != 'MaximusMiller2')) {
+			if ((userBans[rm]) && (userBans[rm].includes(usr))) {
 				io.emit(
 					"outMessage",
-					`<div class='console message removed'><ml>q</ml> ${usr} Tried to join a private room... (Join)</div>`
+					`<div class='console message removed'><ml>q</ml> ${usr} Tried to join a room they were banned in... (${rm})</div>`
 				);
 				
 				return false;
 			}
-
+			
 			sckt.join(rm);
 			io.to(rm).emit(
 				"outMessage",
-				`<div class='console message room ${rm}'><bx>C</bx> ${usr} Joined ${rm} <a href='users/${rm}.html'>Room/User Page</a>.</div>`
+				`<div class='console message room ${rm}'><bx>C</bx> ${usr} Joined ${rm} (${io.sockets.adapter.rooms.get(rm).size} connected) <a href='users/${rm}.html'>Room/User Page</a>.</div>`
 			);
+			
 		} catch (e) {
 			io.emit(
 				"outMessage",
@@ -433,6 +490,8 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 		}
 
 		return true;
+	}else if (message.startsWith('/clear')){
+		idleList = [];
 	}else if(message.startsWith('sv_cheats 1')){
 		io.emit(
 			"outMessage",
@@ -503,6 +562,16 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 		io.emit('outMessage', `<div class='console message'><pre>${JSON.stringify(whoHasConnected)}</pre></div>`);
 	} else if (message.startsWith('/mem')) {
 		io.emit('outMessage', `<div class='console message'><pre>%${(os.freemem() / os.totalmem()) * 100} memory free</pre></div>`);
+	} else if (message.startsWith('/cout ')){
+		try{
+		io.emit(
+		"outMessage",
+		`<div class='console message '>${eval(message.split(' ').slice(1).join(' '))}</div>`);
+		}catch(e){
+			io.emit(
+			"outMessage",
+			`<div class='console message '>Error: ${e}</div>`);
+		}
 	} else if (message.startsWith('/leave')) {
 		var rm = message.split(' ')[1];
 		io.to(rm).emit(
@@ -681,9 +750,16 @@ function askPingUpdate(usr) {
 io.of("/").adapter.on("join-room", (room, id) => {
 	onliners.forEach((value, key) => {
 		if (value == id) {
-			//console.log("+" + key + ` JOINED: ` + room);
+			if ((userBans[room]) && (userBans[room].includes(key))) {
+				io.emit(
+					"outMessage",
+					`<div class='console message removed'><ml>q</ml> ${key} Tried to join a room they were banned in... (${room})</div>`
+				);
+				socket.leave(room);
+			}
 		}
 	});
+	
 });
 io.of("/").adapter.on("leave-room", (room, id) => {
 	onliners.forEach((value, key) => {
@@ -710,6 +786,7 @@ io.on("connection", (socket) => {
 		sendMessage(usr, message, phone, socket);
 	});
 
+
 	//Online people
 	connected++;
 	//console.log("T");
@@ -726,6 +803,11 @@ io.on("connection", (socket) => {
 			onliners.set(usrname, socket.id);
 			if (!whoHasConnected.includes(usrname)) {
 				whoHasConnected.push(usrname);
+			}
+
+
+			for(var everyone in idleList){
+				io.to(socket.id).emit("attentionOut", idleList[everyone], "idle");
 			}
 
 			//console.log("|" + usrname + `[${connected}]`);
@@ -772,6 +854,19 @@ io.on("connection", (socket) => {
 			`data[${index}]: ${serverData[index]} -> ${serverData[index] + change}`
 		);
 		serverData[index] += change;
+	});
+
+	socket.on("attention", (user, status) => {
+		switch(status){
+			case "idle":
+				io.emit("attentionOut", user, "idle");
+				idleList.push(user);
+				break;
+			case "focused":
+				io.emit("attentionOut", user, "focused");
+				idleList.splice(idleList.indexOf(user), 1);
+				break;
+		}
 	});
 
 	//Typing people

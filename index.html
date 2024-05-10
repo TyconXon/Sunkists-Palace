@@ -1,6 +1,6 @@
  <!--Given to you by Maximus Miller, Afton & Boxel-->
 
-<html>
+<html id="sunkistPalaceHTML">
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -85,7 +85,7 @@
 					Refresh
 				</button>
 				<br />
-				<a href="https://sunkist-palace.net/?slow">Slow-internet (legacy) mode</a>
+				<a href="/?slow">Slow-internet (legacy) mode</a>
 				<a href="https://docs.google.com/document/d/1tbv-MJ7Hfz0bctJpbg6RaGocuWXjS4qIJ4t9DzLH8Co/edit?usp=sharing" target="_blank">Documentation</a>
 				<br />
 				<form action="/upload" enctype="multipart/form-data" method="post" id='uploadForm'>
@@ -115,7 +115,10 @@
 				<button onclick="nickname()">Set nickname</button>
 				<button onclick='markAsRead();'> Read all</button>
 				<br>
-				<button popovertarget="volumeSection">Open sound settings</button>
+				<label for="titlePrefix">Show onlinecount in title:</label>
+				<input type="checkbox" onchange='settingChange("titlePrefix")' id="titlePrefix">
+				<br>
+				<button popovertarget="volumeSection" disabled>Open sound settings (removed)</button>
 				<div popover id="volumeSection">
 					<label for="vol">Text Volume:</label>
 					<input type="range" max="1" min="0" id="soundVolume" onchange="settingChange('soundVolume')" name='vol' step='0.05'> <br>
