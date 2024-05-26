@@ -48,14 +48,22 @@ const path = require('path');
 const status = require('./status.json');
 const forever = require('./forever.json');
 var os = require('os');
+var childProcess = require('child_process');
 const Client = require("@replit/database");
 const client = new Client();
+
+const spamton = "<img src='images/spamton-deltarune.gif'> <style>*{background-color:black;color:white;font-family:monospace;}</style> <h1>[[Hyperlink Blocked.]]</h1>";
 
 var subscriptionList = [];
 var idleList = [];
 var userBans = {
 	superSafePasswordsChannel : ["hacker"]
 };
+
+//TERMINX
+
+const coworkers = new Map();
+const minefield = {hacker:["honeypot"]};
 
 const directory = "temp";
 
@@ -239,6 +247,13 @@ const server = http.createServer(function(req, res) {
 		return;
 	}
 
+	if(qData.channel == '' || qData.channel == 'null'){
+		res.writeHead(200, { "Content-Type": "text/html" });
+		res.write(spamton);
+		res.end();
+		return;
+	}
+
 	
 	fs.readFile("index.html", function(err, data) {
 		if (qData.slow == undefined) {
@@ -285,17 +300,8 @@ const server = http.createServer(function(req, res) {
 			
 			if(qData.channel == undefined) {
 
-				/*
-				let rightNow = new Date();
-				if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1 && Math.random()>0.6){
-
-					let aprilList = list.slice(-5);
-					for (let msg in aprilList) {
-						res.write(aprilList[msg]);
-					}
-					res.write('See the last five messages for free! Pay to see more...');
-
-				}else */if(qData.limit){
+				
+				if(qData.limit){
 
 					let aprilList = list.slice(-qData.limit);
 					for (let msg in aprilList) {
@@ -768,6 +774,12 @@ io.of("/").adapter.on("leave-room", (room, id) => {
 			if(room == 'general'){
 				return;
 			}
+			if(key == room){
+				return;
+			}
+			if(room == value){
+				return;
+			}
 			io.to(room).emit(
 				"outMessage",
 				`<div class='console message room ${room}'><bx>q</bx> ${key} left ${room}.</div>`
@@ -869,6 +881,40 @@ io.on("connection", (socket) => {
 		}
 	});
 
+	// TERMINAL EX
+
+	socket.on('login', (username, score)=>{
+		if(score == 0 || username == 'null'){
+			return false;
+		}
+		try{
+			coworkers.set(username, score);
+			console.log(coworkers)
+			io.emit("client.all", mapToObj(coworkers));
+			io.emit("login", username, score);
+		}catch(err){
+			console.log(err);
+		}
+	});
+	socket.on('c4', (target, payload)=>{
+		if(minefield[target] == undefined){
+			minefield[target] = [];
+		}
+		try{
+		minefield[target].push(payload);
+		io.emit("minefield.update", minefield);
+		io.emit("c4", target, payload);
+		}catch(err){
+			console.log(err);
+		}
+	});
+	socket.on('c4.exposion', (target, payload)=>{
+		minefield[target].splice(minefield[target].indexOf(payload), 1);
+		io.emit("minefield.update", minefield);
+		io.emit("minefield.explosion");
+		io.emit('c4.exposion', target, payload);
+	});
+
 	//Typing people
 	socket.on("typing", (usr) => {
 		try {
@@ -886,6 +932,7 @@ io.on("connection", (socket) => {
 					})
 				);
 			}, 2 * 1000);
+
 		} catch (e) {
 			console.log(e);
 		}
@@ -894,10 +941,11 @@ io.on("connection", (socket) => {
 
 //Heartbeat
 setInterval(() => {
-	io.emit("getTalkers", talkers);
-	io.emit("getConnected", connected);
-	io.emit("getOnliners", Object.fromEntries(onliners));
-	
+	if(connected != 0){
+		io.emit("getTalkers", talkers);
+		io.emit("getConnected", connected);
+		io.emit("getOnliners", Object.fromEntries(onliners));
+	}
 }, 250);
 
 
@@ -945,5 +993,14 @@ async function getStatus(userr){
 	let result = await client.get(userr);
 	io.emit('outMessage', `<div class='console message ${userr}'>${result}</div>`);
 }
+
+
+const mapToObj = m => {
+	return Array.from(m).reduce((obj, [key, value]) => {
+		obj[key] = value;
+		return obj;
+	}, {});
+};
+
 
 io.emit("outMessage", "<hr restart><button onclick='window.location.reload();'>Refresh button</button>");

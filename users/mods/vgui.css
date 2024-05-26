@@ -16,8 +16,7 @@ background: #4d5746!important;
  margin-bottom: 10px;
  margin-top: 10px;
  outline: none;
- -webkit-box-reflect: below 5px linear-gradient(
-  to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0))!important;
+ -webkit-box-reflect: unset!important;
  color: rgba(255,255,255,0.5)!important;
 }
 
@@ -26,8 +25,7 @@ h1 {
  text-shadow: none!important;
  text-transform: uppercase;
  font-family: Arial;
- -webkit-box-reflect: below 5px linear-gradient(
-  to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0))!important;
+ -webkit-box-reflect: unset!important;
  color: rgba(255,255,255,0.5)!important;
 }
 

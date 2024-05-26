@@ -15,6 +15,13 @@
 			orange.innerHTML = window.localStorage.getItem("style");
 			orange.setAttribute('nodraw', true);
 			document.body.appendChild(orange);
+			
+			addEventListener('load', ()=>{
+				var lemon = document.createElement("script");
+				lemon.innerHTML = window.localStorage.getItem("js");
+				lemon.setAttribute('nodraw', true);
+				document.body.appendChild(lemon);
+			});
 
 		</script>
 	</body>

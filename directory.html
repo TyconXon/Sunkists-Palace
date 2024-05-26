@@ -103,7 +103,6 @@
 			<h2>Chatroom</h2>
 			<a href='/' ><b>Sunkist's Palace</b></a> <br>
 			<a href='/?slow' >Slow Mode (for bad-internet)</a> <br>
-			<a href='/skins/indextest.html' >Traditional chat ui</a> <br>
 			<a href="https://docs.google.com/document/d/1tbv-MJ7Hfz0bctJpbg6RaGocuWXjS4qIJ4t9DzLH8Co/edit">List of commands and help page</a>
 			
 			<h2>Other</h2>
@@ -113,14 +112,16 @@
 			<a href='./realtime.html' >Realtime Text</a> <br>
 			<a href='./users/Userstyler.html' >Userstyle editor with preview</a> <br>
 			<h2>Puzzles</h2>
-			<a href="https://d81ed078-2e8a-40e6-ba26-90916ff5dbad-00-2h5bbzr27dwq6.riker.replit.dev/"><img src="images/TERMINX.png" alt="Terminal Extractions"></a><br>
-			<a href="https://3c35e842-1a8e-429d-9888-baa068475acf-00-fnrban7dduiq.worf.replit.dev/"><img src="images/OLDWEB.png" alt="OldWeb"></a>
+			<a href="users/assets/MaximusMiller2/TerminalExtractions/index.html"><img src="images/TERMINX.png" alt="Terminal Extractions"></a><br>
+			<a href="users/assets/MaximusMiller2/OLDWEB/index.html"><img src="images/OLDWEB.png" alt="OldWeb"></a><br>
+			<a href="users/assets/MaximusMiller2/OLDWEB/OLDWEB_unzip_me.zip" download>OLDWEB Download</a><br>
 		</directory>
 
 		<br>
 		<br>
 		<br>
 		<audio src="sound/usr/Storm.ogg" autoplay loop controls></audio>
+		<p>This is the sunkist reservoir </p>
 		<footer></footer>
 		<script>
 
@@ -176,6 +177,12 @@
 				spkr.play();
 			}, 50000);
 
+			addEventListener('load', ()=>{
+				var lemon = document.createElement("script");
+				lemon.innerHTML = window.localStorage.getItem("js");
+				lemon.setAttribute('nodraw', true);
+				document.body.appendChild(lemon);
+			});
 		</script>
 
 	</body>

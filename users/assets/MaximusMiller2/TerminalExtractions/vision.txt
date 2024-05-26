@@ -1,0 +1,21 @@
+Typing clicker
+Type words for points
+Shop for cosmetic stuff
+
+Different requirements each day and stuff
+(Words that start with A, Rhymes with B, name object, NYT game stuff, etc)
+Multiplayer stuff
+(Stats, realtime preview, coop and vs, etc)
+Different areas
+
+Lethal company console mini game 
+(Disabling turrets and mines for another player)
+
+Collecting crates and stuff
+
+Similar/connected words powerline
+
+Set traps for specific words for other players and yourself, play mine beep when in effect but dont inform players for whos mine it is or what the word is
+The closer what youre typing is to the word it gets louder
+
+Work together to globally complete different areas and expand the shop

@@ -140,6 +140,12 @@ MaximusMiller2,
 	}*/
 
 }
+.MaximusMiller2 abbr{
+	cursor: url(../images/cur/magnify.cur), help;
+}
+.MaximusMiller2 strong{
+	cursor: url(../images/cur/entity.cur), help;
+}
 
 .Afton,
 afton {
@@ -220,6 +226,7 @@ WigglyStuf {
 	font-family: 'Coolvetica';
 	color: white;
 	background-color: rgba(24,64,128,0.7);
+	background: linear-gradient(38deg, rgba(11,54,78,0.75) 0%, rgba(24,155,204,0.75) 100%); background-attatchment: fixed;
 	text-shadow: 0px 0px 5px #0088ff;
 	
 }
@@ -313,7 +320,7 @@ samm {
 .MaximusMiller2::before,
 .Max::before {
 	background-image: url("../images/pfp/Sunkister.png");
-	cursor: url(../cursor/RopeSnakeItem.png), auto;
+	cursor: url(../images/cur/Annoying_Dog_overworld.gif), auto;
 	border-color: gold;
 	border-style: outset;
 	border-image-slice: 42 42 42 42;
@@ -421,7 +428,7 @@ samm {
 }
 
 .Fr0ggy08::before {
-  background-image: url("../images/pfp/rory.jpg");
+  background-image: url("../images/pfp/lee.jpg");
   border-color:#003b6f;
   border-style:dashed;
 }

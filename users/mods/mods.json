@@ -1,4 +1,6 @@
 {
+	"_0comment" : "Hello! This is where the mods are registered. Just copy one of the preexisting mod registers and fill in your own information",
+	"_1comment" : "Please put any new mods near the top of the category for better reachability!",
 	"themes" : [
 		{
 			"name": "Glasskist",
@@ -24,38 +26,8 @@
       "description": "A darker and more blended together theme",
       "tags" : ["dark", "sleek", "simple", "original", "theme"]
     },
-		{
-			"name": "Dusk Horizon TTAB Patch",
-			"author": "Boxel" ,
-			"file": "/users/mods/dusk-horizon-ttab-patch.css",
-			"image": "/users/mods/dusk-horizon-ttab-patch.jpg",
-			"description": "A patch to make Dusk Horizon work with TTAB",
-			"tags" : ["dark", "sleek", "simple", "patch", "textbox"]
-		},
-		{
-			"name": "Traditional Textbox at Bottom",
-			"author": "MaximusMiller2" ,
-			"file": "/users/mods/ttab.css",
-			"image": "/users/mods/ttab.jpg",
-			"description": "Moves the textbox to the bottom for a more traditional look",
-			"tags" : ["textbox", "layout", "snippit"]
-		},
-		{
-			"name": "Compact Mode",
-			"author": "MaximusMiller2" ,
-			"file": "/users/mods/compact-mode.css",
-			"image": "/users/mods/rawr-x3-owo.png",
-			"description": "Squishes messages and disables identifier",
-			"tags" : ["visibility", "compact", "identifier", "snippit"]
-		},
-		{
-			"name": "Identifier Above Text",
-			"author": "MaximusMiller2" ,
-			"file": "/users/mods/iat.css",
-			"image": "/users/mods/iat.png",
-			"description": "[Expiremental] Moves usernames and timestamps above user messages",
-			"tags" : ["expiremental", "identifier", "snippit"]
-		},
+		
+		
 		{
 			"name": "LAYER 10",
 			"author": "Boxel" ,
@@ -71,6 +43,154 @@
 			"image": "/users/mods/determination.jpg",
 			"description": "A <under>Deltarune</under> inspired theme",
 			"tags" : ["game theme", "blue", "theme", "dark"]
+		},
+		
+		
+		{
+			"name": "Imagisphere",
+			"author": "Boxel",
+			"file": "/users/mods/imagisphere.css",
+			"image": "/users/mods/lbplogo.png",
+			"description": "WIP. (temp description) A little big planet theme.",
+			"tags" : ["lbp", "skeu", "theme"]
+		},
+		
+		
+		{
+			"name": "Orbit",
+			"author": "Afton",
+			"file": "/users/mods/Orbit.css",
+			"image": "/users/mods/orbit.png",
+			"description": "Somewhat futuristic and clean textbox mod.",
+			"tags" : ["theme", "textbox"]
+		},
+		
+		
+		{
+			"name": "Terrible Fate",
+			"author": "Boxel",
+			"file": "/users/mods/terrible-fate.css",
+			"image": "/users/mods/terrible-fate.jpg",
+			"description": "A Majora's Mask inspired theme.",
+			"tags" : ["game theme", "zelda", "theme", "menu"]
+		},
+
+		
+		{
+			"name": "Time Machine",
+			"author": "Boxel",
+			"file": "/users/mods/time-machine.css",
+			"image": "/users/mods/time-machine.png",
+			"description": "A theme that makes Sunkist Palace look like its older self.",
+			"tags" : ["layout", "meta", "theme", "old", "new"]
+		}
+	],
+	"plugins": [
+		{
+			"name": "Sugar Shaders Library",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/ssl.js",
+			"image": "/users/mods/sugar-cube.gif",
+			"description": "[aka SSL] A library that imports cool filters for messages",
+			"tags" : ["library", "userstyle", "filter", "svg", "ssl", "plugin"]
+		},
+		{
+			"name": "HotKeys",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/hotkeys.js",
+			"image": "/users/mods/quick.png",
+			"description": "Improved favorited messages",
+			"tags" : ["shortcuts", "qol", "favorites", "plugin"]
+		},
+		{
+			"name": "Reactive Text",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/reactiveText.js",
+			"image": "/users/mods/text.gif",
+			"description": "Dynamic textbox styling",
+			"tags" : ["textbox", "qol", "style", "plugin"]
+		},
+		{
+			"name": "Absolutely No Styling",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/nostyle.js",
+			"image": "/users/mods/styled.gif",
+			"description": "Removes all styling & links except for mods. For use with mods.",
+			"tags" : ["library", "style", "minimalistic", "plugin"]
+		},
+		{
+			"name": "Settings Menu",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/settingsmenu.js",
+			"image": "/users/mods/merge.gif",
+			"description": "Changes the settings and favorites to be a popup menu. Requires animated popovers.",
+			"tags" : ["button", "options", "menu", "popover", "minimized", "plugin"]
+		}
+	],
+	"snippits": [
+		{
+			"name" : "Aligned Marketplace Buttons",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/amb.css",
+			"image": "/users/mods/ssl.png",
+			"description": "Aligns the subscription buttons to the bottom.",
+			"tags" : ["marketplace", "qol", "alignment", "snippit"]
+		},
+		{
+			"name" : "furry",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/applesauce.css",
+			"image": "/images/pfp/vfold.png",
+			"description": "Replaces Boxel's pfp with her cat (which is objectively better).",
+			"tags" : ["replacer", "userstyle", "pfp", "snippit"]
+		},
+		{
+			"name" : "Applesauce",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/applesaucereal.css",
+			"image": "/users/mods/applesauce.png",
+			"description": "Replaces Boxel's pfp with her other cat (which is objectively betterer).",
+			"tags" : ["replacer", "userstyle", "pfp", "snippit"]
+		},
+		{
+			"name": "No favorites",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/nofavorites.css",
+			"image": "/users/mods/reject.gif",
+			"description": "Removes the favorites divider.",
+			"tags" : ["qol", "removal", "snippit", "menu"]
+		},
+		{
+			"name": "Dark Menu",
+			"author": "Boxel",
+			"file": "/users/mods/dark-menu.css",
+			"image": "/users/mods/dark-menu.jpg",
+			"description": "A basic dark version of the menu.",
+			"tags" : ["theme", "dark", "snippit", "menu"]
+		},
+		{
+			"name": "More Animations",
+			"author": "Boxel",
+			"file": "/users/mods/more-animations.css",
+			"image": "/users/mods/more-animations.jpg",
+			"description": "Animates some elements lacking in motion (Ex. User Messages fading in).",
+			"tags" : ["theme", "animation", "snippit"]
+		},
+		{
+			"name": "Userstyled Filters",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/userfilters.css",
+			"image": "/users/mods/usl.gif",
+			"description": "(REQUIRES SugarShaders) Gives each user a unique and interesting backdrop-filter, as well as warping the menu.",
+			"tags" : ["ssl", "userstyle", "filter", "snippit", "clear"]
+		},
+		{
+			"name": "VGUI",
+			"author": "Boxel",
+			"file": "/users/mods/vgui.css",
+			"image": "/users/mods/vgui.jpg",
+			"description": "Themes the menu based off of the beta Source Engine VGUI",
+			"tags" : ["menu", "steam", "valve", "green", "snippit"]
 		},
 		{
 			"name": "Rain Rain Go Away",
@@ -113,18 +233,60 @@
 			"tags" : ["messages", "format", "clean", "snippit"]
 		},
 		{
+			"name": "Animated PopOver",
+			"author": "MaximusMiller2" ,
+			"file": "/users/mods/apo.css",
+			"image": "/users/mods/apo.gif",
+			"description": "Animates the menus that are on top of everything. (like css menu)",
+			"tags" : ["menu", "animation", "popover", "snippit"]
+		},
+		{
 			"name": "Sunkist Logo",
 			"author": "Boxel" ,
 			"file": "/users/mods/sunkist-logo.css",
 			"image": "/users/mods/sunkist-logo.jpg",
 			"description": "Turns the 'Sunkist's Palace' text on the title of the page into an image of the Sunkist Logo",
 			"tags" : ["sunkist", "logo", "funny", "snippit"]
+		},
+		{
+			"name": "Better Bottom Textbox",
+			"author": "MaximusMiller2" ,
+			"file": "/users/mods/betterBottomText.css",
+			"image": "/users/mods/bbtb.gif",
+			"description": "Moves the textbox to the bottom along with the other menu items.",
+			"tags" : ["textbox", "layout", "remake", "snippit"]
+		},
+		{
+			"name": "Compact Mode",
+			"author": "MaximusMiller2" ,
+			"file": "/users/mods/compact-mode.css",
+			"image": "/users/mods/rawr-x3-owo.png",
+			"description": "Squishes messages and disables identifier",
+			"tags" : ["visibility", "compact", "identifier", "snippit"]
+		},
+		{
+			"name": "Identifier Above Text",
+			"author": "MaximusMiller2" ,
+			"file": "/users/mods/iat.css",
+			"image": "/users/mods/iat.png",
+			"description": "[Expiremental] Moves usernames and timestamps above user messages",
+			"tags" : ["expiremental", "identifier", "snippit"]
+		},
+		{
+			"name": "Dusk Horizon TTAB Patch",
+			"author": "Boxel" ,
+			"file": "/users/mods/dusk-horizon-ttab-patch.css",
+			"image": "/users/mods/dusk-horizon-ttab-patch.jpg",
+			"description": "A patch to make Dusk Horizon work with TTAB",
+			"tags" : ["dark", "sleek", "simple", "patch", "textbox"]
+		},
+		{
+			"name": "Traditional Textbox at Bottom",
+			"author": "MaximusMiller2" ,
+			"file": "/users/mods/ttab.css",
+			"image": "/users/mods/ttab.jpg",
+			"description": "Moves the textbox to the bottom for a more traditional look",
+			"tags" : ["textbox", "layout", "snippit"]
 		}
-	],
-	"plugins": [
-		
-	],
-	"snippits": [
-	
 	]
 }

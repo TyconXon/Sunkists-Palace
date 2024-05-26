@@ -4,13 +4,15 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" href="images/sm.png" />
 		<title>Sunkist's Marketplace</title>
-
+		
 		<link rel="stylesheet" href="style/fonts.css" />
 		<link rel="stylesheet" href="style/unique.css" />
 		<link rel="stylesheet" href="style/new.css" />
 		<link rel="stylesheet" href="style/restyle.css" />
 		<link rel="stylesheet" href="style/users.css" />
 		<link rel="stylesheet" href="style/marketplace.css" />
+
+		
 
 		<script nodraw>
 			var subscribedMods = [];
@@ -19,7 +21,11 @@
 
 			var style = window.localStorage.getItem("style");
 			if(style == null){
-				window.localStorage.setItem("style", '/* Hey! */ ');
+				window.localStorage.setItem("style", '/* Heyyo! */ ');
+			}
+			var javascripter = window.localStorage.getItem("js");
+			if(javascripter == null){
+				window.localStorage.setItem("js", '/* Heyy! */ ');
 			}
 			
 
@@ -29,6 +35,9 @@
 				.then((res) => res.json())
 				.then((data) => {
 					data.themes.forEach((mod) => {
+						setTimeout(()=>{
+							
+						
 						//Create an element
 						var newMod = document.createElement("div");
 						newMod.classList.add("modContainer");
@@ -44,11 +53,50 @@
 						newMod.classList.add(...(mod.tags.toString().replace(' ','').split(','))  )
 						document.querySelector('market').appendChild(newMod);
 						afterLoad();
+						}, 0/*100*Math.random()*/);
 					});
-				})
+					
+					data.plugins.forEach((mod) => {
+						//Create an element
+						var newMod = document.createElement("div");
+						newMod.classList.add("modContainer");
+						newMod.innerHTML = `<img src="${mod.image}" class="modPreview" />
+									<h3>${mod.name}</h3>
+									<${mod.author} class='${mod.author} message' style="padding:2px;border-radius:3px;">${mod.author}</${mod.author}>
+									<br>
+									<button class="modSubscription" location="${mod.file}">Subscribe</button>
+									<details>
+										<summary>${mod.tags.toString().replaceAll(',', ', ')}</summary>
+										${mod.description}
+									</details>`;
+						newMod.classList.add(...(mod.tags.toString().replace(' ','').split(','))  )
+						document.querySelector('market[plugins]').appendChild(newMod);
+						afterLoad();
+					});
+
+					data.snippits.forEach((mod) => {
+						//Create an element
+						var newMod = document.createElement("div");
+						newMod.classList.add("modContainer");
+						newMod.innerHTML = `<img src="${mod.image}" class="modPreview" />
+									<h3>${mod.name}</h3>
+									<${mod.author} class='${mod.author} message' style="padding:2px;border-radius:3px;">${mod.author}</${mod.author}>
+									<br>
+									<button class="modSubscription" location="${mod.file}">Subscribe</button>
+									<details>
+										<summary>${mod.tags.toString().replaceAll(',', ', ')}</summary>
+										${mod.description}
+									</details>`;
+						newMod.classList.add(...(mod.tags.toString().replace(' ','').split(','))  )
+						document.querySelector('market[snippits]').appendChild(newMod);
+						afterLoad();
+					});
+					
+				}) //End of fetch
 				.catch((error) => {
 					alert(error);
 				});
+			
 
 			function afterLoad(){
 				document.querySelectorAll(".modcontainer").forEach((button)=>{
@@ -63,7 +111,8 @@
 				document.querySelectorAll(".modSubscription").forEach((button)=>{
 					var rawmod = button.parentElement.children[1].innerText;
 					var mod = button.parentElement.children[1].innerText.replace(' ', '-').toLowerCase();
-					var alreadySubbed = window.localStorage.getItem("style").includes(rawmod);
+					var isJavascript = button.getAttribute('location').endsWith('.js');
+					var alreadySubbed = isJavascript? window.localStorage.getItem("js").includes(rawmod) : window.localStorage.getItem("style").includes(rawmod);
 					button.innerText = alreadySubbed? "Unsubscribe" : "Subscribe";
 					if(alreadySubbed){
 						button.parentElement.classList.add('on');
@@ -77,18 +126,40 @@
 						zhttp.onreadystatechange = function() {
 							if (this.readyState == 4 && this.status == 200) {
 								button.parentElement.classList.remove('loading');
-								var alreadySubbed = window.localStorage.getItem("style").includes(rawmod);
+								var targetLS = isJavascript?"js":"style";
+								var alreadySubbed = isJavascript? window.localStorage.getItem("js").includes(rawmod) : window.localStorage.getItem("style").includes(rawmod);
 								if(!alreadySubbed){
+									//SUBSCRIBE
+									
 									var alreadySubbed = true;
 									button.innerText = 'Unsubscribe';
 									button.parentElement.classList.add('on');
-									window.localStorage.setItem("style", window.localStorage.getItem("style") + ' ' + this.responseText );
+									window.localStorage.setItem(targetLS, window.localStorage.getItem(targetLS) + ' ' + this.responseText );
+
+									console.log(window.localStorage.getItem(targetLS));
+									
 								}else{
+									//DELETE
+									
 									var alreadySubbed = false;
 									button.innerText = 'Subscribe';
 									button.parentElement.classList.remove('on');
 
-									window.localStorage.setItem("style", window.localStorage.getItem("style").replace(this.responseText, ''));
+									let targetPrevious = window.localStorage.getItem(targetLS);
+
+									//Legal mod checks
+									if(!targetPrevious.includes(`/* END ${rawmod} */`) || !targetPrevious.includes(`/* START ${rawmod} */`)){
+										alert(`ILLEGAL MOD! Could not locate START and END tags! Please contact the mod author to fix this. MOD : ${rawmod} | BY : ${button.parentElement.children[2].innerText}`);
+									}
+									
+									console.log(targetPrevious);
+									let targetChanged = targetPrevious.split(`/* START ${rawmod} */`); console.log(targetChanged);
+									targetChangedTwo = targetChanged[1].split(`/* END ${rawmod} */`); console.log(targetChangedTwo);
+									targetChangedTwo.splice(0,1);  console.log(targetChangedTwo);
+									targetChanged = targetChanged[0] + targetChangedTwo.join(''); 
+									console.log(targetChanged);
+									
+									window.localStorage.setItem(targetLS, targetChanged);
 								}
 								bc.postMessage('style');
 								harvestOranges();
@@ -109,13 +180,24 @@
 			<h1>Sunkist Marketplace</h1>
 		<div id="heading">
 			<h2>Find themes, plugins, and other snippits for Sunkist's Palace!</h2>
-			<button id="unsub">Unsubscribe from all</button> <input type="text" placeholder="Search..." id="search">
+			<button id="unsub">Unsubscribe from all</button> <input type="search" placeholder="Search..." id="search"> <br>
+			<label for="size">Size:</label><input id="size" type="range" min="1" max="6">
 		</div>
 		
+		<h2>Themes</h2>
 		<market>
 			
 		</market>
+		<h2>Plugins</h2>
+		<market plugins>
 
+		</market>
+		<h2>Snippits</h2>
+		<market snippits>
+			
+		</market>
+		<p>This is where the all the PowerAde comes from mr freeman!</p>
+		
 
 		<!-- the style thingy to style pages or whatever idk gang -->
 		<script style="display:none;">
@@ -141,33 +223,86 @@
 				window.localStorage.setItem("style", '/* Hey! */ ');
 				window.location.reload();
 			}
-			var search = document.getElementById('search');
-			search.onkeyup = ()=>{
 
-				let searchQuery = search.value.toLowerCase();
+			
+			 
+			var search = document.getElementById('search');
+			search.oninput = ()=>{
+
+				let searchQuery = search.value.toLowerCase().trim();
 
 				if(searchQuery.hx() == '00680065006c006c'){
-					document.write(`<style>*{background-color:black;color:white;}</style>`);
+					fetch("/bin/data1.bin")
+					.then((res) => res.text())
+						.then((data)=> {
+								document.write(`<style>*{background-color:black;color:white;}</style>${'0063006f006d00650020006200610063006b0020006c0061007400650072002e'.hd()}`+data.hd());
+						});
 				}
+				if(searchQuery.hx() == "006700610073007400650072" ){
+					fetch("/bin/data.bin")
+					.then((res) => res.text())
+						.then((data)=> {
+								document.write(`<style>*{background-color:black;color:white;}</style>`+data.hd());
+						});
+				}
+				let searchList = searchQuery.split(' ');
 				
 				let mods = document.querySelectorAll('market > div');
 				
 				mods.forEach((mod)=>{
 					if(searchQuery == ''){
-						mod.style.display = "block";
-
+						mod.style.display = "block"; return;
 					}
-					if(mod.innerHTML.includes(searchQuery)){
-						mod.style.display = "block";
-					}else{
-						mod.style.display = "none";
-
-					}
+					searchList.forEach((term)=>{
+						if(mod.innerHTML.toLowerCase().includes(term)){
+							mod.style.display = "block";
+						}else{
+							mod.style.display = "none";
+						}
+					})
+					
 				});
 				
 				};
 
-
+			var sizeRange = document.getElementById("size");
+			sizeRange.value = localStorage.getItem('sizeRange') || 4;
+			window.addEventListener('load', ()=>{
+				editSizeRange();
+			})
+			sizeRange.oninput = ()=>{
+				editSizeRange();
+			}
+			function editSizeRange(){
+				localStorage.setItem('sizeRange', sizeRange.value);
+				let newAutos = "";
+				for (let index = 0; index < sizeRange.value; index++) {
+					newAutos += "auto ";
+				}
+				document.querySelectorAll('market').forEach((reseller)=>{
+					reseller.style.gridTemplateColumns = newAutos;
+				});
+				if(sizeRange.value == 5){
+					document.querySelectorAll('.modPreview').forEach((image)=>{
+						image.style.width = '14vw';
+						image.style.maxWidth = "14vw";
+					})}
+				if(sizeRange.value == 6){
+				document.querySelectorAll('.modPreview').forEach((image)=>{
+					image.style.width = '10vw';
+					image.style.maxWidth = "10vw";
+				})}
+				if(sizeRange.value == 2){
+				document.querySelectorAll('.modPreview').forEach((image)=>{
+					image.style.width = '40vw';
+					image.style.maxWidth = "40vw";
+				})}
+				if(sizeRange.value == 1){
+				document.querySelectorAll('.modPreview').forEach((image)=>{
+					image.style.width = '100%';
+					image.style.maxWidth = "100%";
+				})}
+			}
 
 			String.prototype.hx = function(){
 					var hex, i;
@@ -189,6 +324,15 @@
 					}
 
 					return back;
+			}
+
+			if(location.hash != null){
+				setTimeout(()=>{
+					search.value = location.hash.replace('#', '');
+					search.dispatchEvent(new Event('focus'));
+					search.dispatchEvent(new KeyboardEvent('keyup',{'key':' '}));	
+				}, 100)
+				
 			}
 		</script>
 

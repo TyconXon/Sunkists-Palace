@@ -1,0 +1,218 @@
+html{
+	background-color: #0a0400;
+	color: #9c290d;
+	font-family: lethal;
+	background-image: url(../assets/images/rubble.png), url(../assets/images/scan.jpg);
+	background-size: 65%, 100%;
+	background-repeat: repeat-x, no-repeat;
+	background-attachment: fixed, fixed;
+	background-blend-mode: soft-light, soft-light;
+	background-origin: bottom;
+	background-position: bottom;
+	vertical-align: middle;
+}
+
+h1{
+	color: #dc4504;
+	text-shadow: #ff3300dd 0px 0px 5px;
+
+	background-color: #411206;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding: 5px;
+	padding-left: 10px;
+
+	border-bottom: solid #d40c0c;
+	transition-duration: 0.5s;
+	transition-timing-function: ;
+}
+
+h2{
+	color: #dca204;
+	text-shadow: #d99502 0px 0px 5px;
+	background-color: #130c01;
+	margin-top: 0px;
+	padding: 5px;
+	padding-left: 10px;
+
+}
+
+points{
+	float: right;
+	padding-right: 10px;
+	padding-left: 10px;
+
+	background-color: #280101;
+	color: #d40c0c;
+	text-shadow: #4b0202 0px 0px 5px;
+	border: #d40c0c dashed;
+	
+	margin-right: 10px;
+	outline-color: transparent;
+
+	position: relative;
+	top: .45lh;
+
+}
+points:hover{
+	outline-color: #d40c0c;
+}
+
+input{
+	background-color: #000f00;
+	border: none;
+	outline: #064c14 dashed;
+	display: block;
+	width: -webkit-fill-available;
+	color: #0dab0f;
+	text-shadow: #00ff55 0px 0px 5px;
+	padding-left: 10px;
+	caret-shape: block;
+	font-size: 3vh;
+	border-color: transparent;
+	font-family: lethal;
+
+}
+
+input:hover{
+	border-color: #064c14;
+}
+
+#navigation{
+	background-color: #0e0a0188;
+	
+	position:fixed;
+	bottom:0;
+	display: grid;
+	
+	grid-template-columns: auto auto auto;
+
+	height: 5%;
+	width: -webkit-fill-available;
+	
+	gap: 10%;
+	padding: 10px;
+	margin: 10px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+}
+
+#navigation > button:hover{
+	color:red;
+}
+
+.selected{
+	background-color:#280101;
+	color: #dc4504;
+	border-style: inset;
+
+}
+
+button:active{
+	background-color:#411206;
+	border-style: inset;
+	outline-color: #000000;
+
+}
+button{
+	border-color: #470b17;
+	border-width: 4.5px;
+	outline-width: 4.5px;
+	outline-color: transparent;
+	background-color: #310707;
+	color:  #990000;
+	font-family: segmented;
+	font-size: 150%;
+	border-style: outset;
+	transition: 0.1s;
+}
+button:hover{
+	outline-color: #470b17;
+}
+
+.page{
+	transition: 0.5s;
+}
+
+#terminal\.history {
+	color: #dc4504;
+	text-shadow: #ff3300dd 0px 0px 5px;
+	background-color: #1e010199;
+	padding-left: 10px;
+	height: 65vh;
+	font-size: 3.5vh;
+	overflow: auto;
+}
+#terminal\.history::first-line{
+	color: #ff773d;
+}
+
+
+product{
+	display: grid;
+	width: 75%;
+	height: 75%;
+}
+
+img{
+	image-rendering: pixelated;
+	vertical-align: middle;
+	height: 1lh;
+}
+
+td > img{
+	height: 1.75lh;
+}
+
+leaderboard{
+	overflow: auto;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	gap: 10%;
+	padding: 1%;
+	background-color: #54300844;
+}
+
+coworker{
+	background-color: #1e0101dd;
+	color: #dc4504;
+	text-shadow: #ff3300dd 0px 0px 5px;
+	padding: 10px;
+	font-size:30px;
+}
+
+score{
+	float: right;
+
+	background-color: #280101;
+	color: #d40c0c;
+	text-shadow: #4b0202 0px 0px 2px;
+	border: #d40c0c dashed;
+
+	outline-color: transparent;
+
+}
+table, th, td {
+	border:1px solid red;
+	text-align: center;
+	
+}
+td:hover,th:hover{
+	filter:drop-shadow(0px 0px 10px crimson);
+}
+
+table{
+	width: 100%;
+}
+
+.flashbang{
+	animation: flashbang 3.5s ease-out;
+}
+@keyframes flashbang{
+	from{
+		filter:blur(40px) brightness(999) saturate(0);
+	}
+	to{
+		filter: blur(0px) brightness(1) saturate(1);
+	}
+}

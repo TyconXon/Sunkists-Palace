@@ -5,5 +5,8 @@
 <br> <a href="directory.html">Directory</a>
 	<script>
 		document.querySelector("span").innerHTML = decodeURI(location.search.slice(1));
+		if("spam" == decodeURI(location.search.slice(1))){
+			document.write("<img src='images/spamton-deltarune.gif'> <style>*{background-color:black;color:white;font-family:monospace;}</style> <h1>[[Hyperlink Blocked.]]</h1>");
+		}
 	</script>
 </body>

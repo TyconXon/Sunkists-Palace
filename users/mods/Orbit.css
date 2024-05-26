@@ -1,256 +1,143 @@
-#body{
- font-family: Orbitron!important;
-h1 {
- background:black;
- color: magenta!important;
- font-family: Orbitron;
- font-size:40x;
- margin:15px;
- padding-top:3px;
- letter-spacing:1px;
- font-weight:normal;
- text-shadow:magenta!important;
-border: magenta 2px solid;
- border-radius: 15px;
+/* START Orbit */
 
-}
-h1#menuTitle
+	#body{
+		font-family: Orbitron !important;
+		h1 {
+			background:black;
+			color: cyan!important;
+			font-family: Orbitron;
+			font-size:40x;
+			margin:15px;
+			padding-top:3px;
+			letter-spacing:1px;
+			font-weight:normal;
+			text-shadow:blue 0px 0px 10px !important;
+			border: magenta 2px solid;
+			border-radius: 15px;
+		}
+		textarea{
+			padding: 5px 15px;
+			border-radius: 15px;
+			border: 2px solid cyan;
+		}
+	}
+	.message .rightist {opacity:25%;}
+	.message:hover .rightist {opacity:100%;background:none;}
 
-}
-.message .rightist {opacity:25%;}
-.message:hover .rightist {opacity:100%;background:none;}
+	#body {
+	 background: url('..users/assets/afton/testimages/BlueBen.jpg') fixed center top;
+	 background-size: 100% auto;
+	 margin: 0;
+	 padding: 10px;
+	}
+	* {
+		scrollbar-width: auto;
+		scrollbar-color: #08CBD3 #173A3C;
+	}
 
-#body {
- background: url('..users/assets/afton/testimages/BlueBen.jpg') fixed center top;
- background-size: 100% auto;
- margin: 0;
- padding: 10px;
-}
-* {
-  scrollbar-width: auto;
-  scrollbar-color: #08CBD3 #173A3C;
-}
+	/*
+	 * 	Stylesheet for elements unique to chat
+	 */
 
-/*
- * 	Stylesheet for elements unique to chat
- */
-
-html {
-  /*Background:*/
-  /*Rain gif and gradient*/
-  background: url(../images/rain.gif),
-    linear-gradient(25deg,
-      rgba(1, 99, 80) 50%,
-      rgba(52, 148, 129) 60%,
-      rgba(0, 31, 27) 100%);
-  background-size: 40%, 100%;
-  image-rendering: pixelated;
-  background-blend-mode: lighten;
-  /*Rain scrolls, gradient does not*/
-  background-attachment: scroll, fixed;
-  /*General page settings*/
-  overflow: auto;
-  text-align: top;
-  scroll-behavior: auto;
-  font-family: tahoma;
+	html {
+		/*Background:*/
+		/*Rain gif and gradient*/
+		background: url(../images/rain.gif),
+			linear-gradient(25deg,
+				rgba(1, 99, 80) 50%,
+				rgba(52, 148, 129) 60%,
+				rgba(0, 31, 27) 100%);
+		background-size: 40%, 100%;
+		image-rendering: pixelated;
+		background-blend-mode: lighten;
+		/*Rain scrolls, gradient does not*/
+		background-attachment: scroll, fixed;
+		/*General page settings*/
+		overflow: auto;
+		text-align: top;
+		scroll-behavior: auto;
+		font-family: tahoma;
 
 
-}
+	}
 
 
 
-#onlineCount * {border-radius: 25px !important;} 
+	#onlineCount * {border-radius: 10px !important;
+	padding: 1px; padding-left: 2.5px;} 
 
-*::-webkit-scrollbar-track {
-  background: #39304f;
-}
+	*::-webkit-scrollbar-track {
+		background: #39304f;
+	}
 
-*::-webkit-scrollbar-thumb {
-  background-color: #9104dc;
-  border-radius: 12px;
-  border: 3px inset #5125b6;
-}
+	*::-webkit-scrollbar-thumb {
+		background-color: #9104dc;
+		border-radius: 13px;
+		border: 3px inset #5125b6;
+	}
 
-#onlineCount *:before, #talkorinos *:before{
-    border: none !important;
-    background-image: none !important;
-}
+	#onlineCount *:before, #talkorinos *:before{
+			border: none !important;
+			background-image: none !important;
+	}
 
-/***--- Menu Stuffs ---***/
+	/***--- Menu Stuffs ---***/
 
-#menu { /*Menu container*/
-  position: sticky;
-  z-index: 15;
-  border-radius: 15px;
-  backdrop-filter: blur(8px);
-  right: 450;
-  background-color: rgb(2 0 100 / 24%);
-  margin: auto;
-  width: 50%;
-top:0%
-  padding: 7px;
-  border: double rgba(4, 148, 119, 1) 4px;
-  text-align: center;
-}
+	#menu { /*Menu container*/
+		position: sticky;
+		z-index: 15;
+		border-radius: 15px;
+		backdrop-filter: blur(8px);
+		right: 450;
+		background-color: rgb(2 0 100 / 24%);
+		margin: auto;
+		width: 50%;
+	top:0%
+		padding: 7px;
+		border: double rgba(4, 148, 119, 1) 4px;
+		text-align: center;
+	}
 
-#status { /*Who's online*/
-  width: 100%;
-  font-family: sans-serif;
-  color: #ef01ff;
-  border-radius: 3px;
-  padding: 1px;
-  margin: auto;
-  background-color: rgb(0 0 0 / 80%);
-  backdrop-filter: blur(8px);
-  text-align: left;
-}
+	#status { /*Who's online*/
+					margin-bottom 10px;
+		width: 96%;
+		font-family: sans-serif;
+		color: #ef01ff;
+		border-radius: 10px;
+		padding: 10px;
+				 margin: initial;
+		margin-bottom: 12px;
+	margin-top: 12px;
+		margin-left: 18.5px;
+		background-color: rgb(0 0 0 / 80%);
+		backdrop-filter: blur(8px);
+		text-align: left;
+	}
 
-#typingP { /*Who's typing*/
-  float: right;
-  color: #ef01ff;
-}
+	#typingP { /*Who's typing*/
+		float: right;
+		color: #ef01ff;
+	}
 
-h1 { /*Sunkist Palace text*/
-  /*Dark, ambient shadow purple*/
-  background-color: rgb(5 75 53 / 82%);
-  /*Pure yellow*/
-  color: #ff3eb7;
-  font-family: "Orbitron";
-  /*Yellow glow*/
-  text-shadow: 0px 0px 5px #ff3eb7;
-  /*Rounded border*/
-  border-radius: 5px;
-}
+	h1 { /*Sunkist Palace text*/
+		background-color: rgb(5 75 53 / 82%);]
+		color: #ff3eb7;
+		font-family: "Orbitron";
+		text-shadow: 0px 0px 5px #ff3eb7;
+		border-radius: 5px;
+	}
 
-/***--- Special Stuffs ---***/
+	summary {
+		font-family: tahoma;
+	}
+	label {
+		font-family: tahoma;
+	}
+	details {
+		backdrop-filter: sepia(100%);
+		background-color: rgba(150, 150, 150, 0.2);
+	}
 
-#lastRead,
-[lastread] {
-  border-color: red;
-  border-width: 4px;
-  background-color: rgba(100, 100, 100, 0.5);
-  text-align: center;
-}
+/* END Orbit */
 
-#lastRead:before,
-[lastread]:before {
-  content: "New messages:";
-  text-align: center;
-  font-family: "OFF";
-  font-size: 30px;
-  color: red;
-  text-shadow: 0px 0px 5px red;
-}
 
-[chr]{
-  border-color: black;
-  border-width: 4px;
-  background-color: rgba(100, 100, 100, 0.5);
-  text-align: center;
-}
-[chr]:before{
-  content: attr(chr);
-  text-align: center;
-  font-family: "Atlas";
-  font-size: 15px;
-  color: white;
-  text-shadow: 0px 0px 5px #cbf0f0;
-}
-
-[restart] {
-  border-color: blue;
-  border-width: 4px;
-  background-color: rgba(100, 100, 100, 0.5);
-  text-align: center;
-}
-
-[restart]:before {
-  content: "Server restarted";
-  text-align: center;
-  font-family: "TF2 Build";
-  font-size: 30px;
-  color: white;
-  text-shadow: 0px 0px 5px blue;
-}
-
-.reply {
-  border: 15px double cyan /*#ff6550*/;
-  backdrop-filter: hue-rotate(180deg);
-  background-repeat: no-repeat;
-}
-
-.ping {
-  border-radius: 5px;
-  background-color: rgba(51, 51, 89, 0.5);
-  color: #b9bce9;
-  backdrop-filter: invert(100%) contrast(150%);
-  animation: blinkBorder 2s infinite;
-  border-color: gold;
-  border-top-width: 0px;
-  border-bottom-width: 0px;
-
-  border-style: solid;
-  box-sizing: border-box;
-}
-
-.ping:before {
-  content: "@";
-}
-
-.message:has(.ping) {
-  border-left: gold 10px solid;
-  backdrop-filter: invert(100%) saturate(50%);
-  animation: fadeBG 2s infinite;
-}
-
-/***--- Other Stuffs ---***/
-
-.favorite-item{
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-}
-
-.removed { /*Moderated messages*/
-  color: red;
-}
-
-.console.room.general{display:none;}
-.console.room.admin{display:none;}
-
-summary {
-  backdrop-filter: hue-rotate(180deg);
-  transition: all 2s;
-  cursor: pointer;
-  border-bottom: white solid 1px;
-  font-family: tahoma;
-  color: white;
-}
-label {
-  font-family: tahoma;
-}
-details {
-  backdrop-filter: sepia(100%);
-  background-color: rgba(150, 150, 150, 0.2);
-  transition: all 2s;
-  margin: 5px;
-  padding: 5px;
-}
-
-.TF2 {
-  font-family: "TF2 Build", emoji;
-}
-
-.settings {
-  overflow: auto;
-  max-height: 30%;
-}
-
-bx {
-  font-family: boxrocket;
-  font-size: x-large;
-}
-
-ml {
-  font-family: marlett;
-}

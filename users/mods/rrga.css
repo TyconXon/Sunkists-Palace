@@ -38,11 +38,10 @@
   );
  background-size: 25%, 100%;
  background-position: bottom;
- background-attachment: fixed;
  background-repeat: repeat-x, no-repeat;
  image-rendering: pixelated;
  background-blend-mode: normal;
- background-attachment: scroll, fixed;
+ background-attachment: scroll, scroll;
 }
 
 /* END Rain Rain Go Away */

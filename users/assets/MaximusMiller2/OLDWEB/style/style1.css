@@ -1,0 +1,363 @@
+/*Maximus DID write this.*/
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+@font-face {
+	font-family: "Core Sans G 65 Bold";
+	font-display: swap;
+	src: url('Core Sans G 65 Bold.ttf');
+}
+
+@font-face {
+	font-family: "Television";
+	font-display: swap;
+	src: url('Television-3zyqX.ttf');
+}
+
+
+
+body {
+	background-image: url('../images/tvlines_simple.gif');
+	image-rendering: pixelated;
+	background-size: 12px;
+	background-blend-mode: multiply;
+	font-family: 'Core Sans G 65 Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-attachment: fixed;
+	overflow-x: hidden;
+
+
+	margin: 0;
+}
+
+p {
+	color: gray;
+	font-family: 'Core Sans G 65 Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+label {
+	font-family: 'Core Sans G 65 Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: black;
+}
+
+button {
+	font-size: 500%;
+	background-color: #0f0f0f;
+	color: gray;
+	border: solid 5px gray;
+	line-height: 100%;
+	width: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
+	padding-top: 10px;
+
+	font-family: 'Core Sans G 65 Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button:hover,
+input:hover {
+	background-color: #323232;
+	text-decoration: underline black solid;
+}
+
+button:active,
+input:active {
+	color: yellow;
+	text-decoration: underline gold solid;
+}
+
+
+h1 {
+	font-size: 1000%;
+	font-family: 'Core Sans G 65 Bold', 'Segoe UI', Helvetica, Tahoma, Geneva, Verdana, sans-serif;
+	text-align: center;
+	
+}
+
+h2 {
+	color: red;
+	font-family: 'Core Sans G 65 Bold';
+	font-size: 150px;
+}
+#gameSplash {
+	color: rgb(6, 49, 25);
+	font-family: 'Core Sans G 65 Bold';
+	font-size: 50px;
+}
+
+.flipped {
+	transform: rotate(180deg);
+}
+
+.blurred {
+	filter: blur(5px);
+}
+
+.scrambled {
+	direction: rtl;
+	unicode-bidi: bidi-override;
+}
+
+.important {
+	color: #540808;
+	background-color: #949494;
+	font-size: 215%;
+}
+
+.sherlock {
+	color: red;
+	background-color: blue;
+}
+
+#DaDiv {
+	/*This is the TV wrapper*/
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 300px;
+	user-select: none;
+
+}
+
+#screen {
+    font-size: 1000%;
+    text-transform: capitalize;
+    /* text-align: center; */
+    font-family: 'Core Sans G 65 Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px #000000;
+    user-select: none;
+    position: absolute;
+    top: 35%;
+}
+
+
+#DaDiv2 {
+	/*This is the points wrapper*/
+	display: inline-block;
+	right: 0px;
+	width: 500px;
+	padding-left: 2px;
+
+
+}
+
+#cpoints {
+	color: green;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-size: 90px;
+
+	text-shadow: 2px 2px #000000;
+	user-select: none;
+
+}
+
+
+#timeSpan {
+	float: right;
+}
+
+#game {
+	cursor: none;
+}
+
+#pregame {
+	margin: 2%;
+	padding: 5%;
+	text-align: center;
+	
+	
+}
+
+#allTheSettings {
+	background-color: rgba(210, 210, 210, 0.5);
+	border: 0.2cm gray ridge;
+	padding: 2%;
+	margin: 2%;
+}
+
+h3 {
+	font-family: 'Core Sans G 65 Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input {
+	font-family: 'Core Sans G 65 Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: black;
+	color: white;
+}
+
+#gameTitle {
+	animation-name: titleZoom;
+	animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+	animation-duration: 3s;
+	animation-direction: normal;
+	animation-iteration-count: 1;
+    margin-bottom: auto;
+	pointer-events: none;
+	text-shadow: 1px 1px 5px #19121c;
+
+}
+
+#fadein {
+	animation-name: FadeMeIn;
+	animation-duration: 6s;
+	animation-delay: 2s;
+	filter:opacity(0%);
+	animation-fill-mode: forwards;
+}
+@keyframes FadeMeIn {
+	from{
+		filter:opacity(0%) blur(3px);
+	}
+	to{
+		filter:opacity(100%) blur(0px);
+
+	}
+}
+
+details{
+	margin-top: 1%;
+	padding: 1%;
+}
+summary{
+	text-align: center;
+}
+
+#connecting {
+	position: relative;
+	height: 100vh;
+	white-space: nowrap;
+	filter:url(#kill);
+
+}
+
+#connectingMessage {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	white-space: nowrap;
+}
+
+#time {
+	color: black;
+	font-family: 'VT323', monospace;
+	font-size: 90px;
+
+	text-shadow: 2px 2px white;
+	filter:url(#kill);
+
+}
+
+#pathology {
+	text-align: center;
+	filter:url(#kill);
+
+}
+
+.pathological {
+	text-align: center;
+	filter:url(#kill);
+}
+#restartButton{
+	filter:url(#kill);
+
+}
+
+
+.animationClass {
+	animation-name: flipAnimation;
+	animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+	animation-duration: 0.3s;
+	animation-direction: normal;
+	animation-iteration-count: 1;
+}
+
+.animationClass.flipped {
+	animation-name: flippedAnimation;
+	animation-timing-function: linear;
+	animation-duration: 0.15s;
+	animation-direction: normal;
+	animation-iteration-count: 1;
+}
+
+@keyframes titleZoom {
+	0% {
+		scale: 10;
+		filter: blur(5px) ;
+
+	}
+
+	100% {
+		scale: 1;
+		filter: blur(0px) ;
+
+	}
+}
+
+@keyframes flipAnimation {
+	0% {
+		transform: rotate(20deg);
+		filter: blur(2px) ;
+		scale: 5;
+	}
+
+	100% {
+		transform: rotate(0deg);
+		filter: blur(0px) ;
+		scale: 1;
+	}
+}
+
+@keyframes flippedAnimation {
+	0% {
+		transform: rotate(185deg);
+		scale: 1.5;
+	}
+
+	100% {
+		transform: rotate(180deg);
+		scale: 1;
+	}
+}
+
+.wakeupTextClass {
+	animation-name: wakeupText;
+	animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+	animation-duration: 2s;
+	animation-direction: normal;
+	animation-iteration-count: 1;
+	text-shadow: 1px 1px 10px dimgray;
+}
+
+.wakeupMessageClass {
+	animation-name: wakeupText;
+	animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+	animation-duration: 2s;
+	animation-direction: normal;
+	animation-iteration-count: 1;
+	text-shadow: 3px 3px 5px red, 6px 6px 10px rgba(255, 0, 0, 0.5), 12px 12px 20px rgba(255, 0, 0, 0.2);
+
+}
+
+@keyframes wakeupText {
+	0% {
+		opacity: 0;
+		filter: blur(5px) url(#kill);
+
+	}
+
+	100% {
+		opacity: 1;
+		filter: blur(1px) url(#kill);
+	}
+}
+
+
+@keyframes nothing {
+	100% {}
+}
+
+b{
+	color: black;
+}

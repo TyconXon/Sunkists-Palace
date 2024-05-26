@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>About WigglyStuf</title>
+	<link rel="icon" type="image/x-icon" href="assets/wiggly/soulsphere.png">
+	<style>
+		html {
+			height: 100%;
+			width: 100%;
+		}
+
+		body {
+			background-color: black;
+			background-image: url("assets/bg_doom.webp");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+			background-position: center;
+			color: white;
+			font-family: "Nunito", sans-serif;
+			animation: slideshow 15s infinite;
+		}
+
+		.box {
+			font-size: 20px;
+			background: black;
+			padding: 10px;
+			border: 6px solid white;
+			margin-top: 20px;
+		}
+
+		#header {
+			font-size:42px;
+			text-align: center;
+			font-family: "Rubik", sans-serif;
+			font-optical-sizing: auto;
+			font-weight: 500;
+
+			border: 6px solid white;
+			background-color: black;
+			padding:20px;
+			width:fit-content; 
+			width:-webkit-fit-content;
+			margin:auto;
+		}
+
+		.sectionTitle {
+			font-family: "Rubik", sans-serif;
+			font-weight:500px;
+			font-size:24px;
+			text-align: center;
+
+		}
+
+		.sectionSubTitle {
+			font-size:22px;
+			font-family: "Rubik", sans-serif;
+			font-weight:500;
+		}
+
+		/*MaximusMiller2*/
+		[icon]{
+			height: 0.75lh;
+			padding-left: 0.25lh;
+			padding-right: 0.25lh;
+
+			image-rendering: pixelated;
+		}
+
+		@keyframes slideshow{
+			0%{
+				background-image: url("assets/wiggly/bg_doom.webp");
+			}
+			25%{
+				background-image: url("assets/wiggly/bg_halflife.webp");
+			}
+			50%{
+				background-image: url("assets/wiggly/bg_portal.webp");
+			}
+			75%{
+				background-image: url("assets/wiggly/bg_tf2.jfif");
+			}
+		}
+	</style>
+	<!-- RUBIK FONT -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+	<!--TEXT FONT-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div id="header">
+		<div id="title"><img src='assets/wiggly/smirk.png' icon>WIGGLYSTUF<img src='assets/wiggly/soulsphere.png' icon></div>
+		<div id="subtitle" class="sectionTitle">Aka: WigglyAnemone35</div>
+	</div>
+
+	<div id="aboutMe" class="box">
+		<div id="aboutMeTitle" class="sectionTitle">ABOUT ME</div>
+		<div id="aboutMeText">
+			Hello! My name is WigglyStuf. I like making things sometimes. My name comes from when I made my Xbox account with my dad, and it was called WigglyAnemone35. My Nintendo Switch only had 10 letters per name though, so I changed it to WigglyStuf. Yes, it sounds dirty. Shut up.
+		</div>
+	</div>
+
+	<div id="myProjects" class="box">
+		<div id="myProjectsTitle" class="sectionTitle">MY PROJECTS</div>
+		<div style="text-align:center">nothing so far, at least that I'm proud of...</div>
+		<div id="comingSoon" class="sectionTitle">COMING SOON</div>
+		<div id="wigglyWad" style="text-align: center;" class="sectionSubTitle">WIGGLY.wad!</div>
+		<div id="wigglyWadDesc" style="text-align: center;" class="sectionDesc">My first DOOM map pack! Featuring my first level, "Processing", my next one, "Sewers", and my first good one, "Warehouse"! It is still a work in progress. Stay alert for more info coming soon!</div>
+	</div>
+</body>
+
+</html>

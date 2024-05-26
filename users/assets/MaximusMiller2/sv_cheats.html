@@ -1,0 +1,55 @@
+<h1>Developer filesystem overwrite tool</h1>
+<marquee ><h2 style='color:red'>THIS IS FOR DEVELOPER USAGE ONLY. ISSUES MAY OCCUR, DATA LOSS MAY OCCUR, and DEATH.</h2></marquee>
+
+<form action="/upload" enctype="multipart/form-data" method="post" id='uploadForm'>
+	<input type="file" name="someCoolFiles" id='uploadFile'>
+	<input type="text" value="/temp/" id="uploadPath">
+	<input type="text" value="filename.txt" id="uploadName">
+
+	<button id='upload'>Upload</button>
+</form>
+
+<h2>Log:</h2>
+<ol>
+	
+</ol>
+
+<script>
+	document.getElementById("uploadForm").addEventListener("submit", (event)=>{
+
+		var url = "/upload";
+		url = '/upload?dir=' +document.querySelector('#uploadPath').value;
+
+		var fileName = document.querySelector('#uploadName').value;
+
+		// Get the file the user picked
+		var files = document.getElementById("uploadFile").files;
+		if (!files.length) {
+				return;
+		}
+		var file = files[0];
+		// Create a new one with the data but a new name
+		var newFile = new File([file], fileName, {
+			type: file.type,
+		});
+
+		// Build the FormData to send
+		var data = new FormData();
+		data.set("AttachFile", newFile);
+	
+		var request = new XMLHttpRequest();
+		request.open('POST', url, true);
+		request.onload = function() { // request successful
+			document.querySelector('ol').innerHTML += `<li>${request.status} | ${url} <- ${fileName}</li>`;
+		};
+
+		request.onerror = function() {
+			// request failed
+			alert('fail')
+		};
+
+		request.send(data); // create FormData from form that triggered event
+		event.preventDefault();
+
+	});
+</script>

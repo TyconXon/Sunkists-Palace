@@ -1,0 +1,7 @@
+
+/* START furry */
+.Boxel:before{
+	border: ridge 2px white;
+	background-image: url(../images/pfp/vfold.png);
+}
+/* END furry */

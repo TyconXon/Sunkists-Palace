@@ -1,0 +1,49 @@
+/* START Dusk Horizon V2 */
+/* WIP DONT UPLOAD */
+
+#status {
+ position: fixed!important;
+ top: 0;
+ left: 0;
+ width: 100%;
+ margin: 0;
+ filter: drop-shadow(0 10px 10px black);
+ background: rgba(0,0,0,0.3);
+ backdrop-filter: blur(24px);
+ transition: font-size ease-in-out!important;
+}
+
+#menuTitle {display: none;}
+
+#menu {backdrop-filter: none; background: none; border: none;}
+
+#soapMode {
+ backdrop-filter: blur(24px);
+ background: rgba(0,0,0,0.3)!important;
+ border: none;
+ outline: none;
+ box-shadow: 0 10px 40px rgba(0,0,0,0.75);
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ height: 7.5vh!important;
+}
+
+#body {margin-bottom: 8vh;}
+
+details {
+ margin: 0;
+ margin-top: 8px;
+ max-height: 500px!important;
+ backdrop-filter: blur(24px) drop-shadow(0 10px 10px black);
+ background: rgba(0,0,0,0.3);
+ width:100%;
+}
+
+#settingGrid {grid-template-columns: 50% 50%!important;}
+
+summary {background: rgba(0,0,0,0)!important; backdrop-filter: none!important; transition: none;}
+
+summary:hover {background: rgba(255,255,255,0.25)!important;}
+
+/* END Dusk Horizon V2 */

@@ -6,6 +6,13 @@
 market {
 	display:grid;
 	grid-template-columns: auto auto auto auto;
+	border-radius: 5px;
+}
+market:not([plugins]){
+	background-color: rgb(2, 44, 31, 0.25);
+}
+market[plugins]{
+	background-color: rgb(19, 12, 1, 0.25);
 }
 
 #heading{
@@ -40,17 +47,23 @@ html{
 		background-position: bottom, bottom, bottom;
 		background-attachment: fixed, auto, fixed;
 	background-repeat: repeat-x,repeat, no-repeat;
-	image-rendering: pixelated;
+	image-rendering: pixelated;	
 	background-blend-mode: normal;
 	/*Rain scrolls, gradient does not*/
 	background-attachment: scroll, fixed;
 }
 
 h1{
-	color: rgb(17, 204, 232);
-	text-shadow: rgb(16, 59, 66, 0.3) 4px 4px 2px;
+	color: rgb(215, 197, 112);
+	text-shadow: rgb(175, 154, 49, 0.3) 4px 4px 2px;
 	font-family: atlas;
-	background-color: #5f4935cc
+	background-color: #181816cc;
+	padding: 5px;
+}
+body > h2{
+	background-color: #181816cc;
+	color: rgb(215, 197, 112);
+
 }
 
 .modContainer {
@@ -92,13 +105,14 @@ h3, h5 {
 	aspect-ratio:1/1;
 	object-fit:cover;
 	background-color:rgba(0,0,0,0.5);
+	image-rendering: pixelated;
 }
 .modPreview:hover {
 	position:relative;
 	z-index: 10;
 }
 
-details {
+.modContainer details {
 		position: absolute;
 		top: -5;
 		background-color: rgba(150, 150, 150, 0.4);
@@ -111,7 +125,10 @@ details {
 	background-color: rgba(50, 50, 50, 0.75);
 	transition: all 0.5s;
 }
-summary {
+details:hover{
+	background-color:black;
+}
+.modContainer summary {
 		font-family: sedan;
 		text-transform: capitalize;
 		font-variant-caps: small-caps;
@@ -122,8 +139,12 @@ summary {
 summary::-webkit-scrollbar {
 	display: none;
 }
-summary:hover{
+.modContainer:hover summary{
 	max-height: 500lh;
+}
+#search{
+	color:white;
+	background-color:black;	
 }
 
 .modContainer button{
@@ -224,4 +245,10 @@ under {
 .modContainer.blue.gametheme h3{
 	font-family: Deltarune;
 	font-size: 200%;
+}
+
+.modContainer.new {
+	border: 15px double cyan /*#ff6550*/;
+	backdrop-filter: hue-rotate(180deg);
+	background-repeat: no-repeat;
 }

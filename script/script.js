@@ -53,7 +53,9 @@ if(URLparams.get('channel') != undefined){
 	addEventListener('load', ()=>{
 		sunkistsPalace += '/' + URLparams.get('channel');
 		document.getElementById("menuTitle").innerText = sunkistsPalace;
-		
+		var icantthinkofanameforthis = document.createElement('style');
+		icantthinkofanameforthis.innerHTML = '.message:not(.room){display:none;}';
+		document.body.append(icantthinkofanameforthis)
 		message('/leave general');
 		message('/join ' + URLparams.get('channel'));
 		document.getElementById('prefix').value = '/to ' + URLparams.get('channel') + ' ';
@@ -133,8 +135,6 @@ localStorage.setItem('pingSoundUrl', '')
 // document.getElementById('pingSoundVolume').value = localStorage.getItem('pingSoundVolume') ? localStorage.getItem('pingSoundVolume') : 1;
 // document.getElementById('pingSound').checked = localStorage.getItem('pingSound') ? localStorage.getItem('pingSound') : false;
 // document.getElementById('pingSoundUrl').value = localStorage.getItem('pingSoundUrl') ? localStorage.getItem('pingSoundUrl') : '';
-
- document.getElementById('titlePrefix').checked = localStorage.getItem('titlePrefix') ? localStorage.getItem('titlePrefix') : false;
 
 
 // if(document.getElementById('pingSound').checked){
@@ -703,7 +703,7 @@ document.getElementById("uploadForm").addEventListener("submit", (event)=>{
 		var url = "/upload";
 
 			if(devmode){
-				url = '/upload?dir=' + prompt('save dir (ex: /temp/');
+				url = '/upload?dir=' + prompt('save dir (ex: /temp/)','/temp/');
 			}
 		var request = new XMLHttpRequest();
 		request.open('POST', url, true);

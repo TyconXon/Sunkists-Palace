@@ -1,0 +1,20 @@
+/moderate
+/eval
+/kick
+/ban
+/edit
+/join
+/clear
+sv_cheats 1
+/to
+/multi
+/restart
+/list
+/whc
+/mem
+/cout 
+/leave
+/check
+/status
+test
+apple

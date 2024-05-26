@@ -2,6 +2,6 @@
 
 .message::before {display: none;}
 .message {line-height: 1;}
-.identifier{display:none;}
+.message:not(.room) .identifier{display:none;}
 
 /* END Compact Mode */

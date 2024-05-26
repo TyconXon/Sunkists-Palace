@@ -1,5 +1,4 @@
 /* START Animated PopOver */
-/* Copied from MDN */
 [popover]:popover-open {
 	opacity: 1;
 	transform: scaleX(1);
@@ -9,21 +8,15 @@
 	font-size: 1.2rem;
 	padding: 10px;
 
-	/* Final state of the exit animation */
 	opacity: 0;
 	transform: scaleX(0);
 
 	transition:
-		opacity 0.7s,
-		transform 0.7s,
-		overlay 0.7s allow-discrete,
-		display 0.7s allow-discrete;
-	/* Equivalent to
-	transition: all 0.7s allow-discrete; */
+		opacity 0.35s,
+		transform 0.35s,
+		overlay 0.35s allow-discrete,
+		display 0.35s allow-discrete;
 }
-
-/* Needs to be included after the previous [popover]:popover-open
-	 rule to take effect, as the specificity is the same */
 @starting-style {
 	[popover]:popover-open {
 		opacity: 0;
@@ -31,28 +24,21 @@
 	}
 }
 
-/* Transition for the popover's backdrop */
-
 [popover]::backdrop {
 	background-color: rgb(0 0 0 / 0%);
 	transition:
-		display 0.7s allow-discrete,
-		overlay 0.7s allow-discrete,
-		background-color 0.7s;
-	/* Equivalent to
-	transition: all 0.7s allow-discrete; */
+		display 0.35s allow-discrete,
+		overlay 0.35s allow-discrete,
+		background-color 0.35s;
 }
 
 [popover]:popover-open::backdrop {
-	background-color: rgb(0 0 0 / 25%);
+	background-color: rgba(42, 9, 71, 75%);
 }
-
-/* Nesting selectors (&) cannot represent pseudo-elements, so this 
-	 starting-style rule cannot be nested. */
 
 @starting-style {
 	[popover]:popover-open::backdrop {
 		background-color: rgb(0 0 0 / 0%);
 	}
 }
-/*END AnimatedPopOver*/
+/* END Animated PopOver */

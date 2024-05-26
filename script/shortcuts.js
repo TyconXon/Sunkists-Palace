@@ -1,104 +1,37 @@
-document.addEventListener("keydown", (c) => {
+function shortcutDirectory(c){
 
 	altpressed = c.altKey;
 	shiftpressed = c.shiftKey;
-	
+
+	toggleStyleMenu(c)
+
 	if (document.activeElement.tagName != "TEXTAREA") {
-		//WEBPAGE
-		switch (c.key) {
-			//Legacy chat
-			case "Enter":
-				if (c.shiftKey) {
-					text();
-				} else {
-					c.preventDefault();
-					textBox.focus();
-				}
-				break;
-				//Refresh
-			case "Shift":
-				//window.location.assign("https://sunkist-palace.net/?refresh");
-				break;
-				//Toggle autoscroll
-			case ".":
-				c.preventDefault();
-				altMode = !altMode;
-				alert(altMode?"Autoscroll disabled":"Autoscroll enabled");
-				break;
-			default:
-				if(!c.ctrlKey && !c.altKey){
-					textBox.focus();
-				}
-				break;
-		}
+		escappedShorcuts(c);
 	} else if(document.activeElement == textBox) {
-		//TEXTBOX
-
-		//Send
-		if (c.key == "Enter" && !c.shiftKey) {
-			c.preventDefault();
-			let msg = textBox.value;
-			if (msg.trim() == "") {
-				textBox.value = "";
-
-				return false;
-			}
-			msg = document.getElementById('prefix').value + msg ;
-
-
-			if(!c.altKey){
-				if (msg.startsWith("\\multi")) {
 		
-						var rep = msg.split('%;');
-						for(let i = 1; i < rep.length; i++){
-							setTimeout(()=>{
-								message(formatCommands(rep[i]));
-							}, (i * 100))
-						}
-				}else{
-					message(formatCommands(msg));
-				}
-				refreshSplash();
-				markAsRead();
-			}else{
-				message(msg);
-			}
-			if(navigator.onLine == true){
-			textBox.value = "";
-			}else{
-				alert('It seems you may be offline or have a bad connection.');
-				if(confirm('Do you want to go to the slow-wifi version?')){
-					window.location.assign('https://sunkist-palace.net/?slow&msg='+msg+'&user='+window.localStorage.getItem("username"));
-				}
-			}
-
+		if (c.key == "Enter" && !c.shiftKey) {
+			sendMessage(c)
 		}
 		//Auto URL
 		if (c.key == "/" && c.altKey) {
-			textBox.value = urlify(textBox.value);
-			textBox.focus();
-			textBox.setSelection(textBox.value.indexOf('target="_blank">')+15, textBox.value.indexOf('target="_blank">')+15)
+			buildLinks(c);
 		}
 		if(c.key == 'Escape'){
 			textBox.blur();
 		}
-		//Auto image
+		
 		if (c.key == "Shift" && c.altKey) {
+			//Auto image
 			textBox.value = imgify(textBox.value);
 		}
-		if ((c.key == "=" && c.altKey)) {
+		if (c.key == "=" && c.altKey) {
 			textBox.value = '/restart';
 		}
-		if ((c.key == "l" && c.altKey)) {
+		if (c.key == "l" && c.altKey) {
 			setUsr();
 		}
 		if((c.key == "]" && c.altKey)||(c.key == 'u' && c.altKey)){
-			document.getElementById('uploadFile').click();
-			
-			document.getElementById("menuTitle").innerText = 'Selecting image...';
-			window.setTimeout(() => {
-				document.getElementById("menuTitle").innerText = sunkistsPalace;
-			}, 1000);
+			uploadShortcut(c);
 		}
 		if((c.key == "\\" && c.altKey)||(c.key == 'i' && c.altKey)){
 			document.getElementById('upload').click();
@@ -113,50 +46,128 @@ document.addEventListener("keydown", (c) => {
 			markAsRead();
 		}
 		if(c.key == 'ArrowUp' && (textBox.selectionStart == textBox.selectionEnd) && (textBox.selectionStart == 0)){
-			var allMyMessages = document.getElementsByClassName(window.localStorage.getItem("username"));
-			let negatives = 1;
-			var lastMessage = allMyMessages[allMyMessages.length - 1];
-			if (c.ctrlKey){
-					lastMessage = document.getElementById(`${prompt('ID of message to edit: ')}`)
-			}
-			if(c.shiftKey){
-				replyGen(prompt('ID of the message to reply to: '));
-				c.preventDefault();
-				return;
-			}
-			//if last of allmessages == mine {
-
-			//let edits = prompt('Editing ' + lastMessage.id,splitString(lastMessage.outerHTML).message);
-			if(/*edits != null*/ textBox.value != ''){
-				if(!confirm('Replace current message with edit?')){
-					return;
-				}
-			}
-				//message( '/edit '+lastMessage.id+' '+edits);
-				textBox.focus();
-
-				textBox.value = '/edit '+lastMessage.id+' ' + splitString(lastMessage.outerHTML).message;
-				setTimeout(()=>{
-					textBox.selectionEnd = textBox.value.length;
-					textBox.selectionStart = textBox.value.length;
-				}, 5);
-
-			
+			friendlyEdit(c.ctrlKey, c.shiftKey);
 		}
 		//Auto typing
 		if (textBox.value.length >= 2) {
 			socket.emit("typing", window.localStorage.getItem("username"));
 		}
 	}
-});
+
+}
+
+function buildLinks(c){
+	textBox.value = urlify(textBox.value);
+	textBox.focus();
+	textBox.setSelection(textBox.value.indexOf('target="_blank">')+15, textBox.value.indexOf('target="_blank">')+15)}
+function toggleStyleMenu(c){
+	if(c.shiftKey && c.altKey && c.key == " "){
+		c.preventDefault();
+		try{
+			document.getElementById('settingsButton').click();
+		}catch(error){
+		}
+		document.getElementById('thesettings').children[0].click();
+		document.getElementById('sCss').showPopover();
+	}
+
+	if(document.activeElement === document.getElementById("sStyle")){
+		if(c.key == 's' && c.ctrlKey){
+		 c.preventDefault();
+		 document.getElementById('sSub').click();
+		}
+		if(c.shiftKey && c.altKey && c.key == " "){
+			document.getElementById('sCss').hidePopover();
+		}
+	 }
+}
+function sendMessage(c){
+		c.preventDefault();
+		let msg = textBox.value;
+		if (msg.trim() == "") {
+			textBox.value = "";
+
+			return false;
+		}
+		msg = document.getElementById('prefix').value + msg ;
+
+
+		if(!c.altKey){
+			if (msg.startsWith("\\multi")) {
+
+					var rep = msg.split('%;');
+					for(let i = 1; i < rep.length; i++){
+						setTimeout(()=>{
+							message(formatCommands(rep[i]));
+						}, (i * 100))
+					}
+			}else{
+				message(formatCommands(msg));
+			}
+			refreshSplash();
+			markAsRead();
+		}else{
+			message(msg);
+		}
+		if(navigator.onLine == true){
+		textBox.value = "";
+		}else{
+			alert('It seems you may be offline or have a bad connection.');
+			if(confirm('Do you want to go to the slow-wifi version?')){
+				window.location.assign('https://sunkist-palace.net/?slow&msg='+msg+'&user='+window.localStorage.getItem("username"));
+			}
+		}
+
+	
+}
+function escappedShorcuts(c){
+	switch (c.key) {
+		//Legacy chat
+		case "Enter":
+			if (c.shiftKey) {
+				text();
+			} else {
+				c.preventDefault();
+				textBox.focus();
+			}
+			break;
+			//Refresh
+		case "Shift":
+			//window.location.assign("https://sunkist-palace.net/?refresh");
+			break;
+			//Toggle autoscroll
+		case ".":
+			c.preventDefault();
+			altMode = !altMode;
+			alert(altMode?"Autoscroll enabled":"Autoscroll disabled");
+			break;
+		default:
+			if(!c.ctrlKey && !c.altKey){
+				textBox.focus();
+			}
+			break;
+	}
+}
+function uploadShortcut(c){
+	document.getElementById('uploadFile').click();
+
+	document.getElementById("menuTitle").innerText = 'Selecting image...';
+	window.setTimeout(() => {
+		document.getElementById("menuTitle").innerText = sunkistsPalace;
+	}, 1000);
+}
+
+document.addEventListener("keydown", shortcutDirectory);
 
 function formatCommands(msg){
 	var newMsg = msg.trimEnd()
-		.replace(/(?<!\*\*)(?<=\*)(?![*\s])(?:[^*]*[^*\s])?(?=\*)(?!\*\*)/g, "<i>$&</i>")
+		.replace(/(?<!\*\*)\*(?![*\s])(?:[^*]*[^*\s])?\*(?!\*\*)/g, (match)=>{
+			return `<i>${match.replaceAll('|','')}</i>`;
+		})
 		.replace(/(?<=\*\*)(?![*\s])(?:[^*]*[^*\s])?(?=\*\*)/g, "<b>$&</b>")
 		.replace(
-			/(?<=\|\|)(?![|\s])(?:[^|]*[^|\s])?(?=\|\|)/g,
-			"<spoiler>$&</spoiler>",
+			/\|\|(?![|\s])(?:[^|]*[^|\s])?\|\|/g,
+			(match)=>{return `<spoiler>${match.replaceAll('|','')}</spoiler>`}
 		)
 		.replace(/(?<=\_\_)(?![_\s])(?:[^_]*[^_\s])?(?=\_\_)/g, "<u>$&</u>")
 		.replace(
@@ -183,7 +194,7 @@ function formatCommands(msg){
 		)
 		.replace(
 			/(?<=^\/pfp )[^\s]+$/,
-			`<style> .${window.localStorage.getItem("username")}::before{background-image:url('$&') !important;}</style>`
+			`<style nodraw> .${window.localStorage.getItem("username")}::before{background-image:url('$&') !important;background-size:cover;background-position:center;}</style>`
 		)
 		.replace(
 			/(?<=^\/color )[^]+$/,
@@ -314,3 +325,35 @@ textBox.addEventListener('paste', (e) =>{
 		},10)
 	}
 });
+
+function friendlyEdit(ctrlKey, shiftKey){
+	var allMyMessages = document.getElementsByClassName(window.localStorage.getItem("username"));
+	let negatives = 1;
+	var lastMessage = allMyMessages[allMyMessages.length - 1];
+	if (ctrlKey){
+			lastMessage = document.getElementById(`${prompt('ID of message to edit: ')}`)
+	}
+	if(shiftKey){
+		replyGen(prompt('ID of the message to reply to: '));
+		c.preventDefault();
+		return;
+	}
+	//if last of allmessages == mine {
+
+	//let edits = prompt('Editing ' + lastMessage.id,splitString(lastMessage.outerHTML).message);
+	if(/*edits != null*/ textBox.value != ''){
+		if(!confirm('Replace current message with edit?')){
+			return;
+		}
+	}
+		//message( '/edit '+lastMessage.id+' '+edits);
+		textBox.focus();
+
+		textBox.value = '/edit '+lastMessage.id+' ' + splitString(lastMessage.outerHTML).message;
+		setTimeout(()=>{
+			textBox.selectionEnd = textBox.value.length;
+			textBox.selectionStart = textBox.value.length;
+		}, 5);
+
+
+}

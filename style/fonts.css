@@ -41,7 +41,7 @@
 }
 
 @font-face {
-	font-family: "Lethal";
+	font-family: "Lethal", "lethal";
 	font-display: swap;
 	src: url(../fonts/vcr_osd_mono.ttf);
 }

@@ -1,0 +1,144 @@
+/* START Time Machine */
+
+#sunkistPalaceHTML {background: #696969;}
+#menuTitle {background: #000000; text-shadow:none!important; font-family: 'Times New Roman'; -webkit-box-reflect: unset!important;}
+
+#status {position: fixed!important; top:10px; left: 0; width: 49%; margin: 0 25.5%; background: transparent; backdrop-filter:none;}
+
+.message:before {border-image:none;}
+
+#menu {
+ width: 50%!important;
+ backdrop-filter: none;
+ position: sticky;
+ background-color:rgba(100,100,100,0.3);
+ margin:auto;width:40%;padding:10px;
+ border:ridge black 2px;
+ text-align: center;
+ border-radius: 0;
+}
+
+#soapMode {
+ -webkit-box-reflect: unset;
+ width: 75%!important;
+ height:10%!important; 
+ background: #efefef!important;
+ color: black!important;
+ outline: none!important;
+ font-family: Arial!important;
+}
+
+summary, #soapMode {
+ background: #efefef!important;
+ font-family: Arial;
+ color: black;
+ border: gray 1px solid;
+ border-radius: 2px;
+ font-weight: regular!important;
+ font-size: initial;
+}
+
+
+
+details {padding: 0; margin: 0; transition: none;}
+
+details:hover, #soapMode:hover {filter: brightness(0.95);}
+
+.MaximusMiller2, max{
+ background: lightblue;
+ color: black;
+ font-family: 'Bound'!important;
+ font-weight:100;
+ text-shadow: none!important;
+ cursor: auto;
+}
+
+.Afton, afton {
+ background: cyan!important;
+ color: black!important;
+ font-family: 'Orbitron', serif;
+ cursor: auto;
+}
+
+.Afton:before{
+ border: ridge 2px white!important;
+ border-radius:3px!important;
+}
+
+.guest{
+ background-color:lightgray;
+ color: black;
+}
+
+.Boxel, boxel{
+ background:#8d5cff;
+ color:black;
+ font-family: coomer, sans-serif;
+ text-shadow: none;
+ cursor: auto;
+}
+
+.Boxel:before{
+ border: ridge 2px white;
+ background-image: url(../images/pfp/vfold.png);
+}
+
+
+
+.ping{
+ border: 3px dashed blue;
+ border-radius:5px;
+ background-color:lime;
+ color:black;
+ font-size: 35px;
+ animation: blinkBorder 2s infinite;
+}
+
+.reply {
+ border: 20px double #ff6550!important;
+ background:yellow!important;
+ color:black!important;
+}
+
+glow, .glow{
+ box-shadow: 19px 19x 10px red!important;
+}
+
+@keyframes blinkBorder {
+ 0%{
+  border-color: inherit;
+ }
+ 50%{
+  border-color: transparent;
+ }
+ 100%{
+  border-color: inherit;
+ }
+}
+
+.ping:before{
+ content:'@ping:';
+}
+
+.rightist, right {
+ width: 150px;
+ color: black!important;
+ background: white!important;
+ font-family: Arial!important;
+}
+
+blur, .blur {
+ filter: blur(6px);
+}
+
+.message {line-height: 2.5!important;}
+
+.collapsed {line-height: 2.5;}
+
+.collapsed::before {visibility: visible!important}
+
+.collapsed .identifier {color: inherit; text-shadow: inherit;}
+
+.collapsed:hover .identifier {color: inherit; text-shadow: inherit;}
+
+/* END Time Machine */

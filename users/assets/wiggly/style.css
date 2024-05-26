@@ -1,0 +1,77 @@
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	background-color: black;
+	background-image: url("assets/bg_doom.webp");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+	color: white;
+	font-family: "Nunito", sans-serif;
+	animation: slideshow 15s infinite;
+}
+
+.box {
+	font-size: 20px;
+	background: black;
+	padding: 10px;
+	border: 6px solid white;
+	margin-top: 20px;
+}
+
+#header {
+	font-size:42px;
+	text-align: center;
+	font-family: "Rubik", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 500;
+
+	border: 6px solid white;
+	background-color: black;
+	padding:20px;
+	width:fit-content; 
+	width:-webkit-fit-content;
+	margin:auto;
+}
+
+.sectionTitle {
+	font-family: "Rubik", sans-serif;
+	font-weight:500px;
+	font-size:24px;
+	text-align: center;
+
+}
+
+.sectionSubTitle {
+	font-size:22px;
+	font-family: "Rubik", sans-serif;
+	font-weight:500;
+}
+
+/*MaximusMiller2*/
+[icon]{
+	height: 0.75lh;
+	padding-left: 0.25lh;
+	padding-right: 0.25lh;
+
+	image-rendering: pixelated;
+}
+
+@keyframes slideshow{
+	0%{
+		background-image: url("assets/wiggly/bg_doom.webp");
+	}
+	25%{
+		background-image: url("assets/wiggly/bg_halflife.webp");
+	}
+	50%{
+		background-image: url("assets/wiggly/bg_portal.webp");
+	}
+	75%{
+		background-image: url("assets/wiggly/bg_tf2.jfif");
+	}
+}

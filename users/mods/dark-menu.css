@@ -1,0 +1,20 @@
+/* START Dark Menu */
+
+#menu {
+ background: rgba(0, 0, 0, 0.3);
+}
+
+#menuTitle {
+ background: rgba(0, 0, 0, 0.3);
+}
+
+#soapMode {
+ background: rgba(0, 0, 0, 0.3);
+}
+
+#menu button, #menu a {
+ background: rgba(0, 0, 0, 0.3)!important;
+ color: lightgray!important;
+{
+
+/* END Dark Menu */

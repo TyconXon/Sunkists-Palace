@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!--Lucas did not write this.-->
+<!--   TODO:
+
+--Style
+[]Animations
+ [X]Click shake animation
+ [1/2]Death animation
+[]TV lines in background
+
+--Configuration/techinical
+[X]Rework death screen to be a hidden div
+[X]Color list editor
+[]Save settings
+[X]Quick settings buttons (auto adds settings)
+[]Setting presets
+[X]Rename variables
+[]Mobile support, possibly?
+[]Show stats on pregame
+
+--Gameplay
+[OBSOLETE]Prevent the same word&color from appearing
+[]Score system
+ [x]Previous high score
+ [x]Deaths on color & word
+ [X]Cause of death
+ [X]Points at that time
+[X]Quick start buttons (enter)
+ []Rework this to not refresh, but reset the game
+[]Rework timing system
+[]Rework ChannelPoint system
+ When you fail, it saves what you failed on and you 
+ get points on the ones you fail on as many times as 
+ you've failed on them
+
+[]Add OLDTV obstacles
+ [X]Inverted color background (puts the opposite color as the background)
+ []Scrambled word
+ [X]Upside down
+ [X]Inverted controls 
+ []Don't switch
+ []Lost Signal (Spam  to progress)
+ []Color = Color (word is same, color will not)
+ []Blur (spam  to unblur)
+ []Previous word/color 
+-->
+<html>
+
+<head>
+	<title>OldWeb</title>
+	<link href="style/style1.css" rel="stylesheet">
+	<link rel="icon" href="images/TVsettings.png" id="icon">
+</head>
+
+<body oncontextmenu="return false;">
+	
+	<div id="game" hidden>
+
+		<span id="DaDiv2">
+			<p id="cpoints">POINTS</p>
+		</span>
+
+		<span id="timeSpan">
+			<p id="time">TIME</p>
+		</span>
+
+		<span id="mobileCon" hidden>
+			<button onclick="sendInput(true)">YES</button>
+			<button onclick="sendInput(false)">NO</button>
+		</span>
+
+		<div id="DaDiv">
+			<p id="modifier">...</p>
+			<h1 id="screen">OLDWEB</h1>
+			<span id="sherlock"></span>
+		</div>
+
+		<!--
+		<button onclick="sendInput(true)">yes</button>
+		<button onclick="sendInput(false)">no</button>
+		-->
+
+
+	</div>
+
+	<div id="pregame" onclick="skipStart();">
+		<h1 id="gameTitle" onclick="buttonMain();">OLDWEB</h1>
+		<div id="fadein">
+		<h3 id="gameSplash">Channel Points: Apple</h3>
+		<button onclick="buttonMain()">(ENTER)</button>
+		
+		<br>
+
+		<input type="button" value="show settings"
+			onclick="AudioClip.staticSwitchChannel.play();newSettings = true;document.getElementById('allTheSettings').hidden=false; resetButtons();">
+		<!--Yes, this is generated code. That is because I am time-efficient (lazy) and wont spend hours on the form. -->
+		<div class="rendered-form" id="allTheSettings" hidden>
+			<div class="">
+				<h3>Settings</h3>
+			</div>
+			<!--TIMER-->
+			<div class="formbuilder-number form-group field-timer-adjustment">
+				<label for="timer-adjustment" class="formbuilder-number-label">Timer</label>
+				<input type="number" placeholder="15" class="form-control" name="timer-adjustment" access="false" value="15"
+					min="0" id="timer-adjustment" title="How much time is given at the start">
+			</div>
+			<!--COLORS-->
+			<div class="formbuilder-text form-group field-color-list-input">
+				<label for="color-list-input" class="formbuilder-text-label">Colors</label>
+				<input type="text" placeholder="red,blue,green,cyan,yellow,purple" class="form-control" name="color-list-input"
+					access="false" value="red,blue,green,cyan,yellow,purple" id="color-list-input"
+					title="The selection of colors that will be used in the game. ">
+			</div>
+			<div class="formbuilder-number form-group field-add-time">
+				<label for="add-time" class="formbuilder-number-label">Add-time<span class="tooltip-element"
+						tooltip="The base amount of time added when correct.">?</span></label>
+				<input type="number" placeholder="0.65" class="form-control" name="add-time" access="false" value="0.65" min="0"
+					id="add-time" title="The base amount of time added when correct.">
+			</div>
+
+			<hr>
+			<!--SHERLOCK MODE-->
+			<div class="rendered-form" style="background-color: rgba(210, 210, 210, 0.85);">
+				<div class="">
+					<h3 access="false" id="control-7744768">Sherlock Mode</h3>
+				</div>
+				<div class="">
+					<p access="false" id="control-3121424">Sherlock mode is a mechanic that rewards quick-pacing and, when
+						activated, will make a specified number of questions always correct.</p>
+				</div>
+				<div class="formbuilder-checkbox-group form-group field-blahblahblah">
+					<label for="blahblahblah" class="formbuilder-checkbox-group-label"></label>
+					<div class="checkbox-group">
+						<div class="formbuilder-checkbox-inline">
+							<input name="blahblahblah[]" access="false" id="blahblahblah-0" value="sherlock-enabled" type="checkbox"
+								checked="checked">
+							<label for="blahblahblah-0">Enabled</label>
+						</div>
+					</div>
+				</div>
+				<div class="formbuilder-number form-group field-sherlockMin">
+					<label for="sherlockMin" class="formbuilder-number-label">Required time</label>
+					<input type="number" class="form-control" name="sherlockMin" access="false" value="0.4" min="0.1" max="1"
+						step="0.01" id="sherlockMin">
+				</div>
+				<div class="formbuilder-number form-group field-sherlockStepMin">
+					<label for="sherlockStepMin" class="formbuilder-number-label">Required streak<span class="tooltip-element"
+							tooltip="How many in a row to activate">?</span></label>
+					<input type="number" class="form-control" name="sherlockStepMin" access="false" value="3" min="1" step="1"
+						id="sherlockStepMin" title="How many in a row to activate">
+				</div>
+				<div class="formbuilder-number form-group field-sherlockStepMax">
+					<label for="sherlockStepMax" class="formbuilder-number-label">Maximum sherlock-mode answers<span
+							class="tooltip-element"
+							tooltip="When sherlock-mode is activated, how many questions should be affected?">?</span></label>
+					<input type="number" class="form-control" name="sherlockStepMax" access="false" value="20" min="1" step="1"
+						id="sherlockStepMax" title="When sherlock-mode is activated, how many questions should be affected?">
+				</div>
+			</div>
+			<hr>
+			<!----------------->
+			<div class="formbuilder-checkbox-group form-group field-mechanics">
+				<label for="mechanics" class="formbuilder-checkbox-group-label">Mechanics</label>
+				<div class="checkbox-group">
+					<div class="formbuilder-checkbox">
+						<label for="mechanics-0" class="kc-toggle">
+							<input name="mechanics[]" access="false" id="mechanics-0" value="inverted"
+								type="checkbox"><span></span>Inverted color background</label>
+					</div>
+					<div class="formbuilder-checkbox">
+						<label for="mechanics-1" class="kc-toggle">
+							<input name="mechanics[]" access="false" id="mechanics-1" value="scrambled"
+								type="checkbox"><span></span>Scrambled word</label>
+					</div>
+					<div class="formbuilder-checkbox">
+						<label for="mechanics-2" class="kc-toggle">
+							<input name="mechanics[]" access="false" id="mechanics-2" value="flipped"
+								type="checkbox"><span></span>Upside down</label>
+					</div>
+					<div class="formbuilder-checkbox">
+						<label for="mechanics-3" class="kc-toggle">
+							<input name="mechanics[]" access="false" id="mechanics-3" value="backwards-controlled"
+								type="checkbox"><span></span>Inverted controls</label>
+					</div>
+					<div class="formbuilder-checkbox">
+						<label for="mechanics-4" class="kc-toggle">
+							<input name="mechanics[]" access="false" id="mechanics-4" value="waited"
+								type="checkbox"><span></span>Don't switch</label>
+					</div>
+					<div class="formbuilder-checkbox">
+						<label for="mechanics-5" class="kc-toggle">
+							<input name="mechanics[]" access="false" id="mechanics-5" value="batteried"
+								type="checkbox"><span></span>Lost signal battery</label>
+					</div>
+					<div class="formbuilder-checkbox">
+						<label for="mechanics-6" class="kc-toggle">
+							<input name="mechanics[]" access="false" id="mechanics-6" value="colored" type="checkbox"
+								disabled><span></span>Color = Color?</label>
+					</div>
+					<div class="formbuilder-checkbox">
+						<label for="mechanics-7" class="kc-toggle">
+							<input name="mechanics[]" access="false" id="mechanics-7" value="blurred"
+								type="checkbox"><span></span>Blurred</label>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<details style=" text-align:justify;border:2px gray ridge;background-color: rgba(210, 210, 210, 0.85);">
+			<summary>Help</summary>
+			<i>[Recreation of the free game 'OLDTV', but for the web. By Maximus Fayte Miller]</i><br>
+			<br>
+			CONTROLS:
+			<br> Basic controls: <br>
+			<span style="background-color: yellow;">
+				Press <b>G or LEFT CLICK</b> if the color matches the word.<br>
+				Press <b>H or RIGHT CLICK</b> if the color does NOT match the word.<br>
+			</span>
+			<br> Advanced controls: <br>
+			Press <b>K or ENTER</b> to start/restart. <br>
+			Press <b>TAB</b> To open settings. <br>
+			Press <b>SPACE</b> to unblur or close stop dialog. <br>
+			Press <b>0-7</b> to toggle the cooresponding mechanic in pregame. <br>
+			Press <b>=</b> To use the wide color selection loadout. <br>
+			Press <b>-</b> To use the normal - cyan loadout. <br>
+			Press <b>P</b> To add pink. <br>
+			Press <b>~</b> To alert the saved stats. <br>
+
+
+			<br>
+			<i>[STEAM DESCRIPTION FOR OLDTV]</i><br>
+			Not recommended to individuals prone to epilepsy or have color blindness<br>
+			<br>
+			You are a gifted child<br>
+			You will switch through every channel on the planet<br>
+			<br>
+			<a href="https://en.wikipedia.org/wiki/Stroop_effect">OLDTV is an indie game inspired by the stroop test </a> <br>
+			<br>
+			<!--
+			<a href="https://steamcommunity.com/app/643270/discussions/0/3601219829879498622/">Warning: does not include
+				racial slurs in the game files like the original game...</a><br>-->
+			<i><b style="color:red;font-size:15px">Right click is disabled for the upper half of the page.</b></i><br>
+		</details>
+
+		<!-- Too much work for allat, user should just consult the JSON data and /try/ to read it
+		<div style="border:3px crimson ridge;background-color: rgba(210, 210, 210, 0.85);margin: 2px;padding: 2px;">
+			<h3>Stats:</h3>
+			<p>Times played: <span id="statsDeaths">null</span></p>
+			<p>Times played: <span id="statsDeaths">null</span></p>
+		</div>
+		-->
+
+		<details style=" text-align:justify;border:2px gray ridge;background-color: rgba(210, 210, 210, 0.85);">
+			<summary>Saved data:</summary>
+			<pre id="consoleJSON"></pre>
+		</details>
+	</div>
+	</div>
+
+	<div id="connecting" hidden>
+		<h1 id="connectingMessage">Connecting
+			<span id="dot1" style="visibility: hidden;"> .</span>
+			<span id="dot2" style="visibility: hidden;"> .</span>
+			<span id="dot3" style="visibility: hidden;"> .</span>
+		</h1>
+	</div>
+
+	<div id="dead" hidden>
+		<h2 id="pathology">LOST SIGNAL</h2>
+		<p id="pathologicalScore" class="pathological">NULL</p>
+		<p id="pathologicalStats" class="pathological">NULL</p>
+		<p id="pathologicalMemory" class="pathological">NULL</p>
+
+
+		<button onclick='window.location.reload();' id="restartButton">(ENTER)</button>
+	</div>
+
+
+	<script src="script/how_the_game_works.js"></script>
+
+	<svg width="0" height="0">
+		<filter id="kill">
+		  <feColorMatrix type="matrix" 
+			result="red_"             
+			values="4 0 0 0 0
+					0 0 0 0 0 
+					0 0 0 0 0 
+					0 0 0 1 0"/>
+		  <feOffset in="red_" dx="2" dy="0" result="red"/>
+		  <feColorMatrix type="matrix" 
+			in="SourceGraphic"             
+			result="blue_"             
+			values="0 0 0 0 0
+					0 3 0 0 0 
+					0 0 10 0 0 
+					0 0 0 1 0"/>
+		  <feOffset in="blue_" dx="-3" dy="0" result="blue"/>    
+		  <feBlend mode="screen" in="red" in2="blue"/>
+	  
+		</filter>
+	  </svg>
+	  
+</body>
+
+</html>

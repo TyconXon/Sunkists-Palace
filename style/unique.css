@@ -82,6 +82,10 @@ html {
 	text-align: left;
 }
 
+.room::before{
+	display:none;
+}
+
 #typingP { /*Who's typing*/
 	float: right;
 	color: yellow;

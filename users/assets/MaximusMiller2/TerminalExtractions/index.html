@@ -1,0 +1,99 @@
+
+<html lang="en">
+<head>
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://sunkist-palace.net/style/fonts.css">
+	<link rel="icon" href="assets/images/k9.gif">
+	<link rel="stylesheet" href="style/fonts.css">
+	<link rel="stylesheet" href="style/index.css">
+
+
+	<title>Terminal Excavations</title>
+	
+</head>
+<body>
+	
+	<h1>Terminal Excavations <img src="assets/images/k9.gif" id="k9-badge" hidden> <points>0</points></h1>
+
+	<!--Main 3-->
+	
+	<div id="game.terminal" class="page">
+		<h2>Objective: Words that start with L.</h2>
+		<input type="text"  id="terminal.input" autofocus autocomplete="off">
+		<h2 id="terminal.error"></h2>
+		<div id="terminal.history">
+		</div>
+	</div>
+	
+	<div id="area.shop" hidden class="page">
+		<h2>Objective: Be a consumer.</h2>
+		<div id="shop.catalogue">
+			<table>
+				<tr>
+					<th>Product</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Buy</th>
+				</tr>
+				<tr>
+					<td> <img src="assets/images/k9.gif" alt=""> K9-Chip</td>
+					<td>A bomb-sniffing computer chip</td>
+					<td>100 ¤</td>
+					<td><button id="buy.k9">Buy K9</button></td>
+				</tr>
+				<tr>
+					<td> <img src="assets/images/c4.gif" alt=""> Malicious Program</td>
+					<td>Plant account vulnrabilities</td>
+					<td>25 ¤</td>
+					<td><button id="buy.c4">Buy C4</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div id="info.statistics" hidden class="page">
+		<h2>Objective: Contemplate data.</h2>
+		<button onclick="playerData.reset();">Reset stats</button>
+		<h3>Coworker data:</h3>
+		<leaderboard>
+			
+		</leaderboard>
+	</div>
+
+	
+	<div id="navigation">
+		<button>game.terminal</button>
+		<button>area.shop</button>
+		<button>info.statistics</button>
+	</div>
+
+	<!--Other areas-->
+	<div id="faulty" class="page" hidden>
+		<p>but you're not supposed to be here, <playername>Freeman</playername>. As a matter of fact, you're not. <br>
+			Get back where you belong, and forget about all this, until we meet again.</p>
+	</div>
+	<div id="game.duel" class="page" hidden>
+		<h2>Objective: reach 25 words faster than the other person</h2>
+		<input type="text"  id="duel.input"  autocomplete="off">
+		<h2 id="duel.error"></h2>
+		<div id="duel.history">
+		</div>
+	</div>
+	
+
+
+
+	<div hidden>
+	</div>
+
+	<script src="/socket.io/socket.io.js"></script>
+	
+	<script>
+		var socket = io();
+	</script>
+	<script src='script/index.js'></script>
+
+</body>
+</html>

@@ -31,8 +31,19 @@ function setUsr() {
 		);
 
 	}
+	pUsername = prompt("Username?");
+	switch (pUsername) {
+		case '2':
+			pUsername = 'MaximusMiller2';break;
+		case 'B':
+			pUsername = "Boxel";break;
+		case 'A':
+			pUsername = "Afton";break;
+		case 'w':
+			pUsername = "wigglyStuf";break;
+	}
 
-	window.localStorage.setItem("username", prompt("Username?"));
+	window.localStorage.setItem("username", pUsername);
 	let soonUsr = window.localStorage.getItem("username");
 
 	if (soonUsr == "" || soonUsr == undefined) {
@@ -56,7 +67,7 @@ function setUsr() {
 	);
 	window.localStorage.setItem(
 		"autoFormat",
-		confirm("Use auto-code-format? [ok or cancel]"),
+		true,
 	);
 
 	window.localStorage.setItem(

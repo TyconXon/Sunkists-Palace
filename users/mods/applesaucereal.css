@@ -1,0 +1,7 @@
+
+/* START Applesauce */
+.Boxel:before{
+	border: ridge 2px white;
+	background-image: url(/users/mods/applesauce.png);
+}
+/* END Applesauce */

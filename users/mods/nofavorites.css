@@ -1,0 +1,10 @@
+/* START No favorites */
+#settingGrid > details:nth-child(2){
+ display: none;
+}
+#settingGrid {
+		display: grid;
+		grid-template-columns: auto !important;
+}
+/* END No favorites */
+

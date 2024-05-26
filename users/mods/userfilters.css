@@ -1,0 +1,6 @@
+/* START Userstyled Filters */
+.MaximusMiller2{ backdrop-filter: url(#displacementFilter); -webkit-backdrop-filter: url(#displacementFilter);} 
+.Boxel{backdrop-filter: url(#kill); -webkit-backdrop-filter: url(#kill);}
+#menu{ backdrop-filter: url(#noise); -webkit-backdrop-filter: url(#noise);}
+.WigglyStuf{backdrop-filter: url(#pixelate); -webkit-backdrop-filter: url(#pixelate);} 
+/* END Userstyled Filters */

@@ -18,7 +18,8 @@
 			<a href="MaximusMiller2.html" class="MaximusMiller2 message">MaximusMiller2</a>
 			<a href="Boxel.html" class="Boxel message">Boxel</a>
 			<a href="Afton.html" class="Afton message">Afton</a>
-			<a href="Sushi.html" class="Sushi message">Sushi</a>
+			<a href="WigglyStuf.html" class="WigglyStuf message">WigglyStuf</a>
+
 		</directory>
 
 
@@ -28,6 +29,14 @@
 			orange.innerHTML = window.localStorage.getItem("style");
 			orange.setAttribute('nodraw', true);
 			document.body.appendChild(orange);
+			
+			addEventListener('load', ()=>{
+				var lemon = document.createElement("script");
+				lemon.innerHTML = window.localStorage.getItem("js");
+				lemon.setAttribute('nodraw', true);
+				document.body.appendChild(lemon);
+			});
+			
 		</script>
 	</body>
 </html>

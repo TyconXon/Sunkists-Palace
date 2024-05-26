@@ -1,0 +1,48 @@
+/* START Better Bottom Textbox */
+		
+		#soapMode{
+		 bottom: 20;
+		 position:fixed;
+		 left: 0;
+		 border: none;
+		 padding: 10px;
+		 height: 50px;
+		}
+		#status{
+		 height: 35px;
+		 bottom: 70px;
+		 position:fixed;
+		 left: 0;
+		 border: none;
+		 padding: 10px;
+		 width: 100vw;
+		}
+		#settingGrid{
+		 bottom: 0;
+		 left: 0;
+		 width: 100vw;
+		 position: fixed;
+		 backdrop-filter: sepia(100%);
+		}
+		#settingsButton{
+		 bottom: 0;
+		 left: 0;
+		 margin: 0px;
+		 height: 10px;
+		 width: 100vw;
+		 position: fixed;
+		}
+		
+		#menu{
+		 padding: 0px;
+		 margin: 0px;
+		 border: none;
+		 width: 100%;
+		 top: 0px;
+		 backdrop-filter: none;
+		 background-color: transparent;
+		}
+		h1{ margin-top: 0px;} 
+		html{ padding-bottom: 100;}
+		
+/* END Better Bottom Textbox */
