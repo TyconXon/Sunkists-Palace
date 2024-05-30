@@ -105,10 +105,22 @@ function moderate(msgId) {
 	io.emit("moderate", msgId);
 }
 
+var developmentServer = false;
+var deploymentChecked = false;
+
 /** SERVER */
 const server = http.createServer(function(req, res) {
 	var q = url.parse(req.url, true);
 	var qData = q.query;
+
+	if(!deploymentChecked){
+	if(req.rawHeaders[1].includes('picard')){
+		developmentServer = true;
+	}
+		deploymentChecked = true;
+		console.log(developmentServer?'Server started. (development server)':'Server started. (production server)');
+	}
+	
 
 	//Upload system
 	try {
@@ -167,7 +179,39 @@ const server = http.createServer(function(req, res) {
 		
 		return;
 	}
+	if (req.method === 'POST') {
+			let body = '';
 
+			// Collect data chunks
+			req.on('data', chunk => {
+					body += chunk.toString(); // Convert buffer to string
+			});
+
+			// When all data is received
+			req.on('end', () => {
+					// Process the complete body
+					console.log('Received POST data:', body);
+					body = JSON.parse(body);
+				
+					if (body.message != null && body.message != undefined) {
+						if (body.user == null) {
+								body.user = "guest";
+						}
+						sendMessage(body.user, body.message);
+					}
+
+					// Set response headers and send response
+					res.writeHead(200, {'Content-Type': 'text/plain'});
+					res.end('POST request received');
+			});
+
+			// Handle errors during data reception
+			req.on('error', (err) => {
+					console.error('Error receiving data:', err);
+					res.writeHead(500, {'Content-Type': 'text/plain'});
+					res.end('Server error');
+			});
+	}
 
 	if (q.path.includes('.') && (qData.slow == undefined) && (qData.preset == undefined) && (qData.message == undefined)) {
 		if (q.path.includes('.wav')) {
@@ -199,6 +243,11 @@ const server = http.createServer(function(req, res) {
 	if (qData.message != null && qData.message != undefined) {
 		if (qData.user == null) {
 			qData.user = "guest";
+		}
+		if(qData.discord != undefined){
+			if(isImageFile(qData.message) && qData.message.startsWith('http')){
+				qData.message = `<img src="${qData.message}">`;
+			}
 		}
 		sendMessage(qData.user, qData.message);
 	}
@@ -408,7 +457,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 		if(userBans[tchannel] == undefined){
 			userBans[tchannel] = [];
 		}
-		userBans[tchannel].push(usr);
+		userBans[tchannel].push(target);
 		io.to("admin").emit(
 			"outMessage",
 			`<div class='console message removed'><ml>q</ml> ${target} was banned from ${tchannel}.</div>`
@@ -645,6 +694,15 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 		}
 	}
 
+	if(((userBans[room]) && (userBans[room].includes(usr))) || ((userBans['general']) && (userBans['general'].includes(usr)) && (room == undefined) )){
+		io.emit(
+			"outMessage",
+			`<div class='console message removed'><ml>q</ml> ${usr} Tried to send a message in a banned room... (${room})</div>`
+		);
+		return false;
+	}
+	
+
 	let extendedMessage;
 	if (!usr.startsWith("nxm")) {
 		if (
@@ -714,13 +772,52 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 		console.log("@" + usr + ": " + message);
 
 		try {
+			var usersPFP = 'https://sunkist-palace.net/images/pfp/';
+			if(usr.includes('<-')){
+				switch(usr.split(' <-')[0]){
+					case 'MaximusMiller2':
+						usersPFP += 'd-MaximusMiller2.webp';
+						break;
+						case 'Boxel':
+						usersPFP += 'd-Boxel.webp';
+						break;
+						case 'Avonya':
+						usersPFP += 'd-Avonya.webp';
+						break;
+						case 'Afton':
+						usersPFP += 'd-Afton.webp';
+						break;
+					default:
+						usersPFP += 'node.png';
+						break;
+				}
+			}else{
+				switch(usr){
+					case 'MaximusMiller2':
+						usersPFP += 'MaximusMiller2.png';
+						break;
+						case 'Boxel':
+						usersPFP += 'Boxel.png';
+						break;
+						case 'Avonya':
+						usersPFP += 'Avonya.jpg';
+						break;
+						case 'Afton':
+						usersPFP += 'Afton.png';
+						break;
+					default:
+						usersPFP += 'node.png';
+						break;
+				}
+			}
+			
 			request({
 				method: "POST",
 				url: webhookURL,
 				formData: {
 					content: `${message} ${phone ? "✆" : ""}`,
-					username: `${usr}`,/*
-				avatar_url: `https://sunkist-palace.net/images/pfp/${usr}.png`,*/
+					username: `${usr} #${room != null?room:"general"}${developmentServer?' on DEV server':''}`,
+				avatar_url: usersPFP,
 				},
 			});
 		} catch (e) {

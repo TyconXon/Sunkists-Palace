@@ -95,6 +95,14 @@
 			"tags" : ["library", "userstyle", "filter", "svg", "ssl", "plugin"]
 		},
 		{
+			"name": "EarthBound Backgrounds",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/earthboundBattle.js",
+			"image": "/users/mods/49-Bacon_Omega.gif",
+			"description": "<a href='https://www.gjtorikian.com/Earthbound-Battle-Backgrounds-JS'>Replaces the background with randomized unique animated EarthBound battle backgrounds.</a>",
+			"tags" : ["background", "game", "random", "plugin"]
+		},
+		{
 			"name": "HotKeys",
 			"author": "MaximusMiller2",
 			"file": "/users/mods/hotkeys.js",
@@ -190,7 +198,7 @@
 			"file": "/users/mods/vgui.css",
 			"image": "/users/mods/vgui.jpg",
 			"description": "Themes the menu based off of the beta Source Engine VGUI",
-			"tags" : ["menu", "steam", "valve", "green", "snippit"]
+			"tags" : ["menu", "game", "valve", "green", "snippit"]
 		},
 		{
 			"name": "Rain Rain Go Away",

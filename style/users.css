@@ -69,6 +69,7 @@ msgtxt {
 .phone:after {
 	content: "\2706";
 }
+.\<-::after {content: "🎮"; }  
 
 /*Reply button*/
 .rightist,
@@ -146,6 +147,9 @@ MaximusMiller2,
 .MaximusMiller2 strong{
 	cursor: url(../images/cur/entity.cur), help;
 }
+.MaximusMiller2.\<-::before {
+	background-image: url("../images/pfp/d-MaximusMiller2.webp");
+}
 
 .Afton,
 afton {
@@ -155,6 +159,9 @@ afton {
 	cursor: url(../images/cur/Cat_Paw.png), auto;
 }
 .Afton:not(span){background: linear-gradient(0deg, rgba(45,232,253,0.5) 0%, rgba(25,6,101,0.5) 100%);background-attachment: fixed;} 
+.Afton.\<-::before {
+	background-image: url("../images/pfp/d-Afton.webp");
+}
 
 .Console,
 .console {
@@ -188,6 +195,9 @@ Boxel {
 	font-family: coomer, sans-serif, emoji;
 	/* font-family: Lethal, sans-serif, emoji; */
 	cursor: url('../images/cur/paw.png'), auto;
+}
+.Boxel.\<-::before {
+	background-image: url("../images/pfp/d-Boxel.webp");
 }
 
 .Rat,
@@ -260,6 +270,9 @@ Avonya_Herobrine,
 			rgba(189, 201, 223, 0.8) 100%);
 	text-shadow: 0px 0px 10px #bccbeb;
 	font-family: "Minecraft";
+}
+.Avonya.\<-::before {
+	background-image: url("../images/pfp/d-Avonya.webp");
 }
 
 .Sky,

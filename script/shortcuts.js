@@ -263,6 +263,22 @@ function formatCommands(msg){
 			`<style> html{background-image: url('$&') !important;background-attachment: fixed;background-size:cover;}</style>`
 		)
 		.replace(
+			"\\mention Boxel",
+			'<@565674394249199617> (Boxel)'
+		)
+		.replace(
+			"\\mention Afton",
+			'<@814541916040331294> (Afton)'
+		)
+		.replace(
+			"\\mention MaximusMiller2",
+			'<@542899543608655872> (MaximusMiller2)'
+		)
+		.replace(
+			"\\mention Avonya",
+			'<@901409358427066409> (Avonya)'
+		)
+		.replace(
 			'/pkfire',
 			''
 		)/* //doesn't work
