@@ -25,61 +25,49 @@
  *       ╚═╝    ╚═════╝ ╚═════╝  ╚═════╝
  *
  */
-//* Profile on pfp click
-//* Post/Get functionality
+//* CLEAN EVERYTHING!!! This code is messy and unreadable. It's awful. WE MUST PURIFY THIS WEBSITE!!!
 //* Rework the chat messages to only send important information such as the usr and msg  - for preformance
 
-//
+//Configuration!!!
 const MEM = true; /** Memory-Mode: Are messages stored in memory or forgotten after relay? */
 const splashTexxt = "<a href='./directory.html'>Page directory</a> | Expirementally disabling IDLE system." /** MOTD */
 
-//Requires
 var http = require("http");
 var https = require("https");
-
 const { Server } = require("socket.io");
-var url = require("url");
-const request = require("request");
-const webhookURL = process.env["webhookURL"];
-var fs = require("fs");
-const { setTimeout, setInterval } = require("timers");
-const busboy = require('busboy');
-const path = require('path');
-const status = require('./status.json');
-const forever = require('./forever.json');
-var os = require('os');
-var childProcess = require('child_process');
-const Client = require("@replit/database");
-const client = new Client();
 
-const spamton = "<img src='images/spamton-deltarune.gif'> <style>*{background-color:black;color:white;font-family:monospace;}</style> <h1>[[Hyperlink Blocked.]]</h1>";
+/* Precious exotic imports */
 
-var subscriptionList = [];
-var idleList = [];
-var userBans = {
-	superSafePasswordsChannel : ["hacker"]
-};
+	var url = require("url");
+	const request = require("request");
+	const webhookURL = process.env["webhookURL"];
+	var fs = require("fs");
+	const { setTimeout, setInterval } = require("timers");
+	const busboy = require('busboy');
+	const path = require('path');
+	const status = require('./status.json');
+	const forever = require('./forever.json');
+	var os = require('os');
+	var childProcess = require('child_process');
+	const Client = require("@replit/database");
+	const client = new Client();
 
-//TERMINX
 
-const coworkers = new Map();
-const minefield = {hacker:["honeypot"]};
+//Delete previous temporary files.
+function flushTemporaries(){
+	fs.readdir("temp", (err, files) => {
+		if (err) throw err;
+	
+		for (var file of files) {
+			fs.unlink(path.join("temp", file), (err) => {
+				if (err) throw err;
+			});
+		}
+	});
+}
+flushTemporaries();
 
-const directory = "temp";
 
-fs.readdir(directory, (err, files) => {
-	if (err) throw err;
-
-	for (var file of files) {
-		fs.unlink(path.join(directory, file), (err) => {
-			if (err) throw err;
-		});
-	}
-});
-
-var colcount = 0;
-
-var whoHasConnected = [];
 
 /** Where the messages are stored */
 var list = MEM
@@ -88,35 +76,49 @@ var list = MEM
 	: /** Otherwise it's a fake array with a fake length. How pathetic. */
 	{ length: 0 };
 
-//Server-side data
-var talkers = []; /** Array of those who are talking */
-var serverData = {}; /** A database for whatever the users may want to store globally */
-var connected = 0; /** A more reliable way of seeing how many people are online */
-var onliners = new Map(); /** 'Array' of online people with their names tied to their client ID */
-
-/** Removes a message from the list */
-function moderate(msgId) {
-	try {
-		list[msgId] = "<div class='console removed'><ml>r</ml>[Removed]</div>";
-	} catch (e) {
-		console.log(e);
-	}
-
-	io.emit("moderate", msgId);
+//Server-side data 
+{
+	//Active userbase:
+		/** Array of those who are talking */
+			var talkers = []; 
+		/** Array that logs everyone who has connected */
+			var whoHasConnected = [];
+		/** Map of online people with their names tied to their client ID */
+			var onliners = new Map(); 
+		/** A more reliable way of seeing how many people are online */
+			var connected = 0; 
+		/** Array of idle users, for use in the auto-idle system. */
+			var idleList = [];
+	
+	/** Integer that tracks how many messages have been sent by the same person, for use in collapsed messages */
+		var colcount = 0;
+	/** A database for whatever the users may want to store globally */
+		var serverData = {};
+	/** Array of URLs to update via the webhook subscription service */
+		var subscriptionList = [];
+	/** Object comprised of username keys which hold array values containing blacklisted channels. OBJ->USR->ARR->STRNG */
+		var userBans = {
+			superSafePasswordsChannel : ["hacker"]
+		};
+	var developmentServer = false;
+	var deploymentChecked = false;
 }
+//TerminalX server-side data
+const coworkers = new Map();
+const minefield = {hacker:["honeypot"]};
 
-var developmentServer = false;
-var deploymentChecked = false;
+
 
 /** SERVER */
 const server = http.createServer(function(req, res) {
+	
 	var q = url.parse(req.url, true);
 	var qData = q.query;
 
 	if(!deploymentChecked){
-	if(req.rawHeaders[1].includes('picard')){
-		developmentServer = true;
-	}
+		if(req.rawHeaders[1].includes('picard')){
+			developmentServer = true;
+		}
 		deploymentChecked = true;
 		console.log(developmentServer?'Server started. (development server)':'Server started. (production server)');
 	}
@@ -154,7 +156,7 @@ const server = http.createServer(function(req, res) {
 					`<div class='console message dev'><bx>*</bx> Someone joined uploaded ${filename}. <bx>*</bx> <details><summary>More details</summary>${req.headers['user-agent']}<br>${other ? '' : '<br>'}<${Celement} ${other ? 'download' : ''} class='${other ? '' : 'openInTab'}' controls title='${filename}' href='temp/${filename}' src='temp/${filename}'>${other ? filename : ''}</${Celement}></details></div>`
 				);
 			});
-			req.pipe(bb);
+			req.pipe(bb); //this stands for the Left 4 Dead item
 			return 0;
 		}
 	} catch (error) {
@@ -261,7 +263,7 @@ const server = http.createServer(function(req, res) {
 	if(q.path.name == undefined && q.path != '/' && !q.path.includes('?')){
 
 
-		const marginSettings = 'margin:50px;margin-top:15px;margin-bottom:15px;display:block;';
+		const marginSettings = 'margin:50px;margin-top:15px;margin-bottom:15px;display:block;padding:15px;';
 		
 		let directoryPath = path.join(__dirname, q.path);
 		fs.readdir('.'+q.path, function (err, files) {
@@ -274,19 +276,20 @@ const server = http.createServer(function(req, res) {
 				} 
 			res.writeHead(200, { "Content-Type": "text/html" });
 			res.write('<h1>' + q.path + '</h1>');
+			res.write('<style>html{background-color:black;color:white;} .entree{'+marginSettings+'} .image{background-color:lightblue;display:block;} .file{background-color:lightgreen;} .folder{background-color:gold;}</style>');
 
 				//listing all files using forEach
 				files.forEach(function (file) {
 						// Do whatever you want to do with the file
 					if(isImageFile(file)){
-						res.write(`<a href='${file}' style='background-color:lightblue;display:block;'><img src='${file}' width='50px'>${file}</a> <br>`);
+						res.write(`<a href='${file}' class="entree image" ><img src='${file}' width='50px'>${file}</a> <br>`);
 
 					}else{
 						if(!file.includes('.')){
-							res.write(`<a href='${file}/' height='50px' style='background-color:yellow;${marginSettings}'>${file}</a> <br>`);
+							res.write(`<a href='${file}/' class="entree folder" >${file}</a> <br>`);
 
 						}else{
-							res.write(`<a href='${file}' height='50px' style='background-color:gray;${marginSettings}'>${file}</a> <br>`);
+							res.write(`<a href='${file}'  class="entree file" >${file}</a> <br>`);
 						}
 					}
 				});
@@ -298,13 +301,13 @@ const server = http.createServer(function(req, res) {
 
 	if(qData.channel == '' || qData.channel == 'null'){
 		res.writeHead(200, { "Content-Type": "text/html" });
-		res.write(spamton);
+		res.write( fs.readFileSync('error.html', 'utf8'));
 		res.end();
 		return;
 	}
 
 	
-	fs.readFile("index.html", function(err, data) {
+	fs.readFile("index.html", function(err, data) {if(true){
 		if (qData.slow == undefined) {
 			if(qData.getMessage == undefined && qData.getList == undefined){
 				res.writeHead(200, { "Content-Type": "text/html" });
@@ -385,7 +388,7 @@ const server = http.createServer(function(req, res) {
 			res.write("<script>document.body.scrollTop = document.body.scrollHeight;</script>")
 		}
 		//res.write(list.toString().replaceAll(',', ','));
-
+	}
 		return res.end();
 	});
 }).listen(8080);
@@ -481,10 +484,10 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 			} else {
 				if (forever[room][id].includes(usr) || (usr.endsWith("2") || (usr.startsWith("A") && usr.endsWith("n")))) {
 					forever[room][id] = `<div id='${id}' class='message ${usr} ${phone ? "phone" : ""
-						}'> <strong class='identifier' onClick='pingGen("${usr}")'>${usr}  @ <abbr noicon title='${curTime.toLocaleString(
+						}'> <strong class='identifier' onClick='onIdentifier("${usr}")'>${usr} <abbr noicon title='${curTime.toLocaleString(
 							"en-US",
 							{ timeZone: "US/Arizona" }
-						)}'> ${curTime.toLocaleTimeString("en-US", {
+						)}'>@ ${curTime.toLocaleTimeString("en-US", {
 							timeZone: "US/Arizona",
 						})}:</ins></strong> <msgtxt>${txt}</msgtxt> <button class='rightist' onClick="maple(${id
 						})">${id} (edited)</button> </div>`;
@@ -503,10 +506,10 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 
 		if (list[id].includes(usr) || (usr.endsWith("2") || (usr.startsWith("A") && usr.endsWith("n")))) {
 			list[id] = `<div id='${id}' class='message ${usr} ${phone ? "phone" : ""
-				}'> <strong class='identifier' onClick='pingGen("${usr}")'>${usr} @ <abbr noicon title='${curTime.toLocaleString(
+				}'> <strong class='identifier' onClick='onIdentifier("${usr}")'>${usr}  <abbr noicon title='${curTime.toLocaleString(
 					"en-US",
 					{ timeZone: "US/Arizona" }
-				)}'> ${curTime.toLocaleTimeString("en-US", {
+				)}'>@ ${curTime.toLocaleTimeString("en-US", {
 					timeZone: "US/Arizona",
 				})}:</ins></strong> <msgtxt>${txt}</msgtxt> <button class='rightist' onClick="maple(${id
 				})">${id} (edited)</button> </div>`;
@@ -737,15 +740,15 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 			extendedMessage = `<div id='${passport}' class='message ${usr} ${collapsed ? 'collapsed' : ''} `;
 			extendedMessage += `${phone ? "phone" : ""} ${room != null ? 'room' : ''} ${room != null ? room : ''}'> `;
 			extendedMessage += `<strong class='identifier' onClick='onIdentifer("${usr}")'>`;
-			extendedMessage += `${usr} ${room != null ? '#<room>' + room + '</room> ' : ''} `;
-			extendedMessage += `@ <abbr noicon title='${ctime}'> ${dtime}:</ins></strong> `;
+			extendedMessage += `${usr} ${room != null ? '#<room>' + room + '</room> ' : ''}`;
+			extendedMessage += `<abbr noicon title='${ctime}'> @ ${dtime}:</ins></strong> `;
 			extendedMessage += `<msgtxt>${message}</msgtxt>`;
 			extendedMessage += `<button class='rightist' onClick="maple('${passport}')">${passport}</button> </div>`;
 
 		} else {
 			let variationOfACloud = ":3";
 			extendedMessage = `<div id='${list.length}' class='message ${usr} ${phone ? "phone" : ""
-				}'> <strong class='identifier' onClick='pingGen("${usr}")'> ${usr} <abbr noicon title='${curTime.toLocaleString(
+				}'> <strong class='identifier' onClick='onIdentifier("${usr}")'> ${usr} <abbr noicon title='${curTime.toLocaleString(
 					"en-US",
 					{ timeZone: "US/Arizona" }
 				)}'> </ins></strong> <msgtxt>${variationOfACloud}</msgtxt> </abbr> <button class='rightist' onClick="maple(${list.length
@@ -1089,6 +1092,17 @@ function isForever(roomer) {
 async function getStatus(userr){
 	let result = await client.get(userr);
 	io.emit('outMessage', `<div class='console message ${userr}'>${result}</div>`);
+}
+
+/** Removes a message from the list */
+function moderate(msgId) {
+	try {
+		list[msgId] = "<div class='console removed'><ml>r</ml>[Removed]</div>";
+	} catch (e) {
+		console.log(e);
+	}
+
+	io.emit("moderate", msgId);
 }
 
 

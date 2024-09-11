@@ -60,6 +60,7 @@ if(URLparams.get('channel') != undefined){
 		message('/join ' + URLparams.get('channel'));
 		document.getElementById('prefix').value = '/to ' + URLparams.get('channel') + ' ';
 	});
+
 }
 
 // Load existing favorites from localStorage
@@ -277,24 +278,21 @@ function imgify(text) {
 }
 /*//Message data extractor//*/
 function splitString(inputString) {
-	// Regular expression to match the specified format
-	//const regex = /<div id='[0-9]+' class='message [A-Za-z0-9]+ '> <strong class='identifier' onClick='pingGen\("[^"]*"\)'> [A-Za-z0-9]+ @ <abbr noicon title='[^']*'> ([A-Za-z0-9]+(:[A-Za-z0-9]+)+) [A-Za-z]+ <\/ins>: <\/strong><msgtxt>[A-Za-z]+<\/msgtxt> <button class='rightist' onClick="maple\([0-9]+\)">[0-9]+<\/button> <\/div>/im;
+	try{
 	// Creating an object with named properties
-	try {
+console.log(inputString);
 		const result = {
-			id: inputString.match(/(?<=id=')[^]+(?=')/),
+			id: inputString.match(/((?<=maple\()|(?<=maple\('))[^']+((?=')|(?=\)))/g)[0],
 			usrIdentifier: inputString.match(
-				/(?<=onIdentifer\(")[^(^)]*(?="\))/g,
-			),
+				/((?<=onIdentifer\(\")|(?<=onIdentifer\(\&quot;))[^(^)]*((?="\))|(?=\&quot;\)))/g,
+			)[0],
 			/*curTime: inputString.match(/(?<=title=')[0-9]+/[0-9]+/[0-9]+, [0-9]+:[0-9]+:[0-9]+ (AM|PM)(?=')/g)[0],*/
-			message: inputString.match(/(?<=<msgtxt>)[^]+(?=<\/msgtxt>)/g)[0],
+			message: inputString.match(/(?<=<msgtxt>)[^]+?(?=<\/msgtxt>)/g)[0],
 		};
 		console.log(result);
 		return result;
-	} catch (err) {
-		console.error(err + ' | ' + inputString);
-		
-		return false;
+	}catch(e){
+		console.log(e);
 	}
 }
 

@@ -3,10 +3,26 @@
 	"_1comment" : "Please put any new mods near the top of the category for better reachability!",
 	"themes" : [
 		{
+			"name": "98 Menu",
+			"author": "fatrhabit",
+			"file": "/users/mods/98menu.css",
+			"image": "/users/mods/apple.png",
+			"description": "to be defined",
+			"tags" : [ "new", "theme"]
+		},
+		{
+			"name": "Simple Dark",
+			"author": "fatrhabit",
+			"file": "/users/mods/simple-dark.css",
+			"image": "/users/mods/simple-dark.png",
+			"description": "y2k emo skater boy myspace Alex g mid 90s affliction theme!!!",
+			"tags" : ["dark", "black", "classy", "modern", "background", "new", "theme"]
+		},
+		{
 			"name": "Glasskist",
 			"author": "MaximusMiller2",
-			"file": "/users/mods/glass-sunkist.css",
-			"image": "/users/mods/Glasskist.png",
+			"file": "/users/mods/glasskist.css",
+			"image": "/users/mods/glasskist.png",
 			"description": "Cleaner, rounded theme.",
 			"tags" : ["glass", "modern", "background", "original", "theme"]
 		},
@@ -50,16 +66,23 @@
 			"name": "Imagisphere",
 			"author": "Boxel",
 			"file": "/users/mods/imagisphere.css",
-			"image": "/users/mods/lbplogo.png",
+			"image": "/users/mods/imagisphere.jpg",
 			"description": "WIP. (temp description) A little big planet theme.",
 			"tags" : ["lbp", "skeu", "theme"]
 		},
-		
+		{
+			"name": "Unified Minecraft",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/minecraft.css",
+			"image": "/images/pfp/Avonya.jpg",
+			"description": "Vanilla flavored.",
+			"tags" : ["unified", "minecraft", "simple", "game", "compact", "theme"]
+		},
 		
 		{
 			"name": "Orbit",
 			"author": "Afton",
-			"file": "/users/mods/Orbit.css",
+			"file": "/users/mods/orbit.css",
 			"image": "/users/mods/orbit.png",
 			"description": "Somewhat futuristic and clean textbox mod.",
 			"tags" : ["theme", "textbox"]
@@ -82,7 +105,15 @@
 			"file": "/users/mods/time-machine.css",
 			"image": "/users/mods/time-machine.png",
 			"description": "A theme that makes Sunkist Palace look like its older self.",
-			"tags" : ["layout", "meta", "theme", "old", "new"]
+			"tags" : ["layout", "meta", "theme", "old"]
+		},
+		{
+			"name": "Suncord",
+			"author": "Boxel",
+			"file": "/users/mods/suncord.css",
+			"image": "/users/mods/suncord.png",
+			"description": "A Discord inspired theme. (To be used with Lefthand Menu)",
+			"tags" : ["layout", "theme", "new"]
 		}
 	],
 	"plugins": [
@@ -90,15 +121,23 @@
 			"name": "Sugar Shaders Library",
 			"author": "MaximusMiller2",
 			"file": "/users/mods/ssl.js",
-			"image": "/users/mods/sugar-cube.gif",
+			"image": "/users/mods/ssl.gif",
 			"description": "[aka SSL] A library that imports cool filters for messages",
 			"tags" : ["library", "userstyle", "filter", "svg", "ssl", "plugin"]
 		},
 		{
+			"name": "oneko",
+			"author": "scrambled",
+			"file": "/users/mods/oneko.js",
+			"image": "/oneko.gif",
+			"description": "ADDS THE CAT THAT FOLLOWS YOUR MOUSE!",
+			"tags" : ["fun", "cat", "meow", "ssl", "plugin"]
+		},
+		{
 			"name": "EarthBound Backgrounds",
 			"author": "MaximusMiller2",
-			"file": "/users/mods/earthboundBattle.js",
-			"image": "/users/mods/49-Bacon_Omega.gif",
+			"file": "/users/mods/earthbound-battle.js",
+			"image": "/users/mods/earthbound-battle.gif",
 			"description": "<a href='https://www.gjtorikian.com/Earthbound-Battle-Backgrounds-JS'>Replaces the background with randomized unique animated EarthBound battle backgrounds.</a>",
 			"tags" : ["background", "game", "random", "plugin"]
 		},
@@ -106,36 +145,108 @@
 			"name": "HotKeys",
 			"author": "MaximusMiller2",
 			"file": "/users/mods/hotkeys.js",
-			"image": "/users/mods/quick.png",
+			"image": "/users/mods/hotkeys.png",
 			"description": "Improved favorited messages",
 			"tags" : ["shortcuts", "qol", "favorites", "plugin"]
 		},
 		{
 			"name": "Reactive Text",
 			"author": "MaximusMiller2",
-			"file": "/users/mods/reactiveText.js",
-			"image": "/users/mods/text.gif",
+			"file": "/users/mods/reactive-text.js",
+			"image": "/users/mods/reactive-text.gif",
 			"description": "Dynamic textbox styling",
 			"tags" : ["textbox", "qol", "style", "plugin"]
 		},
 		{
 			"name": "Absolutely No Styling",
 			"author": "MaximusMiller2",
-			"file": "/users/mods/nostyle.js",
-			"image": "/users/mods/styled.gif",
+			"file": "/users/mods/no-style.js",
+			"image": "/users/mods/no-style.gif",
 			"description": "Removes all styling & links except for mods. For use with mods.",
 			"tags" : ["library", "style", "minimalistic", "plugin"]
 		},
 		{
 			"name": "Settings Menu",
 			"author": "MaximusMiller2",
-			"file": "/users/mods/settingsmenu.js",
-			"image": "/users/mods/merge.gif",
+			"file": "/users/mods/settings-menu.js",
+			"image": "/users/mods/settings-menu.gif",
 			"description": "Changes the settings and favorites to be a popup menu. Requires animated popovers.",
 			"tags" : ["button", "options", "menu", "popover", "minimized", "plugin"]
+		},
+		{
+			"name": "Typing Sounds",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/typing-sounds.js",
+			"image": "/users/mods/cube.png",
+			"description": "Lethal company sounds for hovering and typing. Taken from Terminal Ex.",
+			"tags" : ["button", "sound", "textbox", "game", "hover","new", "plugin"]
+		},
+		{
+			"name": "Lefthand Menu",
+			"author": "Boxel",
+			"file": "/users/mods/lhm.js",
+			"image": "/users/mods/lhm.jpg",
+			"description": "Completely reformats the menu, moving it to the left side of the screen. (Compatible with almost every mod)",
+			"tags" : ["options", "menu", "plugin", "new"]
+		},
+		{
+			"name": "Menuify",
+			"author": "Boxel",
+			"file": "/users/mods/menuify.js",
+			"image": "/users/mods/menuify.png",
+			"description": "Menu library to manage settings dropdown menus easier.",
+			"tags" : ["library", "options", "menu", "plugin", "Menuify", "new"]
+		},
+		{
+			"name": "Menuify Template",
+			"author": "Boxel",
+			"file": "/users/mods/menutemp.js",
+			"image": "/users/mods/menutemp.png",
+			"description": "Template for Menuify menu.",
+			"tags" : ["options", "menu", "plugin", "Menuify", "new"]
+		},
+		{
+			"name": "More Customization",
+			"author": "Boxel",
+			"file": "/users/mods/morecustomization.js",
+			"image": "/users/mods/ftv.jpg",
+			"description": "Menuify required. LEAKED unfinished plugin.",
+			"tags" : ["options", "menu", "plugin", "Menuify", "new"]
+		},
+		{
+			"name": "Cookie.",
+			"author": "Boxel",
+			"file": "/users/mods/cookie.js",
+			"image": "/users/mods/cookie.webp",
+			"description": "Cookie Clicker inspired menu. (Requires Menuify)",
+			"tags" : ["options", "menu", "plugin", "Menuify", "new"]
+		},
+		{
+			"name": "Custom Placeholder Text",
+			"author": "Boxel",
+			"file": "/users/mods/cpt.js",
+			"image": "/users/mods/cpt.jpg",
+			"description": "Lets you set and manage custom placeholder/splash texts. (Requires Menuify)",
+			"tags" : ["splash", "placeholder", "menu", "plugin", "Menuify", "new"]
 		}
 	],
 	"snippits": [
+		{
+			"name" : "No Timestamps",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/no-timestamps.css",
+			"image": "/users/mods/apple.png",
+			"description": "removes timestamps from messages.",
+			"tags" : ["qol", "snippit", "new"]
+		},
+		{
+			"name" : "No Squircle Messages",
+			"author": "MaximusMiller2",
+			"file": "/users/mods/msgradius.css",
+			"image": "/users/mods/apple.png",
+			"description": "removes border radius from messages.",
+			"tags" : ["qol", "snippit", "new"]
+		},
 		{
 			"name" : "Aligned Marketplace Buttons",
 			"author": "MaximusMiller2",
@@ -156,15 +267,15 @@
 			"name" : "Applesauce",
 			"author": "MaximusMiller2",
 			"file": "/users/mods/applesaucereal.css",
-			"image": "/users/mods/applesauce.png",
+			"image": "/images/pfp/Boxel.png",
 			"description": "Replaces Boxel's pfp with her other cat (which is objectively betterer).",
 			"tags" : ["replacer", "userstyle", "pfp", "snippit"]
 		},
 		{
 			"name": "No favorites",
 			"author": "MaximusMiller2",
-			"file": "/users/mods/nofavorites.css",
-			"image": "/users/mods/reject.gif",
+			"file": "/users/mods/no-favorites.css",
+			"image": "/users/mods/no-favorites.gif",
 			"description": "Removes the favorites divider.",
 			"tags" : ["qol", "removal", "snippit", "menu"]
 		},
@@ -187,8 +298,8 @@
 		{
 			"name": "Userstyled Filters",
 			"author": "MaximusMiller2",
-			"file": "/users/mods/userfilters.css",
-			"image": "/users/mods/usl.gif",
+			"file": "/users/mods/user-filters.css",
+			"image": "/users/mods/user-filters.gif",
 			"description": "(REQUIRES SugarShaders) Gives each user a unique and interesting backdrop-filter, as well as warping the menu.",
 			"tags" : ["ssl", "userstyle", "filter", "snippit", "clear"]
 		},
@@ -259,8 +370,8 @@
 		{
 			"name": "Better Bottom Textbox",
 			"author": "MaximusMiller2" ,
-			"file": "/users/mods/betterBottomText.css",
-			"image": "/users/mods/bbtb.gif",
+			"file": "/users/mods/better-bottom-text.css",
+			"image": "/users/mods/better-bottom-text.gif",
 			"description": "Moves the textbox to the bottom along with the other menu items.",
 			"tags" : ["textbox", "layout", "remake", "snippit"]
 		},
@@ -268,7 +379,7 @@
 			"name": "Compact Mode",
 			"author": "MaximusMiller2" ,
 			"file": "/users/mods/compact-mode.css",
-			"image": "/users/mods/rawr-x3-owo.png",
+			"image": "/users/mods/compact-mode-rawr-x3-owo.png",
 			"description": "Squishes messages and disables identifier",
 			"tags" : ["visibility", "compact", "identifier", "snippit"]
 		},
@@ -295,6 +406,14 @@
 			"image": "/users/mods/ttab.jpg",
 			"description": "Moves the textbox to the bottom for a more traditional look",
 			"tags" : ["textbox", "layout", "snippit"]
+		},
+		{
+			"name": "Menu Previewer",
+			"author": "Boxel" ,
+			"file": "/users/mods/menu-previewer.css",
+			"image": "/users/mods/menu-previewer.jpg",
+			"description": "Makes the menu more central for screenshotting purposes only.",
+			"tags" : ["menu", "meta", "snippit", "new"]
 		}
 	]
 }

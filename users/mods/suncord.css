@@ -1,0 +1,90 @@
+/* START Suncord */
+#sunkistPalaceHTML {
+	background: #2c2d32;
+}
+
+.message, #soapMode, summary, details, .rightist {
+	color: lightgray!important;
+	text-shadow: none!important;
+	background: #2c2d32!important;
+	font-family: Verdana, sans-serif!important;
+	font-size: initial!important;
+}
+
+#menu {
+	background: #1c1d21;
+	border: none;
+	border-right: rgba(0,0,0,0.5) 3px solid;
+}
+
+#soapMode {
+	background: #36363e!important;
+	border:none;
+	outline: none;
+	border-radius: 10px;
+	box-shadow: 0 0 15px rgba(0,0,0,0.5);
+	bottom: 5px!important;
+}
+
+details, summary {
+	background: #323338!important;
+	border-radius: 5px;
+}
+
+.rightist {
+	background: rgba(255,255,255,0.1)!important;
+	border: none!important;
+	box-shadow: none!important;
+	font-size: 0.8em!important;
+	opacity: 0;
+}
+
+
+
+.message:hover .rightist {
+	opacity: 1;
+}
+
+
+
+
+#menuTitle {
+	-webkit-box-reflect: unset!important;
+	background: #5865f2;
+	color: white!important;
+	text-shadow: none!important;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+
+
+
+.message:hover {
+	background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.1) 40%)!important;
+}
+
+.message:nth-child(odd):hover {
+	background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.1) 40%)!important;
+}
+
+.message:nth-child(odd) {
+	background: rgba(0,0,0,0.05)!important;
+}
+
+
+
+
+
+/*
+.MaximusMiller2 {
+	background: linear-gradient(90deg, rgba(30,60,80,1), rgba(0,0,0,0) 25%)!important
+}
+.Afton {
+	background: linear-gradient(90deg, rgba(0,204,204,0.5), rgba(0,0,0,0) 25%)!important
+}
+.Boxel {
+	background: linear-gradient(90deg, rgba(255,25,244,0.5), rgba(0,0,0,0) 25%)!important
+}
+*/
+/* END Suncord */

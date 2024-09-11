@@ -1,10 +1,14 @@
 function dailyPrompt(input){
-	if(input[0] != 'l'){
+	if(playerData.usedWords[0] == null){
+		return true;
+	}
+	if(!isOneLetterDifferent(input, playerData.usedWords[0])){
 		return false;
 	}else{
 		return true;
 	}
 }
+
 
 const terminal = {
 	input : document.getElementById('terminal.input'),
@@ -485,7 +489,42 @@ document.getElementById('buy.c4').onmouseenter = () =>{
 }
 
 
+//limited time
 
+document.getElementById('buy.nc').onclick = ()=>{
+	if(afford(10)){}else{return;}
+	let aud = new Audio('assets/audio/button_synth_positive_01.wav');
+		aud.volume = 0.25;
+		aud.play();
+	playerData.usedWords = [];
+	localStorage.setItem(
+		'playerData.usedWords',
+		JSON.stringify(playerData.usedWords));
+}
+document.getElementById('buy.nc').onmouseenter = () =>{
+	let aud = new Audio('assets/audio/dog_playfull3.wav');
+	aud.volume = 0.1;
+	aud.play();
+}
+
+function isOneLetterDifferent(arg1, arg2) {
+		if (arg1.length !== arg2.length) {
+				return false; // The lengths must be the same
+		}
+
+		let differenceCount = 0;
+
+		for (let i = 0; i < arg1.length; i++) {
+				if (arg1[i] !== arg2[i]) {
+						differenceCount++;
+						if (differenceCount > 1) {
+								return false; // More than one letter is different
+						}
+				}
+		}
+
+		return differenceCount === 1;
+}
 
 
 

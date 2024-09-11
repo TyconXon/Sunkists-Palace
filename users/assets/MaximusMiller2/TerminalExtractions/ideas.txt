@@ -1,0 +1,6 @@
+1. sapper - removes points slowly unless you type a keyword
+ a. sapper 2 - points are siphoned, but slower
+2. inventory
+3. ingame killfeed
+4. confuser - changes prompt for a random ammount of words, subtraction for incorrections 
+5. save-load power-up (kinda like a loan)

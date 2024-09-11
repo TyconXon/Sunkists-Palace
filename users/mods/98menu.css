@@ -1,0 +1,124 @@
+/* START 98 Menu */
+@font-face {
+	font-family: "Pixelated MS Sans Serif";
+	src: url(https://unpkg.com/98.css@0.1.16/dist/ms_sans_serif.woff) format("woff");
+	src: url(https://unpkg.com/98.css@0.1.16/dist/ms_sans_serif.woff2) format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family:"Pixelated MS Sans Serif";src:url(https://unpkg.com/98.css@0.1.16/dist/ms_sans_serif_bold.woff) format("woff");src:url(https://unpkg.com/98.css@0.1.16/dist/ms_sans_serif_bold.woff2) format("woff2");font-weight:700;font-style:normal;
+}
+
+
+h1{
+border: none !important;
+border-radius: 0px !important;
+background: #d4d0c8 !important;
+box-shadow: inset -1px -1px 0px 0px #404040, inset 1px 1px 0px 0px #eceae7, inset -2px -2px 0px 0px #808080, inset 2px 2px 0px 0px #ffffff !important;
+text-shadow: none !important;
+color: black !important;
+margin: unset;
+font-family: "Pixelated MS Sans Serif" !important;
+}
+
+summary{
+}
+
+#menu {
+		margin: auto !important;
+		padding: 1px 3px!important;
+		border: none !important;
+		border-radius: 0px !important;
+		outline: 0;
+		font-size: 100%; 
+		background-color: #d4d0c8 !important;
+		box-shadow: inset -1px -1px 0px 0px #ffffff, inset 1px 1px 0px 0px #808080, inset -2px -2px 0px 0px #eceae7, inset 2px 2px 0px 0px #404040 
+		!important;
+}
+
+[reflect]{-webkit-box-reflect: unset;}
+
+#soapMode{
+		border: none;
+		overflow: auto;
+		outline: none;
+		resize: none;
+		text-shadow: none;
+		font-family: "Pixelated MS Sans Serif", Serif !important;
+		background-color: #ffffff;
+		color: #000000;
+}
+#status{
+		width: 100%;
+		color: white;
+		border-radius: 0px !important;
+		padding: 5px !important;
+		margin: auto !important;
+		background: -webkit-linear-gradient(left, #0a246a 0%, #a6caf0 100%, #a6caf0 101%) !important;
+		backdrop-filter: blur(8px);
+		text-align: left;
+		font-family: "Pixelated MS Sans Serif" !important;
+		align-content: center !important;
+}
+
+#typingP{
+		background: #d4d0c8 !important;
+		color: #000000 !important;
+		font-family: "Pixelated MS Sans Serif" !important;
+		border: none !important;
+		font-size: 10pt !important;
+		box-shadow: inset -1px -1px 0px 0px #404040, inset 1px 1px 0px 0px #ffffff, inset -2px -2px 0px 0px #808080, inset 2px 2px 0px 0px #eceae7 !important;
+		padding: 4px !important;
+		text-decoration: none !important;
+		margin: auto;
+}
+
+summary {
+		backdrop-filter: none !important;
+
+		transition: all 2s;
+		cursor: pointer;
+		border-bottom: white solid 1px;
+		font-family: "Pixelated MS Sans Serif", Serif !important;
+		color: black;
+		padding: 5px;
+		box-shadow: inset -1px -1px 0px 0px #ffffff, inset 1px 1px 0px 0px #808080, inset -2px -2px 0px 0px #eceae7, inset 2px 2px 0px 0px #404040 
+		!important;
+		background-color: #d4d0c8 !important;
+}
+
+details {
+		backdrop-filter: none;
+		background-color: white;
+		transition: all 2s;
+		margin: 5px;
+		padding: 5px;
+}
+
+* {
+		scrollbar-width: auto;
+		scrollbar-color: #d4d0c8 #d4d0c8 !important;
+}
+
+.settings button{
+background: #d4d0c8 !important;
+		color: #000000 !important;
+		font-family: "Pixelated MS Sans Serif" !important;
+		border: none !important;
+		font-size: 10pt !important;
+		box-shadow: inset -1px -1px 0px 0px #404040, inset 1px 1px 0px 0px #ffffff, inset -2px -2px 0px 0px #808080, inset 2px 2px 0px 0px #eceae7 !important;
+		padding: 4px !important;
+		text-decoration: none !important;
+		margin: auto;
+
+}
+
+html{
+	background: url(../users/mods/modBackgrounds/98menu.jpg) no-repeat center center !important;
+	background-color: #3a6ea5;
+	background-attachment: fixed !important;
+	background-size: cover;
+}
+/* END 98 Menu */

@@ -1,0 +1,71 @@
+/* START Unified Minecraft */
+*{
+	font-family: 'Minecraft';
+}
+.message {
+	background: #3e3e3eaa !important;
+	font-family: 'Minecraft';
+	font-size:medium;
+	border-radius: 0px;
+	line-height: 0.75;
+	white-space: collapse;
+	text-shadow: 1.5px 1.5px 0px #0d0d0daa;
+}
+h1{
+	font-family: 'Minecraft' !important; 
+}
+.identifier abbr{
+	display:none;
+}
+.identifier::before{
+	content: '< ';
+}
+.identifier::after{
+	content: '>';
+}
+.message::before{
+	display:none;
+}
+.collapsed .identifier{
+	color: grey;
+}
+.console{
+	color:yellow;
+	margin-left:0px;
+	padding: 0px;
+	padding-left: 15px;
+	text-align: left;
+	line-height: 2;
+}
+bx{
+	/*They mess up verticle sizing.*/
+	display:none;
+}
+a{
+	text-shadow: none;
+	background: transparent;
+}
+a:link{
+	color:lime;
+}
+a:visited{
+	color: green;
+}
+a:hover{
+	background-color: #0d0d0daa;
+}
+
+a::before{
+	opacity: 0.15;
+}
+
+button.rightist {
+	background: none !important;
+	box-shadow: none !important;
+	border: none;
+	border-radius: 0px;
+	:hover{
+			background: none !important;
+	}
+}
+/* END Unified Minecraft */

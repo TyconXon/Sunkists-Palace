@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap'); 		
-
+@import url('https://fonts.cdnfonts.com/css/frutiger');
 @font-face {
 	font-family: "Bound";
 	font-display: swap;
@@ -41,7 +41,7 @@
 }
 
 @font-face {
-	font-family: "Lethal", "lethal";
+	font-family: "Lethal";
 	font-display: swap;
 	src: url(../fonts/vcr_osd_mono.ttf);
 }
@@ -107,7 +107,7 @@
 }
 
 @font-face {
-  font-family: Amatic SC;
+  font-family: "Amatic SC";
   src: url("../fonts/AmaticSC-Regular.ttf");
 }
 

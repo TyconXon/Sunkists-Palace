@@ -31,7 +31,7 @@
 
 			// subscribedMods.concat(style.match(/(?<=START)[^]+(?=*\/)/g))
 			// alert(subscribedMods);
-			fetch("/users/mods/mods.json")
+			fetch("/users/mods/1_2_3_abc_mods.json")
 				.then((res) => res.json())
 				.then((data) => {
 					data.themes.forEach((mod) => {
@@ -177,7 +177,8 @@
 	</head>
 	<body>
 
-			<h1>Sunkist Marketplace</h1>
+		<a href="/directory.html">Back to directory</a>
+		<h1>Sunkist Marketplace</h1>
 		<div id="heading">
 			<h2>Find themes, plugins, and other snippits for Sunkist's Palace!</h2>
 			<button id="unsub">Unsubscribe from all</button> <input type="search" placeholder="Search..." id="search"> <br>
@@ -196,8 +197,7 @@
 		<market snippits>
 			
 		</market>
-		<p>This is where the all the PowerAde comes from mr freeman!</p>
-		
+	
 
 		<!-- the style thingy to style pages or whatever idk gang -->
 		<script style="display:none;">
@@ -221,6 +221,8 @@
 
 			document.getElementById('unsub').onclick = ()=>{
 				window.localStorage.setItem("style", '/* Hey! */ ');
+				window.localStorage.setItem("js", '/* Yes, thats it! */ ');
+
 				window.location.reload();
 			}
 
@@ -265,44 +267,44 @@
 				
 				};
 
-			var sizeRange = document.getElementById("size");
-			sizeRange.value = localStorage.getItem('sizeRange') || 4;
-			window.addEventListener('load', ()=>{
-				editSizeRange();
-			})
-			sizeRange.oninput = ()=>{
-				editSizeRange();
-			}
-			function editSizeRange(){
-				localStorage.setItem('sizeRange', sizeRange.value);
-				let newAutos = "";
-				for (let index = 0; index < sizeRange.value; index++) {
-					newAutos += "auto ";
-				}
-				document.querySelectorAll('market').forEach((reseller)=>{
-					reseller.style.gridTemplateColumns = newAutos;
-				});
-				if(sizeRange.value == 5){
-					document.querySelectorAll('.modPreview').forEach((image)=>{
-						image.style.width = '14vw';
-						image.style.maxWidth = "14vw";
-					})}
-				if(sizeRange.value == 6){
-				document.querySelectorAll('.modPreview').forEach((image)=>{
-					image.style.width = '10vw';
-					image.style.maxWidth = "10vw";
-				})}
-				if(sizeRange.value == 2){
-				document.querySelectorAll('.modPreview').forEach((image)=>{
-					image.style.width = '40vw';
-					image.style.maxWidth = "40vw";
-				})}
-				if(sizeRange.value == 1){
-				document.querySelectorAll('.modPreview').forEach((image)=>{
-					image.style.width = '100%';
-					image.style.maxWidth = "100%";
-				})}
-			}
+			// var sizeRange = document.getElementById("size");
+			// sizeRange.value = localStorage.getItem('sizeRange') || 4;
+			// window.addEventListener('load', ()=>{
+			// 	editSizeRange();
+			// })
+			// sizeRange.oninput = ()=>{
+			// 	editSizeRange();
+			// }
+			// function editSizeRange(){
+			// 	localStorage.setItem('sizeRange', sizeRange.value);
+			// 	let newAutos = "";
+			// 	for (let index = 0; index < sizeRange.value; index++) {
+			// 		newAutos += "auto ";
+			// 	}
+			// 	document.querySelectorAll('market').forEach((reseller)=>{
+			// 		reseller.style.gridTemplateColumns = newAutos;
+			// 	});
+			// 	if(sizeRange.value == 5){
+			// 		document.querySelectorAll('.modPreview').forEach((image)=>{
+			// 			image.style.width = '14vw';
+			// 			image.style.maxWidth = "14vw";
+			// 		})}
+			// 	if(sizeRange.value == 6){
+			// 	document.querySelectorAll('.modPreview').forEach((image)=>{
+			// 		image.style.width = '10vw';
+			// 		image.style.maxWidth = "10vw";
+			// 	})}
+			// 	if(sizeRange.value == 2){
+			// 	document.querySelectorAll('.modPreview').forEach((image)=>{
+			// 		image.style.width = '40vw';
+			// 		image.style.maxWidth = "40vw";
+			// 	})}
+			// 	if(sizeRange.value == 1){
+			// 	document.querySelectorAll('.modPreview').forEach((image)=>{
+			// 		image.style.width = '100%';
+			// 		image.style.maxWidth = "100%";
+			// 	})}
+			// }
 
 			String.prototype.hx = function(){
 					var hex, i;

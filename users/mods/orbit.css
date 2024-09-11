@@ -24,8 +24,9 @@
 	.message .rightist {opacity:25%;}
 	.message:hover .rightist {opacity:100%;background:none;}
 
+	#sunkistPalaceHTML {background: url(../users/mods/modBackgrounds/orbit.jpg) no-repeat fixed;background-size:cover;}
+
 	#body {
-	 background: url('..users/assets/afton/testimages/BlueBen.jpg') fixed center top;
 	 background-size: 100% auto;
 	 margin: 0;
 	 padding: 10px;

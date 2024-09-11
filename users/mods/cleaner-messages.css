@@ -1,7 +1,7 @@
 /* START Cleaner Messages */
 
 .collapsed .identifier {display:none}
-.collapsed {margin:0px!important;}
+.collapsed {margin-top:0px!important;}
 .collapsed:before {display:none}
 .message {margin-top:25px;}
 .message:has(.ping) {background:rgba(255,210,0,0.5); color:white;}

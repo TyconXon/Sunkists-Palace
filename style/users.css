@@ -171,7 +171,7 @@ afton {
 	font-family: tahoma;
 	border-radius: 10px;
 	cursor: url(../images/cur/crowbar.png), auto;
-	background-image: url(../images/background/Art-therapy-example01.jpg);
+	background-image: url(../images/background/portal_overgrown.jpg);
 	background-attachment: fixed;
 	background-blend-mode: darken;
 	background-size: cover;
@@ -185,7 +185,7 @@ afton {
 
 .Boxel,
 Boxel {
-	background-color: rgba(20,15,35,0.5);
+	/* background-color: rgba(20,15,35,0.5);
 	background-image: linear-gradient(to right,
 			rgba(20, 15, 35, 0.5),
 			rgba(255, 25, 244, 0.5)
@@ -193,11 +193,21 @@ Boxel {
 	text-shadow: 0px 0px 5px #ffffff60;
 	color: white;
 	font-family: coomer, sans-serif, emoji;
-	/* font-family: Lethal, sans-serif, emoji; */
+	cursor: url('../images/cur/paw.png'), auto; */
+	background-color: rgba(20,15,35,0.5);
+	background-image: linear-gradient(to right,
+			rgba(15,5,29,0.5),
+			rgba(92,70,194,0.5),
+			rgba(173,28,162,0.5),
+			rgba(197,141,43,0.5)
+		);
+	text-shadow: 0px 0px 5px #ffffff60;
+	color: white;
+	font-family: coomer, sans-serif, emoji;
 	cursor: url('../images/cur/paw.png'), auto;
 }
 .Boxel.\<-::before {
-	background-image: url("../images/pfp/d-Boxel.webp");
+	background-image: url("../images/pfp/mecatdrawing.jpg");
 }
 
 .Rat,
@@ -215,9 +225,46 @@ rose {
 	font-size: 20px;
 }
 
-.FatRhabit,
-fatrhabit {
-	font-family: "Comic Sans MS";
+
+
+@keyframes spin{
+	from{ transform:rotate(360deg); }
+	to{ transform:rotate(-360deg); }
+}
+
+.FatRhabit::before{
+	border-radius: 50%;
+	animation: spin 7s infinite linear;
+	background: url("https://sunkist-palace.net/images/pfp/profile.png");
+
+}
+
+.FatRhabit,FatRhabit{
+	bottom: 0;
+	font-family: 'Frutiger', sans-serif;
+	color: white;
+	text-shadow: black 0px 3px 4px;
+	background-color: rgba(0,0,0,0.5);
+	background-blend-mode: darken;
+	background-position: center;
+	text-wrap: pretty;
+
+}
+
+.FatRhabit .identifier{
+ text-transform:uppercase !important;
+ font-family: Times New Roman, sans-serif !important; 
+ transform: scale(0.8, 1);
+}
+
+
+
+.FatRhabit .rightist{
+	background: linear-gradient(0deg, rgba(8,0,15,0.4) 0%, rgba(145,145,145,0.4) 100%);
+	color: #fff;
+	border: 1px inset rgba(0, 0, 0, 0.5);
+	border-radius: 0px;
+	font-size: 12px;
 }
 
 .via,
@@ -405,7 +452,8 @@ samm {
 .Boxel::before {
 	/*PFP*/
 	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9);
-  background-image: url("../images/pfp/boxel.png");
+  background: url("../images/pfp/mecatdrawing.jpg") center;
+	background-size:140%;
 	background-repeat: no-repeat;
 	border-image-slice: 42 42 42 42 fill;
 	border-image-width: 12px 12px 12px 12px;
@@ -413,7 +461,6 @@ samm {
 	border-image-repeat: stretch stretch;
 	border-image-source: url("../images/border/pwa.png");
 	border-style: solid;
-
 }
 
 .Sushi::before {
@@ -466,10 +513,10 @@ samm {
 	font-family: "TF2 Build", emoji;
 }
 
-.Boxel button{
-	font-family: "Passing Notes";
+.Boxel button, .Boxel .rightist{
+	font-family: "Lethal" !important;
 	background-blend-mode: multiply;
-	background-color: purple;
+	background: rgba(0,0,0,0.5);
 	color: white;
 }
 
@@ -497,7 +544,7 @@ samm {
 
 .Boxel msgtxt::selection,
 .Boxel::selection{
-	background-color: rgba(87, 14, 156,0.5);
+	background: rgba(173,28,162,0.5);
 }
 
 /***--- Message Cursor   ---***/

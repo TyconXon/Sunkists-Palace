@@ -91,9 +91,9 @@ details a {
 
 }
 
-/* #sunkistPalaceHTML {
- background: url('../users/assets/boxel/images/bg2.jpeg') center fixed;
+#sunkistPalaceHTML {
+ background: url(../users/mods/modBackgrounds/dusk-horizon.jpeg) center fixed;
  background-size: 100% auto;
-} */
+}
 
 /* END Dusk Horizon */

@@ -5,50 +5,65 @@
 	<link rel="stylesheet" href="../style/restyle.css">
 	<link rel="stylesheet" href="../style/users.css">
 	<style>
-		h1{
-			background-color: black;
-			border: white 5px solid;
-			width: max-content;
+		#main{
+			width: 65vw;
 			margin:auto;
-			padding: 10px;
-			margin-bottom: 5px;
+			background: rgb(12,5,71);
+			background: linear-gradient(205deg, rgba(12,5,71,0.735440123314951) 0%, rgba(20,16,142,0.8530871821384804) 27%, rgba(2,19,83,0.8474849412421218) 49%, rgba(11,7,98,0.7634513277967436) 69%, rgba(5,31,75,0.9371207955838585) 100%);
+			height: auto;
+			padding-bottom: 50px;
 			color: white;
-		}
-		h2{
-			color: white;
-			width: max-content;
-			margin:auto;
-			background-color: black;
-			border: white 5px solid;
-			padding: 5px;
-			margin-bottom: 5px;
-
-		}
-		p{
-			color: white;
-			margin:auto;
-			background-color: gray;
-			padding: 10px;
-			margin-bottom: 5px;
-
-			border: white 3px solid;
-		}
-		.MaximusMiller2{
-			text-shadow: none !important;
-			margin: 5px;
-			padding: 10px;
-
-			
 		}
 		html{
-			background-image: url(../images/background/Art-therapy-example01.jpg);
+			background-image: url(../images/background/underwater.gif);
+			background-attachment: fixed;
+			background-size: cover;
+			image-rendering: auto;
 		}
+		[pfp]{
+			width: 15vw;
+		}
+		[over]{
+			width: 15vw;
+			height: 15vw;
 
-		a{
-			margin: auto !important;
-			width: max-content;
-			padding: 2px;
+			border-style: outset;
+			border-image-slice: 12% fill;
+			border-image-width: 12% 12% 12% 12%;
+			border-image-outset: 10;
+			border-image-repeat: stretch stretch;
+			border-image-source: url("../images/border/water.png");
+			border-style: solid;
+			position:relative;
+			top: -15vw;
+			user-select: none;
+			image-rendering: pixelated;
 		}
+		[pfpcontainer]{
+			position: relative;
+			top: 25;
+			left: 25;
+		}
+		[content]{
+			position: absolute;
+			top: -5vh;
+			left: 17vw;
+			color: white;
+		}
+		about{
+			position: relative;
+			top: -10vw;
+		}
+		h1{
+			font-family: 'coomer';
+			font-weight: lighter;
+			font-size: 4vw;
+		}
+		p{
+			font-size: 25px;
+			white-space: pre-line;
+		}
+		
 	</style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" nodraw=""></script>
@@ -58,92 +73,108 @@
 	<title>MaximusMiller2</title>
 	<link rel="icon" href="../images/dog.png">
 </head>
-<body class='MaximusMiller2'>
-	<h1 ns>MaximusMiller2</h1>
-	<h2>aka Canada (jr)</h2>
-	<p>
-		Creator of Sunkist's Palace, and its linked projects. <br>
-		Afton is my boyfriend. <br>
-		<details>
-			<summary>More information on myself</summary>
-			<ul>
-				<li>I've been programming since I was around 6,</li>
-				<li>	I love Hammer World Editor and the Source Engine,</li>
-				<li>I'm a furry,</li>
-				<li>I've been interested in math since my sister showed me an algebra problem while I was still in like 2nd grade,</li>
-				<li>and I was so determined to figure it out I got interested in math, </li>
-				<li>I love foxes,</li>
-				<li></li>
-			</ul>
-			
-		</details>
-	</p>
-	<h2>Usefull CSS</h2>
-	<pre><code>
-/* Compact mode */
-.message::before{display:none;}
-.message{line-height: 1;}
-	</code></pre>
+<body>
 
-	<pre><code>
-/* Traditional textbox at bottom */
+	<div id='main'>
+		<div header>
+			<div pfpcontainer> 
+				<img src="../images/highquality.png" pfp>
+				<div over>
+			</div>
+			<div content>
+				<h1>MaximusMiller2</h1>
+				<p>Programmer - Creator of Sunkist's Palace,
+				Source engine enthusiast,
+				and member of many obscure fandoms.</p>
+			</div>
+		</div>
 
-#soapMode{
- bottom: 0;
- position:fixed;
- left: 0;
- background-color: black;
- border:none;
- padding: 10px;
-}
+			<div about>
+				<ul>
+					<li><h2>RPGs:</h2></li>
+					<li>OFF fan,</li>
+					<li>Earthbound (& Mother 3) fan,</li>
+					<li><a href='https://sunkist-palace.net/?channel=null'>Deltarune</a> (& Undertale) fan,</li>
+					<li>Hylics fan,</li>
+					<br>
+					
+					<li><h2>Story games:</h2></li>
+					<li>Night in the Woods fan,</li>
+					<li>The Walking Dead Game fan,</li>
+					<li>Detroit: Become Human fan,</li>
+					<li>Minecraft: Story Mode fan,</li>
+					<br>
+					
+					<li><h2>FPSs:</h2></li>
+					<li>Half-Life series (including -the beta-) fan,</li>
+					<li>Fallout fan,</li>
+					<li>Prey (2017) fan,</li>
+					<li>Bioshock fan,</li>
+					<li>ULTRAKILL fan,</li>
+					<li><a href='https://www.youtube.com/watch?v=VYbIVaztcaA&t=11s'>FREEDOOM</a> fan,</li>
+					<li>fn player, unfortunately,</li>
+					<li>fn save the world player, Fortunately,</li>
+					<li>Team Fortress 2 fan,</li>
+					<br>
 
-#menu{
- padding: 0px;
- margin: 0px;
- border: none;
- width: 100%;
- top: 0px;
- backdrop-filter: none;
- background-color: dimgray;
-}
-h1{ margin-top: 0px;} 
-html{ padding-bottom: 100;}
+					<li><h2>Puzzle games:</h2></li>
+					<li>Portal series fan,</li>
+					<li>Baba is You fan,</li>
+					<li>Superliminal fan,</li>
 
-</code></pre>
+					<br>
 
-	<img src="assets/IOT.png" alt="iot">
-	<pre>
-		<code>
-			/*Identifier above text
-				Warning: expiremental, can break messages*/
-			.identifier{
-			 position: relative;
-			 top: -30;
-			 background-color:gray;
-			}
-			.collapsed .identifier{
-			 background-color: transparent;
-			}
-			.message::before{
-			 position: relative;
-			 top: -30;
-			}
-			msgtxt{position:absolute;left:75;}
+					<li><h2>Other Games:</h2></li>
+					<li>Viva Pinata fan,</li>
+					<li>Don't Starve player,</li>
+					<li>Cult of the Lamb fan,</li>
+					<li>Project Zomboid player,</li>
+					<li>Lethal Company fan,</li>
+					<li>Source engine fan,</li>
+					<li>Fan of a lot of source mods,</li>
+					<br>
+					
+					<li><h2>Things other than games:</h2></li>
+					<li> <a href='https://www.youtube.com/channel/UCwNetPdfk1uyEdJ-FkYptrQ'>Tally Hall</a> (+ <a href='https://www.youtube.com/playlist?list=PLgfcKJoXczh6LMD5dCylsNlx4j_Y5AXM-'>JOE HAWLEY JOE HAWLEY</a> + <a href='https://youtube.com/playlist?list=OLAK5uy_k2F6ziLkqoGFxaiOjnY9YNShP3asV-K5Y&si=D-9TfKvoRNIHDsut'>Hawaii: Part II</a>) fan,</li>
+					<li><a href='https://www.youtube.com/@wayneradiotv/videos'>WayneRadioTV</a> fan,</li>
+					<li>Programming</li>
+					<li>Hammer World Editor</li>
+				</ul>
+				</div>
+			<img src="assets/MaximusMiller2/rank.png" alt="">
+			<pre>
+				<code>
+					.MaximusMiller2::before {
+						background-image: url("../users/assets/MaximusMiller2/me-as-a-fox.png");
+						border-image-source: url("../images/border/leavey.png");
+					}
+					.MaximusMiller2{
+						background-color: rgb(30 80 49 / 65%);
+						color: #8cc5f4;
+						font-size: auto;
+						font-family: "Arial", emoji;
+					}
+					</code>
+			</pre>
+	</div>
 
-			.phone:after {
-			 position:absolute;
-			 left: 50;
-			}
-		</code>
-	</pre>
-
-	<h2>Glass CSS Theme</h2>
-	<a target="_blank" title="glass-sunkist.css" href="assets/glass-sunkist.css" >glass-sunkist.css</a>
-	<h2>Console CSS Theme</h2>
-	<p>Should be paired with compact mode and mobile text box</p>
-	<a target="_blank" title="glass-sunkist.css" href="assets/unified-console.css" >unified-console.css</a>
-
-
+	<script nodraw>
+		const fontRotation = [
+			"Bound",
+			"Deltarune",
+			"Coomer",
+			"sunkist",
+			"serif",
+			"system-ui",
+			"Coolvetica",
+			"Amatic SC"
+		];
+		function random(max){
+			return Math.floor(Math.random()*max);
+		}
+		document.querySelector('h1').style.fontFamily = fontRotation[ random(fontRotation.length) ];
+	</script>
+	
 	<script nodraw="">
 		hljs.highlightAll();
 	</script>

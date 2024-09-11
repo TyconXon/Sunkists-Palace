@@ -9,7 +9,8 @@ scrambled {
 }
 
 .flipped,
-flip {
+flip,
+[flipped]{
 	transform: rotate(180deg);
 }
 
@@ -111,6 +112,11 @@ rotator {
 	50% {
 		transform: rotate(180deg);
 	}
+}
+
+@keyframes spin{
+	from{ transform:rotate(360deg); }
+	to{ transform:rotate(-360deg); }
 }
 
 rotator3D,

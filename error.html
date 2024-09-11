@@ -1,5 +1,76 @@
-its down right now  <br>
-use <a href='/?slow=a'> slow mode </a> <br>
-or use <a href='/realtime.html'> realtime mode </a> <br>
-or use <a href='/schedule/checkSchedule.html'>Check schedule</a> <br>
-or <a href='/aindex.html'> continue anyway </a>
+<html>
+	<head>
+		<title>[[Hyperlink Blocked.]]</title>
+		<link rel="stylesheet" href="style/fonts.css"></link>
+		<style>
+			*{
+				color:white;
+				font-family:"Undertale";
+				text-align: center;
+				overflow: hidden;
+				image-rendering: pixelated;
+			}
+			html{
+				background-color:black;
+			}
+			img{
+				height: 35vh;
+			}
+			body{
+				position: relative;
+				top: 25vh;
+				overflow: hidden;	
+			}
+			background-wrapper {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				z-index: -1;
+			}
+			background {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 200%;
+				height: 100%;
+				background: url('./images/background/dumpslider.png') repeat-x;
+				animation: slide 10s linear infinite;
+				image-rendering: pixelated;
+			}
+
+			@keyframes slide {
+					from { transform: translateX(0); }
+					to { transform: translateX(-50%); }
+			}
+		</style>
+	</head>
+
+	<background-wrapper>
+		<background>
+			</background>
+	</background-wrapper>
+	
+	<body>
+
+		
+		<img src='images/spamton_laugh_glitch.gif'>
+		<h1>[[Hyperlink Blocked]]</h1>
+		<p>You provided illegal query data.</p>
+		<audio autoplay controls loop src='https://archive.org/download/deltarune-soundtrack/Deltarune%20Soundtrack/Spamton.mp3'></audio>
+
+			<script>
+				let a = true;
+				document.addEventListener("mouseover", function() {
+					if (navigator.userActivation.hasBeenActive && a) {
+						var audio = document.querySelector("audio");
+						audio.volume = 0.2;
+						audio.play();
+						a=false;
+					}
+				});
+			</script>
+	</body>
+</html>

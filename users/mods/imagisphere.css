@@ -7,7 +7,7 @@
   border-radius: 100%;
   background-color: rgba(50,50,50,1);
   border-width: 0;
-  border-image-source: url("../users/assets/boxel/images/linkOverlay.png");
+  border-image-source: url(../users/mods/modAssets/imagisphere-zipper.png);
   box-shadow: inset 0 0 7px 3px black;  
   border-image-slice: 1 1 1 1 fill!important;
   border-image-width: 9px!important;
@@ -36,7 +36,7 @@ backdrop-filter: none;
 }
 
 #menuTitle {
- background-image: url('../users/mods/lbplogolong.png')!important;
+ background-image: url('../users/mods/modAssets/imagisphere-logolong.png')!important;
  background-size: auto 100%!important;
  background-repeat: no-repeat!important;
  background-position: center!important;
@@ -52,7 +52,7 @@ backdrop-filter: none;
 
 #sunkistPalaceHTML {
  background:
-  url(../users/assets/boxel/images/Gardens2.webp);
+  url(../users/mods/modBackgrounds/imagisphere.webp);
  background-attachment: fixed;
  background-position: right;
  background-repeat: no-repeat!important;
