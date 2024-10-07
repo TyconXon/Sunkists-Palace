@@ -105,25 +105,25 @@ function recieveMessage(message) {
 function createNewMessageLine(){
 	if (!document.hasFocus() || !altMode) {
         if (unfocusedLevel === 0) {
-            const rule = document.createElement('hr');
-            const readMessage = document.createElement('button');
-
-            readMessage.innerHTML = "Read Messages";
-            readMessage.style.backgroundColor = 'red';
-            readMessage.style.padding = 'auto';
-
-            // Mark as read and remove elements on click
-            readMessage.onclick = () => {
-                markAsRead();
-                readMessage.remove();
-                rule.remove();
-            };
-
-            document.body.appendChild(rule);
-            document.body.appendChild(readMessage);
-
-            unfocusedLevel = 1;
-        }
+		const rule = document.createElement('hr');
+		const readMessage = document.createElement('button');
+		
+		readMessage.innerHTML = "Read Messages";
+		readMessage.style.backgroundColor = 'red';
+		readMessage.style.padding = 'auto';
+		
+		// Mark as read and remove elements on click
+		readMessage.onclick = () => {
+			markAsRead();
+			readMessage.remove();
+			rule.remove();
+		};
+		
+		document.body.appendChild(rule);
+		document.body.appendChild(readMessage);
+		
+		unfocusedLevel = 1;
+	}
     } else {
         try {
             navigator.vibrate(22);
