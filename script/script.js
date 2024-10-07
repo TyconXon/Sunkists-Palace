@@ -5,8 +5,9 @@ var altMode = true; //Determines if the page will autoscroll on a new message on
 var pingList = []; //Webpage sized ping-list
 var curServerData = {};
 var unfocusedLevel = 0;
-var singLevel = 0;
-var sanLevel = 0;
+let sndVol = 0.3;
+
+
 const textBox = document.getElementById("soapMode");
 var sunkistsPalace = 'Sunkist\'s Palace';
 var altpressed = false;
@@ -741,6 +742,43 @@ function isVideoFile(filename) {
 	const fileExtension = filename.split('.').pop().toLowerCase();
 	return videoExtensions.includes(fileExtension);
 }
+
+function loadedDiceRoll(firstProb, firstChoice, ...args) {
+    if (args.length === 0) {
+        return firstChoice; // If no other arguments, always return the first choice
+    }
+    if (firstProb < 0 || firstProb > 1) {
+        throw new Error("Probability must be between 0 and 1");
+    }
+
+    const randomNum = Math.random();
+
+    // If the random number falls within the range of the first argument's probability, return it
+    if (randomNum < firstProb) {
+        return firstChoice;
+    }
+
+    // Otherwise, return a random choice from the rest of the arguments
+    const remainingProb = (1 - firstProb);
+    const randomIndex = Math.floor(Math.random() * args.length);
+    
+    return args[randomIndex];
+}
+
+function randomChoice(...args) {
+    if (args.length === 0) {
+        return null; // Return null if no arguments are passed
+    }
+    const randomIndex = Math.floor(Math.random() * args.length);
+    return args[randomIndex];
+}
+
+function playSound(soundURL) {
+    let sound = new Audio(soundURL);
+    sound.volume = sndVol;
+    sound.play();
+}
+
 
 /*
 if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1){

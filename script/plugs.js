@@ -1,439 +1,194 @@
+//User-defined
+let msgCausesSounds = true;
+//Internal
+var sanLevel = 0;
+var singLevel = 0;
+
 /*//Server message handling//*/
 //When the client recieves a messsage
-socket.on("outMessage", (message) => {
-	console.log(message);
-	//Only available for autoMode
+socket.on("outMessage", recieveMessage);
 
-	if(message.includes('console message room')){
-		let sounder = new Audio('/sound/usr/error.ogg');
-		sounder.volume = 0.15;
-		sounder.play();
-	}else{
-		let soundURL =
-			"/sound/";
-		let sndVol = 0.3;
-		if (splitString(message) != false) {
-			switch (splitString(message).usrIdentifier) {
-				case "MaximusMiller2":
-					if (Math.random() < 0.1) {
-						soundURL += "/say/toby/snd_select.wav";
-					} else {
-						soundURL += "/say/toby/text.mp3";
-					}
-					break;
-				case "Boxel":
-					if (Math.random() < 0.12) {
-						soundURL += "wow.mp3";
-					} else {
-						soundURL += "/sound/usr/Fox_idle3.ogg";
-					}
-					break;
-				case "Afton":
-					if (Math.random() < 0.15) {
-						soundURL += "say/toby/snd_pombark.wav";
-					} else {
-						soundURL += "usr/alert2.mp3";
-					}
-	
-					break;
-				case 'Elsen':
-					soundURL += 'Global.wav';
-					break;
-				default:
-					soundURL += "say/toby/snd_text.wav";
-	
-					break;
-			}
-			switch (splitString(message).message) {
-				case "dog":
-				case "bark":
-					soundURL =
-						"/sound/say/toby/snd_pombark.wav";
-					break;
-				case ":3":
-				case "&:":
-				case "Meow":
-				case "cat":
-				case "3":
-				case "meow":
-					let rng = Math.random();
-					if (rng <= 0.333) {
-						soundURL =
-							"/sound/usr/Cat_idle1.ogg";
-					} else if (rng <= 0.666) {
-						soundURL =
-							"/sound/usr/Cat_idle2.ogg";
-					} else {
-						soundURL =
-							"/sound/usr/Cat_idle3.ogg";
-					}
-					break;
-				case "die":
-					soundURL =
-						"/sound/itoi/die.mp3";
-					break;
-				case "Fox":
-				case "fox":
-					if (Math.random() > 0.5) {
-						soundURL =
-							"/sound/usr/Fox_idle3.ogg";
-					} else {
-						soundURL =
-							"/sound/usr/Fox_idle2.ogg";
-					}
-					break;
-				case "explode":
-				case "boom":
-					soundURL =
-						"/sound/say/toby/snd_badexplosion.wav";
-					break;
-				case "ralsei":
-					if (singLevel == 0) {
-						soundURL =
-							"/sound/say/toby/snd_ralseising1.wav";
-						singLevel = 1;
-					} else {
-						soundURL =
-							"/sound/say/toby/snd_ralseising2.wav";
-						singLevel = 0;
-					}
-					break;
-				case "smile":
-					soundURL =
-						"/sound/say/toby/snd_smile.wav";
-					break;
-				case "Wow!":
-					soundURL =
-						"/sound/say/itoi/008-Earthbound-Now-Let_s-Go.mp3";
-					break;
-				case "Whoa!":
-					soundURL =
-						"/sound/say/itoi/015-Earthbound-Whoa.mp3";
-					break;
-				case "Win!":
-					soundURL =
-						"/sound/say/itoi/035-Earthbound-YouWin.mp3";
-					break;
-				case "sanctuary":
-					switch (sanLevel) {
-						case 8:
-							soundURL =
-								"/sound/say/itoi/048.mp3";
-							sanLevel++;
-							break;
-						case 9:
-							soundURL =
-								"/sound/say/itoi/049.mp3";
-							sanLevel++;
-							break;
-						case 10:
-							soundURL =
-								"/sound/say/itoi/050.mp3";
-							sanLevel++;
-							break;
-						case 11:
-							soundURL =
-								"/sound/say/itoi/051.mp3";
-							sanLevel++;
-							break;
-						case 13:
-							soundURL =
-								"/sound/say/itoi/052.mp3";
-							sanLevel++;
-							break;
-						case 14:
-							soundURL =
-								"/sound/say/itoi/053.mp3";
-							sanLevel++;
-							break;
-						case 15:
-							soundURL =
-								"/sound/say/itoi/054.mp3";
-							sanLevel = 0;
-							break;
-						case 0:
-							soundURL =
-								"/sound/say/itoi/122.mp3";
-							sanLevel++;
-							break;
-						case 1:
-							soundURL =
-								"/sound/say/itoi/123.mp3";
-							sanLevel++;
-							break;
-						case 2:
-							soundURL =
-								"/sound/say/itoi/124.mp3";
-							sanLevel++;
-							break;
-						case 3:
-							soundURL =
-								"/sound/say/itoi/125.mp3";
-							sanLevel++;
-							break;
-						case 4:
-							soundURL =
-								"/sound/say/itoi/126.mp3";
-							sanLevel++;
-							break;
-						case 5:
-							soundURL =
-								"/sound/say/itoi/127.mp3";
-							sanLevel++;
-							break;
-						case 6:
-							soundURL =
-								"/sound/say/itoi/128.mp3";
-							sanLevel++;
-							break;
-						case 7:
-							soundURL =
-								"/say/sound/itoi/129.mp3";
-							sanLevel++;
-							break;
-					}
-	
-					break;
-				case "spooky":
-					soundURL =
-						"/sound/say/itoi/159- Earthbound - Spooky___.mp3";
-	
-					break;
-				case "ok":
-					soundURL =
-						"/sound/say/itoi/170- Earthbound - OK _Ssuka_.mp3";
-					break;
-				case "active":
-					soundURL =
-						"/sound/say/itoi/active.mp3";
-					break;
-				case "fiddlesticks":
-					soundURL =
-						"/sound/say/valve/bugreporter_failed.wav";
-					break;
-				case "screenshot":
-					soundURL =
-						"/sound/say/valve/bugreporter_succeeded.wav";
-					break;
-				case "[":
-					soundURL =
-						"/sound/say/itoi/ding_off.wav";
-					break;
-				case "]":
-					soundURL =
-						"/sound/say/itoi/ding_on.wav";
-					break;
-				case "drunk":
-					soundURL =
-						"/sound/usr/Drunk.mp3";
-					break;
-				case "zap":
-					soundURL =
-						"/sound/usr/Electric.mp3";
-					break;
-				case "anticitizen":
-					soundURL =
-						"/sound/say/valve/halflife/voice/f_anticitizenreport_spkr.wav";
-					break;
-				case "anticivil":
-					soundURL =
-						"/sound/say/valve/halflife/voice/f_anticivil1_5_spkr.wav";
-					break;
-				case "clamp":
-					soundURL =
-						"/sound/say/valve/halflife/voice/f_anticivilevidence_3_spkr.wav";
-					break;
-				case "malcompliance":
-					soundURL =
-						"/sound/say/valve/halflife/voice/f_capitalmalcompliance_spkr.wav";
-					break;
-				case "old times":
-					soundURL =
-						"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/sound/Gman_06.ogg";
-					break;
-				case "misplaced":
-					soundURL =
-						"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/sound/Gman_12a_edited.ogg";
-					break;
-				case "choose":
-					soundURL =
-						"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/sound/Gman_choose1.ogg";
-					break;
-				case "get off":
-					soundURL =
-						"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/sound/Gman_exit10.ogg";
-					break;
-				case "unforeseen consequences":
-					soundURL =
-						"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/sound/Gman_mono9.ogg";
-					break;
-				case "no regrets":
-					soundURL =
-						"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/sound/Gman_noreg.ogg";
-					break;
-				case "rise and shine":
-					soundURL =
-						"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/sound/Gman_riseshine.ogg";
-					break;
-				case "snarl":
-					soundURL =
-						"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/sound/Gman_snarl01.ogg";
-					break;
-				case "buzz":
-					soundURL =
-						"/sound/say/itoi/hackbuzzer.wav";
-					break;
-				case "medic":
-					soundURL =
-						"/sound/say/valve/tf2/medic_standonthepoint04.mp3";
-					break;
-				case "thanks":
-					soundURL =
-						"/sound/say/valve/tf2/medic_thanks01.mp3";
-					break;
-				case "thank you":
-					soundURL =
-						"/sound/say/valve/tf2/medic_thanksfortheheal01.mp3";
-					break;
-				case "start":
-					soundURL =
-						"/sound/say/valve/tf2/mm_round_start_casual.wav";
-					break;
-				case "mad":
-					soundURL =
-						"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/sound/NPC_VO_rosie_combat_01.wav.mp3";
-					break;
-				case "thunder":
-					soundURL =
-						"/sound/say/valve/halflife/thunder2.wav";
-					break;
-				case "13":
-					soundURL =
-						"/sound/Tally Hall - Marvin's Marvelous Mechanical Museum - 13 13.ogg";
-					break;
-			}
-			//Create a sound from this link
-			let msgSound = new Audio(soundURL);
-			msgSound.volume = sndVol;
-			
-			//Then play it
-			msgSound.play();
-		}
-	}
-	/*
-	let eventData = {
-		fullData: message,
-		user: splitString(message).usrIdentifier,
-		message: splitString(message).message
-	}
+// Map user identifiers to sound URL options
+const userSounds = {
+	MaximusMiller2: loadedDiceRoll(0.1, 'say/toby/snd_select.wav',  'say/toby/text.mp3'),
+	Boxel: loadedDiceRoll(0.02, 'say/itoi/wow.mp3', 'usr/Fox_idle3.ogg'),
+	Afton: loadedDiceRoll(0.15, 'say/toby/snd_pombark.wav', 'usr/alert2.mp3'),
+	Elsen: 'Global.wav',
+	default: 'say/toby/snd_text.wav'
+};
 
-	document.dispatchEvent(eventData);
-	*/
+// Map message keywords to sound URL options. = will redirect to another entree.
+const messageSounds = new Map([
+	["zap", '/sound/usr/Electric.mp3'],
+	["dog", '/sound/say/toby/snd_pombark.wav'],
+	["bark", '=dog'],
+	["meow", randomCatSound()],
+	[":3", "=meow"],
+	["Meow", "=meow"],
+	["3", "=meow"],
+	["die", '/sound/say/itoi/die.mp3'],
+	["fox", randomChoice('/sound/usr/Fox_idle3.ogg' , '/sound/usr/Fox_idle2.ogg')],
+	["Fox", "=fox"],
+	//Toby Fox
+	["boom", '/sound/say/toby/snd_badexplosion.wav'],
+	["explosion", '=boom'],
+	["explode", "=boom"],
+	["ralsei", resetSingLevel()],
+	["smile", '/sound/say/toby/snd_smile.wav'],
+	["I can do anything!", "/sound/say/toby/snd_joker_anything.wav"],
+	//Itoi
+	["Wow!", '/sound/say/itoi/008-Earthbound-Now-Let_s-Go.mp3'],
+	["Whoa!", '/sound/say/itoi/015-Earthbound-Whoa.mp3'],
+	["Win", '/sound/say/itoi/you win!.mp3'],
+	["sanctuary", getSanctuarySound()],
+	["spooky", '/sound/say/itoi/159-Earthbound-Spooky.mp3'],
+	["ok", '/sound/say/itoi/170-Earthbound-OK_Ssuka.mp3'],
+	["scary", "/sound/say/itoi/Scary.mp3"],
+	["break", "/sound/say/itoi/Random_break.ogg"],
+	["heal", "/sound/say/itoi/ailment.mp3"],
+	["kill", "/sound/say/itoi/attack.mp3"],
+	//Hakita
+	["punch", "/sound/say/hakita/PunchSwoosh.ogg"],
+	["feedbacker", "=punch"],
+	["spawn", "/sound/say/hakita/portal.ogg"],
+	["husk", "=spawn"],
+	["streetcleaner", "=spawn"],
+	["ferryman", "/sound/say/hakita/PortalFerryman.ogg"],
+	["mannequin", "/sound/say/hakita/MannequinSkitter.wav"],
+	["Devil May Cry","/sound/say/hakita/devilmaycry.wav"],
+	["enraged", "/sound/say/hakita/enraged.mp3"],
+	["kys", "=enraged"],
+	["Yes, that's it!", "/sound/say/hakita/Sp_yesthatsit.ogg"],
+	["wicked", "/sound/say/hakita/wicked.wav"],
+	["ricoshot", "/sound/say/hakita/coinflip.wav"],
+	["bribe", "=ricoshot"],
+	["coin", "=ricoshot"],
+	["marksman", "=ricoshot"],
+	["Full auto", "/sound/say/hakita/fullauto.wav"],
+	["Fuller auto", "/sound/say/hakita/fullerauto.wav"],
+	//Lindroth
+	["tyro", randomChoice("/sound/say/lindroth/1.ogg", "/sound/say/lindroth/2.ogg", "/sound/say/lindroth/3.ogg", "/sound/say/lindroth/4.ogg", "/sound/say/lindroth/5.ogg")],
 
-	if (true) { //If was for no automode
-		// Create a new message element
+]);
+
+function recieveMessage(message) {
+    console.debug("Receiving message: " + message);
+	let eMessage = externalMessageEdits(message);
+    findSound(eMessage);
+	createNewMessageLine();
+	createMessage(eMessage)
+
+    // Handle auto-formatting if enabled
+    if (window.localStorage.getItem("autoFormat")) {
+        document.getElementsByClassName('openInTab').forEach(element => {
+            element.onclick = () => newPopup(element.src);
+        });
+    }
+
+    // Recheck pings and scroll if in alt mode
+    checkPings();
+    if (altMode) {
+        document.body.scrollTop = document.body.scrollHeight;
+    }
+}
+
+function createNewMessageLine(){
+	if (!document.hasFocus() || !altMode) {
+        if (unfocusedLevel === 0) {
+            const rule = document.createElement('hr');
+            const readMessage = document.createElement('button');
+
+            readMessage.innerHTML = "Read Messages";
+            readMessage.style.backgroundColor = 'red';
+            readMessage.style.padding = 'auto';
+
+            // Mark as read and remove elements on click
+            readMessage.onclick = () => {
+                markAsRead();
+                readMessage.remove();
+                rule.remove();
+            };
+
+            document.body.appendChild(rule);
+            document.body.appendChild(readMessage);
+
+            unfocusedLevel = 1;
+        }
+    } else {
+        try {
+            navigator.vibrate(22);
+        } catch (error) {
+            console.log("Can't vibrate.");
+        }
+        unfocusedLevel = 0;
+    }
+}
+
+function createMessage(message){
+	    // Create and append a new message element
 		const newDiv = document.createElement("message");
-		// Set the HTML content of the new div
 		newDiv.innerHTML = message;
+		document.body.appendChild(newDiv);
+}
 
-		
+function findSound(message) {
+    if (message.includes('console message room')) {
+        playSound('/sound/usr/error.ogg');
+        return;
+    }
 
-		if (!document.hasFocus() || !altMode) {
-			if (unfocusedLevel == 0) {
-				var rule = document.createElement('hr');
-				var readMessage = document.createElement('button');
-				readMessage.innerHTML = "Read Messages";
-				readMessage.onclick =()=>{markAsRead();readMessage.remove();rule.remove();};
-				readMessage.style.backgroundColor = 'red';
-				readMessage.style.padding = 'auto';
-				document.body.appendChild(rule);
-				document.body.appendChild(readMessage);
+    let soundURL = '/sound/';
+    let msgParts = splitString(message);
+    
+    if (!msgParts) {
+		//if we couldn't figure out the messageparts
+		playSound()
+		return
+	};    
+    soundURL += userSounds[msgParts.usrIdentifier] || 'say/toby/snd_text.wav';
 
-				unfocusedLevel = 1;
-				document.title.replace(sunkistsPalace, splitString(message).usrIdentifier);
-				setTimeout(()=>{
-					document.title.replace(splitString(message).usrIdentifier, sunkistsPalace);
-				}, 5000);
-			}
-		} else {
-			try {
-				navigator.vibrate(22);
-			} catch (error) {
-				
-			}
-			
-			unfocusedLevel = 0;
-		}
-
-		// Append the new div to the body
-		const finalMsg = document.body.appendChild(newDiv);
-
-		/*
-		if(rightNow.getUTCMonth() == 3 && rightNow.getUTCDay() == 1 && Math.random()>0.5){
-			for(let i = 0; i < Math.round(Math.random()*8); i++){
-				var request = new XMLHttpRequest();
-				request.open('GET', 'https://random-word-api.herokuapp.com/word', true);
-				request.onreadystatechange = function() { // request successful
-				// we can use server response to our request now
-					
-					if (this.readyState == 4 && this.status == 200) {
-						let someonesLastMessage = document.getElementsByClassName('message');
-						let someonesVeryLastMessage = someonesLastMessage[someonesLastMessage.length - 1]
-						if(Math.random()>0.5){
-							someonesVeryLastMessage.innerHTML = someonesVeryLastMessage.innerHTML.replace('<msgtxt>', '<msgtxt>' + /[a-z]+/.exec(this.responseText)[0] + " ");
-						}else{
-							someonesVeryLastMessage.innerHTML = someonesVeryLastMessage.innerHTML.replace('</msgtxt>', " " + /[a-z]+/.exec(this.responseText)[0] + " </msgtxt>");
-						}
-						
-					}
-				};
-		
-				request.onerror = function() {
-					// request failed
-				};
-		
-				request.send();
-			}
-		}
-*/
-		if (window.localStorage.getItem("autoFormat")) {
-			hljs.highlightAll();
-			let elementes = document.getElementsByClassName('openInTab');
-			 for(var i = 0; i < elementes.length; i++){
-					elementes[i].onclick = function(){ newPopup(this.src);console.log(this.src) };
-			 }
-		}
-
-/*
-		if (window.localStorage.getItem("notificationLevel") == "2") {
-			var splitted = splitString(message);
-			var styles = window.getComputedStyle(newDiv, "::before");
-			console.log(styles.getPropertyValue("background-image"));
-			console.log(JSON.stringify(styles));
-
-			if (
-				!(
-					splitted.usrIdentifier ==
-					window.localStorage.getItem("username")
-				)
-			) {
-				notify(
-					splitted.message,
-					splitted.usrIdentifier,
-					"https://javascriptreminiscentofpragmaticgears.maximusmiller2.repl.co/pre.gif",
-				);
-			}
-		}
-*/
-		//Recheck pings
-		checkPings();
-		//If altmode is enabled, rescroll the page
-		if (altMode) {
-			//Scroll to the bottom, basically
-			document.body.scrollTop = document.body.scrollHeight;
-		}
+	let _chosen = "";
+	if(messageSounds.get(msgParts.message).startsWith('=')){
+		//If has shorctut notation
+		let shortcutPointsTo = messageSounds.get(msgParts.message).replace('=', '');
+		_chosen = messageSounds.get(shortcutPointsTo)
+	}else{
+		_chosen = messageSounds.get(msgParts.message);
 	}
-});
+
+    soundURL = _chosen || soundURL;
+
+    playSound(soundURL);
+}
+
+// Helper functions
+function randomCatSound() {
+    return randomChoice('/sound/usr/Cat_idle1.ogg','/sound/usr/Cat_idle2.ogg','/sound/usr/Cat_idle3.ogg');
+}
+
+function resetSingLevel() {
+	//Flip-flop between the ralsei sounds
+    singLevel = 1 - singLevel;
+    return singLevel ? '/sound/say/toby/snd_ralseising2.wav' : '/sound/say/toby/snd_ralseising1.wav';
+}
+
+const sanctuarySounds = [
+	'/sound/say/itoi/122.mp3', '/sound/say/itoi/123.mp3', '/sound/say/itoi/124.mp3', '/sound/say/itoi/125.mp3',
+	'/sound/say/itoi/126.mp3', '/sound/say/itoi/127.mp3', '/sound/say/itoi/128.mp3', '/sound/say/itoi/129.mp3',
+	'/sound/say/itoi/048.mp3', '/sound/say/itoi/049.mp3', '/sound/say/itoi/050.mp3', '/sound/say/itoi/051.mp3',
+	'/sound/say/itoi/052.mp3', '/sound/say/itoi/053.mp3', '/sound/say/itoi/054.mp3'
+];
+function getSanctuarySound() {
+
+    let sound = sanctuarySounds[sanLevel] || sanctuarySounds[0];
+    sanLevel = (sanLevel + 1) % sanctuarySounds.length;
+    return sound;
+}
+
+
+
+
+
 socket.on("getConnected", (con) => {
 	document.getElementById("onlineNumber").innerHTML = con;
 	if(localStorage.getItem('titlePrefix')){
