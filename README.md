@@ -14,4 +14,5 @@
 ╚═╝░░░░░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝░╚════╝░╚══════╝
 ```
 # What is Sunkist's Palace?
-WIP!
+> A simple chat room for messing with HTML and 'conversing'. Word of the day is 'Hamburger'.
+**Sunkist's Palace** is a chat room made with 
