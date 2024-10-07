@@ -10,37 +10,47 @@ socket.on("outMessage", recieveMessage);
 
 // Map user identifiers to sound URL options
 const userSounds = {
-	MaximusMiller2: loadedDiceRoll(0.1, 'say/toby/snd_select.wav',  'say/toby/text.mp3'),
-	Boxel: loadedDiceRoll(0.02, 'say/itoi/wow.mp3', 'usr/Fox_idle3.ogg'),
-	Afton: loadedDiceRoll(0.15, 'say/toby/snd_pombark.wav', 'usr/alert2.mp3'),
+	MaximusMiller2: ()=>{return loadedDiceRoll(0.1, 'say/toby/snd_select.wav',  'say/toby/text.mp3')},
+	Boxel: ()=>{return loadedDiceRoll(0.02, 'say/itoi/wow.mp3', 'usr/Fox_idle3.ogg')},
+	Afton: ()=>{return loadedDiceRoll(0.15, 'say/toby/snd_pombark.wav', 'usr/alert2.mp3')},
 	Elsen: 'Global.wav',
 	default: 'say/toby/snd_text.wav'
 };
+
+
+const sanctuarySounds = [
+	'/sound/say/itoi/122.mp3', '/sound/say/itoi/123.mp3', '/sound/say/itoi/124.mp3', '/sound/say/itoi/125.mp3',
+	'/sound/say/itoi/126.mp3', '/sound/say/itoi/127.mp3', '/sound/say/itoi/128.mp3', '/sound/say/itoi/129.mp3',
+	'/sound/say/itoi/048.mp3', '/sound/say/itoi/049.mp3', '/sound/say/itoi/050.mp3', '/sound/say/itoi/051.mp3',
+	'/sound/say/itoi/052.mp3', '/sound/say/itoi/053.mp3', '/sound/say/itoi/054.mp3'
+];
+
 
 // Map message keywords to sound URL options. = will redirect to another entree.
 const messageSounds = new Map([
 	["zap", '/sound/usr/Electric.mp3'],
 	["dog", '/sound/say/toby/snd_pombark.wav'],
 	["bark", '=dog'],
-	["meow", randomCatSound()],
+	["meow", ()=>{return randomCatSound()}],
 	[":3", "=meow"],
 	["Meow", "=meow"],
 	["3", "=meow"],
+	["cat", "=meow"],
 	["die", '/sound/say/itoi/die.mp3'],
-	["fox", randomChoice('/sound/usr/Fox_idle3.ogg' , '/sound/usr/Fox_idle2.ogg')],
+	["fox", ()=>{return randomChoice('/sound/usr/Fox_idle3.ogg' , '/sound/usr/Fox_idle2.ogg')}],
 	["Fox", "=fox"],
 	//Toby Fox
 	["boom", '/sound/say/toby/snd_badexplosion.wav'],
 	["explosion", '=boom'],
 	["explode", "=boom"],
-	["ralsei", resetSingLevel()],
+	["ralsei", ()=>{return resetSingLevel()}],
 	["smile", '/sound/say/toby/snd_smile.wav'],
 	["I can do anything!", "/sound/say/toby/snd_joker_anything.wav"],
 	//Itoi
 	["Wow!", '/sound/say/itoi/008-Earthbound-Now-Let_s-Go.mp3'],
 	["Whoa!", '/sound/say/itoi/015-Earthbound-Whoa.mp3'],
 	["Win", '/sound/say/itoi/you win!.mp3'],
-	["sanctuary", getSanctuarySound()],
+	["sanctuary", ()=>{return getSanctuarySound()}],
 	["spooky", '/sound/say/itoi/159-Earthbound-Spooky.mp3'],
 	["ok", '/sound/say/itoi/170-Earthbound-OK_Ssuka.mp3'],
 	["scary", "/sound/say/itoi/Scary.mp3"],
@@ -67,7 +77,7 @@ const messageSounds = new Map([
 	["Full auto", "/sound/say/hakita/fullauto.wav"],
 	["Fuller auto", "/sound/say/hakita/fullerauto.wav"],
 	//Lindroth
-	["tyro", randomChoice("/sound/say/lindroth/1.ogg", "/sound/say/lindroth/2.ogg", "/sound/say/lindroth/3.ogg", "/sound/say/lindroth/4.ogg", "/sound/say/lindroth/5.ogg")],
+	["tyro", ()=>{return randomChoice("/sound/say/lindroth/1.ogg", "/sound/say/lindroth/2.ogg", "/sound/say/lindroth/3.ogg", "/sound/say/lindroth/4.ogg", "/sound/say/lindroth/5.ogg")}	],
 
 ]);
 
@@ -80,7 +90,7 @@ function recieveMessage(message) {
 
     // Handle auto-formatting if enabled
     if (window.localStorage.getItem("autoFormat")) {
-        document.getElementsByClassName('openInTab').forEach(element => {
+        Array(document.getElementsByClassName('openInTab')).forEach(element => {
             element.onclick = () => newPopup(element.src);
         });
     }
@@ -145,15 +155,21 @@ function findSound(message) {
 		playSound()
 		return
 	};    
-    soundURL += userSounds[msgParts.usrIdentifier] || 'say/toby/snd_text.wav';
+		let _rawValue = userSounds[msgParts.usrIdentifier];
+		let digestedSound = typeof _rawValue === 'function' ? _rawValue() : _rawValue ;
+    soundURL += digestedSound || 'say/toby/snd_text.wav';
 
-	let _chosen = "";
-	if(messageSounds.get(msgParts.message).startsWith('=')){
-		//If has shorctut notation
-		let shortcutPointsTo = messageSounds.get(msgParts.message).replace('=', '');
-		_chosen = messageSounds.get(shortcutPointsTo)
-	}else{
-		_chosen = messageSounds.get(msgParts.message);
+	let _chosen = false;
+	let directSound = messageSounds.get(msgParts.message);
+	
+	// If it's a shortcut to another sound
+	if (typeof directSound === 'string' && directSound.startsWith('=')) {
+			let shortcutKey = directSound.replace('=', '');
+			let shortcutSound = messageSounds.get(shortcutKey);
+			_chosen = typeof shortcutSound === 'function' ? shortcutSound() : shortcutSound;
+	} else {
+			// Call the function to get a fresh sound URL, or use a static string
+			_chosen = typeof directSound === 'function' ? directSound() : directSound;
 	}
 
     soundURL = _chosen || soundURL;
@@ -172,12 +188,7 @@ function resetSingLevel() {
     return singLevel ? '/sound/say/toby/snd_ralseising2.wav' : '/sound/say/toby/snd_ralseising1.wav';
 }
 
-const sanctuarySounds = [
-	'/sound/say/itoi/122.mp3', '/sound/say/itoi/123.mp3', '/sound/say/itoi/124.mp3', '/sound/say/itoi/125.mp3',
-	'/sound/say/itoi/126.mp3', '/sound/say/itoi/127.mp3', '/sound/say/itoi/128.mp3', '/sound/say/itoi/129.mp3',
-	'/sound/say/itoi/048.mp3', '/sound/say/itoi/049.mp3', '/sound/say/itoi/050.mp3', '/sound/say/itoi/051.mp3',
-	'/sound/say/itoi/052.mp3', '/sound/say/itoi/053.mp3', '/sound/say/itoi/054.mp3'
-];
+
 function getSanctuarySound() {
 
     let sound = sanctuarySounds[sanLevel] || sanctuarySounds[0];
@@ -186,6 +197,9 @@ function getSanctuarySound() {
 }
 
 
+function externalMessageEdits(message){
+	return message;
+}
 
 
 
