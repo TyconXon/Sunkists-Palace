@@ -43,6 +43,7 @@ const messageSounds = new Map([
 	["boom", '/sound/say/toby/snd_badexplosion.wav'],
 	["explosion", '=boom'],
 	["explode", "=boom"],
+	["boom", "=boom"],
 	["ralsei", ()=>{return resetSingLevel()}],
 	["smile", '/sound/say/toby/snd_smile.wav'],
 	["I can do anything!", "/sound/say/toby/snd_joker_anything.wav"],
