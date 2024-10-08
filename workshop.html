@@ -204,6 +204,8 @@
 
 
 			function harvestOranges(){
+				if(hasQueryParameter("safe")) {return;}
+
 				var orange = document.createElement("style");
 				if(document.querySelector('[autogen]') != null){
 					document.querySelector('[autogen]').outerHTML = '';
@@ -335,6 +337,11 @@
 					search.dispatchEvent(new KeyboardEvent('keyup',{'key':' '}));	
 				}, 100)
 				
+			}
+			// Function to see if a query parameter is in the URL
+			function hasQueryParameter(name) {
+				const urlParams = new URLSearchParams(window.location.search);
+				return urlParams.get(name);
 			}
 		</script>
 

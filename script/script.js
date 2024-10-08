@@ -212,6 +212,8 @@ document.getElementById("sJs").value =
 harvestOranges();
 
 addEventListener('load', ()=>{
+	if(hasQueryParameter("safe")) {return;}
+
 	var lemon = document.createElement("script");
 	lemon.innerHTML = window.localStorage.getItem("js");
 	lemon.setAttribute('nodraw', true);
@@ -247,6 +249,8 @@ document.getElementById("sSubJs").onclick = function() {
 };
 
 function harvestOranges(){
+	if(hasQueryParameter('safe')) {return;}
+
 	var orange = document.createElement("style");
 	if(document.querySelector('[autogen]') != null){
 		document.querySelector('[autogen]').outerHTML = '';
@@ -420,6 +424,12 @@ function reply(msgId) {
 function getQueryParameter(name) {
 		const urlParams = new URLSearchParams(window.location.search);
 		return urlParams.get(name);
+}
+
+// Function to see if a query parameter is in the URL
+function hasQueryParameter(name) {
+	const urlParams = new URLSearchParams(window.location.search);
+	return urlParams.get(name);
 }
 
 // Read the value of the 'preset' query parameter

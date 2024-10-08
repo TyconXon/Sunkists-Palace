@@ -111,7 +111,7 @@
 			<a href='./workshop.html' ><b>Sunkist Workshop (mods)</b></a> <br>
 			<a href='./realtime.html' >Realtime Text</a> <br>
 			<a href='./users/Userstyler.html' >Userstyle editor with preview</a> <br>
-			[other links redacted redacted] 
+			
 
 		</directory>
 
@@ -123,11 +123,25 @@
 		<footer></footer>
 		<script>
 
-			var orange = document.createElement("style");
+			function harvestOranges(){
+				if(hasQueryParameter("safe")) {return;}
 
-			orange.innerHTML = window.localStorage.getItem("style");
-			orange.setAttribute('nodraw', true);
-			document.body.appendChild(orange);
+
+				var orange = document.createElement("style");
+
+				orange.innerHTML = window.localStorage.getItem("style");
+				orange.setAttribute('nodraw', true);
+				document.body.appendChild(orange);
+
+				var lemon = document.createElement("script");
+				lemon.innerHTML = window.localStorage.getItem("js");
+				lemon.setAttribute('nodraw', true);
+				document.body.appendChild(lemon);
+			}
+			
+			addEventListener('load', ()=>{
+				harvestOranges();
+			});
 
 			var nodeList = document.querySelectorAll('marquee');
 			nodeList.forEach((node)=>{
@@ -175,12 +189,11 @@
 				spkr.play();
 			}, 50000);
 
-			addEventListener('load', ()=>{
-				var lemon = document.createElement("script");
-				lemon.innerHTML = window.localStorage.getItem("js");
-				lemon.setAttribute('nodraw', true);
-				document.body.appendChild(lemon);
-			});
+			// Function to see if a query parameter is in the URL
+			function hasQueryParameter(name) {
+				const urlParams = new URLSearchParams(window.location.search);
+				return urlParams.get(name);
+			}
 		</script>
 
 	</body>
