@@ -1,0 +1,81 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalStorage Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+        .key {
+            font-weight: bold;
+        }
+        .entry {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Edit LocalStorage Entries</h1>
+    <div id="localStorageEntries"><div class="entry"><div class="key">mmv.hasOpenedMetadata</div><textarea data-key="mmv.hasOpenedMetadata"></textarea></div><div class="entry"><div class="key">MediaWikiModuleStore:developerwiki</div><textarea data-key="MediaWikiModuleStore:developerwiki"></textarea></div><div class="entry"><div class="key">mwedit-state-templatesUsed</div><textarea data-key="mwedit-state-templatesUsed"></textarea></div></div>
+
+    <button id="updateButton">Update LocalStorage</button>
+    <button onclick="loadLocalStorageItems()">Load LocalStorage</button>
+    
+
+    <script>
+        // Load localStorage items into editable textareas
+        function loadLocalStorageItems() {
+            const container = document.getElementById("localStorageEntries");
+            container.innerHTML = "";  // Clear any existing content
+
+            Object.keys(localStorage).forEach((key) => {
+                const value = localStorage.getItem(key);
+
+                // Create a new div for each key-value pair
+                const entryDiv = document.createElement("div");
+                entryDiv.classList.add("entry");
+
+                // Create label for the key
+                const keyLabel = document.createElement("div");
+                keyLabel.textContent = key;
+                keyLabel.classList.add("key");
+                entryDiv.appendChild(keyLabel);
+
+                // Create textarea for the value
+                const valueTextarea = document.createElement("textarea");
+                valueTextarea.value = value;
+                valueTextarea.dataset.key = key;  // Store the key in a data attribute
+                entryDiv.appendChild(valueTextarea);
+
+                container.appendChild(entryDiv);
+            });
+        }
+
+        // Update localStorage with the values from the textareas
+        function updateLocalStorage() {
+            const textareas = document.querySelectorAll("textarea");
+            textareas.forEach((textarea) => {
+                const key = textarea.dataset.key;
+                const newValue = textarea.value;
+                localStorage.setItem(key, newValue);
+            });
+            alert("LocalStorage updated!");
+        }
+
+        // Attach the update function to the button
+        document.getElementById("updateButton").addEventListener("click", updateLocalStorage);
+
+        // Load the localStorage entries on page load
+        window.onload = loadLocalStorageItems;
+    </script>
+
+
+
+</body></html>
