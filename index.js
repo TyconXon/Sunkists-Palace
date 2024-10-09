@@ -56,7 +56,10 @@ const { Server } = require("socket.io");
 //Delete previous temporary files.
 function flushTemporaries(){
 	fs.readdir("temp", (err, files) => {
-		if (err) throw err;
+		if (err) {
+			console.log("no temp?? not flushing anything man.");
+			return;
+		}
 	
 		for (var file of files) {
 			fs.unlink(path.join("temp", file), (err) => {
