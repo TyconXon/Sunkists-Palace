@@ -1,42 +1,34 @@
 <html id="userindex">
-	<head>
-		<link rel="stylesheet" href="../style/users.css">
-		<link rel="stylesheet" href="../style/fonts.css">
-		<link rel="stylesheet" href="../style/userindex.css">
-		<title>User Indeax</title>
-	</head>
-	<body>
-		
+<head>
+	<link rel="stylesheet" href="../style/users.css">
+	<link rel="stylesheet" href="../style/fonts.css">
+	<link rel="stylesheet" href="../style/userindex.css">
+	<title>User Index</title>
+</head>
+<body>
 		<!--Put links to your page here-->
 		<!--If anyone wants to style this, go ahead-->
-		
-		<a href="../directory.html" id="backbtn">Back</a>
-		<h1>User list:</h1>
-		<directory>
-      <div class="users">
-			<br>
-			<a href="MaximusMiller2.html" class="MaximusMiller2 message">MaximusMiller2</a>
-			<a href="Boxel.html" class="Boxel message">Boxel</a>
-			<a href="Afton.html" class="Afton message">Afton</a>
-			<a href="WigglyStuf.html" class="WigglyStuf message">WigglyStuf</a>
-
-		</directory>
-
+	<div class="users">
+		<a href="MaximusMiller2.html" class="MaximusMiller2 message">MaximusMiller2</a>
+		<a href="Boxel.html" class="Boxel message">Boxel</a>
+		<a href="Afton.html" class="Afton message">Afton</a>
+		<a href="WigglyStuf.html" class="WigglyStuf message">WigglyStuf</a>
+	</div>
 
 		
-		<script>
-			var orange = document.createElement("style");
-			orange.innerHTML = window.localStorage.getItem("style");
-			orange.setAttribute('nodraw', true);
-			document.body.appendChild(orange);
+	<script>
+		var orange = document.createElement("style");
+		orange.innerHTML = window.localStorage.getItem("style");
+		orange.setAttribute('nodraw', true);
+		document.body.appendChild(orange);
 			
-			addEventListener('load', ()=>{
-				var lemon = document.createElement("script");
-				lemon.innerHTML = window.localStorage.getItem("js");
-				lemon.setAttribute('nodraw', true);
-				document.body.appendChild(lemon);
-			});
-			
-		</script>
-	</body>
+		addEventListener('load', ()=>{
+			var lemon = document.createElement("script");
+			lemon.innerHTML = window.localStorage.getItem("js");
+			lemon.setAttribute('nodraw', true);
+			document.body.appendChild(lemon);
+		});
+		
+	</script>
+</body>
 </html>
