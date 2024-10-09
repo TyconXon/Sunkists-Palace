@@ -34,16 +34,14 @@
 			"description": "Like a real IRC.",
 			"tags" : ["unified", "dark", "simple", "terminal", "original", "theme"]
 		},
-    {
-      "name": "Dusk Horizon",
-      "author": "Boxel",
-      "file": "/users/mods/dusk-horizon.css",
-      "image": "/users/mods/dusk-horizon.jpg",
-      "description": "A darker and more blended together theme",
-      "tags" : ["dark", "sleek", "simple", "original", "theme"]
-    },
-		
-		
+    		{
+      			"name": "Dusk Horizon",
+      			"author": "Boxel",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/dusk-horizon.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/dusk-horizon.jpg",
+      			"description": "A darker and more blended together theme",
+      			"tags" : ["dark", "sleek", "simple", "original", "theme"]
+    		},
 		{
 			"name": "LAYER 10",
 			"author": "Boxel" ,
