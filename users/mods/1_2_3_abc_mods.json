@@ -233,7 +233,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/sCM.js",
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/sCM.png",
 			"description": "Adds a custom context menu to the chat page. [EXPERIMENTAL] [WIP]",
-			"tags" : ["context menu", "menu", "right click", "plugin", "expiremental", "wip", "new"]
+			"tags" : ["context-menu", "menu", "right-click", "plugin", "expiremental", "wip", "new"]
 		}
 	],
 	"snippits": [
