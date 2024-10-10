@@ -305,7 +305,7 @@
 			"name": "VGUI",
 			"author": "Boxel",
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/vgui.css",
-      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/vgui.jpg",,
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/vgui.jpg",
 			"description": "Themes the menu based off of the beta Source Engine VGUI",
 			"tags" : ["menu", "game", "valve", "green", "snippit"]
 		},
