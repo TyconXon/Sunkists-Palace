@@ -39,6 +39,11 @@ const messageSounds = new Map([
 	["die", '/sound/say/itoi/die.mp3'],
 	["fox", ()=>{return randomChoice('/sound/usr/Fox_idle3.ogg' , '/sound/usr/Fox_idle2.ogg')}],
 	["Fox", "=fox"],
+	["vort", ()=>{return randomChoice('/sound/say/valve/halflife/vortigese02.wav', '/sound/say/valve/halflife/vortigese03.wav', '/sound/say/valve/halflife/vortigese04.wav', '/sound/say/valve/halflife/vortigese05.wav', '/sound/say/valve/halflife/vortigese07.wav', '/sound/say/valve/halflife/vortigese08.wav', '/sound/say/valve/halflife/vortigese09.wav', '/sound/say/valve/halflife/vortigese11.wav', '/sound/say/valve/halflife/vortigese12.wav') }],
+	["vorp", "=vort"],
+	["fiddlesticks", "/sound/say/valve/source/bugreporter_failed.wav"],
+	["thunder", "sound/say/valve/halflife/thunder2.wav"],
+	
 	//Toby Fox
 	["boom", '/sound/say/toby/snd_badexplosion.wav'],
 	["explosion", '=boom'],
@@ -47,13 +52,14 @@ const messageSounds = new Map([
 	["ralsei", ()=>{return resetSingLevel()}],
 	["smile", '/sound/say/toby/snd_smile.wav'],
 	["I can do anything!", "/sound/say/toby/snd_joker_anything.wav"],
+	["heal", "/sound/say/toby/snd_power.wav"],
 	//Itoi
 	["Wow!", '/sound/say/itoi/008-Earthbound-Now-Let_s-Go.mp3'],
 	["Whoa!", '/sound/say/itoi/015-Earthbound-Whoa.mp3'],
 	["Win", '/sound/say/itoi/you win!.mp3'],
 	["sanctuary", ()=>{return getSanctuarySound()}],
-	["spooky", '/sound/say/itoi/159-Earthbound-Spooky.mp3'],
-	["ok", '/sound/say/itoi/170-Earthbound-OK_Ssuka.mp3'],
+	["spooky", '/sound/say/itoi/159- Earthbound - Spooky___.mp3'],
+	["ok", '/sound/say/itoi/170- Earthbound - OK _Ssuka_.mp3'],
 	["scary", "/sound/say/itoi/Scary.mp3"],
 	["break", "/sound/say/itoi/Random_break.ogg"],
 	["heal", "/sound/say/itoi/ailment.mp3"],
