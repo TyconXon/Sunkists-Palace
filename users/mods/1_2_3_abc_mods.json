@@ -45,16 +45,16 @@
 		{
 			"name": "LAYER 10",
 			"author": "Boxel" ,
-			"file": "/users/mods/layer-10.css",
-			"image": "/users/mods/layer-10.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/layer-10.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/layer-10.jpg",
 			"description": "An <ultra>ULTRAKILL</ultra> inspired theme",
 			"tags" : ["red", "game theme", "dark", "theme"]
 		},
 		{
 			"name": "Determination",
 			"author": "Boxel" ,
-			"file": "/users/mods/determination.css",
-			"image": "/users/mods/determination.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/determination.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/determination.jpg",
 			"description": "A <under>Deltarune</under> inspired theme",
 			"tags" : ["game theme", "blue", "theme", "dark"]
 		},
@@ -63,8 +63,8 @@
 		{
 			"name": "Imagisphere",
 			"author": "Boxel",
-			"file": "/users/mods/imagisphere.css",
-			"image": "/users/mods/imagisphere.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/imagisphere.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/imagisphere.jpg",
 			"description": "WIP. (temp description) A little big planet theme.",
 			"tags" : ["lbp", "skeu", "theme"]
 		},
@@ -90,8 +90,8 @@
 		{
 			"name": "Terrible Fate",
 			"author": "Boxel",
-			"file": "/users/mods/terrible-fate.css",
-			"image": "/users/mods/terrible-fate.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/terrible-fate.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/terrible-fate.jpg",
 			"description": "A Majora's Mask inspired theme.",
 			"tags" : ["game theme", "zelda", "theme", "menu"]
 		},
@@ -100,16 +100,16 @@
 		{
 			"name": "Time Machine",
 			"author": "Boxel",
-			"file": "/users/mods/time-machine.css",
-			"image": "/users/mods/time-machine.png",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/time-machine.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/time-machine.png",
 			"description": "A theme that makes Sunkist Palace look like its older self.",
 			"tags" : ["layout", "meta", "theme", "old"]
 		},
 		{
 			"name": "Suncord",
 			"author": "Boxel",
-			"file": "/users/mods/suncord.css",
-			"image": "/users/mods/suncord.png",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/suncord.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/suncord.png",
 			"description": "A Discord inspired theme. (To be used with Lefthand Menu)",
 			"tags" : ["layout", "theme", "new"]
 		}
@@ -182,31 +182,31 @@
 		{
 			"name": "Lefthand Menu",
 			"author": "Boxel",
-			"file": "/users/mods/lhm.js",
-			"image": "/users/mods/lhm.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/lhm.js",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/lhm.jpg",
 			"description": "Completely reformats the menu, moving it to the left side of the screen. (Compatible with almost every mod)",
 			"tags" : ["options", "menu", "plugin", "new"]
 		},
 		{
 			"name": "Menuify",
 			"author": "Boxel",
-			"file": "/users/mods/menuify.js",
-			"image": "/users/mods/menuify.png",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menuify.js",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menuify.png",
 			"description": "Menu library to manage settings dropdown menus easier.",
 			"tags" : ["library", "options", "menu", "plugin", "Menuify", "new"]
 		},
 		{
 			"name": "Menuify Template",
 			"author": "Boxel",
-			"file": "/users/mods/menutemp.js",
-			"image": "/users/mods/menutemp.png",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menutemp.js",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menutemp.png",
 			"description": "Template for Menuify menu.",
 			"tags" : ["options", "menu", "plugin", "Menuify", "new"]
 		},
 		{
 			"name": "More Customization",
 			"author": "Boxel",
-			"file": "/users/mods/morecustomization.js",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/more-customization.js",
 			"image": "/users/mods/ftv.jpg",
 			"description": "Menuify required. LEAKED unfinished plugin.",
 			"tags" : ["options", "menu", "plugin", "Menuify", "new"]
@@ -214,16 +214,16 @@
 		{
 			"name": "Cookie.",
 			"author": "Boxel",
-			"file": "/users/mods/cookie.js",
-			"image": "/users/mods/cookie.webp",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/cookie.js",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/cookie.webp",
 			"description": "Cookie Clicker inspired menu. (Requires Menuify)",
 			"tags" : ["options", "menu", "plugin", "Menuify", "new"]
 		},
 		{
 			"name": "Custom Placeholder Text",
 			"author": "Boxel",
-			"file": "/users/mods/cpt.js",
-			"image": "/users/mods/cpt.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/cpt.js",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/cpt.jpg",
 			"description": "Lets you set and manage custom placeholder/splash texts. (Requires Menuify)",
 			"tags" : ["splash", "placeholder", "menu", "plugin", "Menuify", "new"]
 		}
@@ -280,16 +280,16 @@
 		{
 			"name": "Dark Menu",
 			"author": "Boxel",
-			"file": "/users/mods/dark-menu.css",
-			"image": "/users/mods/dark-menu.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/dark-menu.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/dark-menu.jpg",
 			"description": "A basic dark version of the menu.",
 			"tags" : ["theme", "dark", "snippit", "menu"]
 		},
 		{
 			"name": "More Animations",
 			"author": "Boxel",
-			"file": "/users/mods/more-animations.css",
-			"image": "/users/mods/more-animations.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/more-animations.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/more-animations.jpg",
 			"description": "Animates some elements lacking in motion (Ex. User Messages fading in).",
 			"tags" : ["theme", "animation", "snippit"]
 		},
@@ -304,48 +304,48 @@
 		{
 			"name": "VGUI",
 			"author": "Boxel",
-			"file": "/users/mods/vgui.css",
-			"image": "/users/mods/vgui.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/vgui.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/vgui.jpg",,
 			"description": "Themes the menu based off of the beta Source Engine VGUI",
 			"tags" : ["menu", "game", "valve", "green", "snippit"]
 		},
 		{
 			"name": "Rain Rain Go Away",
 			"author": "Boxel" ,
-			"file": "/users/mods/rrga.css",
-			"image": "/users/mods/rrga.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/rrga.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/rrga.jpg",
 			"description": "Removes the rain gif that appears on some pages",
 			"tags" : ["rain", "focus", "snippit"]
 		},
 		{
 			"name": "Round PFPs",
 			"author": "Boxel" ,
-			"file": "/users/mods/round-pfps.css",
-			"image": "/users/mods/round-pfps.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/round-pfps.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/round-pfps.jpg",
 			"description": "Makes user profiler pictures round",
 			"tags" : ["profile", "pfp", "round", "snippit"]
 		},
 		{
 			"name": "Polaroids",
 			"author": "Boxel" ,
-			"file": "/users/mods/polaroids.css",
-			"image": "/users/mods/polaroids.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/polaroids.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/polaroids.jpg",
 			"description": "Gives images a white polaroid styled border",
 			"tags" : ["skeu", "image", "snippit"]
 		},
 		{
 			"name": "Unobtrusive Reply Button",
 			"author": "Boxel" ,
-			"file": "/users/mods/urb.css",
-			"image": "/users/mods/urb.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/urb.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/urb.jpg",
 			"description": "Hides reply buttons until you hover over the message",
 			"tags" : ["reply", "button", "clean", "clear", "snippit"]
 		},
 		{
 			"name": "Cleaner Messages",
 			"author": "Boxel" ,
-			"file": "/users/mods/cleaner-messages.css",
-			"image": "/users/mods/cleaner-messages.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/cleaner-messages.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/cleaner-messages.jpg",
 			"description": "Declutters messages and reformats them, also spaces out messages sent from different users",
 			"tags" : ["messages", "format", "clean", "snippit"]
 		},
@@ -360,8 +360,8 @@
 		{
 			"name": "Sunkist Logo",
 			"author": "Boxel" ,
-			"file": "/users/mods/sunkist-logo.css",
-			"image": "/users/mods/sunkist-logo.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/sunkist-logo.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/sunkist-logo.jpg",
 			"description": "Turns the 'Sunkist's Palace' text on the title of the page into an image of the Sunkist Logo",
 			"tags" : ["sunkist", "logo", "funny", "snippit"]
 		},
@@ -408,8 +408,8 @@
 		{
 			"name": "Menu Previewer",
 			"author": "Boxel" ,
-			"file": "/users/mods/menu-previewer.css",
-			"image": "/users/mods/menu-previewer.jpg",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menu-previewer.css",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menu-previewer.jpg",
 			"description": "Makes the menu more central for screenshotting purposes only.",
 			"tags" : ["menu", "meta", "snippit", "new"]
 		}
