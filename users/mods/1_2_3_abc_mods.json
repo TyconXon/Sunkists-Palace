@@ -8,7 +8,7 @@
 			"file": "/users/mods/98menu.css",
 			"image": "/users/mods/apple.png",
 			"description": "to be defined",
-			"tags" : [ "new", "theme"]
+			"tags" : [ "theme"]
 		},
 		{
 			"name": "Simple Dark",
@@ -16,7 +16,7 @@
 			"file": "/users/mods/simple-dark.css",
 			"image": "/users/mods/simple-dark.png",
 			"description": "y2k emo skater boy myspace Alex g mid 90s affliction theme!!!",
-			"tags" : ["dark", "black", "classy", "modern", "background", "new", "theme"]
+			"tags" : ["dark", "black", "classy", "modern", "background", "theme"]
 		},
 		{
 			"name": "Glasskist",
@@ -111,7 +111,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/suncord.css",
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/suncord.png",
 			"description": "A Discord inspired theme. (To be used with Lefthand Menu)",
-			"tags" : ["layout", "theme", "new"]
+			"tags" : ["layout", "theme"]
 		}
 	],
 	"plugins": [
@@ -177,7 +177,7 @@
 			"file": "/users/mods/typing-sounds.js",
 			"image": "/users/mods/cube.png",
 			"description": "Lethal company sounds for hovering and typing. Taken from Terminal Ex.",
-			"tags" : ["button", "sound", "textbox", "game", "hover","new", "plugin"]
+			"tags" : ["button", "sound", "textbox", "game", "hover", "plugin"]
 		},
 		{
 			"name": "Lefthand Menu",
@@ -185,7 +185,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/lhm.js",
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/lhm.jpg",
 			"description": "Completely reformats the menu, moving it to the left side of the screen. (Compatible with almost every mod)",
-			"tags" : ["options", "menu", "plugin", "new"]
+			"tags" : ["options", "menu", "plugin"]
 		},
 		{
 			"name": "Menuify",
@@ -193,7 +193,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menuify.js",
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menuify.png",
 			"description": "Menu library to manage settings dropdown menus easier.",
-			"tags" : ["library", "options", "menu", "plugin", "Menuify", "new"]
+			"tags" : ["library", "options", "menu", "plugin", "Menuify"]
 		},
 		{
 			"name": "Menuify Template",
@@ -201,7 +201,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menutemp.js",
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menutemp.png",
 			"description": "Template for Menuify menu.",
-			"tags" : ["options", "menu", "plugin", "Menuify", "new"]
+			"tags" : ["options", "menu", "plugin", "Menuify"]
 		},
 		{
 			"name": "More Customization",
@@ -209,7 +209,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/more-customization.js",
 			"image": "/users/mods/ftv.jpg",
 			"description": "Menuify required. LEAKED unfinished plugin.",
-			"tags" : ["options", "menu", "plugin", "Menuify", "new"]
+			"tags" : ["options", "menu", "plugin", "Menuify"]
 		},
 		{
 			"name": "Cookie.",
@@ -217,7 +217,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/cookie.js",
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/cookie.webp",
 			"description": "Cookie Clicker inspired menu. (Requires Menuify)",
-			"tags" : ["options", "menu", "plugin", "Menuify", "new"]
+			"tags" : ["options", "menu", "plugin", "Menuify"]
 		},
 		{
 			"name": "Custom Placeholder Text",
@@ -243,7 +243,7 @@
 			"file": "/users/mods/no-timestamps.css",
 			"image": "/users/mods/apple.png",
 			"description": "removes timestamps from messages.",
-			"tags" : ["qol", "snippit", "new"]
+			"tags" : ["qol", "snippit"]
 		},
 		{
 			"name" : "No Squircle Messages",
@@ -251,7 +251,7 @@
 			"file": "/users/mods/msgradius.css",
 			"image": "/users/mods/apple.png",
 			"description": "removes border radius from messages.",
-			"tags" : ["qol", "snippit", "new"]
+			"tags" : ["qol", "snippit"]
 		},
 		{
 			"name" : "Aligned Marketplace Buttons",
@@ -419,7 +419,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menu-previewer.css",
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/menu-previewer.jpg",
 			"description": "Makes the menu more central for screenshotting purposes only.",
-			"tags" : ["menu", "meta", "snippit", "new"]
+			"tags" : ["menu", "meta", "snippit"]
 		}
 	]
 }
