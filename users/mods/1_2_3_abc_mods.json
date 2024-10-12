@@ -241,7 +241,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/default-buttons.js",
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/default-buttons.jpg",
 			"description": "[DANGEROUS] Uses removeChild on the documents head to remove the external button styling. This is dangerous and should be used with caution.",
-			"tags" : ["buttons", "menu", "plugin", "expiremental", dangerous, "new"]
+			"tags" : ["buttons", "menu", "plugin", "expiremental", "dangerous", "new"]
 		}
 	],
 	"snippits": [
