@@ -30,7 +30,7 @@
 
 //Configuration!!!
 const MEM = true; /** Memory-Mode: Are messages stored in memory or forgotten after relay? */
-const splashTexxt = "<a href='./directory.html'>Page directory</a> | Expirementally disabling IDLE system." /** MOTD */
+const splashTexxt = "<a href='./directory.html'>Page directory</a> | We're using railway now." /** MOTD */
 
 var http = require("http");
 var https = require("https");
