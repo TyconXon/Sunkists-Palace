@@ -242,6 +242,30 @@
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/default-buttons.jpg",
 			"description": "[DANGEROUS] Uses removeChild on the documents head to remove the external button styling. This is dangerous and should be used with caution.",
 			"tags" : ["buttons", "menu", "plugin", "expiremental", "dangerous", "new"]
+		},
+		{
+			"name": "Sunkist's Palace Deluxe Edition",
+			"author": "Boxel",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/spde.js",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/spde.png",
+			"description": "A whole new remaster of Sunkist's Palace with endless features! Please enter the door on your left for more info!",
+			"tags" : ["incompatible", "broken", "dumb", "reference", "joke", "new"]
+		},
+		{
+			"name": "Subtitle",
+			"author": "Boxel",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/subtitle.js",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/subtitle.png",
+			"description": "A subtitle utility function. <pre><code>subtitle(message, duration, style)</code></pre>",
+			"tags" : ["dependency", "library", "subtitle", "function", "utility", "new"]
+		},
+		{
+			"name": "New Favi",
+			"author": "Boxel",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/new-favi.js",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/new-favi.jpg",
+			"description": "Changes page icons to a more unified look based on the Sunkist Marketplace icon.",
+			"tags" : ["favicon", "unified", "icon", "plugin", "meta", "new"]
 		}
 	],
 	"snippits": [
