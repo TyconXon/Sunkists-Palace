@@ -5,36 +5,33 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- Meta tag stuff -->
-	<meta name="keywords" 		content="Maximus Miller, Afton Rath, Apple, Hamburger, HTML" />
-	<meta name="author" 			content="Maximus fayte Miller" />
-	<meta name="theme-color" 	content="rgba(60,45,75,0.8)" />
-	<meta id="metatitle" name="title" content="Sunkist's Palace" />
-	<meta name="description" 					content="A simple chat room for messing with HTML and 'conversing'. Word of the day is 'Hamburger'." />
-	<meta property="image" 				content="images/pre.gif" />
+	<meta name="keywords" 			content="Maximus Miller, Afton Rath, Boxel, Apple, Hamburger, HTML" />
+	<meta name="author" 			content="Maximus Fayte Miller" />
+	<meta name="theme-color" 		content="rgba(60,45,75,0.8)" />
+	<meta id="metatitle" name="title" 	content="Sunkist's Palace" />
+	<meta name="description" 		content="A simple chat room for messing with HTML and 'conversing'. Word of the day is 'Hamburger'." />
+	<meta property="image" 			content="images/pre.gif" />
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" href="/images/favi.png">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<!--Fonts-->
-	<!-- <link rel="icon" id="icon" href="/images/favi.svg" type="image/svg+xml" /> -->
-  <link rel="icon" id="icon" href="/images/favi.png" type="image/png"/>
-	
-	<!-- Possible method for functional stylesheet -->
+	<!-- Favicon -->
+  	<link rel="icon" id="icon" href="/images/favi.png" type="image/png"/>
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.cdnfonts.com/css/tf2-build" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css" />
+	
+	<!-- External stylesheets -->
 	<link rel="stylesheet" href="https://unpkg.com/7.css/dist/7.scoped.css" />
 	<link rel="stylesheet" href="https://unpkg.com/7.css/dist/gui/_variables.scss" />
 	<link rel="stylesheet" href="https://unpkg.com/7.css/dist/gui/button.css" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css" />
-	<!--Syntax highlighter-->
-
-	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
-	
-	<!--IMPORTANT STUFF-->
-
+		
+	<!-- Primary -->
 	<title id="title">Sunkist's Palace</title>
 	
 	<link rel="stylesheet" href="style/fonts.css">
@@ -45,82 +42,89 @@
 	<link rel="manifest" href="manifest.json">
 	
 </head>
-
-
-	<!--BODY-->
 	
+<!--BODY-->
 <body id="body" onload=" document.body.scrollTop = document.body.scrollHeight; checkPings();">
 	
 	<div id="menu">
+		<!-- MENU TITLE -->
 		<h1 id="menuTitle">Sunkist's Palace</h1>
-
+		
+		<!-- INFOBAR -->
 		<p class="infobar" id="status">
 			<span id="statusOnline">
 				ONLINE [<span id="onlineNumber"></span>]:<span id="onlineCount"></span></span>
 			<wbr /><span id="typingP"><span id="talkorinos"></span> :TYPING</span>
 		</p>
 
-		
+		<!-- CHATBOX -->
 		<textarea autofocus autocomplete="on" type="text" id="soapMode" style="height: 8%; width: 100%"></textarea>
 
 		<!--SETTINGS AND SUCH-->
 		<div id='settingGrid' style="display: grid; grid-template-columns: auto auto">
-			<!--Settings-->
+			<!--SETTINGS -->
 			<details class="settings" style="max-height: 200px" id='thesettings'>
 				
-				<summary>Settings</summary>
-				<br />
-				<button onclick="setUsr()">
-					Login
-				</button>
-				<button onclick="text()" >
-					Add to chat (press Enter)
-				</button>
-				<button  onclick="window.location.reload()">
-					Refresh
-				</button>
-				<button onclick="nickname()">Set nickname</button>
-				<button onclick='markAsRead();'> Read all</button>
-				<button onclick='altMode = !altMode;alert(altMode?"Autoscroll enabled":"Autoscroll disabled");'>Toggle autoscrolling</button>
-				<button onclick="friendlyEdit(true,false)"> Edit message (ctrl + up arrow)</button>
-				<button onclick="friendlyEdit(false,true)"> Reply to message (shift + up arrow)</button>
-				<button onclick="newPopup(window.location.origin + '/?channel='+prompt('Username of person to DM?')+'&cls')"> Open DM page</button>
+				<summary>Settings</summary><br />
+				<button onclick="setUsr()" id="loginBtn">Login</button>
+				<button onclick="text()" id="messageBtn">Add to chat (press Enter)</button>
+				<button onclick="window.location.reload()" id="refreshBtn">Refresh</button>
+				<button onclick="nickname()" id="nicknameBtn">Set nickname</button>
+				<button onclick="markAsRead();" id="read"> Read all</button>
+				<button onclick="altMode = !altMode;alert(altMode?'Autoscroll enabled':'Autoscroll disabled');" id="scrollBtn">Toggle autoscrolling</button>
+				<button onclick="friendlyEdit(true,false)" id="editBtn"> Edit message (ctrl + up arrow)</button>
+				<button onclick="friendlyEdit(false,true)" id="replyBtn"> Reply to message (shift + up arrow)</button>
+				<button onclick="newPopup(window.location.origin + '/?channel='+prompt('Username of person to DM?')+'&cls')" id="dmBtn"> Open DM page</button>
 				
 				<br />
-				<a href="/?slow">Slow-internet (legacy) mode</a>
-				<a href="/directory.html" target="_blank">Sunkist directory</a>
-				<a href="/?cls">Clear all previous messages</a>
-				<a href="/?limit=20">Limit messages to 20</a>
-
-				<a href="https://docs.google.com/document/d/1tbv-MJ7Hfz0bctJpbg6RaGocuWXjS4qIJ4t9DzLH8Co/edit?usp=sharing" target="_blank">Documentation</a>
+				
+				<a href="/?slow" id="slowBtn">Slow-internet (legacy) mode</a>
+				<a href="/directory.html" target="_blank" id="directoryBtn">Sunkist directory</a>
+				<a href="/?cls" id="clearBtn">Clear all previous messages</a>
+				<a href="/?limit=20" id="limitBtn">Limit messages to 20</a>
+		
+				<a href="https://docs.google.com/document/d/1tbv-MJ7Hfz0bctJpbg6RaGocuWXjS4qIJ4t9DzLH8Co/edit?usp=sharing" target="_blank" id="docsBtn">Documentation</a>
+				
 				<br />
+		
+				<!-- UPLOAD -->
 				<form action="/upload" enctype="multipart/form-data" method="post" id='uploadForm'>
 					<input type="file" name="someCoolFiles" id='uploadFile'>
 					<button id='upload'>Upload</button>
 				</form>
-				
-				<button popovertarget="sCss"> Open CSS</button>
+
+				<!-- CSS EDITOR -->
+				<button popovertarget="sCss" id="cssBtn"> Open CSS</button>
 				<div popover="auto" id="sCss">
 					<textarea name="sStyle" id="sStyle" width='500px' height='500px'></textarea>
 					<br>
 					<button id="sSub">Save & Run CSS</button>
 				</div>
-				
-				<button popovertarget="sJsMenu">Open JS</button>
+
+				<!-- JS EDITOR -->
+				<button popovertarget="sJsMenu" id="jsBtn">Open JS</button>
 				<div id='sJsMenu' popover>
 					<textarea name="sJs" id="sJs" width='500px' height='500px'></textarea><br>
 					<button id='sSubJs'>Save JS</button>
 				</div>
+				
 				<br />
+		
+				<!-- MESSAGE PREFIX -->
 				<label for="prefix">Message prefix:</label>
 				<textarea type="text" id='prefix' name='prefix'></textarea>
+				
 				<br />
+		
+				<!-- TITLE EDITOR -->
 				<label for="suffix">Rename title: </label>
 				<textarea type="text" id='suffix' name='suffix'>Sunkist's Palace</textarea>
-				<br>
 				
 				<br>
-				<button popovertarget="volumeSection" disabled>Open sound settings (removed)</button>
+		
+				<!-- VOLUME EDITOR -->
+				<br>
+				<button popovertarget="volumeSection" id="soundsBtn" disabled>Open sound settings (removed)</button>
 				<div popover id="volumeSection">
 					<label for="vol">Text Volume:</label>
 					<input type="range" max="1" min="0" id="soundVolume" onchange="settingChange('soundVolume')" name='vol' step='0.05'> <br>
@@ -132,27 +136,31 @@
 					<input type="checkbox" onchange='settingChange("pingSound")' id="pingSound">
 					<input type="text" onchange='settingChange("pingSoundUrl")' id="pingSoundUrl" disabled>
 				</div>
-
-				
 			</details>
+			
+		<!-- FAVORITES -->	
 			<details class="settings" style="max-height: 200px">
-				<summary>Favorites</summary>
-				<br />
+				<!-- FAVORITES -->
+				<summary>Favorites</summary><br />
+				
 				<button id="fSub" onclick='addToFavorites()'>Submit</button>
 				<textarea name="fAdd" id="text-input" cols="30" rows="1"></textarea>
+				
 				<br />
-				<div id='favorites-list'>
-					
-				</div>
+				
+				<div id='favorites-list'></div>
 			</details>
 		</div>
 	</div>
+	
 	<br />
 	<br />
 	<br />
 
+	<!-- SCRIPTS -->
 	<script src="/socket.io/socket.io.js" nodraw></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" nodraw></script>
+	
 	<script src="script/script.js" nodraw></script>
 	<script src="script/splashtext.js" nodraw></script>
 	<script src="script/plugs.js" nodraw></script>
@@ -162,8 +170,6 @@
 	<script src="script/shortcuts.js" nodraw></script>
 	
 	<script src="messageFormatting.js" nodraw></script>
-
-	
 </body>
 
 </html>
