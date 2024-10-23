@@ -125,6 +125,9 @@ function createNewMessageLine(){
 			readMessage.remove();
 			rule.remove();
 		};
+
+		rule.classList.add("unread");
+		readMessage.classList.add("unread");
 		
 		document.body.appendChild(rule);
 		document.body.appendChild(readMessage);
