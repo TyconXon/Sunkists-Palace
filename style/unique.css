@@ -103,6 +103,11 @@ h1, .titleRead { /*Sunkist Palace text*/
 	border-radius: 5px;
 }
 
+.titleUnread {
+	color: blue;
+	text-shadow: 0 0 10px blue;
+}
+
 /***--- Special Stuffs ---***/
 
 #lastRead,
