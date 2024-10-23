@@ -281,6 +281,7 @@ socket.on("requestUpdate", () => {
 			sunkistsPalace+"[+" + newMessageCount + "]";
 		document.getElementById("icon").href =
 			"/images/faviupdate.png";
+		document.getElementById("menuTitle").setAttribute('unread', true)
 	}
 });
 socket.on("getDataFinished", (data) => {
