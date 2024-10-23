@@ -273,15 +273,15 @@ socket.on("requestUpdate", () => {
 		newMessageCount++;
 		document.getElementById("title").innerText =
 			sunkistsPalace+" +"+ newMessageCount;
-		document.getElementById("menuTitle").style.color = "blue";
-		document.getElementById("menuTitle").style.textShadow =
-			"0px 0px 10px blue";
+		// document.getElementById("menuTitle").style.color = "blue";
+		// document.getElementById("menuTitle").style.textShadow =
+			// "0px 0px 10px blue";
 
 		document.getElementById("menuTitle").innerText =
 			sunkistsPalace+"[+" + newMessageCount + "]";
 		document.getElementById("icon").href =
 			"/images/faviupdate.png";
-		document.getElementById("menuTitle").classList.add('unreadMenuTitle')
+		document.getElementById("menuTitle").classList.add('titleUnread')
 	}
 });
 socket.on("getDataFinished", (data) => {
