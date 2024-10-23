@@ -91,7 +91,7 @@ html {
 	color: yellow;
 }
 
-h1 { /*Sunkist Palace text*/
+h1, .titleRead { /*Sunkist Palace text*/
 	/*Dark, ambient shadow purple*/
 	background-color: rgba(60, 45, 75, 0.8);
 	/*Pure yellow*/
