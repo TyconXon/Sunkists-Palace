@@ -193,15 +193,15 @@ function markAsRead(){
 	newMessageCount = 0;
 	document.getElementById("title").innerText =
 		sunkistsPalace
-	document.getElementById("menuTitle").style.color = "yellow";
-	document.getElementById("menuTitle").style.textShadow =
-		"0px 0px 10px yellow";
+	// document.getElementById("menuTitle").style.color = "yellow";
+	// document.getElementById("menuTitle").style.textShadow =
+		// "0px 0px 10px yellow";
 
 	document.getElementById("menuTitle").innerText =
 		sunkistsPalace;
 	document.getElementById("icon").href =
 		"images/favi.png";
-	document.getElementById("menuTitle").classList.remove('unreadMenuTitle')
+	document.getElementById("menuTitle").className = 'titleRead'
 }
 
 document.getElementById("sStyle").value =
