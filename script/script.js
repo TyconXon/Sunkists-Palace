@@ -201,7 +201,7 @@ function markAsRead(){
 		sunkistsPalace;
 	document.getElementById("icon").href =
 		"images/favi.png";
-
+	document.getElementById("menuTitle").setAttribute('unread', false)
 }
 
 document.getElementById("sStyle").value =
