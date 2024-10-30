@@ -70,6 +70,10 @@ const splashText = [
 	"Gee, it sure is boring around here.",
 	"Oh boy! I'm so hungry, I could eat an Octorok!",
 	"Great! I can't wait to bomb some Dodongos!" ,
+	"*Confused cat noises*",
+	"You only have OneShot",
+	"The way is blocked... by blocks!",
+	
 	
 	
 ];
