@@ -1,18 +1,16 @@
 const VALID_USERS = [
-	"MaximusMiller2",
-	"Max",
+	"MaximusMiller2", //MaximusMiller2
+	"Max", //MaximusMiller2
 	"Afton",
-	"Boxel",
-	"Rat",
-	"Rat Goon",
+	"Boxel", //Boxel
+	"Sophie" //Boxel
 	"Sushi",
 	"Avonya",
-	"RoseGold",
+	"Leon",
 	"FatRhabbit",
-	"via",
-	"Sky",
-	"TheKingOfPlants",
-  "fffruittssaladd",
-  "Fr0ggy08",
-  "samm",
+	"Star",
+	"Rey",
+	"Obi",
+	"Lee",
+	"Sam",
 ];
