@@ -60,16 +60,17 @@ const splashText = [
 	"Good evening everyone! We've come here expressly to scare the bejesus out of you by showing our hoodoo, displaying our juju, and tragically and embarrassingly, exposing our supreme mojo. ",
 	"I'm not at liberty to say - how a Secret message came for you today",
 	"Two objects at equidistance, acting as if they cared",
-  	"In a prehistoric dried-up lake. A million years after the last earthquake. There lived a little girl who loved to bake. The only thing she made was cake and all she used was salt. That's all she had it's not her fault. "
+  	"In a prehistoric dried-up lake. A million years after the last earthquake. There lived a little girl who loved to bake. The only thing she made was cake and all she used was salt. That's all she had it's not her fault. ",
 	"Lamp oil? Rope? Bombs? You want it? It's yours my friend, as long as you have enough rubies.",
 	"Sorry, Link! I can't give credit.",
-	"Come back when you're a little hmmmm...richer.",
-	"Squadalah! We're off!",
+	"Come back when you're a little hmmmm... richer.",
+	"Squadalah! We are off!",
 	"Brought to you by Soap, Jesus, and Zubin.",
 	"I won! :D",
 	"Gee, it sure is boring around here.",
 	"Oh boy! I'm so hungry, I could eat an Octorok!",
-	"Great! I can't wait to bomb some Dodongos!",
+	"Great! I can't wait to bomb some Dodongos!" ,
+	
 	
 ];
 const tommyVoice = [
