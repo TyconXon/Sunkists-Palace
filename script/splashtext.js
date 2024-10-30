@@ -46,13 +46,13 @@ const splashText = [
 	"Why do we have to all wear these ridiculous ties?!",
 	"Do you know who ate all the donuts?",
 	"Have you seen my coffee cup?",
-  "I ever tell you about the time me and Keith made a homemade bumper car ride with ridin' mowers in his backyard? Mower blade wounds over 90% of his body.",
-  "I ever tell you about the time my buddy Keith drowned in the Tunnel of Love? You wouldn't think it could happen 'cause the water's so shallow, but that's how it gets you, man. Overconfidence. Keith was with his lady at the time, and he was yellin' for her to save him, but she didn't want to get wet.",
-  `I ever tell you about the time Keith and I made fireworks? Now, I didn't know shit about chemistry, but Keith figured "Gasoline burns, doesn't it?" Heh, third-  degree burns on 95 percent of his body.`,
-  "I ever tell you about the time Keith tried to deep-fry a turkey? Third-degree burns over 90 percent of his body.",
-  "I ever tell you about the time my buddy Keith fell down an open manhole? He was unconscious down there for like a week.",
-  "One time, the Army bombed my buddy Keith. He went camping and didn't bother to read the signs, and I guess they were just testing bombs that day.",
-  "Yo, my buddy Keith had his car drop in a lake off a bridge just like this one here... Yeah, see, he was driving over it late at night and there in the middle of the bridge was what looked like, In Keith's estimation, like a dead bear, so Keith gets out his car to find a stick to poke at it, right? Well, it turns out it's just some lady's fur coat that musta fallen out her car, so, hey, free coat, right? Now, owls won't normally attack a man, but in this case, they were hungry, and that made them reckless, man. Keith reckons that they musta been there for hours watchin' what they thought was a bear carcass, 'cause as soon as he picked it up, them owls had claws in him inch deep. Well, Keith figures his best bet is to jump in a lake, 'cause owls can't swim. Well, them owls could. He fought them for like 20 minutes treading water, and during that time, a boat came, the bridge went up and down went Keith's car. Man, sometimes nature's just tryin' to teach us, if we'd only listen.",
+ 	 "I ever tell you about the time me and Keith made a homemade bumper car ride with ridin' mowers in his backyard? Mower blade wounds over 90% of his body.",
+ 	 "I ever tell you about the time my buddy Keith drowned in the Tunnel of Love? You wouldn't think it could happen 'cause the water's so shallow, but that's how it gets you, man. Overconfidence. Keith was with his lady at the time, and he was yellin' for her to save him, but she didn't want to get wet.",
+  	`I ever tell you about the time Keith and I made fireworks? Now, I didn't know shit about chemistry, but Keith figured "Gasoline burns, doesn't it?" Heh, third-  degree burns on 95 percent of his body.`,
+  	"I ever tell you about the time Keith tried to deep-fry a turkey? Third-degree burns over 90 percent of his body.",
+  	"I ever tell you about the time my buddy Keith fell down an open manhole? He was unconscious down there for like a week.",
+  	"One time, the Army bombed my buddy Keith. He went camping and didn't bother to read the signs, and I guess they were just testing bombs that day.",
+  	"Yo, my buddy Keith had his car drop in a lake off a bridge just like this one here... Yeah, see, he was driving over it late at night and there in the middle of the bridge was what looked like, In Keith's estimation, like a dead bear, so Keith gets out his car to find a stick to poke at it, right? Well, it turns out it's just some lady's fur coat that musta fallen out her car, so, hey, free coat, right? Now, owls won't normally attack a man, but in this case, they were hungry, and that made them reckless, man. Keith reckons that they musta been there for hours watchin' what they thought was a bear carcass, 'cause as soon as he picked it up, them owls had claws in him inch deep. Well, Keith figures his best bet is to jump in a lake, 'cause owls can't swim. Well, them owls could. He fought them for like 20 minutes treading water, and during that time, a boat came, the bridge went up and down went Keith's car. Man, sometimes nature's just tryin' to teach us, if we'd only listen.",
 	"This next song reminds me of the time I ripped a cold cheeseburger out of my daughters hands. I told her \" I didn't want her to get mad cow disease \", but really I was just hungry.",
 	"You know, I don't know if you all know, but I do know that the government is going to instigate a new national identification policy, and it's not the standard ID card, it's a little grain of rice with your name carved into it that is inserted under the flesh of your arm, and I think I'm going to be the first in line to get it - it's so cute sounding.",
 	"Very many years ago, the Bolivians were starving so, they had rats as big as ponies there. They asked the pope to declare them fish.",
@@ -60,7 +60,17 @@ const splashText = [
 	"Good evening everyone! We've come here expressly to scare the bejesus out of you by showing our hoodoo, displaying our juju, and tragically and embarrassingly, exposing our supreme mojo. ",
 	"I'm not at liberty to say - how a Secret message came for you today",
 	"Two objects at equidistance, acting as if they cared",
-  "In a prehistoric dried-up lake. A million years after the last earthquake. There lived a little girl who loved to bake. The only thing she made was cake and all she used was salt. That's all she had it's not her fault. "
+  	"In a prehistoric dried-up lake. A million years after the last earthquake. There lived a little girl who loved to bake. The only thing she made was cake and all she used was salt. That's all she had it's not her fault. "
+	"Lamp oil? Rope? Bombs? You want it? It's yours my friend, as long as you have enough rubies.",
+	"Sorry, Link! I can't give credit.",
+	"Come back when you're a little hmmmm...richer.",
+	"Squadalah! We're off!",
+	"Brought to you by Soap, Jesus, and Zubin.",
+	"I won! :D",
+	"Gee, it sure is boring around here.",
+	"Oh boy! I'm so hungry, I could eat an Octorok!",
+	"Great! I can't wait to bomb some Dodongos!",
+	
 ];
 const tommyVoice = [
 	"Right, very carefully, slower than molasses drips off a spoon. :)",
@@ -78,6 +88,7 @@ const tommyVoice = [
 	"This is all built to CODE!! It'll be okay.",
 	"When we get outta here I'm gonna write the Wikipedia article for the the uh the Black Mesa Golem Ape!",
 	"Grab a soda, Mr. Freeman! It'll help you see faster!" ,
+	
 	
 ];
 function refreshSplash(){
