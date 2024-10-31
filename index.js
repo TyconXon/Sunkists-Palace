@@ -126,7 +126,27 @@ const server = http.createServer(function(req, res) {
 		deploymentChecked = true;
 		console.log(developmentServer?'Server started. (development server)':'Server started. (production server)');
 	}
-	
+
+	if(q.path.includes('out.png')){
+		// make image
+		const img1 = PImage.make(100, 100);
+
+		// get canvas context
+		const ctx = img1.getContext("2d");
+
+		// fill with red
+		ctx.fillStyle = "red";
+		ctx.fillRect(0, 0, 100*Math.random(), 100*Math.random());
+
+		//write to 'out.png'
+		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
+		.then(() => {
+			console.log("wrote out the png file to out.png");
+		})
+		.catch((e) => {
+			console.log("there was an error writing");
+		});
+	}
 
 	//Upload system
 	try {
@@ -262,26 +282,7 @@ const server = http.createServer(function(req, res) {
 	}
 	
 
-	if(req.url.includes('/out.png')){
-		// make image
-		const img1 = PImage.make(100, 100);
-
-		// get canvas context
-		const ctx = img1.getContext("2d");
-
-		// fill with red
-		ctx.fillStyle = "red";
-		ctx.fillRect(0, 0, 100*Math.random(), 100*Math.random());
-
-		//write to 'out.png'
-		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
-		.then(() => {
-			console.log("wrote out the png file to out.png");
-		})
-		.catch((e) => {
-			console.log("there was an error writing");
-		});
-	}
+	
 	
 	if(q.path.name == undefined && q.path != '/' && !q.path.includes('?')){
 
