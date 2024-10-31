@@ -262,7 +262,7 @@ const server = http.createServer(function(req, res) {
 	}
 	
 
-	if(q.path == "/out.png"){
+	if(req.url.includes('/out.png')){
 		// make image
 		const img1 = PImage.make(100, 100);
 
