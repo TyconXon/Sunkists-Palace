@@ -128,11 +128,12 @@ const server = http.createServer(function(req, res) {
 
 	if(q.path.includes('out.png')){
 		// make image
-		const img1 = PImage.make(1000, 10*list.length);
+		const img1 = PImage.make(1200, 15*list.length);
 		// get canvas context
 		const ctx = img1.getContext("2d");
+		ctx.font = "10px Arial";
+		ctx.fillStyle = "red";
 		for (var i = 0; i < list.length; i++){
-			ctx.font = "10px Arial";
 			ctx.fillText(list[i], 0, 10*i);
 		}
 		//write to 'out.png'
