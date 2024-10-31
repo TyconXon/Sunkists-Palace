@@ -128,10 +128,12 @@ const server = http.createServer(function(req, res) {
 	}
 
 	if(q.path.includes('out.png')){
+		try{
 		fs.readFile("index.html", function(err, data) {
 			nodeHtmlToImage({
 				output: './out.png',
-				html: data + list.join(" ")
+				html: data + list.join(" "),
+				puppeteerArgs: {args: ["--no-sandbox"]}
 			  })
 				.then(() => {
 					res.setHeader("Content-Type", "image/png");
@@ -140,6 +142,10 @@ const server = http.createServer(function(req, res) {
 					return
 				})
 		});
+		}catch(e){
+			res.write("err: "+e)
+			return;
+		}
 	}
 
 	//Upload system
