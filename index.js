@@ -51,8 +51,7 @@ const { Server } = require("socket.io");
 	var childProcess = require('child_process');
 	const Client = require("@replit/database");
 	const client = new Client();
-	const nodeHtmlToImage = require('node-html-to-image')
-
+	const PImage = require('pureimage');
 
 //Delete previous temporary files.
 function flushTemporaries(){
@@ -128,24 +127,22 @@ const server = http.createServer(function(req, res) {
 	}
 
 	if(q.path.includes('out.png')){
-		try{
-		fs.readFile("index.html", function(err, data) {
-			nodeHtmlToImage({
-				output: './out.png',
-				html: data + list.join(" "),
-				puppeteerArgs: {args: ["--no-sandbox"]}
-			  })
-				.then(() => {
-					res.setHeader("Content-Type", "image/png");
-					res.write(fs.readFileSync('.' + q.pathname.replace(/%20/g, ' ')));
-					console.log('finishhed doin that')
-					return
-				})
-		});
-		}catch(e){
-			res.write("err: "+e)
-			return;
+		// make image
+		const img1 = PImage.make(1000, 10*list.length);
+		// get canvas context
+		const ctx = img1.getContext("2d");
+		for (var i = 0; i < list.length; i++){
+			ctx.font = "10px Arial";
+			ctx.fillText(list[i], 0, 10*i);
 		}
+		//write to 'out.png'
+		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
+		.then(() => {
+			console.log("wrote out the png file to out.png");
+		})
+		.catch((e) => {
+			console.log("there was an error writing");
+		});
 	}
 
 	//Upload system
