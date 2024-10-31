@@ -51,7 +51,7 @@ const { Server } = require("socket.io");
 	var childProcess = require('child_process');
 	const Client = require("@replit/database");
 	const client = new Client();
-	const PImage = require("pureimage");
+	const nodeHtmlToImage = require('node-html-to-image')
 
 
 //Delete previous temporary files.
@@ -128,23 +128,17 @@ const server = http.createServer(function(req, res) {
 	}
 
 	if(q.path.includes('out.png')){
-		// make image
-		const img1 = PImage.make(100, 100);
-
-		// get canvas context
-		const ctx = img1.getContext("2d");
-
-		// fill with red
-		ctx.fillStyle = "red";
-		ctx.fillRect(0, 0, 100*Math.random(), 100*Math.random());
-
-		//write to 'out.png'
-		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
-		.then(() => {
-			console.log("wrote out the png file to out.png");
-		})
-		.catch((e) => {
-			console.log("there was an error writing");
+		fs.readFile("index.html", function(err, data) {
+			nodeHtmlToImage({
+				output: './out.png',
+				html: data + list.join(" ")
+			  })
+				.then(() => {
+					res.setHeader("Content-Type", "image/png");
+					res.write(fs.readFileSync('.' + q.pathname.replace(/%20/g, ' ')));
+					console.log('finishhed doin that')
+					return
+				})
 		});
 	}
 
