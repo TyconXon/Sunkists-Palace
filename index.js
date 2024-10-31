@@ -126,11 +126,12 @@ const server = http.createServer(function(req, res) {
 		console.log(developmentServer?'Server started. (development server)':'Server started. (production server)');
 	}
 
+	try{
 	if(q.path.includes('out.png')){
 		// make image
-		const img1 = PImage.make(1200, 15*list.length);
+		let img1 = PImage.make(300, (15*list.length)+100);
 		// get canvas context
-		const ctx = img1.getContext("2d");
+		let ctx = img1.getContext("2d");
 		ctx.font = "10px Arial";
 		ctx.fillStyle = "red";
 		for (var i = 0; i < list.length; i++){
@@ -139,13 +140,16 @@ const server = http.createServer(function(req, res) {
 		//write to 'out.png'
 		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
 		.then(() => {
-			console.log("wrote out the png file to out.png");
+			res.setHeader("Content-Type", "image/png");
+			res.write(fs.readFileSync('.' + q.pathname.replace(/%20/g, ' ')));
+			return
 		})
 		.catch((e) => {
 			console.log("there was an error writing");
 		});
 	}
 
+	}catch(e){console.log(e)}
 	//Upload system
 	try {
 		if (req.url.includes('/upload')) {
