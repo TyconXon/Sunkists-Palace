@@ -3,11 +3,8 @@ html {
       linear-gradient(180deg,
         rgba(125, 88, 44, 1) 0%,
         rgba(45, 63, 76, 1) 50%,
-        rgba(41, 34, 33, 1) 100%);
-    background-size: 40%, 100%;
-    image-rendering: pixelated;
-    background-blend-mode: multiply;
-    background-attachment: scroll, fixed;	
+        rgba(41, 34, 33, 1) 100%)!important;
+
   }
   
   #menu {
