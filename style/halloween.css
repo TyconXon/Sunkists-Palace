@@ -1,0 +1,38 @@
+html {
+    background: url(../images/rain.gif),
+      linear-gradient(180deg,
+        rgba(125, 88, 44, 1) 0%,
+        rgba(45, 63, 76, 1) 50%,
+        rgba(41, 34, 33, 1) 100%);
+    background-size: 40%, 100%;
+    image-rendering: pixelated;
+    background-blend-mode: multiply;
+    background-attachment: scroll, fixed;	
+  }
+  
+  #menu {
+    border-radius: 0px;
+    background-color: rgba(160, 90, 90, 0.3);
+    border: ridge rgba(255, 120, 70, 0.8) 2px;
+  }
+  
+  #status {
+    font-family: Times New Roman;
+    color: purple;
+    text-shadow: 0 0 15px black;
+    background-color: rgba(15, 15, 15, 0.3);
+  }
+  
+  h1, .titleRead {
+    font-family: Times New Roman;
+    font-style: italic;
+  }
+  
+  summary {
+    backdrop-filter: hue-rotate(10deg);
+    font-family: Times New Roman;
+  }
+  
+  details {
+    background-color: rgba(250, 170, 120, 0.2);
+  }  
