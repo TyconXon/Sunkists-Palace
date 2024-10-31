@@ -132,7 +132,6 @@ const server = http.createServer(function(req, res) {
 		let img1 = PImage.make(300, (15*list.length)+100);
 		// get canvas context
 		let ctx = img1.getContext("2d");
-		ctx.font = "10px Arial";
 		ctx.fillStyle = "red";
 		for (var i = 0; i < list.length; i++){
 			ctx.fillText(list[i], 0, 10*i);
