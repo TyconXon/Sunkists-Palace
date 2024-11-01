@@ -73,7 +73,7 @@ const splashText = [
 	"*Confused cat noises*",
 	"You only have OneShot",
 	"The way is blocked... by blocks!",
-	
+	"Bye, hi... sigh Hawaii",
 	
 	
 ];
