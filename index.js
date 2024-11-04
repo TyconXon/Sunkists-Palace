@@ -110,6 +110,11 @@ var list = MEM
 const coworkers = new Map();
 const minefield = {hacker:["honeypot"]};
 
+const fnt = pureimage.registerFont(
+      "fonts/AmaticSC-Regular.ttf",
+      "invalid",
+    );
+fnt.loadSync();
 
 
 /** SERVER */
