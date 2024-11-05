@@ -138,7 +138,7 @@ const server = http.createServer(function(req, res) {
 		// get canvas context
 		let ctx = img1.getContext("2d");
 		ctx.fillStyle = "red";
-		ctx.font = "15px invalid";
+		ctx.font = "15pt 'invalid'";
 		for (var i = 0; i < list.length; i++){
 			ctx.fillText(list[i], 0, 10*i);
 		}
