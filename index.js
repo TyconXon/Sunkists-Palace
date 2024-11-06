@@ -111,7 +111,7 @@ const coworkers = new Map();
 const minefield = {hacker:["honeypot"]};
 
 const fnt = PImage.registerFont(
-      "fonts/SpaceMono-Regular.ttf",
+      "fonts/Retron2000.ttf",
       "invalid",
     );
 fnt.loadSync();
