@@ -152,15 +152,33 @@ const server = http.createServer(function(req, res) {
 	try{
 	if(q.path.includes('out.png')){
 		// make image
-		let img1 = PImage.make(1200, (20*list.length)+100);
+		let img1 = PImage.make(1200, (20*list.length)+20);
 		// get canvas context
 		let ctx = img1.getContext("2d");
-		ctx.fillStyle = "red";
+		
 		ctx.font = "20pt 'invalid'";
-		for (var i = 0; i < list.length; i++){
-			let splt = splitString(list[i])
-			ctx.fillText(`[${splt.id}] ${splt.usrIdentifier} : ${splt.message}`, 10, (15*i)+10);
+		ctx.fillStyle = "white";
+
+		
+		var ir;
+		for (ir = 0; ir < list.length; ir++){
+			let splt = splitString(list[ir])
+			switch(splt.usrIdentifier){
+				case "MaximusMiller2":
+					ctx.fillStyle = "yellow"; break;
+				case "Boxel": 
+					ctx.fillStyle = "purple"; break;
+				case "Afton":
+					ctx.fillStyle = "cyan"; break;
+				default:
+					ctx.fillStyle = "white"; break;
+			}
+			ctx.fillText(`[${splt.id}] ${splt.usrIdentifier} : ${splt.message}`, 10, (16*ir)+20);
 		}
+
+		ctx.fillStyle = "red";
+		ctx.fillText(`Online: ${JSON.stringify(Object.keys(Object.fromEntries(onliners)))}`, 10, (16*ir)+20);
+		ctx.fillText(`${curTime.toLocaleString("en-US", { timeZone: "US/Arizona" })}`, 10, (16*ir)+20);
 		//write to 'out.png'
 		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
 		.then(() => {
