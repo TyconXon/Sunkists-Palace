@@ -127,7 +127,11 @@ function splitString(inputString) {
 		};
 		return result;
 	}catch(e){
-		console.log("splitstring error: " + e);
+		return {
+			id: "imparsable",
+			usrIdentifier: "imparsable",
+			message: "imparsable"
+		}
 	}
 }
 
@@ -155,7 +159,7 @@ const server = http.createServer(function(req, res) {
 		ctx.font = "20pt 'invalid'";
 		for (var i = 0; i < list.length; i++){
 			let splt = splitString(list[i])
-			ctx.fillText(`[${splt.id}] ${splt.usrIdentifier} : ${splt.message}`, 0, 10*i);
+			ctx.fillText(`[${splt.id}] ${splt.usrIdentifier} : ${splt.message}`, 10, (10*i)+10);
 		}
 		//write to 'out.png'
 		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
