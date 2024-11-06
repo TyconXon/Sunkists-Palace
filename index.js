@@ -178,6 +178,7 @@ const server = http.createServer(function(req, res) {
 
 		ctx.fillStyle = "red";
 		ctx.fillText(`Online: ${JSON.stringify(Object.keys(Object.fromEntries(onliners)))}`, 10, (16*ir)+20);
+		let curTime = new Date();
 		ctx.fillText(`${curTime.toLocaleString("en-US", { timeZone: "US/Arizona" })}`, 10, (16*ir)+20);
 		//write to 'out.png'
 		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
