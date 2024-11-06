@@ -159,7 +159,7 @@ const server = http.createServer(function(req, res) {
 		ctx.font = "20pt 'invalid'";
 		for (var i = 0; i < list.length; i++){
 			let splt = splitString(list[i])
-			ctx.fillText(`[${splt.id}] ${splt.usrIdentifier} : ${splt.message}`, 10, (10*i)+10);
+			ctx.fillText(`[${splt.id}] ${splt.usrIdentifier} : ${splt.message}`, 10, (15*i)+10);
 		}
 		//write to 'out.png'
 		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
