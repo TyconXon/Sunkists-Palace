@@ -869,11 +869,11 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 					username: `${usr} #${room != null?room:"general"}${developmentServer?' on DEV server':''}`,
 				avatar_url: usersPFP,
 				},
-			});
+			});*/
 		} catch (e) {
 			console.log('Unable to send discord message. Err: ' + e);
 		}
-  */
+  
 	}
 
 	if (room != null) {
