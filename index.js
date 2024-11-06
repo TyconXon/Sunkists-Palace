@@ -116,6 +116,20 @@ const fnt = PImage.registerFont(
     );
 fnt.loadSync();
 
+function splitString(inputString) {
+	try{
+		const result = {
+			id: inputString.match(/((?<=maple\()|(?<=maple\('))[^']+((?=')|(?=\)))/g)[0],
+			usrIdentifier: inputString.match(
+				/((?<=onIdentifer\(\")|(?<=onIdentifer\(\&quot;))[^(^)]*((?="\))|(?=\&quot;\)))/g,
+			)[0],
+			message: inputString.match(/(?<=<msgtxt>)[^]+?(?=<\/msgtxt>)/g)[0],
+		};
+		return result;
+	}catch(e){
+		console.log("splitstring error: " + e);
+	}
+}
 
 /** SERVER */
 const server = http.createServer(function(req, res) {
@@ -138,9 +152,10 @@ const server = http.createServer(function(req, res) {
 		// get canvas context
 		let ctx = img1.getContext("2d");
 		ctx.fillStyle = "red";
-		ctx.font = "15pt 'invalid'";
+		ctx.font = "20pt 'invalid'";
 		for (var i = 0; i < list.length; i++){
-			ctx.fillText(list[i], 0, 10*i);
+			let splt = splitString(list[i])
+			ctx.fillText(`[${splt.id}] ${splt.usrIdentifier} : ${splt.message}`, 0, 10*i);
 		}
 		//write to 'out.png'
 		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
@@ -515,7 +530,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 			} else {
 				if (forever[room][id].includes(usr) || (usr.endsWith("2") || (usr.startsWith("A") && usr.endsWith("n")))) {
 					forever[room][id] = `<div id='${id}' class='message ${usr} ${phone ? "phone" : ""
-						}'> <strong class='identifier' onClick='onIdentifier("${usr}")'>${usr} <abbr noicon title='${curTime.toLocaleString(
+						}'> <strong class='identifier' onClick='onIdentifer("${usr}")'>${usr} <abbr noicon title='${curTime.toLocaleString(
 							"en-US",
 							{ timeZone: "US/Arizona" }
 						)}'>@ ${curTime.toLocaleTimeString("en-US", {
@@ -537,7 +552,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 
 		if (list[id].includes(usr) || (usr.endsWith("2") || (usr.startsWith("A") && usr.endsWith("n")))) {
 			list[id] = `<div id='${id}' class='message ${usr} ${phone ? "phone" : ""
-				}'> <strong class='identifier' onClick='onIdentifier("${usr}")'>${usr}  <abbr noicon title='${curTime.toLocaleString(
+				}'> <strong class='identifier' onClick='onIdentifer("${usr}")'>${usr}  <abbr noicon title='${curTime.toLocaleString(
 					"en-US",
 					{ timeZone: "US/Arizona" }
 				)}'>@ ${curTime.toLocaleTimeString("en-US", {
@@ -779,7 +794,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 		} else {
 			let variationOfACloud = ":3";
 			extendedMessage = `<div id='${list.length}' class='message ${usr} ${phone ? "phone" : ""
-				}'> <strong class='identifier' onClick='onIdentifier("${usr}")'> ${usr} <abbr noicon title='${curTime.toLocaleString(
+				}'> <strong class='identifier' onClick='onIdentifer("${usr}")'> ${usr} <abbr noicon title='${curTime.toLocaleString(
 					"en-US",
 					{ timeZone: "US/Arizona" }
 				)}'> </ins></strong> <msgtxt>${variationOfACloud}</msgtxt> </abbr> <button class='rightist' onClick="maple(${list.length
@@ -844,7 +859,8 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 						break;
 				}
 			}
-			
+
+			/*
 			request({
 				method: "POST",
 				url: webhookURL,
@@ -857,6 +873,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 		} catch (e) {
 			console.log('Unable to send discord message. Err: ' + e);
 		}
+  */
 	}
 
 	if (room != null) {
