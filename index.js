@@ -184,8 +184,9 @@ const server = http.createServer(function(req, res) {
 		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
 		.then(() => {
 			res.setHeader("Content-Type", "image/png");
-			res.write(fs.readFileSync('.' + q.pathname.replace(/%20/g, ' ')));
-			return
+			res.write(fs.readFileSync('./out.png')));
+			res.end();
+			return;
 		})
 		.catch((e) => {
 			console.log("there was an error writing");
@@ -402,10 +403,9 @@ const server = http.createServer(function(req, res) {
 		
 		} else {
 			res.writeHead(200, { "Content-Type": "text/html" });
-			res.write(`<html style="padding-top:25px;"><head><meta charset="utf-8" /><meta http-equiv="refresh" content="5;URL='/?slow&autorefreshed'" />
+			res.write(`<html style="padding-top:25px;"><head><meta charset="utf-8" />${qData.paused == undefined? `<meta http-equiv="refresh" content="5;URL='/?slow&autorefreshed'" />` : `` }
 			<style>
 			.MaximusMiller2{background-color:lightblue;} .Afton{background-color:cyan;}.Boxel{background-color:purple;color:white;}
-	
 			</style>
 			</head><body>
 			<div style="position:sticky;background-color:grey; font-size:150%;top:0;">
