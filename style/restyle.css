@@ -43,6 +43,9 @@ img {
 	border-radius: 3px;
 	max-width: 50%;
 }
+video{
+	max-width: 50%;
+}
 
 pre code {
 	text-shadow: none;
