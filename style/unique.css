@@ -50,8 +50,9 @@ html {
 }
 
 #onlineCount *:before, #talkorinos *:before{
-		border: none;
-		background-image: none;
+/* 		border: none;
+		background-image: none; */
+	display: none;
 }
 
 /***--- Menu Stuffs ---***/
