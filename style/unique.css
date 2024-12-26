@@ -50,7 +50,7 @@ html {
 }
 
 #onlineCount *:before, #talkorinos *:before{
-		border: none !important;
+		border: none;
 		background-image: none;
 }
 
