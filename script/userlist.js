@@ -12,5 +12,5 @@ const VALID_USERS = [
 	"Rey",
 	"Obi",
 	"Lee",
-	"Sam",
+	"Sam"
 ];
