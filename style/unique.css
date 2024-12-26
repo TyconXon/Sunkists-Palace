@@ -51,7 +51,7 @@ html {
 
 #onlineCount *:before, #talkorinos *:before{
 		border: none !important;
-		background-image: none !important;
+		background-image: none;
 }
 
 /***--- Menu Stuffs ---***/
