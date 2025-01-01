@@ -1,0 +1,27 @@
+@import url('https://elisniper.github.io/Glass-Wave/release/import.css');
+
+:root {
+  --var-background: url(https://www.sunkist-palace.net/images/ocean.gif), url(https://www.sunkist-palace.net/images/rainnew.gif),  linear-gradient(180deg,   rgba(56, 93, 95, 1) 0%,   rgba(45, 63, 76, 1) 50%,   rgba(50, 49, 50, 1) 100%) ;
+  --var-background-size: 15%, 25%, 100%;
+  --var-background-position: bottom, center;
+  
+  --var-accent: rgba(100, 50, 170, 0.35);
+  --var-popout-color: rgb(10, 21, 21);
+  --var-chat-bubbles-background: rgb(11, 35, 40, 0);
+  --var-chat-mentioned: rgba(100, 50, 170, 0.35);
+  --var-font: gg sans;
+
+  --var-black1: rgba(31, 7, 65, 0.25);
+  --var-black2: rgba(0, 0, 0, 0.5);
+}
+
+body, .bg_d4b6c5 {
+    background-repeat:repeat-x,repeat !important;
+}
+.message_d5deea.mentioned_d5deea .contents_f9f2ca, .message_d5deea.mentioned_d5deea .container_b558d0 {
+  background: url(https://www.sunkist-palace.net/images/ash.gif), linear-gradient(187deg, rgb(92 10 92) 0%, rgb(75 5 80) 50%, rgb(62 5 32) 100%) !important;
+    background-size: 40%, 100% !important; 
+    background-position: bottom, bottom, bottom !important;
+    background-attachment:  fixed, fixed !important;
+    background-repeat: repeat, no-repeat !important;
+}
