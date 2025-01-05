@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+		<style>
+			html{
+				background-color: black;
+				color: white;
+			}
+			
+			div{
+				width: 500px;
+				height: 500px;
+				margin: auto;
+				background-color: white;
+			}
+		</style>
+    </head>
+    <body>
+		<div>
+        <canvas 
+			id="output"
+			width="500"
+			height="500"
+			></canvas>
+		</div>
+		<button onclick="start()">Start</button>
+		<br>
+		<input type="text" id="text" placeholder="text" value="Terminus.88e2e5a9.ALGM">
+		<input type="color" id="color" placeholder="text" value="black">
+		<br>
+		<input type="number" id="fps" placeholder="seconds per frame" value="1">
+		<input type="number" id="maxframes" placeholder="max frames" value="-1">
+		<br>
+		<input type="number" id="shapes" placeholder="# of shapes" value="6">
+		<input type="checkbox" id="transparency" >transparency
+		<input type="checkbox" id="squares" checked>squares
+		<input type="checkbox" id="circles" >circles
+		<input type="checkbox" id="clear" checked>clear frame
+		<br>
+		<input type="number" id="highFreq" placeholder="highest frequency" value="1700">
+		<input type="number" id="lowFreq" placeholder="lowest frequency" value="200">
+		<input type="number" id="tones" placeholder="tones" value="1">
+		<textarea type="text" id="sentences" placeholder="sentences">The elusive shadow analyzes an elusive pattern within a fleeting second.
+			A shattered dream explores a fractured timeline beneath a crimson sky.
+			The silent observer pursues a forbidden letter with unwavering focus.
+		</textarea>
+
+
+
+        <script>
+            var canvas = document.querySelector('#output')
+            var ctx = canvas.getContext("2d")
+			var FPS = document.querySelector("#fps").value
+			var heartbeat
+			var shapes 
+			var transparency 
+			var text 
+			var _frame = 0
+			var maxFrames 
+			var squares 
+			var circles 
+			var clear
+			var tones
+			var lowFreq
+			var highFreq
+			var color
+			var sentences
+
+			function start(){
+				document.querySelector("button").disabled = true
+				heartbeat = null
+				
+				FPS = document.querySelector("#fps").value
+				shapes = document.querySelector("#shapes").value
+				transparency = document.querySelector("#transparency").checked
+				text = document.querySelector("#text").value
+				maxFrames = document.querySelector("#maxframes").value
+				squares = document.querySelector("#squares").checked
+				circles = document.querySelector("#circles").checked
+				clear = document.querySelector("#clear").checked
+				tones = document.querySelector("#tones").value
+				lowFreq = document.querySelector("#lowFreq").value
+				highFreq = document.querySelector("#highFreq").value
+				color = document.querySelector('#color').value
+				sentences = document.querySelector("#sentences").value
+
+				setTimeout(()=>{
+					var msg = new SpeechSynthesisUtterance();
+					msg.text = sentences;
+					window.speechSynthesis.speak(msg);
+				}, FPS*1000)
+				
+
+				heartbeat = setInterval(update, FPS*1000)
+			}
+
+
+			function update(){
+				if(_frame == maxFrames){
+					return
+				}
+				if(clear)
+					ctx.clearRect(0, 0, 500, 500);
+
+				for(let i = 0; i < tones; i++){
+					playFrequency(rng(lowFreq,highFreq), FPS*1000)
+				}
+
+				for(let i = 0; i < shapes; i++){
+					if (circles)
+						randomEllipse()
+					if (squares)
+						randomSquare()
+				}
+				_frame++
+
+				ctx.fillStyle = color
+				ctx.font = "25px consolas";
+  				ctx.fillText(text, 0, 500-5)
+
+				ctx.fillStyle = color
+				ctx.font = "15px consolas";
+  				ctx.fillText(`Frame ${_frame}`, 0, 15)
+			}
+
+			function randomSquare(){
+				var widthAndHeight = rng(250, 50)
+				ctx.fillStyle = `rgb(${rng(255)} ${rng(255)} ${rng(255)} / ${transparency? rng(100) : 100}%)`
+				ctx.fillRect(rng(500-widthAndHeight), 
+							rng(500-widthAndHeight),
+							widthAndHeight,widthAndHeight)
+			}
+
+			function randomEllipse(){
+				var widthAndHeight = rng(100, 50)
+				ctx.fillStyle = `rgb(${rng(255)} ${rng(255)} ${rng(255)} / ${transparency? rng(100) : 100}%)`
+				ctx.beginPath();
+				ctx.ellipse(rng(500-widthAndHeight), 
+							rng(500-widthAndHeight),
+							widthAndHeight,widthAndHeight, Math.PI / 4, 0, 2 * Math.PI)
+				ctx.fill()
+			}
+
+			function rng(max, min = 0){
+				return Math.random() * (max - min) + min;
+			}
+
+
+
+		
+        function playFrequency(frequency,length) {
+			var audioContext = new AudioContext();
+            // create 2 second worth of audio buffer, with single channels and sampling rate of your device.
+            var sampleRate = audioContext.sampleRate;
+            var duration = 5*sampleRate;
+            var numChannels = 1;
+            var buffer  = audioContext.createBuffer(numChannels, duration, sampleRate);
+            // fill the channel with the desired frequency's data
+            var channelData = buffer.getChannelData(0);
+            for (var i = 0; i < sampleRate; i++) {
+                channelData[i]=Math.sin(2*Math.PI*frequency*i/(sampleRate));
+            }
+
+            // create audio source node.
+            var source = audioContext.createBufferSource();
+            source.buffer = buffer;
+            source.connect(audioContext.destination);
+
+            // finally start to play
+            source.start(0);
+            setInterval(() => {
+                source.stop()
+            }, length);
+        }
+            
+        </script>
+    </body>
+</html>
