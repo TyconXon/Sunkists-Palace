@@ -74,6 +74,14 @@ const splashText = [
 	"You only have OneShot",
 	"The way is blocked... by blocks!",
 	"Bye, hi... sigh Hawaii",
+	"We can't be silent, cuz they might be giants!",
+	"Minimum wage!",
+	"My name is Zubin, and I can swim!",
+	"Bingo! Right in the center!",
+	"bro...",
+	"If it was methane it'd be igniting in the flare right?",
+	"Jesse Jesse Jesse, can't you see, you're little cellphones a ring-ringin'",
+	
 	
 	
 ];
