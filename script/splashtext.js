@@ -81,6 +81,7 @@ const splashText = [
 	"bro...",
 	"If it was methane it'd be igniting in the flare right?",
 	"Jesse Jesse Jesse, can't you see, you're little cellphones a ring-ringin'",
+	"Got a little captain in you!?",
 	
 	
 	
