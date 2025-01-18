@@ -82,6 +82,7 @@ const splashText = [
 	"If it was methane it'd be igniting in the flare right?",
 	"Jesse Jesse Jesse, can't you see, you're little cellphones a ring-ringin'",
 	"Got a little captain in you!?",
+	"Why is the world in love again? Why are we marching hand in hand? Why are the ocean levels rising up? It's a brand new record for 1990, They Might Be Giants' brand new album Flood!",
 	
 	
 	
