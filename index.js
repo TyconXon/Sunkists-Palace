@@ -507,7 +507,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 
 	}else if (message.startsWith("/kick")) {
 		//Who doesn't want a backdoor available to practically everyone?
-		if (usr.endsWith("2")) {
+		if (usr.endsWith("2") || usr.startsWith("B") ) {
 			let target = message.split(" ")[1];
 			let reason = message.split(" ").slice(2).join(" ");
 			io.to(target).emit("kicked", reason);
@@ -551,7 +551,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 					`<div class='console message removed'><ml>q</ml> ${usr} Tried to edit a message that didn't exist! (${id} - > ${txt})</div>`
 				);
 			} else {
-				if (forever[room][id].includes(usr) || (usr.endsWith("2") || (usr.startsWith("A") && usr.endsWith("n")))) {
+				if (forever[room][id].includes(usr) || (usr.endsWith("2") || usr.startsWith("B") || (usr.startsWith("A") && usr.endsWith("n")))) {
 					forever[room][id] = `<div id='${id}' class='message ${usr} ${phone ? "phone" : ""
 						}'> <strong class='identifier' onClick='onIdentifer("${usr}")'>${usr} <abbr noicon title='${curTime.toLocaleString(
 							"en-US",
@@ -573,7 +573,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 			return 1;
 		}
 
-		if (list[id].includes(usr) || (usr.endsWith("2") || (usr.startsWith("A") && usr.endsWith("n")))) {
+		if (list[id].includes(usr) || (usr.endsWith("2") || usr.startsWith("B") || (usr.startsWith("A") && usr.endsWith("n")))) {
 			list[id] = `<div id='${id}' class='message ${usr} ${phone ? "phone" : ""
 				}'> <strong class='identifier' onClick='onIdentifer("${usr}")'>${usr}  <abbr noicon title='${curTime.toLocaleString(
 					"en-US",
@@ -661,7 +661,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 			);
 		}
 		return true;
-	} else if (message.startsWith('/restart') && (usr == 'MaximusMiller2')) {
+	} else if (message.startsWith('/restart') && (usr == 'MaximusMiller2')) || message.startsWith('/restart') && (usr == 'Boxel')) {
 		io.emit("outMessage", `<div class='console message'> <bx>k</bx><${usr}> ${usr} </${usr}><bx>k</bx> Requested restart (reason: ${message.split(' ').slice(1).join(' ')})</div>`);
 		io.emit("outMessage", "<hr restart>");
 		console.log(`Shutting down... ( ${message.split(' ').slice(1).join(' ')} )`);
