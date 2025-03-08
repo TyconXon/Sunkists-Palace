@@ -83,6 +83,7 @@ const splashText = [
 	"Jesse Jesse Jesse, can't you see, you're little cellphones a ring-ringin'",
 	"Got a little captain in you!?",
 	"Why is the world in love again? Why are we marching hand in hand? Why are the ocean levels rising up? It's a brand new record for 1990, They Might Be Giants' brand new album Flood!",
+	"Do you hear the flibbity jibbity jibber jabberWith an Oh my God, I've got to get out of here or I'll have another word to sell, another story to tell another time piece ringing the bell do you hear the clock stop when you reach the end? No, you know it must be never ending, comprehend if you can but when you try to pretend to understand you resemble a fool although you're only a man so give it up and smile
 	
 	
 	
