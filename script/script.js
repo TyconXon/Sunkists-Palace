@@ -200,7 +200,7 @@ function markAsRead(){
 	document.getElementById("menuTitle").innerText =
 		sunkistsPalace;
 	document.getElementById("icon").href =
-		"images/favicon.ico";
+		"images/favi.png";
 	document.getElementById("menuTitle").className = 'titleRead'
 }
 
