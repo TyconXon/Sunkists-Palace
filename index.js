@@ -661,7 +661,7 @@ function sendMessage(usr, message, phone, sckt, room = null) {
 			);
 		}
 		return true;
-	} else if (message.startsWith('/restart') && (usr == 'MaximusMiller2')) || message.startsWith('/restart') && (usr == 'Boxel')) {
+	} else if (message.startsWith('/restart') && (usr == 'MaximusMiller2') || message.startsWith('/restart') && (usr == 'Boxel')) {
 		io.emit("outMessage", `<div class='console message'> <bx>k</bx><${usr}> ${usr} </${usr}><bx>k</bx> Requested restart (reason: ${message.split(' ').slice(1).join(' ')})</div>`);
 		io.emit("outMessage", "<hr restart>");
 		console.log(`Shutting down... ( ${message.split(' ').slice(1).join(' ')} )`);
