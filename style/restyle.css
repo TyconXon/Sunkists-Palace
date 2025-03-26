@@ -9,6 +9,10 @@ a {
 	padding: 3px;
 }
 
+#menu a {
+	border: 3px yellow solid;
+}
+
 a>img {
 	background-color: transparent;
 }
@@ -118,11 +122,11 @@ textarea {
 	color: white;
 	caret-color: lightblue;
 }
-#sStyle{
+#sStyle, #sJs {
 	width: 80vw;
 	height: 60vh;
 }
-#sSub{
-	width: 80vw;
+#sSub, #sSubJs {
+	width: 80%;
 	margin-top:5px;
 }

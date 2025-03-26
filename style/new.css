@@ -200,8 +200,7 @@ test,
 }
 
 [curBlock] {
-	cursor: url(../cursor/block.cur"),
-		auto;
+	cursor: url(../cursor/block.cur) auto;
 }
 
 sauce,

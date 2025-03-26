@@ -66,23 +66,23 @@
 			<details class="settings" style="max-height: 200px" id='thesettings'>
 				
 				<summary>Settings</summary><br />
-				<button onclick="setUsr()" id="loginBtn">Login</button>
-				<button onclick="text()" id="messageBtn">Add to chat (press Enter)</button>
-				<button onclick="window.location.reload()" id="refreshBtn">Refresh</button>
-				<button onclick="nickname()" id="nicknameBtn">Set nickname</button>
-				<button onclick="markAsRead();" id="read"> Read all</button>
-				<button onclick="altMode = !altMode;alert(altMode?'Autoscroll enabled':'Autoscroll disabled');" id="scrollBtn">Toggle autoscrolling</button>
-				<button onclick="friendlyEdit(true,false)" id="editBtn"> Edit message (ctrl + up arrow)</button>
-				<button onclick="friendlyEdit(false,true)" id="replyBtn"> Reply to message (shift + up arrow)</button>
-				<button onclick="newPopup(window.location.origin + '/?channel='+prompt('Username of person to DM?')+'&cls')" id="dmBtn"> Open DM page</button>
-				
+				<div id="settingsButtons">
+					<button onclick="setUsr()" id="loginBtn">Login</button>
+					<button onclick="text()" id="messageBtn">Add to chat (press Enter)</button>
+					<button onclick="window.location.reload()" id="refreshBtn">Refresh</button>
+					<button onclick="nickname()" id="nicknameBtn">Set nickname</button>
+					<button onclick="markAsRead();" id="read"> Read all</button>
+					<button onclick="altMode = !altMode;alert(altMode?'Autoscroll enabled':'Autoscroll disabled');" id="scrollBtn">Toggle autoscrolling</button>
+					<button onclick="friendlyEdit(true,false)" id="editBtn"> Edit message (ctrl + up arrow)</button>
+					<button onclick="friendlyEdit(false,true)" id="replyBtn"> Reply to message (shift + up arrow)</button>
+					<button onclick="newPopup(window.location.origin + '/?channel='+prompt('Username of person to DM?')+'&cls')" id="dmBtn"> Open DM page</button>
+				</div>
 				<br />
 				
 				<a href="/?slow" id="slowBtn">Slow-internet (legacy) mode</a>
 				<a href="/directory.html" target="_blank" id="directoryBtn">Sunkist directory</a>
 				<a href="/?cls" id="clearBtn">Clear all previous messages</a>
 				<a href="/?limit=20" id="limitBtn">Limit messages to 20</a>
-		
 				<a href="https://docs.google.com/document/d/1tbv-MJ7Hfz0bctJpbg6RaGocuWXjS4qIJ4t9DzLH8Co/edit?usp=sharing" target="_blank" id="docsBtn">Documentation</a>
 				
 				<br />
@@ -109,15 +109,19 @@
 				</div>
 				
 				<br />
+				<br />
 		
 				<!-- MESSAGE PREFIX -->
 				<label for="prefix">Message prefix:</label>
+				<br>
 				<textarea type="text" id='prefix' name='prefix'></textarea>
 				
 				<br />
+				<br>
 		
 				<!-- TITLE EDITOR -->
 				<label for="suffix">Rename title: </label>
+				<br>
 				<textarea type="text" id='suffix' name='suffix'>Sunkist's Palace</textarea>
 				
 				<br>

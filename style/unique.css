@@ -109,6 +109,17 @@ h1, .titleRead { /*Sunkist Palace text*/
 	text-shadow: 0 0 10px blue;
 }
 
+#settingsButtons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+  }
+  
+  #settingsButtons > * {
+	flex-basis: 5%;
+	flex-grow: 1;
+  }
+
 /***--- Special Stuffs ---***/
 
 #lastRead,
