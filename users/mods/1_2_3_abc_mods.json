@@ -103,7 +103,7 @@
       			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/time-machine.css",
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/time-machine.png",
 			"description": "A theme that makes Sunkist Palace look like its older self.",
-			"tags" : ["layout", "meta", "theme", "old"]
+			"tags" : ["layout", "meta", "theme", "old", "retro"]
 		},
 		{
 			"name": "Suncord",
@@ -266,6 +266,14 @@
       			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/new-favi.jpg",
 			"description": "Changes page icons to a more unified look based on the Sunkist Marketplace icon.",
 			"tags" : ["favicon", "unified", "icon", "plugin", "meta", "new"]
+		},
+		{
+			"name": "Old Favi",
+			"author": "Boxel",
+      			"file": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/old-favi.js",
+      			"image": "https://raw.githubusercontent.com/BoxelLogica/Sunkist-Mods/refs/heads/main/old-favi.jpg",
+			"description": "Brings back the retro white chatbox icon from 2024.",
+			"tags" : ["favicon", "retro", "icon", "plugin", "meta", "new", "old"]
 		}
 	],
 	"snippits": [

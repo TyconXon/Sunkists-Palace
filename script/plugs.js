@@ -280,7 +280,7 @@ socket.on("requestUpdate", () => {
 		document.getElementById("menuTitle").innerText =
 			sunkistsPalace+"[+" + newMessageCount + "]";
 		document.getElementById("icon").href =
-			"/images/faviupdate.png";
+			"/images/favicon-alert.ico";
 		document.getElementById("menuTitle").className = 'titleUnread'
 	}
 });
