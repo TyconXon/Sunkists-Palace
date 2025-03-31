@@ -1,0 +1,45 @@
+<html id="gameindex">
+<head>
+	<link rel="stylesheet" href="../style/users.css">
+	<link rel="stylesheet" href="../style/fonts.css">
+	<link rel="stylesheet" href="../style/gamelab.css">
+	<link rel="stylesheet" href="../style/marketplace.css">
+    <!-- <script src="games.js"></script> -->
+	<title>Tommy's Game Lab</title>
+</head>
+<body>
+
+    <h1>Tommy's Game Lab</h1>
+    
+
+    <div class="trueCenter">
+    <games>
+        <!-- <div class="gameContainer" id="${game.id}"> -->
+            <!-- <img src="${game.banner}"> -->
+            <!-- <a href="${game.id}"></a> -->
+            <!-- <p>${game.name}</p> -->
+        <!-- </div> -->
+    </games>
+</div>
+    <script src="games.js"></script>
+
+
+
+
+
+	<script>
+		var orange = document.createElement("style");
+		orange.innerHTML = window.localStorage.getItem("style");
+		orange.setAttribute('nodraw', true);
+		document.body.appendChild(orange);
+			
+		addEventListener('load', ()=>{
+			var lemon = document.createElement("script");
+			lemon.innerHTML = window.localStorage.getItem("js");
+			lemon.setAttribute('nodraw', true);
+			document.body.appendChild(lemon);
+		});
+		
+	</script>
+</body>
+</html>
