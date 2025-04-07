@@ -135,13 +135,13 @@
 				<button popovertarget="volumeSection" id="soundsBtn" disabled>Open sound settings (removed)</button>
 				<div popover id="volumeSection">
 					<label for="vol">Text Volume:</label>
-					<input type="range" max="1" min="0" id="soundVolume" onchange="settingChange('soundVolume')" name='vol' step='0.05'> <br>
+					<input id="vol" type="range" max="1" min="0" id="soundVolume" onchange="settingChange('soundVolume')" name='vol' step='0.05'> <br>
 					<label for="vol1">Ping volume:</label>
-					<input type="range" max="1" min="0" id="pingSoundVolume" name='vol1' onchange="settingChange('pingSoundVolume')" step='0.05'> <br>
+					<input id="vol1" type="range" max="1" min="0" id="pingSoundVolume" name='vol1' onchange="settingChange('pingSoundVolume')" step='0.05'> <br>
 					<label for="vol2">Special Volume:</label>
-					<input type="range" max="1" min="0" id="specialSoundVolume" name='vol2' onchange="settingChange('specialSoundVolume')" step='0.05'> <br>
+					<input id="vol2" type="range" max="1" min="0" id="specialSoundVolume" name='vol2' onchange="settingChange('specialSoundVolume')" step='0.05'> <br>
 					<label for="pingSound">Ping sound:</label>
-					<input type="checkbox" onchange='settingChange("pingSound")' id="pingSound">
+					<input id='pingSound' type="checkbox" onchange='settingChange("pingSound")' id="pingSound">
 					<input type="text" onchange='settingChange("pingSoundUrl")' id="pingSoundUrl" disabled>
 				</div>
 			</details>
@@ -177,6 +177,8 @@
 	<script src="script/user.js" nodraw></script>
 	<script src="script/shortcuts.js" nodraw></script>
 	
+	<script src="services.js" type="text/javascript" nodraw></script>
+
 	<script src="messageFormatting.js" nodraw></script>
 </body>
 
