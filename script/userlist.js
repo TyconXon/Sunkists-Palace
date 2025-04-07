@@ -3,7 +3,7 @@ const VALID_USERS = [
 	"Max", //MaximusMiller2
 	"Afton",
 	"Boxel", //Boxel
-	"Sophie" //Boxel
+	"Sophie", //Boxel
 	"Sushi",
 	"Avonya",
 	"Leon",
