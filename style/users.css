@@ -4,8 +4,10 @@
 
 /***--- Message Defaults       ---***/
 
-.message {/*Every message has this class*/
+.message {
+	/*Every message has this class*/
 	line-height: 2.5;
+
 	/* Position Fix */
 	padding: 0.5% 5% 0.5% 0.5%;
 	border-radius: 5px;
@@ -13,6 +15,7 @@
 	vertical-align: top;
 	image-rendering: auto;
 	white-space: pre-wrap;
+
 	/*Allow new lines*/
 	overflow-wrap: break-word;
 	font-family: inherit, monospace, emoji;
@@ -20,7 +23,8 @@
 	background-color: lightgray;
 	color: black;
 }
-.message:hover{
+
+.message:hover {
 	filter: brightness(0.9);
 }
 
@@ -28,8 +32,10 @@
 	--iconsize: 35px;
 }
 
-.message::before {/*PFP settings*/
+.message::before {
+	/*PFP settings*/
 	margin-bottom: -12.5px;
+
 	/* Position Fix */
 	border: ridge 2px white;
 	border-radius: 3px;
@@ -39,24 +45,27 @@
 	height: var(--iconsize);
 	content: "";
 	font-size: 100%;
+	
 	/*Default image*/
 	background-image: url("https://media.tenor.com/m56fWQ4A39sAAAAd/survive-the-internet-jackbox.gif");
 
 }
-.collapsed::before{
+
+.collapsed::before {
 	visibility: hidden !important;
 }
-.collapsed .identifier {/*
-	visibility: hidden !important;*/
+
+.collapsed .identifier {
 	color: transparent;
 	text-shadow: 0 0 0 transparent;
 }
-.collapsed:hover .identifier{/*
-	visibility: hidden !important;*/
+
+.collapsed:hover .identifier {
 	color: gray;
 	text-shadow: 3 3 3 gray;
 }
-.collapsed{
+
+.collapsed {
 	line-height: 1;
 
 }
@@ -69,7 +78,10 @@ msgtxt {
 .phone:after {
 	content: "\2706";
 }
-.\<-::after {content: "🎮"; }  
+
+.\<-::after {
+	content: "🎮";
+}
 
 /*Reply button*/
 .rightist,
@@ -82,18 +94,17 @@ right {
 }
 
 .identifier {
-	/*filter: invert(100%);*/
-	/*filter: grayscale(100%);*/
-	/*filter: hue-rotate(90deg);*/
 	filter: opacity(55%);
 	padding-left: 6px;
 }
+
 .identifier,
 .rightist {
 	cursor: url(../images/cur/portal.png), auto;
 }
 
-room { /*Room indicator*/
+room {
+	/*Room indicator*/
 	color: cyan;
 	text-decoration: underline overline;
 }
@@ -102,15 +113,17 @@ room { /*Room indicator*/
 	background-color: lightgray;
 	color: black;
 }
-.dev{
-	display:none;
+
+.dev {
+	display: none;
 }
 
-[class^="rightist"]:hover:before{
-	content:'\2BA9';
+[class^="rightist"]:hover:before {
+	content: '\2BA9';
 	color: blue;
 }
-[class^="rightist"]:hover{
+
+[class^="rightist"]:hover {
 	color: transparent;
 }
 
@@ -126,7 +139,8 @@ MaximusMiller2,
 	font-size: 20px;
 	font-family: "Bound", emoji;
 	/*Earthbound*/
-	font-weight: 100;/*
+	font-weight: 100;
+	/*
 	text-shadow: 0px 0px 5px #006cff;*/
 	cursor: url(../images/cur/catter.png), auto;
 
@@ -141,12 +155,15 @@ MaximusMiller2,
 	}*/
 
 }
-.MaximusMiller2 abbr{
+
+.MaximusMiller2 abbr {
 	cursor: url(../images/cur/magnify.cur), help;
 }
-.MaximusMiller2 strong{
+
+.MaximusMiller2 strong {
 	cursor: url(../images/cur/entity.cur), help;
 }
+
 .MaximusMiller2.\<-::before {
 	background-image: url("../images/pfp/d-MaximusMiller2.webp");
 }
@@ -155,10 +172,15 @@ MaximusMiller2,
 afton {
 	background-color: rgb(0, 204, 204, 0.45);
 	color: black;
-	font-family: 'Undertale',"Orbitron", serif, emoji;
+	font-family: 'Undertale', "Orbitron", serif, emoji;
 	cursor: url(../images/cur/Cat_Paw.png), auto;
 }
-.Afton:not(span){background: linear-gradient(0deg, rgba(45,232,253,0.5) 0%, rgba(25,6,101,0.5) 100%);background-attachment: fixed;} 
+
+.Afton:not(span) {
+	background: linear-gradient(0deg, rgba(45, 232, 253, 0.5) 0%, rgba(25, 6, 101, 0.5) 100%);
+	background-attachment: fixed;
+}
+
 .Afton.\<-::before {
 	background-image: url("../images/pfp/d-Afton.webp");
 }
@@ -184,7 +206,9 @@ afton {
 }
 
 .Boxel,
-Boxel {
+Boxel,
+.Sophie,
+Sophie {
 	/* background-color: rgba(20,15,35,0.5);
 	background-image: linear-gradient(to right,
 			rgba(20, 15, 35, 0.5),
@@ -194,19 +218,20 @@ Boxel {
 	color: white;
 	font-family: coomer, sans-serif, emoji;
 	cursor: url('../images/cur/paw.png'), auto; */
-	background-color: rgba(20,15,35,0.5);
+	background-color: rgba(20, 15, 35, 0.5);
 	background-image: linear-gradient(to right,
-			rgba(15,5,29,0.5),
-			rgba(92,70,194,0.5),
-			rgba(173,28,162,0.5),
-			rgba(197,141,43,0.5)
-		);
+			rgba(15, 5, 29, 0.5),
+			rgba(92, 70, 194, 0.5),
+			rgba(173, 28, 162, 0.5),
+			rgba(197, 141, 43, 0.5));
 	text-shadow: 0px 0px 5px #ffffff60;
 	color: white;
 	font-family: coomer, sans-serif, emoji;
 	cursor: url('../images/cur/paw.png'), auto;
 }
-.Boxel.\<-::before {
+
+.Boxel.\<-::before,
+.Sophie.\<-::before {
 	background-image: url("../images/pfp/mecatdrawing.jpg");
 }
 
@@ -227,40 +252,44 @@ rose {
 
 
 
-@keyframes spin{
-	from{ transform:rotate(360deg); }
-	to{ transform:rotate(-360deg); }
+@keyframes spin {
+	from {
+		transform: rotate(360deg);
+	}
+
+	to {
+		transform: rotate(-360deg);
+	}
 }
 
-.FatRhabit::before{
+.FatRhabit::before {
 	border-radius: 50%;
 	animation: spin 7s infinite linear;
 	background: url("https://sunkist-palace.net/images/pfp/profile.png");
-
 }
 
-.FatRhabit,FatRhabit{
+.FatRhabit,
+FatRhabit {
 	bottom: 0;
 	font-family: 'Frutiger', sans-serif;
 	color: white;
 	text-shadow: black 0px 3px 4px;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0, 0, 0, 0.5);
 	background-blend-mode: darken;
 	background-position: center;
 	text-wrap: pretty;
-
 }
 
-.FatRhabit .identifier{
- text-transform:uppercase !important;
- font-family: Times New Roman, sans-serif !important; 
- transform: scale(0.8, 1);
+.FatRhabit .identifier {
+	text-transform: uppercase !important;
+	font-family: Times New Roman, sans-serif !important;
+	transform: scale(0.8, 1);
 }
 
 
 
-.FatRhabit .rightist{
-	background: linear-gradient(0deg, rgba(8,0,15,0.4) 0%, rgba(145,145,145,0.4) 100%);
+.FatRhabit .rightist {
+	background: linear-gradient(0deg, rgba(8, 0, 15, 0.4) 0%, rgba(145, 145, 145, 0.4) 100%);
 	color: #fff;
 	border: 1px inset rgba(0, 0, 0, 0.5);
 	border-radius: 0px;
@@ -270,38 +299,39 @@ rose {
 .via,
 via {
 	color: #93a87e;
-	background:linear-gradient(to right,
-	#505c45,
-	#384031 );
+	background: linear-gradient(to right,
+			#505c45,
+			#384031);
 	/*text-shadow: 0px 0px 5px rgba(255, 216, 240, 0.5);*/
-	font-weight:bold;
-	font-family: 'Oswald',"DM Serif", emoji;
+	font-weight: bold;
+	font-family: 'Oswald', "DM Serif", emoji;
 }
 
 .WigglyStuf,
 WigglyStuf {
 	font-family: 'Coolvetica';
 	color: white;
-	background-color: rgba(24,64,128,0.7);
-	background: linear-gradient(38deg, rgba(11,54,78,0.75) 0%, rgba(24,155,204,0.75) 100%); background-attatchment: fixed;
+	background-color: rgba(24, 64, 128, 0.7);
+	background: linear-gradient(38deg, rgba(11, 54, 78, 0.75) 0%, rgba(24, 155, 204, 0.75) 100%);
+	background-attachment: fixed;
 	text-shadow: 0px 0px 5px #0088ff;
-	
+
 }
 
 .Sushi,
-Sushi, sushi {
-  background: linear-gradient(90deg, 
-  rgba(79,57,131,.75) 0%,
-  rgba(118,57,131,.75) 100%
-  );
-  font-family: coomer, sans-serif, emoji;
-  cursor: url(../images/cur/catter.png), auto;
-  color: lightgrey;
+Sushi,
+sushi {
+	background: linear-gradient(90deg,
+			rgba(79, 57, 131, .75) 0%,
+			rgba(118, 57, 131, .75) 100%);
+	font-family: coomer, sans-serif, emoji;
+	cursor: url(../images/cur/catter.png), auto;
+	color: lightgrey;
 }
 
-.Sushi:active, 
+.Sushi:active,
 sushi:active {
-  cursor: url(../images/cur/pawwer.png), auto;
+	cursor: url(../images/cur/pawwer.png), auto;
 }
 
 .Avonya,
@@ -318,9 +348,22 @@ Avonya_Herobrine,
 	text-shadow: 0px 0px 10px #bccbeb;
 	font-family: "Minecraft";
 }
+
 .Avonya.\<-::before {
 	background-image: url("../images/pfp/d-Avonya.webp");
 }
+
+
+.Nova,
+Nova {
+	/* background-image: linear-gradient(to right, */
+			/* rgba(0, 0, 0, 0.5), */
+			/* rgba(255, 255, 255, 0.5)); */
+	/* text-shadow: 0px 0px 5px #ffffff60; */
+	/* color: white; */
+	font-family: Arial, sans-serif, emoji;
+}
+
 
 .Sky,
 sky {
@@ -336,43 +379,47 @@ sky {
 
 .BadWolf,
 badwolf {
-  font-family: 'marlett';
-  color: turquoise;
-  background-color: #0e1111 ;
- ;
+	font-family: 'marlett';
+	color: turquoise;
+	background-color: #0e1111;
+	;
 }
 
 .TheKingOfPlants,
 thekingofplants,
 rey {
-  font-family: 'bookmanoldstyle';
+	font-family: 'bookmanoldstyle';
 	color: white;
 	background-color: maroon;
 	text-shadow: 0px 0px 5px rgba(214, 95, 86);
 }
 
-.ffruittssaladd, ffruittssaladd, .fruitsalad, fruitsalad {
-  font-family: 'Arial';
-  color:#f0719c;
-  font-weight:bold;
-  background-color:rgba(69, 20, 35, 0.75);
-  text-shadow: 0px 0px 5px #6b1c37;
-  font-size:20px;
+.ffruittssaladd,
+ffruittssaladd,
+.fruitsalad,
+fruitsalad {
+	font-family: 'Arial';
+	color: #f0719c;
+	font-weight: bold;
+	background-color: rgba(69, 20, 35, 0.75);
+	text-shadow: 0px 0px 5px #6b1c37;
+	font-size: 20px;
 }
 
-.Fr0ggy08, Fr0ggy08 {
-  font-family 'ojuju';
-  color:#d676b1;
-  background-color:#0d0b0b;
-  text-shadow: 0 0 5px #961485;
+.Fr0ggy08,
+Fr0ggy08 {
+	font-family: 'ojuju';
+	color: #d676b1;
+	background-color: #0d0b0b;
+	text-shadow: 0 0 5px #961485;
 }
 
 .samm,
 samm {
-  background-color: #47215488;
-  text-shadow: 0px 0px 5px #ffffff60;
-  color: #bda1c9;
-  font-family: 'Sedan', sans-serif, emoji;
+	background-color: #47215488;
+	text-shadow: 0px 0px 5px #ffffff60;
+	color: #bda1c9;
+	font-family: 'Sedan', sans-serif, emoji;
 }
 
 /***--- Message Icon         ---***/
@@ -394,7 +441,7 @@ samm {
 .TheKingOfPlants::before {
 	border-color: #301212;
 	border-style: double;
-  background-image: url("../images/pfp/rey.jpg");
+	background-image: url("../images/pfp/rey.jpg");
 }
 
 .Afton::before {
@@ -407,22 +454,33 @@ samm {
 	border-image-source: url("../images/border/tech.png");
 	border-style: solid;
 }
+
 .BadWolf::before {
-  background-image: url("../images/pfp/BadWolf.png");
-  border-color: white;
-  border-image-slice: 42 42 42 42 fill;
-  border-image-width: 12px 12px 12px 12px;
-  border-image-outset: 6px 6px 6px 6px;
-  border-image-repeat: stretch stretch;
-  border-style: solid;
+	background-image: url("../images/pfp/BadWolf.png");
+	border-color: white;
+	border-image-slice: 42 42 42 42 fill;
+	border-image-width: 12px 12px 12px 12px;
+	border-image-outset: 6px 6px 6px 6px;
+	border-image-repeat: stretch stretch;
+	border-style: solid;
 }
+
 .Avonya::before {
 	background-image: url("../images/pfp/sasscoin.jpg");
 	border-color: #bccbeb;
 	border-style: outset;
 }
-.WigglyStuf::before{
-	background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIe_-A5UKPm1iBBCk6OmFa6FbjerOdrdhZCWpU06il5w&s');
+
+.Nova::before {
+	/* background-image: url("../images/pfp/"); */
+	border-color: #bccbeb;
+	border-style: outset;
+}
+
+
+
+.WigglyStuf::before {
+	background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIe_-A5UKPm1iBBCk6OmFa6FbjerOdrdhZCWpU06il5w&s');
 }
 
 .Console::before,
@@ -430,30 +488,33 @@ samm {
 	background-image: url("../images/pfp/node.png");
 	border-style: none;
 }
-.guest::before{
+
+.guest::before {
 	background-image: url("https://media.tenor.com/m56fWQ4A39sAAAAd/survive-the-internet-jackbox.gif");
 }
+
 .Elsen::before {
 	background-image: url("../images/ELSEN.png");
 }
 
 .via::before {
-			background-image: url("../images/pfp/via.png");
-			border-color: #e3ebbd;
-			border-style: ridge;
-			border-image-slice: 42 42 42 42 fill;
-			border-image-width: 12px 12px 12px 12px;
-			border-image-outset: 6px 6px 6px 6px;
-			border-image-repeat: stretch stretch;
-			border-image-source: url("https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/599140/5aa92af1cf3dfab9603ac4edd95a935933302c81.png");
-			border-style: solid;
+	background-image: url("../images/pfp/via.png");
+	border-color: #e3ebbd;
+	border-style: ridge;
+	border-image-slice: 42 42 42 42 fill;
+	border-image-width: 12px 12px 12px 12px;
+	border-image-outset: 6px 6px 6px 6px;
+	border-image-repeat: stretch stretch;
+	border-image-source: url("https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/599140/5aa92af1cf3dfab9603ac4edd95a935933302c81.png");
+	border-style: solid;
 }
 
-.Boxel::before {
+.Boxel::before,
+.Sophie::before {
 	/*PFP*/
 	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9);
-  background: url("../images/pfp/mecatdrawing.jpg") center;
-	background-size:140%;
+	background: url("../images/pfp/mecatdrawing.jpg") center;
+	background-size: 140%;
 	background-repeat: no-repeat;
 	border-image-slice: 42 42 42 42 fill;
 	border-image-width: 12px 12px 12px 12px;
@@ -464,15 +525,15 @@ samm {
 }
 
 .Sushi::before {
-  /*win*/
-  background-image: url("../images/pfp/sushi.jpg");
-  background-repeat: no-repeat;
-  border-image-slice: 42 42 42 42 fill;
-  border-image-width: 12px 12px 12px 12px;
-  border-image-outset: 6px 6px 6px 6px;
-  border-image-repeat: stretch stretch;
-  border-image-source: url("../images/border/nyakuza.png");
-  border-style: solid;
+	/*win*/
+	background-image: url("../images/pfp/sushi.jpg");
+	background-repeat: no-repeat;
+	border-image-slice: 42 42 42 42 fill;
+	border-image-width: 12px 12px 12px 12px;
+	border-image-outset: 6px 6px 6px 6px;
+	border-image-repeat: stretch stretch;
+	border-image-source: url("../images/border/nyakuza.png");
+	border-style: solid;
 }
 
 .Sky::before {
@@ -482,83 +543,88 @@ samm {
 }
 
 .ffruittssaladd::before {
-  border-color: #6b1c37;
-  border-style:solid;
-  background-image: url("../images/pfp/Cass.png");
+	border-color: #6b1c37;
+	border-style: solid;
+	background-image: url("../images/pfp/Cass.png");
 }
 
 .Fr0ggy08::before {
-  background-image: url("../images/pfp/lee.jpg");
-  border-color:#003b6f;
-  border-style:dashed;
+	background-image: url("../images/pfp/lee.jpg");
+	border-color: #003b6f;
+	border-style: dashed;
 }
 
 .samm::before {
-  border-color: #bda1c9;
-  border-style:solid;
-  background-image: url("../images/pfp/samm.jpg");
+	border-color: #bda1c9;
+	border-style: solid;
+	background-image: url("../images/pfp/samm.jpg");
 }
 
 /***--- Message Button      ---***/
 
-.MaximusMiller2 button{
+.MaximusMiller2 button {
 	background-blend-mode: multiply;
 	font-family: "Bound";
 	background-color: lightblue;
 }
 
-.Afton button{
+.Afton button {
 	background-color: cyan;
 	background-blend-mode: multiply;
 	font-family: "TF2 Build", emoji;
 }
 
-.Boxel button, .Boxel .rightist{
+.Boxel button,
+.Boxel .rightist,
+.Sophie button,
+.Sophie .rightist {
 	font-family: "Lethal" !important;
 	background-blend-mode: multiply;
-	background: rgba(0,0,0,0.5);
+	background: rgba(0, 0, 0, 0.5);
 	color: white;
 }
 
-.Sky button{
-	background-image:none;
-	background-color:pink;
+.Sky button {
+	background-image: none;
+	background-color: pink;
 }
 
 /***--- Message Highlight ---***/
 
 .MaximusMiller2 msgtxt::selection,
-.MaximusMiller2::selection{
-	background-color: rgba(90,188,216,0.5);
+.MaximusMiller2::selection {
+	background-color: rgba(90, 188, 216, 0.5);
 }
 
 .Afton msgtxt::selection,
-.Afton::selection{
-	background-color: rgba(90,188,216,0.5);
+.Afton::selection {
+	background-color: rgba(90, 188, 216, 0.5);
 }
 
 .Console::selection,
-.console::selection{
+.console::selection {
 	background-color: orange;
 }
 
 .Boxel msgtxt::selection,
-.Boxel::selection{
-	background: rgba(173,28,162,0.5);
+.Boxel::selection,
+.Sophie msgtxt::selection,
+.Sophie::selection {
+	background: rgba(173, 28, 162, 0.5);
 }
 
 /***--- Message Cursor   ---***/
 
-.MaximusMiller2:active{
+.MaximusMiller2:active {
 	cursor: url(../images/cur/pawwer.png), auto;
 }
 
-.Afton:active{
+.Afton:active {
 	cursor: url(../images/cur/Cat_Paw_Cursor.png), auto;
 }
 
 .Console:active,
-.console:active{
+.console:active {
 	cursor: url(../images/cur/hit.png), auto;
 }
 
@@ -566,66 +632,73 @@ samm {
 /*Add gradient text
 */
 
-.devstyle, devstyle {
-				background: rgb(42,245,255);
-background: linear-gradient(90deg, rgba(42,245,255,0.5) 0%, rgba(40,194,255,0.5) 50%, rgba(96,175,255,0.5) 100%);
-				text-shadow: 0px 0px 5px #e8ebed80;
-				color: #e8ebed;
-				font-family: "Nothing You Could Do", sans-serif, emoji;
-																font-weight: bold;
-				cursor: url('../../images/cur/paw.png'), auto;
-			}
+.devstyle,
+devstyle {
+	background: rgb(42, 245, 255);
+	background: linear-gradient(90deg, rgba(42, 245, 255, 0.5) 0%, rgba(40, 194, 255, 0.5) 50%, rgba(96, 175, 255, 0.5) 100%);
+	text-shadow: 0px 0px 5px #e8ebed80;
+	color: #e8ebed;
+	font-family: "Nothing You Could Do", sans-serif, emoji;
+	font-weight: bold;
+	cursor: url('../../images/cur/paw.png'), auto;
+}
 
-			.devstyle::before {
-				/*PFP*/
-				box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9);
-					background-image: url("../images/pfp/Sunkister.png");
-				background-repeat: no-repeat;
-				border-image-slice: 42 42 42 42 fill;
-				border-image-width: 12px 12px 12px 12px;
-				border-image-outset: 6px 6px 6px 6px;
-				border-image-repeat: stretch stretch;
-				border-image-source: url("../images/border/water.png");
-				border-style: solid;
-			}
+.devstyle::before {
+	/*PFP*/
+	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9);
+	background-image: url("../images/pfp/Sunkister.png");
+	background-repeat: no-repeat;
+	border-image-slice: 42 42 42 42 fill;
+	border-image-width: 12px 12px 12px 12px;
+	border-image-outset: 6px 6px 6px 6px;
+	border-image-repeat: stretch stretch;
+	border-image-source: url("../images/border/water.png");
+	border-style: solid;
+}
 
-			.devstyle button{
-				font-family: "Passing Notes";
-				background-blend-mode: multiply;
-																color: #963484;
-background-color: lightgray;
-			}
+.devstyle button {
+	font-family: "Passing Notes";
+	background-blend-mode: multiply;
+	color: #963484;
+	background-color: lightgray;
+}
 
-			.devstyle msgtxt::selection,
-			.devstyle::selection{
-				background-color: #963484;
-			}
+.devstyle msgtxt::selection,
+.devstyle::selection {
+	background-color: #963484;
+}
 
-			.devstyle:active{
-				cursor: url(../images/cur/pawwer.png), auto;
-			}
+.devstyle:active {
+	cursor: url(../images/cur/pawwer.png), auto;
+}
 
-.gay, .homo, .pride {
-	background: linear-gradient(0deg, rgba(160,34,195,0.2) 0%, rgba(253,45,68,0.25) 20%, rgba(253,162,45,0.25) 40%, rgba(45,253,92,0.25) 60%, rgba(45,183,253,0.25) 80%, rgba(89,45,253,0.25) 100%) !important;
+.gay,
+.homo,
+.pride {
+	background: linear-gradient(0deg, rgba(160, 34, 195, 0.2) 0%, rgba(253, 45, 68, 0.25) 20%, rgba(253, 162, 45, 0.25) 40%, rgba(45, 253, 92, 0.25) 60%, rgba(45, 183, 253, 0.25) 80%, rgba(89, 45, 253, 0.25) 100%) !important;
 	background-attachment: fixed !important;
 }
+
 div#\31 00::after {
-		content: "100th message!";
-		float: right;
-		filter: opacity(25%);
-}
-div#\35 00::after {
-		content: "500th message!";
-		float: right;
-		filter: opacity(30%);
-}
-div#\31 000::after {
-		content: "1000th message!";
-		font-family: coomer;
-		float: right;
-		filter: opacity(30%);
+	content: "100th message!";
+	float: right;
+	filter: opacity(25%);
 }
 
-.TerminalExtractions{
-	
+div#\35 00::after {
+	content: "500th message!";
+	float: right;
+	filter: opacity(30%);
+}
+
+div#\31 000::after {
+	content: "1000th message!";
+	font-family: coomer;
+	float: right;
+	filter: opacity(30%);
+}
+
+.TerminalExtractions {
+	display: initial;
+	/*WORK ON*/
 }
