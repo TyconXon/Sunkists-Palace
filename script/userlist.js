@@ -13,5 +13,6 @@ const VALID_USERS = [
 	"Obi",
 	"Lee",
 	"Sam",
-	"Nova"
+	"Nova",
+	"angelfromthestars"
 ];

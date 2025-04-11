@@ -354,6 +354,8 @@ Avonya_Herobrine,
 }
 
 
+.angelfromthestars, 
+angelfromthestars,
 .Nova,
 Nova {
 	font-family: Arial, sans-serif, emoji;
@@ -469,7 +471,7 @@ samm {
 	border-style: outset;
 }
 
-.Nova::before {
+.angelfromthestars::before, .Nova::before {
 	border-style: outset;
 	background-image: url("../images/pfp/nova.webp");
 	cursor: url(../images/cur/Cat_Paw.png), auto;
