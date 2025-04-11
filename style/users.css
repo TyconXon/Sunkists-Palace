@@ -356,12 +356,10 @@ Avonya_Herobrine,
 
 .Nova,
 Nova {
-	/* background-image: linear-gradient(to right, */
-			/* rgba(0, 0, 0, 0.5), */
-			/* rgba(255, 255, 255, 0.5)); */
-	/* text-shadow: 0px 0px 5px #ffffff60; */
-	/* color: white; */
 	font-family: Arial, sans-serif, emoji;
+	background: rgba(245, 120, 193, 0.75);
+	text-shadow: 0 0 5px #f7a8ea;
+	color: #fae3f6
 }
 
 
@@ -472,9 +470,17 @@ samm {
 }
 
 .Nova::before {
-	/* background-image: url("../images/pfp/"); */
-	border-color: #bccbeb;
 	border-style: outset;
+	background-image: url("../images/pfp/nova.webp");
+	cursor: url(../images/cur/Cat_Paw.png), auto;
+	border-color: #fae3f6;
+	border-style: dotted;
+	border-image-width: 3px;
+	border-image-outset: 2px;
+	border-image-slice: 42 42 42 42;
+	border-image-repeat: stretch;
+	border-image-source: url("../images/border/novaborder.png");
+	background-size: 100%;
 }
 
 
