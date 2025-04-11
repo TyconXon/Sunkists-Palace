@@ -6,10 +6,10 @@ games = {
         'font' : 'Bound' 
     },
     'game2' : {
-        'id' : '',
-        'name' : 'No Game',
-        'banner' : '',
-        'font' : '' 
+        'id' : 'balatro',
+        'name' : 'Balatro',
+        'banner' : 'gamepages/balatro/gamelab-banner.png',
+        'font' : 'gamepages/balatro/m6x11plus.ttf' 
     },
     'game3' : {
         'id' : '',

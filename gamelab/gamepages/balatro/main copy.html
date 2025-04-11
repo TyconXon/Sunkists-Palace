@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Balatro</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="example.css"/>
+		<script src="hookConsole.js"></script>
+		<script src="jquery-1.7.min.js"></script>
+		<link rel="icon" href="img/Icons/icon_00.png">
+	</head>
+	<body>
+
+		<h1 hidden>Balatro</h1>
+		<img class="preload" src="img/cards.png"/>
+
+		<div id="jokers"></div>
+		<div id="Info">
+			<blindInfo>
+				<h2 id="blindName">Small Blind</h2>
+				<p id="blindDescription">Score at least: <b>300</b></p>
+			</blindInfo>
+			<h2 id="rndScr">Round Score:<br><span id="roundScore"></span></h2>
+			<playingHand>
+				<h3><span id="playingHandName">Flush</span> <span id="playingHandLevel">lvl. 2</span></h3>
+				<scoringCalc><chips id='playingHandChips'> 30 </chips> x <mult id='playingHandMult'> 4 </mult></scoringCalc>
+			</playingHand>
+			<div id="rndHands">Hands: <br> <span id="infoHands">4</span> </div>
+			<div id="rndDisc">Discards: <br> <span id='infoDiscards'>3</span></div>
+			<div id="gamRnd">Round : <span id='infoRound'>3</span></div>
+			<div id="gamAnt">Ante : <span id='infoAnte'>3</span></div>
+			<div id="plyMon">$<span id='infoMoney'>3</span></div>
+		</div>
+
+		<div id="game-box">
+			<div id="card-table">
+				<button id="deal">DEAL</button>
+			</div>
+			<div id="controls">
+				<button id="play">Play</button>
+				<button id="discard">Discard</button>
+				<span id="deck-count"> 52/52 </span>
+			</div>
+		</div>
+		<div id="store-box">
+			<h1 id='shopText'>Shop</h1>
+			<div id="upper-shelf"></div>
+		</div>
+		<footer>
+			<p> recreation for the web, by Maximus Fayte Miller. Using Cards.js for card rendering. Early beta. Todo: Card packs, tarot cards, planet cards, spectral cards, vouchers, shop reroll, animations, satisfying stuff. April 4th 2025. Selling jokers currently is sorta broken.</p>
+		</footer>
+		<a href='https://www.playbalatro.com'>Balatro by LocalThunk</a> 
+
+
+		<!-- load this at the bottom so the #card-table element exists -->
+		<script>RULEBOOK = {
+			blinds : {
+				small : {
+					name : "Small Blind",
+					description: "",
+					scaling : 1,
+					payout : 3,
+					colors : [
+						[0.871, 0.267, 0.231],
+						[0.0, 0.42, 0.706],
+						[0.086, 0.137, 0.145],
+					]
+				},
+				big : {
+					name : "Big Blind",
+					description: "",
+					scaling : 1.5,
+					payout : 3,
+					colors : [
+						[0.271, 0.667, 0.231],
+						[0.0, 0.52, 0.306],
+						[0.086, 0.137, 0.145]
+					]
+				},
+				boss : [
+					{
+						name : "The Wall",
+						description: "Extra large blind",
+						minimumAnte : 2,
+						scaling : 4,
+						payout : 5,
+						hooks : ["cardCheckHook"],
+						cardCheckHook : function(card){
+							return true
+						},
+						colors : [
+							[0.871, 0.267, 0.231],
+							[0.0, 0.42, 0.706],
+							[0.086, 0.137, 0.145],
+						]
+					},
+					{
+						name : "The Club",
+						description: "All Club cards are debuffed",
+						scaling : 2,
+						payout : 5,
+						hooks : ["cardCheckHook"],
+						minimumAnte : 1,
+						cardCheckHook : function(card){
+							if(card.suit == "c"){
+								return false
+							}else{
+								return true
+							}
+						},
+						colors : [
+							[0.871, 0.267, 0.231],
+							[0.0, 0.42, 0.706],
+							[0.086, 0.137, 0.145],
+						]
+					},
+					{
+						name : "The Hook",
+						description: "Discards 2 random cards per hand played",
+						scaling : 2,
+						payout : 5,
+						hooks : ["afterPlayHook"],
+						minimumAnte : 1,
+						//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+						afterPlayHook : function(givenInformation){
+							let lowerhand = givenInformation.stationaryHand;
+							for (let index = 0; index < 2; index++) {
+								let randomChoice = Math.floor(Math.random() * lowerhand.length);
+								givenInformation.deck.addCard(lowerhand[randomChoice]);
+								givenInformation.deck.render();
+							}
+						},
+						colors : [
+							[0.871, 0.267, 0.211],
+							[0.0, 0.32, 0.206],
+							[0.186, 0.137, 0.145]
+						]
+					},
+					{
+						name : "The Wheel",
+						description: "1 in 7 cards get drawn face down",
+						scaling : 2,
+						payout : 5,
+						hooks : ["drawCardHook"],
+						minimumAnte : 1,
+						//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+						drawCardHook : function(card){
+							if(Math.random() < (1/7)){
+								card.faceDownBLIND = true;
+							}
+						},
+						colors : [
+							[0.871, 0.267, 0.211],
+							[0.0, 0.32, 0.206],
+							[0.186, 0.137, 0.145]
+						]
+					},
+				]
+			},
+			anteScaling : [300,800,2000,5000,11000,20000,35000,50000],
+			buildBlind : function(level,ante){
+				let returningBlind = {};
+				switch (level) {
+					case 0:
+						returningBlind = this.blinds.small
+						break;
+					case 1:
+						returningBlind = this.blinds.big
+						break;
+					case 2:
+						returningBlind = this.blinds.boss[Math.floor(Math.random()*this.blinds.boss.length)]
+						break;
+					default:
+						alert("err in building blind")
+						break;
+				}
+				returningBlind.minimum = this.anteScaling[ante] * returningBlind.scaling;
+				return returningBlind;
+		
+			},
+			enhancements : {
+				none : "Basic Card",
+				bonus : "Bonus Card",
+				mult : "Mult Card",
+				wild : "Wild Card",
+				glass : "Glass Card",
+				steel : "Steel Card",
+				stone : "Stone Card",
+				gold : "Gold Card",
+				lucky : "Lucky Card"
+			},
+			seals : {
+				none : "No seal",
+				gold : "Gold Seal",
+				red : "Red Seal",
+				blue : "Blue Seal",
+				purple : "Purple Seal"
+			},
+			editions : {
+				base : "Base",
+				foil : "Foil",
+				holographic : "Holographic",
+				polychrome : "Polychrome",
+				negative : "Negative"
+			},
+			jokers:{
+				joker:{
+					name : "Joker",
+					description: "<mult>+4</mult> Mult",
+					price: 4,
+					quality:0,
+					id : "000",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + 4}
+						return returningData
+					},
+				},
+				gluttonousJoker:{
+					name : "Gluttonous Joker",
+					description: "Played cards with <clubs>Clubs</clubs> suit give <mult>+3</mult> Mult when scored",
+					price: 4,
+					quality:0,
+					id : "019",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let clubCount = 0
+						givenInformation.handType.scoringCards.forEach(card => {
+							if(card.suit == "c"){
+								clubCount++
+							}
+						});
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (clubCount*3)}
+						return returningData
+					},
+				},
+				wrathfulJoker:{
+					name : "Wrathful Joker",
+					description: "Afton 'feel my' Wrath",
+					price: 4,
+					quality:0,
+					id : "018",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let clubCount = 0
+						givenInformation.handType.scoringCards.forEach(card => {
+							if(card.suit == "s"){
+								clubCount++
+							}
+						});
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (clubCount*3)}
+						return returningData
+					},
+				},
+				lustyJoker:{
+					name : "Lusty Joker",
+					description: "Played cards with <hearts>Hearts</hearts> suit give <mult>+3</mult> Mult when scored",
+					price: 4,
+					quality:0,
+					id : "017",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let clubCount = 0
+						givenInformation.handType.scoringCards.forEach(card => {
+							if(card.suit == "h"){
+								clubCount++
+							}
+						});
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (clubCount*3)}
+						return returningData
+					},
+				},
+				greedyJoker:{
+					name : "Greedy Joker",
+					description: "Played cards with <diamonds>Diamonds</diamonds> suit give <mult>+3</mult> Mult when scored",
+					price: 4,
+					quality:0,
+					id : "016",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let clubCount = 0
+						givenInformation.handType.scoringCards.forEach(card => {
+							if(card.suit == "d"){
+								clubCount++
+							}
+						});
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (clubCount*3)}
+						return returningData
+					},
+				},
+				halfJoker:{
+					name : "Half Joker",
+					description: "<mult>+20</mult> if played hand contains <b>3</b> or fewer cards",
+					price: 5,
+					quality:0,
+					id : "007",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let additionalMult = 0
+						if(givenInformation.handType.scoringCards.length <= 3 && givenInformation.stationaryHand.length >= givenInformation.gameObject.player.handSize - 3){
+							additionalMult = 20
+						} 
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + additionalMult}
+						return returningData
+					},
+				},
+				misprintJoker:{
+					name : "Misprint",
+					description: "<mult>+RANDOM</mult> Mult",
+					price: 5,
+					quality:0,
+					id : "026",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + Math.floor((Math.random()*25))}
+						return returningData
+					},
+				},
+				raisedFistJoker:{
+					name : "Raised Fist",
+					description: "Adds <u>double</u> the rank of the <u>lowest</u> ranked card held in hand to Mult",
+					price: 5,
+					quality:0,
+					id : "028",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						if(givenInformation.stationaryHand.length < 1){
+							let returningData = {currentMultiplier: givenInformation.currentMultiplier};
+							return returningData;
+						}
+		
+						let rankValues = [];
+						givenInformation.stationaryHand.forEach(card => {
+							let rank = parseInt(card.name.slice(1));
+							rankValues.push(rank);
+						});
+						rankValues.sort((a, b) => a - b);
+		
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (2 * rankValues[0])};
+						return returningData;
+					},
+				},
+				bannerJoker:{
+					name : "Banner",
+					description: "<chips>+30</chips> Chips for each remaining <u>discard</u>",
+					price: 5,
+					quality:0,
+					id : "021",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentChips"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let returningData = {currentChips: givenInformation.currentChips + (30 * givenInformation.gameObject.blind.discards)};
+						return returningData;
+					},
+				},
+				oddToddJoker:{
+					name : "Odd Todd",
+					description: "Played cards with <u>odd</u> rank give <chips>+31</chips> Chips when scored",
+					price: 5,
+					quality:0,
+					id : "039",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentChips"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						
+						let additionalChips = 0
+						givenInformation.handType.scoringCards.forEach(card => {
+							if(card.rank % 2 !== 0){
+								additionalChips += 31;
+							}
+						});
+		
+						let returningData = {currentChips: givenInformation.currentChips + additionalChips};
+						return returningData;
+					},
+				},
+				evenStevenJoker:{
+					name : "Even Steven",
+					description: "Played cards with <u>even</u> rank give <mult>+4</mult> Mult when scored",
+					price: 5,
+					quality:0,
+					id : "038",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						
+						let additionalMult = 0
+						givenInformation.handType.scoringCards.forEach(card => {
+							if(card.rank % 2 == 0){
+								additionalMult += 4;
+							}
+						});
+		
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + additionalMult};
+						return returningData;
+					},
+				},
+				supernovaJoker:{
+					name : "Supernova",
+					description: "Adds the number of times the played <u>poker hand</u> has been played this run to Mult",
+					price: 5,
+					quality:0,
+					id : "042",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let timesPlayed = givenInformation.gameObject.player.timesPokerHandPlayed[givenInformation.handType.hand] || 0
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (timesPlayed)};
+						return returningData;
+					},
+				},
+				scholarJoker:{
+					name : "Scholar",
+					description: "Played <u>Aces</u> give <chips>+20</chips> Chips and <mult>+4</mult> Mult when scored",
+					price: 5,
+					quality:0,
+					id : "040",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier", "currentChips"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let acesCounted = 0
+						givenInformation.handType.scoringCards.forEach(card => {
+							if(card.rank == 1){
+								acesCounted++
+							}
+						});
+						let returningData = {
+							currentMultiplier: givenInformation.currentMultiplier + (acesCounted * 4),
+							currentChips : givenInformation.currentChips + (acesCounted * 20)
+						}
+						return returningData;   
+					},
+				},
+				smileyFaceJoker:{
+					name : "Smiley Face",
+					description: "Played <u>face cards</u> give <mult>+5</mult> Mult when scored",
+					price: 5,
+					quality:0,
+					id : "154",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let acesCounted = 0
+						givenInformation.handType.scoringCards.forEach(card => {
+							if(card.rank > 10){
+								acesCounted++
+							}
+						});
+						let returningData = {
+							currentMultiplier: givenInformation.currentMultiplier + (acesCounted * 4)
+						}
+						return returningData;   
+					},
+				},
+				jollyJoker:{
+					name : "Jolly Joker",
+					description: "<mult>+8</mult> Mult if played hand contains a <u>Pair</u>",
+					price: 3,
+					quality:0,
+					id : "002",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let hasPair = 0;
+		
+						let ranks = {};
+						for (let card of givenInformation.handType.scoringCards) {
+							let rank = parseInt(card.name.slice(1));
+							ranks[rank] = (ranks[rank] || 0) + 1;
+						}
+						let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+						//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+						if (rankCounts[0][1] >= 2) {
+							hasPair = 1
+						}
+						
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (hasPair * 8)}
+						return returningData
+					},
+				},
+				zanyJoker:{
+					name : "Zany Joker",
+					description: "<mult>+12</mult> Mult if played hand contains a <u>Three of a Kind</u>",
+					price: 3,
+					quality:0,
+					id : "003",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let hasPair = 0;
+		
+						let ranks = {};
+						for (let card of givenInformation.handType.scoringCards) {
+							let rank = parseInt(card.name.slice(1));
+							ranks[rank] = (ranks[rank] || 0) + 1;
+						}
+						let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+						//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+						if (rankCounts[0][1] >= 3) {
+							hasPair = 1
+						}
+						
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (hasPair * 12)}
+						return returningData
+					},
+				},
+				madJoker:{
+					name : "Mad Joker",
+					description: "<mult>+10</mult> Mult if played hand contains a <u>Two Pair</u>",
+					price: 3,
+					quality:0,
+					id : "004",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let hasPair = 0;
+		
+						let ranks = {};
+						for (let card of givenInformation.handType.scoringCards) {
+							let rank = parseInt(card.name.slice(1));
+							ranks[rank] = (ranks[rank] || 0) + 1;
+						}
+						let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+						//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+						if (rankCounts.length > 1 && rankCounts[0][1] >= 2 && rankCounts[1][1] >= 2) {
+							hasPair = 1
+						}
+						
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (hasPair * 12)}
+						return returningData
+					},
+				},
+				slyJoker:{
+					name : "Sly Joker",
+					description: "<chips>+50</chips> Chips if played hand contains a <u>Pair</u>",
+					price: 3,
+					quality:0,
+					id : "138",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentChips"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let hasPair = 0;
+		
+						let ranks = {};
+						for (let card of givenInformation.handType.scoringCards) {
+							let rank = parseInt(card.name.slice(1));
+							ranks[rank] = (ranks[rank] || 0) + 1;
+						}
+						let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+						//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+						if (rankCounts[0][1] >= 2) {
+							hasPair = 1
+						}
+						
+						let returningData = {currentChips: givenInformation.currentChips + (hasPair * 50)}
+						return returningData
+					},
+				},
+				wilyJoker:{
+					name : "Wily Joker",
+					description: "<chips>+100</chips> Chips if played hand contains a <u>Three of a Kind</u>",
+					price: 3,
+					quality:0,
+					id : "139",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentChips"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let hasPair = 0;
+		
+						let ranks = {};
+						for (let card of givenInformation.handType.scoringCards) {
+							let rank = parseInt(card.name.slice(1));
+							ranks[rank] = (ranks[rank] || 0) + 1;
+						}
+						let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+						//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+						if (rankCounts[0][1] >= 3) {
+							hasPair = 1
+						}
+						
+						let returningData = {currentChips: givenInformation.currentChips + (hasPair * 100)}
+						return returningData
+					},
+				},
+				cleverJoker:{
+					name : "Clever Joker",
+					description: "<chips>+80</chips> chips if played hand contains a <u>Two Pair</u>",
+					price: 3,
+					quality:0,
+					id : "140",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentChips"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let hasPair = 0;
+		
+						let ranks = {};
+						for (let card of givenInformation.handType.scoringCards) {
+							let rank = parseInt(card.name.slice(1));
+							ranks[rank] = (ranks[rank] || 0) + 1;
+						}
+						let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+						//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+						if (rankCounts.length > 1 && rankCounts[0][1] >= 2 && rankCounts[1][1] >= 2) {
+							hasPair = 1
+						}
+						
+						let returningData = {currentChips: givenInformation.currentChips + (hasPair * 80)}
+						return returningData;
+					},
+				},
+				mysticSummitJoker:{
+					name : "Mystic Summit",
+					description: "<mult>+15</mult> Mult when <u>0</u> discards remaining",
+					price: 5,
+					quality:0,
+					id : "022",
+					hooks : [
+						{
+							in:"afterCardsScoreHook", 
+							out:["currentMultiplier"]
+						},
+					],
+					//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+					afterCardsScoreHook : (givenInformation)=>{
+						let qualifies = 0;
+						if ( givenInformation.gameObject.blind.discards == 0 ){
+							qualifies = 15;
+						}
+						let returningData = {currentMultiplier: givenInformation.currentMultiplier + (qualifies)};
+						return returningData;
+					},
+				},
+			},
+			vouchers:{
+				overstockVoucher : {
+					name : "Overstock",
+					description : "Add an additional card slot to the shop.",
+					price : 10,
+					id : '00',
+					effect : function(game){
+						return "not finished";
+					}
+				}
+			},
+		
+			basePokerHands : {
+				"Straight Flush" :{
+					level : 1,
+					chips : 100,
+					mult  : 8,
+					upgrade : [40,4],
+					played: 0,
+					id : 37
+				},
+				"Four of a Kind" :{
+					level : 1,
+					chips : 60,
+					mult  : 7,
+					upgrade : [30,3],
+					played: 0,
+					id : 33
+				},
+				"Full House"     :{
+					level : 1,
+					chips : 40,
+					mult  : 4,
+					upgrade : [25,2],
+					played: 0,
+					id: 32,
+				},
+				"Flush"          :{
+					level : 1,
+					chips : 35,
+					mult  : 4,
+					upgrade : [15,2],
+					played: 0,
+					id : 34,
+				},
+				"Straight"       :{
+					level : 1,
+					chips : 30,
+					mult  : 4,
+					upgrade : [30,3],
+					played: 0,
+					id : 35,
+				},
+				"Three of a Kind":{
+					level : 1,
+					chips : 30,
+					mult  : 3,
+					upgrade : [20,2],
+					played: 0,
+					id : 31,
+				},
+				"Two Pair"       :{
+					level : 1,
+					chips : 20,
+					mult  : 2,
+					upgrade : [20,1],
+					played: 0,
+					id : 36
+				},
+				"One Pair"       :{
+					level : 1,
+					chips : 10,
+					mult  : 2,
+					upgrade : [15,1],
+					played: 0,
+					id : 30,
+				},
+				"High Card"      :{
+					level : 1,
+					chips : 5,
+					mult  : 1,
+					upgrade : [10,1],
+					played: 0,
+					id : 38
+				},
+			}
+		  }</script>
+		<script src="deckType.js"></script>
+		<script>
+
+var cards = (function() {
+  //The global options
+  var opt = {
+    cardSize: {
+      width: 71,
+      height: 95,
+      padding: 50
+    },
+    animationSpeed: 500,
+    table: 'body',
+    cardback: 'red',
+    acesHigh: true,
+    cardsUrl: 'img/BalatroCards_Free.png',
+    blackJoker: false,
+    redJoker: false,
+    type: STANDARD,
+    loop: 1,
+    immediateMode: false,
+    RULEBOOK : {}
+  };
+  var zIndexCounter = 1;
+  var all = []; //All the cards created.
+  var start = 1;
+  var end = start + 12;
+
+  function mouseEvent(ev) {
+    var card = $(this).data('card');
+    document.querySelector("h1").innerText = `${card}`
+
+    if (card.container) {
+      var handler = card.container._click;
+      if (handler) {
+        handler.func.call(handler.context || window, card, ev);
+      }
+    }
+  }
+
+  function init(options) {
+    if (options) {
+      for (var i in options) {
+        if (opt.hasOwnProperty(i)) {
+          opt[i] = options[i];
+        }
+      }
+    }
+    switch (opt.type) {
+      case STANDARD:
+        opt.acesHigh = false;
+        start = opt.acesHigh ? 2 : 1;
+        end = start + 12;
+        break;
+      case EUCHRE:
+        start = 9;
+        end = start + 5;
+        break;
+      case PINOCHLE:
+        start = 9;
+        end = start + 5;
+        opt.loop = 2;
+        break;
+    }
+
+    opt.table = $(opt.table)[0];
+    if ($(opt.table).css('position') == 'static') {
+      $(opt.table).css('position', 'relative');
+    }
+    for (let l = 0; l < opt.loop; l++)
+      for (var i = start; i <= end; i++) {
+        all.push(new Card('h', i, opt.table));
+        all.push(new Card('s', i, opt.table));
+        all.push(new Card('d', i, opt.table));
+        all.push(new Card('c', i, opt.table));
+      }
+    if (opt.blackJoker) {
+      all.push(new Card('bj', 0, opt.table));
+    }
+    if (opt.redJoker) {
+      all.push(new Card('rj', 0, opt.table));
+    }
+
+    $('.card').click(mouseEvent);
+    shuffle(all);
+  }
+
+  function shuffle(deck) {
+    //Fisher yates shuffle
+    var i = deck.length;
+    if (i == 0) return;
+    while (--i) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tempi = deck[i];
+      var tempj = deck[j];
+      deck[i] = tempj;
+      deck[j] = tempi;
+    }
+  }
+
+  function Card(suit, rank, table) {
+    this.init(suit, rank, table);
+  }
+
+  Card.prototype = {
+    init: function(suit, rank, table) {
+      this.shortName = suit + rank;
+      this.suit = suit;
+      this.rank = rank;
+      this.name = suit.toUpperCase() + rank;
+      this.faceUp = false;
+      this.faceDownBLIND = false;
+
+      //Balatro specific
+      this.enhancement = opt.RULEBOOK.enhancements.none;
+      this.seal = opt.RULEBOOK.seals.none;
+      this.edition = opt.RULEBOOK.editions.base;
+
+      this.chipBonus = 0; //Permanent chip bonus gained by Hiker jokers
+
+      this.el = $('<div/>').css({
+        width: opt.cardSize.width,
+        height: opt.cardSize.height,
+        "background-image": 'url(' + opt.cardsUrl + '), url(img/BaltroBacks.png)',
+        position: 'absolute',
+        cursor: 'pointer'
+      }).addClass('card').data('card', this).appendTo($(table));
+      
+      this.showCard();
+      this.moveToFront();
+    },
+
+    toString: function() {
+      return this.name;
+    },
+
+    moveTo: function(x, y, speed, callback) {
+      var props = {
+        top: y - (opt.cardSize.height / 2),
+        left: x - (opt.cardSize.width / 2)
+      };
+      $(this.el).animate(props, speed || opt.animationSpeed, callback);
+    },
+
+    rotate: function(angle) {
+      $(this.el)
+        .css('-webkit-transform', 'rotate(' + angle + 'deg)')
+        .css('-moz-transform', 'rotate(' + angle + 'deg)')
+        .css('-ms-transform', 'rotate(' + angle + 'deg)')
+        .css('transform', 'rotate(' + angle + 'deg)')
+        .css('-o-transform', 'rotate(' + angle + 'deg)');
+    },
+
+    showCard: function() {
+      if (this.faceDownBLIND){
+        return false;
+      }
+      var offsets = {
+        "c": 1,
+        "d": 2,
+        "h": 0,
+        "s": 3,
+        "rj": 2,
+        "bj": 3
+      };
+      var xpos, ypos;
+      var rank = this.rank;
+      if (rank == 14) {
+        rank = 1; //Aces high must work as well.
+      }
+      xpos = -rank * opt.cardSize.width;
+      ypos = -offsets[this.suit] * opt.cardSize.height;
+      this.rotate(0);
+
+      //balatro specific
+      var enhancementXpos, enhancementYpos;
+      switch(this.enhancement){
+        case opt.RULEBOOK.enhancements.none:
+          enhancementXpos = opt.cardSize.width;
+          enhancementYpos = 0;
+          break;
+        case opt.RULEBOOK.enhancements.bonus:
+          enhancementXpos = opt.cardSize.width;
+          enhancementYpos = opt.cardSize.height;
+          break;
+        case opt.RULEBOOK.enhancements.mult:
+          enhancementXpos = 2 * opt.cardSize.width;
+          enhancementYpos = opt.cardSize.height;
+          break;
+        case opt.RULEBOOK.enhancements.glass:
+          enhancementXpos = 5 * opt.cardSize.width;
+          enhancementYpos = opt.cardSize.height;
+          break;
+        case opt.RULEBOOK.enhancements.steel:
+            enhancementXpos = 6 * opt.cardSize.width;
+            enhancementYpos = opt.cardSize.height;
+          break;
+        case opt.RULEBOOK.enhancements.gold:
+            enhancementXpos = 6 * opt.cardSize.width;
+            enhancementYpos = 0;
+          break;
+        case opt.RULEBOOK.enhancements.lucky:
+            enhancementXpos = 4 * opt.cardSize.width;
+            enhancementYpos = opt.cardSize.height;
+          break;
+        case opt.RULEBOOK.enhancements.stone:
+            enhancementXpos = 5 * opt.cardSize.width;
+            enhancementYpos = 0;
+          break;
+        case opt.RULEBOOK.enhancements.wild:
+            enhancementXpos = 3 * opt.cardSize.width;
+            enhancementYpos = opt.cardSize.height;
+          break;
+      }
+
+      this.el.attr('title', `${this.name} (${this.enhancement} | ${this.seal} | ${this.edition} | +${this.chipBonus}c )`)
+      this.el.attr('faceDown', 'false');
+      $(this.el).css('background-position', xpos + 'px ' + ypos + 'px, ' + `-${enhancementXpos}px -${enhancementYpos}px`);
+    },
+
+    hideCard: function(position) {
+      var y = opt.cardback == 'red' ? 0 * opt.cardSize.height : -1 * opt.cardSize.height;
+      $(this.el).css('background-position', '0px ' + y + 'px');
+      this.rotate(0);
+      this.el.attr('title', `Face down!`);
+      this.el.attr('faceDown', 'true');
+    },
+
+    moveToFront: function() {
+      $(this.el).css('z-index', zIndexCounter++);
+    }
+  };
+
+  function Container() {
+
+  }
+
+  Container.prototype = new Array();
+  Container.prototype.extend = function(obj) {
+    for (var prop in obj) {
+      this[prop] = obj[prop];
+    }
+  }
+  Container.prototype.extend({
+    addCard: function(card) {
+      this.addCards([card]);
+    },
+
+    addCards: function(cards) {
+      cards = cards.slice()
+      for (var i = 0; i < cards.length; i++) {
+        var card = cards[i];
+        if (card.container) {
+          card.container.removeCard(card);
+        }
+        this.push(card);
+        card.el.attr('insideType', this.toString());
+        card.container = this;
+      }
+    },
+
+    removeCard: function(card) {
+      for (var i = 0; i < this.length; i++) {
+        if (this[i] == card) {
+          this.splice(i, 1);
+          return true;
+        }
+      }
+      return false;
+    },
+
+    init: function(options) {
+      options = options || {};
+      this.x = options.x || $(opt.table).width() / 2;
+      this.y = options.y || $(opt.table).height() / 2;
+      this.faceUp = options.faceUp;
+    },
+
+    click: function(func, context) {
+      this._click = {
+        func: func,
+        context: context
+      };
+    },
+
+    mousedown: function(func, context) {
+      this._mousedown = {
+        func: func,
+        context: context
+      };
+    },
+
+    mouseup: function(func, context) {
+      this._mouseup = {
+        func: func,
+        context: context
+      };
+    },
+
+    render: function(options) {
+      options = options || {};
+      var speed = options.speed || opt.animationSpeed;
+      this.calcPosition(options);
+      for (var i = 0; i < this.length; i++) {
+        var card = this[i];
+        zIndexCounter++;
+        card.moveToFront();
+        var top = parseInt($(card.el).css('top'));
+        var left = parseInt($(card.el).css('left'));
+        if (top != card.targetTop || left != card.targetLeft) {
+          var props = {
+            top: card.targetTop,
+            left: card.targetLeft,
+            queue: false
+          };
+          if (options.immediate || opt.immediateMode) {
+            $(card.el).css(props);
+          } else {
+            $(card.el).animate(props, speed);
+          }
+        }
+      }
+      var me = this;
+      var flip = function() {
+        for (var i = 0; i < me.length; i++) {
+          if (me.faceUp && !me[i].faceDownBLIND) {
+            me[i].showCard();
+          } else {
+            me[i].hideCard();
+          }
+        }
+      }
+      if (true||options.immediate) {
+        flip();
+      } else {
+        setTimeout(flip, speed / 2);
+      }
+
+      if (options.callback) {
+        setTimeout(options.callback, speed);
+      }
+    },
+
+    topCard: function() {
+      return this[this.length - 1];
+    },
+
+    toString: function() {
+      return 'Container';
+    }
+  });
+
+  function Deck(options) {
+    this.init(options);
+  }
+
+  Deck.prototype = new Container();
+  Deck.prototype.extend({
+    calcPosition: function(options) {
+      options = options || {};
+      var left = Math.round(this.x - opt.cardSize.width / 2, 0);
+      var top = Math.round(this.y - opt.cardSize.height / 2, 0);
+      var condenseCount = 6;
+      for (var i = 0; i < this.length; i++) {
+        if (i > 0 && i % condenseCount == 0) {
+          top -= 1;
+          left -= 1;
+        }
+        this[i].targetTop = top;
+        this[i].targetLeft = left;
+      }
+    },
+
+    toString: function() {
+      return 'Deck';
+    },
+
+    deal: function(count, hands, speed, callback, blind) {
+      var me = this;
+      var i = 0;
+      var totalCount = count * hands.length;
+
+      function dealOne() {
+        if (me.length == 0 || i == totalCount) {
+          if (callback) {
+            callback();
+          }
+          return;
+        }
+        new Audio("snd/card1.ogg").play()
+        // if (blind && blind.drawCardHook){
+        //   blind.drawCardHook(me.topCard());
+        // }
+        hands[i % hands.length].addCard(me.topCard());
+        hands[i % hands.length].render({
+          callback: dealOne,
+          speed: speed
+        });
+        //Balatro specific
+        
+        i++;
+      }
+      dealOne();
+    }
+  });
+
+  function Hand(options) {
+    this.init(options);
+  }
+  Hand.prototype = new Container();
+  Hand.prototype.extend({
+    calcPosition: function(options) {
+      options = options || {};
+      var width = opt.cardSize.width + (this.length - 1) * opt.cardSize.padding;
+      var left = Math.round(this.x - width / 2);
+      var top = Math.round(this.y - opt.cardSize.height / 2, 0);
+      for (var i = 0; i < this.length; i++) {
+        this[i].targetTop = top;
+        this[i].targetLeft = left + i * opt.cardSize.padding;
+      }
+    },
+
+    toString: function() {
+      return 'Hand';
+    }
+  });
+
+  function Pile(options) {
+    this.init(options);
+  }
+
+  Pile.prototype = new Container();
+  Pile.prototype.extend({
+    calcPosition: function(options) {
+      options = options || {};
+    },
+
+    toString: function() {
+      return 'Pile';
+    },
+
+    deal: function(count, hands) {
+      if (!this.dealCounter) {
+        this.dealCounter = count * hands.length;
+      }
+    }
+  });
+
+
+  return {
+    init: init,
+    all: all,
+    options: opt,
+    SIZE: opt.cardSize,
+    Card: Card,
+    Container: Container,
+    Deck: Deck,
+    Hand: Hand,
+    Pile: Pile,
+    shuffle: shuffle
+  };
+})();
+
+if (typeof module !== 'undefined') {
+  module.exports = cards;
+}
+
+		</script>
+		<script>
+			// Enable or disable immediate mode for rendering
+const immediateMode = false;
+const info = document.getElementById("Info");
+const storeTopShelf = document.getElementById("upper-shelf");
+
+var pixelSize = 750.0;
+var backgroundColors = [
+	[0.871, 0.267, 0.231],
+	[0.0, 0.42, 0.706],
+	[0.086, 0.137, 0.145],
+]
+
+// Game state and configuration
+const game = {
+	inShop: false,
+	alive: true,
+	round: 0,
+	ante: 0,
+	level: 0,
+	blind: {
+		minimum: 300,
+		currentScore: 0,
+		hands: 4,
+		discards: 4,
+		payout: 3,
+		name: "Initial blind",
+		inPlay: false
+	},
+	player: {
+		initialHands: 4,
+		initialDiscards: 4,
+		handSize: 8,
+		money: 3,
+		topShelfMax : 2,
+		jokers: [],
+		timesPokerHandPlayed: {
+			"Full House" : 0
+		},
+		jokersMaximum: 5,
+		addJoker: function (joker) {
+			if (this.jokers.length < this.jokersMaximum) {
+				// Create the new joker span element
+				const jokerEl = document.createElement('span');
+				jokerEl.classList.add('joker', 'in-play');
+				jokerEl.id = joker.id + Date.now();
+				joker.elementId = jokerEl.id
+				jokerEl.title = joker.name;
+		
+				// Create the img element for the joker image
+				const jokerImg = document.createElement('img');
+				jokerImg.src = `img/Jokers/joker_${joker.id}.png`;
+				jokerEl.appendChild(jokerImg);
+		
+				// Create the tooltip span
+				const tooltipText = document.createElement('span');
+				tooltipText.classList.add('tooltiptext');
+				tooltipText.innerHTML = `${joker.description} <br> [Selling for $${Math.ceil(joker.price / 2)}]`;
+				jokerEl.appendChild(tooltipText);
+		
+				// Attach the click event listener
+				jokerEl.addEventListener('click', () => {
+					jokerClick(`${joker.elementId}`, joker);
+				});
+		
+				// Append the new joker element to the container
+				document.getElementById('jokers').appendChild(jokerEl);
+		
+				// Add the joker to the player's collection
+				this.jokers.push(joker);
+			}
+		}
+	}
+};
+
+// Initialize card library
+cards.init({ table: '#card-table', type: STANDARD, cardback: "blue", RULEBOOK: RULEBOOK, acesHigh: true, immediateMode: immediateMode });
+
+// Create deck and adjust position
+const deck = new cards.Deck();
+deck.x += 260;
+deck.y += 140;
+
+// Apply enhancements to cards
+cards.all.forEach(card => {
+	
+	// let randomChoice = Math.floor(Math.random() * 9)
+	// switch (randomChoice) {
+	// 	case 1:
+	// 		card.enhancement = RULEBOOK.enhancements.none;
+	// 		break;
+	// 	case 2:
+	// 		card.enhancement = RULEBOOK.enhancements.bonus;
+	// 		break;
+	// 	case 3:
+	// 		card.enhancement = RULEBOOK.enhancements.mult;
+	// 		break;
+	// 	case 5:
+	// 		card.enhancement = RULEBOOK.enhancements.glass;
+	// 		break;
+	// 	case 6:
+	// 		card.enhancement = RULEBOOK.enhancements.steel;
+	// 		break;
+	// 	case 8:
+	// 		card.enhancement = RULEBOOK.enhancements.gold;
+	// 		break;	
+	// 	case 9:
+	// 		card.enhancement = RULEBOOK.enhancements.lucky;
+	// 		break;
+	// }
+});
+
+deck.addCards(cards.all);
+deck.render({ immediate: true });
+
+// Create player hands and discard pile
+const upperhand = new cards.Hand({ faceUp: true, y: 230 });
+const lowerhand = new cards.Hand({ faceUp: true, y: 340 });
+const discardPile = new cards.Deck({ faceUp: true });
+discardPile.x += 260;
+
+// Deal button event listener
+$('#deal').click(() => {
+	$('#deal').hide();
+	startBlind();
+
+	let jokerKeys = Object.keys(RULEBOOK.jokers)
+	document.querySelector("footer").innerText += `  | AutoUpdate info: [${jokerKeys.length} jokers]`
+
+});
+
+// Start a blind
+function startBlind() {
+	
+	cards.shuffle(deck)
+	document.getElementById('card-table').hidden = false;
+	document.getElementById('store-box').hidden = true;
+	game.inShop = false;
+	
+	deck.deal(game.player.handSize, [lowerhand], 100, () => {
+		game.blind.inPlay = true;
+		document.getElementById("play").innerText = "Play";
+		setupShop();
+		sortHand();
+	},game.blind);
+}
+
+function jokerClick(id,joker){
+	try{
+		// alert(id)
+	let jokerEl = document.getElementById(id);
+	if(confirm(`Are you sure you wish to sell ${joker.name} for $${Math.ceil(joker.price / 2)}?`)){
+		game.player.jokers.splice(game.player.jokers.at(joker));
+		jokerEl.outerHTML = '';
+		game.player.money += Math.ceil(joker.price / 2)
+	}
+	}catch(err){
+		alert(err)
+	}
+}
+
+// Move to next blind
+function nextBlind() {
+	game.level = (game.level === 2) ? 0 : game.level + 1;
+	if (game.level === 0) game.ante++;
+	game.round++;
+	game.blind = RULEBOOK.buildBlind(game.level, game.ante);
+	Object.assign(game.blind, {
+		hands: game.player.initialHands,
+		discards: game.player.initialDiscards,
+		currentScore: 0,
+		inPlay: false
+	});
+	backgroundColors = game.blind.colors
+	document.getElementById('card-table').hidden = true;
+	document.getElementById('store-box').hidden = false;
+	game.inShop = true;
+	setupShop();
+}
+function setupShop(){
+	//Empty shop
+	storeTopShelf.innerHTML = "";
+	
+	for (let index = 0; index < game.player.topShelfMax; index++) {
+		let jokerKeys = Object.keys(RULEBOOK.jokers)
+		let randomChoice = jokerKeys[Math.ceil( Math.random() * (jokerKeys.length-1) )]
+		let uid = Math.floor( Math.random() * 10000 )
+		storeTopShelf.innerHTML += `<button class="joker in-shop" title="${RULEBOOK.jokers[randomChoice].name}" onclick="buy('${randomChoice}','store${uid}')" id="store${uid}"><span class="price">$${RULEBOOK.jokers[randomChoice].price}</span><img src='img/Jokers/joker_${RULEBOOK.jokers[randomChoice].id}.png'><span class="tooltiptext">${RULEBOOK.jokers[randomChoice].description}</span></button>`
+	}
+
+	for (let index = 0; index < 3; index++) {
+
+		let planetKeys = Object.keys(RULEBOOK.basePokerHands);
+		let rng = Math.ceil( Math.random() * (planetKeys.length-1) );
+		let randomChoice = planetKeys[rng];
+		let uid = Math.floor( Math.random() * 10000 );
+		let descriptionText = `Upgrade ${randomChoice} to level ${RULEBOOK.basePokerHands[randomChoice].level + 1}:</br> <chips> + ${RULEBOOK.basePokerHands[randomChoice].upgrade[0]} </chips> x <mult> + ${RULEBOOK.basePokerHands[randomChoice].upgrade[1]} </mult>`
+		storeTopShelf.innerHTML += `<button class="joker in-shop" title="${randomChoice}" onclick="buy('${randomChoice}','store${uid}')" id="store${uid}"><span class="price">$${RULEBOOK.basePokerHands[randomChoice].level+3}</span><img src='img/Usables/usable_${RULEBOOK.basePokerHands[randomChoice].id}.png'><span class="tooltiptext">${descriptionText}</span></button>`
+	}
+	storeTopShelf.innerHTML += `<button class="joker in-shop" title="Incantation" onclick="buy('Incantation','store_inc')" id="store_inc"><span class="price">$7</span><img src='img/Usables/usable_42.png'><span class="tooltiptext">Add 10 random enhanced cards to your deck.</span></button>`
+
+}
+
+function buy(key, uid){
+	let planetKeys = Object.keys(RULEBOOK.basePokerHands)
+	let jokerKeys = Object.keys(RULEBOOK.jokers)
+	//alert(key)
+
+	if(planetKeys.includes(key)){
+		buy_planet(key, uid)
+	}else if(jokerKeys.includes(key)){
+		buy_joker(key,uid)
+	}else if(key == "Incantation"){
+		if ( game.player.money < 7){
+			alert("Not enough money!");
+			return;
+		}
+		game.player.money -= 7;
+		document.getElementById("store_inc").innerHTML = "SOLD OUT!";
+		_TEMP_incantation();
+	}
+}
+
+function _TEMP_incantation(){
+	try{
+		for (let index = 0; index < 10; index++) {
+			let randomSuit = Math.floor(Math.random() * 4);
+			let chosenSuit = "none";
+			switch (randomSuit) {
+				case 0:
+					chosenSuit = 'h'
+					break;
+				case 1:
+					chosenSuit = 's'
+					break;
+				case 2:
+					chosenSuit = 'd'
+					break;
+				case 3:
+					chosenSuit = 'c'
+			}
+
+			let card = new cards.Card(chosenSuit, Math.ceil(Math.random() * 13), '#card-table');
+			let randomChoice = Math.floor(Math.random() * 9)
+			switch (randomChoice) {
+				case 1:
+					card.enhancement = RULEBOOK.enhancements.none;
+					break;
+				case 2:
+					card.enhancement = RULEBOOK.enhancements.bonus;
+					break;
+				case 3:
+					card.enhancement = RULEBOOK.enhancements.mult;
+					break;
+				case 4:
+				case 5:
+					card.enhancement = RULEBOOK.enhancements.glass;
+					break;
+				case 6:
+				case 7:
+					card.enhancement = RULEBOOK.enhancements.steel;
+					break;
+				case 8:
+					card.enhancement = RULEBOOK.enhancements.gold;
+					break;	
+				case 9:
+					card.enhancement = RULEBOOK.enhancements.lucky;
+					break;
+			}
+			cards.all.push(card);
+			card.el.click((ev)=>{
+				document.querySelector("h1").innerText = `${card}`
+			
+				if (card.container) {
+				  var handler = card.container._click;
+				  if (handler) {
+					handler.func.call(handler.context || window, card, ev);
+				  }
+				}
+			  });
+			// alert(cards.mouseEvent)
+			deck.addCard(card);
+			cards.shuffle(deck);
+			deck.render({immediate:true});
+
+		}
+	}catch(error){
+		alert(error)
+	}
+}
+
+function buy_planet(planetKey, uid){
+	if ( game.player.money < RULEBOOK.basePokerHands[planetKey].level + 3){
+		alert("Not enough money!");
+		return;
+	}
+	game.player.money -= RULEBOOK.basePokerHands[planetKey].level + 3;
+	upgradePokerHand(planetKey, 1)
+	document.getElementById(uid).innerHTML = "SOLD OUT!";
+	document.getElementById(uid).disabled = true;
+}
+
+
+function buy_joker(jokerKey, uid){
+	if ( game.player.money < RULEBOOK.jokers[jokerKey].price ){
+		alert("Not enough money!");
+		return;
+	}
+	if( game.player.jokersMaximum < game.player.jokers.length + 1 ){
+		alert("No more joker slots left!");
+		return;
+	}
+	game.player.money -= RULEBOOK.jokers[jokerKey].price;
+	game.player.addJoker(RULEBOOK.jokers[jokerKey]);
+	document.getElementById(uid).innerHTML = "SOLD OUT!";
+	document.getElementById(uid).disabled = true;
+}
+
+function upgradePokerHand(hand, times = 1){
+	saidHand = RULEBOOK.basePokerHands[hand];
+	saidHand.level += times;
+	saidHand.chips += (times * saidHand.upgrade[0]);
+	saidHand.mult += (times * saidHand.upgrade[1]);
+	alert(`Upgraded ${hand}!`)
+}
+
+// Handle card movement between hands
+upperhand.click(card => transferCard(card, upperhand, lowerhand));
+lowerhand.click(card => {
+	if (upperhand.length < 5) transferCard(card, lowerhand, upperhand);
+});
+
+function transferCard(card, fromHand, toHand) {
+	toHand.addCard(card);
+	fromHand.render({ immediate: true });
+	toHand.render({ immediate: true });
+}
+
+// Keybindings for gameplay actions
+document.addEventListener("keydown", ev => {
+	const keyActions = {
+		'a': () => $("#play").click(),
+		'd': () => $('#discard').click(),
+		'z': () => alert(detectPokerHand(upperhand)),
+		'Enter': () => $("#play").click(),
+		'Backspace': () => deselectCardByPlacement(0),
+		'k' : sortHand,
+	};
+	if (keyActions[ev.key]) keyActions[ev.key]();
+	if (ev.ctrlKey) ev.preventDefault();
+	if (!isNaN(ev.key)) ev.ctrlKey ? deselectCardByPlacement(ev.key - 1) : selectCardByPlacement(ev.key - 1);
+});
+
+// Card selection/deselection functions
+function selectCardByPlacement(id) {
+	if (upperhand.length < 5) transferCard(lowerhand[id], lowerhand, upperhand);
+}
+
+function deselectCardByPlacement(id) {
+	transferCard(upperhand[id], upperhand, lowerhand);
+}
+
+function sortHand () {
+	lowerhand.sort((a, b) => b.rank - a.rank); lowerhand.render()
+}
+
+// Button click events
+$('#play').click(() => game.blind.inPlay ? Playhand() : startBlind());
+$('#discard').click(() => {
+	if (game.blind.discards <= 0) return alert("You don't have any discards left!");
+	discardSelected();
+	game.blind.discards--;
+});
+
+$("#deck-count").click(()=>{
+	alert(cards.all.toSorted((a, b) => b.rank - a.rank).join(', ').replaceAll('H','♥').replaceAll('C','♣').replaceAll('D','♦').replaceAll('S','♠'));
+});
+deck.click(()=>{
+	alert(deck.toSorted((a, b) => b.rank - a.rank).join(', ').replaceAll('H','♥').replaceAll('C','♣').replaceAll('D','♦').replaceAll('S','♠'));
+});
+
+// Gameplay mechanics
+function Playhand() {
+	if (upperhand.length === 0) return;
+
+	let handType = detectPokerHand(upperhand);
+	game.blind.currentScore += calculateScore(handType);
+	// upgradePokerHand(handType.hand)
+
+	if( isNaN(game.player.timesPokerHandPlayed[handType.hand]) ){
+		game.player.timesPokerHandPlayed[handType.hand]  = 1;
+	}else{
+		game.player.timesPokerHandPlayed[handType.hand] += 1;
+	}
+
+	discardSelected();
+	game.blind.hands--;
+
+	if(game.blind.hooks){
+		if(game.blind.hooks.includes('afterPlayHook')){
+			game.blind.afterPlayHook();
+		}
+	}
+	if (game.blind.currentScore >= game.blind.minimum){
+		winBlind();
+	}else if(game.blind.hands == 0){
+		game.alive = false;
+		info.innerHTML  = `<h1>You failed!</h1> No hands left. Score: ${game.blind.currentScore} / ${game.blind.minimum} <br> <button href="javascript();" onclick="location.reload()">Play again?</button>`
+		document.getElementById('game-box').hidden = true
+	}
+}
+
+function winBlind() {
+	let newMoney = game.blind.payout
+	lowerhand.forEach(card => {
+		if (card.enhancement == RULEBOOK.enhancements.gold){
+			game.player.money += 3;
+		}
+	});
+	newMoney += game.blind.discards
+	game.player.money += newMoney;
+	alert(`${game.blind.name} won! ${newMoney} dollars awarded. Finishing score: ${game.blind.currentScore} / ${game.blind.minimum}`)
+	deck.addCards(cards.all);
+	deck.render();
+	nextBlind();
+	document.getElementById("play").innerText = "Next";
+}
+
+function discardSelected() {
+	if (game.blind.currentScore < game.blind.minimum) {
+		deck.deal(upperhand.length, [lowerhand], 50, ()=>{/*sortHand();*/}, game.blind);
+	}
+	discardPile.addCards(upperhand);
+	discardPile.render();
+	upperhand.render();
+	lowerhand.render();
+}
+
+// Game information updater
+setInterval(updateInfo, 50);
+function updateInfo() {
+	if (!game.alive) return pixelSize = 125.0;
+	$('#discard').prop("disabled", (game.blind.discards <= 0 || !game.blind.inPlay));
+
+	document.getElementById('deck-count').innerText = `${deck.length} / ${cards.all.length}`
+
+	let handType = detectPokerHand(upperhand);
+
+	document.querySelector('#blindName').innerText = game.blind.name
+	document.querySelector('#blindDescription').innerHTML = `Score at least: <b>${game.blind.minimum}</b>`
+	document.querySelector('#roundScore').innerText = game.blind.currentScore
+	document.querySelector('#infoHands').innerText = game.blind.hands
+	document.querySelector('#infoDiscards').innerText = game.blind.discards
+	document.querySelector('#infoRound').innerText = game.round
+	document.querySelector('#infoAnte').innerText = game.ante
+	document.querySelector('#infoMoney').innerText = game.player.money
+	document.querySelector('#shopText').innerHTML = `Shop ( $${game.player.money} )`;
+
+
+	if(game.inShop){
+		pixelSize = 325.0;
+	}else{
+		pixelSize = 750.0;
+	}
+	
+	// info.innerHTML = `{ <money>$${game.player.money}</money> | Ante ${game.ante} | Round ${game.round} } </br> ( <hands>${game.blind.hands} Hands</hands> | <discards>${game.blind.discards} Discards</discards> ) </br> ${game.blind.name} : [${game.blind.currentScore} / <b>${game.blind.minimum}</b>] </br> `;
+	if (upperhand.length > 0){
+		let chips = getPreplayScoreOfCards(handType.scoringCards, RULEBOOK.basePokerHands[handType.hand].chips);
+		let mult = getPreplayMultOfCards(handType.scoringCards, RULEBOOK.basePokerHands[handType.hand].mult);
+
+		document.getElementById('playingHandName').innerHTML = handType.hand
+		document.getElementById('playingHandLevel').innerHTML = `lvl. ${RULEBOOK.basePokerHands[handType.hand].level}`
+		document.getElementById('playingHandChips').innerHTML = calculateChips(handType, mult, chips)
+		document.getElementById('playingHandMult').innerHTML = calculateMultiplier(handType, mult, chips)
+
+
+		// info.innerHTML += `${handType.hand} (lvl. ${RULEBOOK.basePokerHands[handType.hand].level}): <chips>${calculateChips(handType, mult, chips)}</chips> x <mult>${calculateMultiplier(handType, mult, chips)}</mult>`;
+	}else{
+		document.getElementById('playingHandName').innerHTML = 'Invalid hand'
+		document.getElementById('playingHandLevel').innerHTML = 0
+		document.getElementById('playingHandChips').innerHTML = 0
+		document.getElementById('playingHandMult').innerHTML = 0
+	}
+}
+
+function doesntViolateBlind(card){
+	if(game.blind.cardCheckHook){
+		if(game.blind.cardCheckHook(card)){
+			return true
+		}else{
+			return false
+		}
+	}else{
+		return true
+	}
+}
+
+function getPreplayScoreOfCards(scoringCards, chips){
+	scoringCards.forEach(card => {
+		if(doesntViolateBlind(card)){
+			if(card.rank == 1){
+				chips += 13
+			}
+			if(card.enhancement == RULEBOOK.enhancements.bonus){
+				chips += 50
+			}
+			chips += card.rank 
+		}
+	});
+	return chips
+}
+
+
+function getPreplayMultOfCards(scoringCards, base){
+	var mult = base
+	scoringCards.forEach(card => {
+		if(doesntViolateBlind(card)){
+			if(card.enhancement == RULEBOOK.enhancements.mult){
+				mult += 5
+			}
+			if(card.enhancement == RULEBOOK.enhancements.glass){
+				mult *= 2
+			}
+		}
+	});
+	lowerhand.forEach(card => {
+		if(doesntViolateBlind(card)){
+			if(card.enhancement == RULEBOOK.enhancements.steel){
+				mult *= 1.5
+			}
+		}
+	});
+
+	return mult
+}
+
+function executeLateJokers(handType, mult, chips){
+	var givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+	game.player.jokers.forEach(joker => {
+		joker.hooks.forEach(jHooks => {
+			if(jHooks.in == "afterCardsScoreHook"){
+				var jokerHookOutput = joker.afterCardsScoreHook(givenInformation)
+				if(jHooks.out.includes("currentMultiplier")){
+					mult = jokerHookOutput.currentMultiplier
+					givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+				}
+			}
+		});
+	});
+	return 
+}
+
+
+function calculateMultiplier(handType, mult, chips){
+	var givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+	game.player.jokers.forEach(joker => {
+		joker.hooks.forEach(jHooks => {
+			if(jHooks.in == "afterCardsScoreHook"){
+				var jokerHookOutput = joker.afterCardsScoreHook(givenInformation)
+				if(jHooks.out.includes("currentMultiplier")){
+					mult = jokerHookOutput.currentMultiplier
+					givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+				}
+			}
+		});
+	});
+	return mult
+}
+
+function calculateChips(handType, mult, chips){
+	let givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+	game.player.jokers.forEach(joker => {
+		joker.hooks.forEach(jHooks => {
+			if(jHooks.in == "afterCardsScoreHook"){
+				var jokerHookOutput = joker.afterCardsScoreHook(givenInformation)
+				if(jHooks.out.includes("currentChips")){
+					chips = jokerHookOutput.currentChips
+					givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+				}
+			}
+		});
+	});
+	return chips
+}
+
+function calculateScore(handType){
+	var chips = getPreplayScoreOfCards(handType.scoringCards, RULEBOOK.basePokerHands[handType.hand].chips)
+	var mult = getPreplayMultOfCards(handType.scoringCards,RULEBOOK.basePokerHands[handType.hand].mult)
+	return calculateChips(handType, mult, chips) * calculateMultiplier(handType, mult, chips)
+}
+
+function detectPokerHand(cards) {
+    if (cards.length == 0) return { hand: "Invalid hand", scoringCards: [] };
+    
+    let ranks = {}, suits = {};
+    let rankValues = [];
+    let rankMap = {};
+    
+    // Parse cards
+    for (let card of cards) {
+        let suit = card.name[0];
+        let rank = parseInt(card.name.slice(1));
+        
+        ranks[rank] = (ranks[rank] || 0) + 1;
+        suits[suit] = (suits[suit] || 0) + 1;
+        rankValues.push(rank);
+        rankMap[card] = rank;
+    }
+    
+    rankValues.sort((a, b) => a - b);
+    let uniqueRanks = Object.keys(ranks).length;
+    let isFlush = cards.length === 5 && Object.keys(suits).length === 1;
+    let isStraight = uniqueRanks === 5 && (rankValues[4] - rankValues[0] === 4 || rankValues.join() === "2,3,4,5,14");
+    
+    // Identify hands
+    let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+    let hand = "High Card";
+    let scoringRanks = new Set();
+    
+    if (isFlush && isStraight && rankValues.includes(14)) {
+        hand = "Royal Flush";
+        scoringRanks = new Set(rankValues);
+    } else if (isFlush && isStraight) {
+        hand = "Straight Flush";
+        scoringRanks = new Set(rankValues);
+    } else if (rankCounts[0][1] === 4) {
+        hand = "Four of a Kind";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+    } else if (rankCounts.length > 1 && rankCounts[0][1] === 3 && rankCounts[1][1] === 2) {
+        hand = "Full House";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+        scoringRanks.add(parseInt(rankCounts[1][0]));
+    } else if (isFlush) {
+        hand = "Flush";
+        scoringRanks = new Set(rankValues);
+    } else if (isStraight) {
+        hand = "Straight";
+        scoringRanks = new Set(rankValues);
+    } else if (rankCounts[0][1] === 3) {
+        hand = "Three of a Kind";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+    } else if (rankCounts.length > 1 && rankCounts[0][1] === 2 && rankCounts[1][1] === 2) {
+        hand = "Two Pair";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+        scoringRanks.add(parseInt(rankCounts[1][0]));
+    } else if (rankCounts[0][1] === 2) {
+        hand = "One Pair";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+    }else{
+		scoringRanks.add(parseInt(rankValues[0]))
+	}
+    
+    let scoringCards = cards.filter(card => scoringRanks.has(rankMap[card]));
+    
+    return { hand, scoringCards };
+}
+
+// Auto-start game
+window.addEventListener("load", () => {
+	// game.player.addJoker(RULEBOOK.jokers.lustyJoker);
+	// game.player.addJoker(RULEBOOK.jokers.gluttonousJoker);
+	// game.player.addJoker(RULEBOOK.jokers.greedyJoker);
+
+	setTimeout(() => $('#deal').click(), 50);
+});
+
+		</script>
+
+
+		<canvas id="glCanvas"></canvas>
+    
+		<script>
+			const vertexShaderSource = `
+				attribute vec4 position;
+				void main() {
+					gl_Position = position;
+				}
+			`;
+	
+			//vec4(0.871, 0.267, 0.231, 1.0)
+			// vec4(0.0, 0.42, 0.706, 1.0)
+			//vec4(0.086, 0.137, 0.145, 1.0)
+			const fragmentShaderSource = `
+				precision mediump float;
+				uniform vec2 resolution;
+				uniform float time;
+				
+				#define SPIN_ROTATION -2.0
+				#define SPIN_SPEED 7.0
+				#define OFFSET vec2(0.0)
+				uniform vec4 COLOUR_1;
+				uniform vec4 COLOUR_2;
+				uniform vec4 COLOUR_3; 
+				#define CONTRAST 3.5
+				#define LIGTHING 0.4
+				#define SPIN_AMOUNT 0.25
+				uniform float PIXEL_FILTER;
+				#define SPIN_EASE 1.0
+				#define PI 3.14159265359
+				#define IS_ROTATE false
+	
+				vec4 effect(vec2 screenSize, vec2 screen_coords) {
+					float pixel_size = length(screenSize.xy) / PIXEL_FILTER;
+					vec2 uv = (floor(screen_coords.xy*(1./pixel_size))*pixel_size - 0.5*screenSize.xy)/length(screenSize.xy) - OFFSET;
+					float uv_len = length(uv);
+	
+					float speed = (SPIN_ROTATION*SPIN_EASE*0.2);
+					if(IS_ROTATE){
+						speed = time * speed;
+					}
+					speed += 302.2;
+					float new_pixel_angle = atan(uv.y, uv.x) + speed - SPIN_EASE*20.*(1.*SPIN_AMOUNT*uv_len + (1. - 1.*SPIN_AMOUNT));
+					vec2 mid = (screenSize.xy/length(screenSize.xy))/2.;
+					uv = (vec2((uv_len * cos(new_pixel_angle) + mid.x), (uv_len * sin(new_pixel_angle) + mid.y)) - mid);
+	
+					uv *= 30.;
+					speed = time*(SPIN_SPEED);
+					vec2 uv2 = vec2(uv.x+uv.y);
+	
+					for(int i=0; i < 5; i++) {
+						uv2 += sin(max(uv.x, uv.y)) + uv;
+						uv  += 0.5*vec2(cos(5.1123314 + 0.353*uv2.y + speed*0.131121),sin(uv2.x - 0.113*speed));
+						uv  -= 1.0*cos(uv.x + uv.y) - 1.0*sin(uv.x*0.711 - uv.y);
+					}
+	
+					float contrast_mod = (0.25*CONTRAST + 0.5*SPIN_AMOUNT + 1.2);
+					float paint_res = min(2., max(0.,length(uv)*(0.035)*contrast_mod));
+					float c1p = max(0.,1. - contrast_mod*abs(1.-paint_res));
+					float c2p = max(0.,1. - contrast_mod*abs(paint_res));
+					float c3p = 1. - min(1., c1p + c2p);
+					float light = (LIGTHING - 0.2)*max(c1p*5. - 4., 0.) + LIGTHING*max(c2p*5. - 4., 0.);
+					return (0.3/CONTRAST)*COLOUR_1 + (1. - 0.3/CONTRAST)*(COLOUR_1*c1p + COLOUR_2*c2p + vec4(c3p*COLOUR_3.rgb, c3p*COLOUR_1.a)) + light;
+				}
+	
+				void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+					vec2 uv = fragCoord / resolution.xy;
+					fragColor = effect(resolution.xy, uv * resolution.xy);
+				}
+	
+				void main() {
+					vec4 fragment_color;
+					mainImage(fragment_color, gl_FragCoord.xy);
+					gl_FragColor = fragment_color;
+				}
+			`;
+	
+			function createShader(gl, type, source) {
+				const shader = gl.createShader(type);
+				gl.shaderSource(shader, source);
+				gl.compileShader(shader);
+				if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+					console.error("Shader compile error:", gl.getShaderInfoLog(shader));
+					gl.deleteShader(shader);
+					return null;
+				}
+				return shader;
+			}
+	
+			function createProgram(gl, vertexShader, fragmentShader) {
+				const program = gl.createProgram();
+				gl.attachShader(program, vertexShader);
+				gl.attachShader(program, fragmentShader);
+				gl.linkProgram(program);
+				if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+					console.error("Program link error:", gl.getProgramInfoLog(program));
+					gl.deleteProgram(program);
+					return null;
+				}
+				return program;
+			}
+	
+			function main() {
+		const canvas = document.getElementById("glCanvas");
+		const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+		if (!gl) {
+			console.error("WebGL not supported");
+			return;
+		}
+	
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+	
+		const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+		const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+		const program = createProgram(gl, vertexShader, fragmentShader);
+	
+		// Create a buffer for fullscreen quad
+		const positionBuffer = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+			-1, -1,  1, -1, -1,  1,
+			-1,  1,  1, -1,  1,  1
+		]), gl.STATIC_DRAW);
+	
+		const positionLocation = gl.getAttribLocation(program, "position");
+		
+		gl.useProgram(program);
+		
+		// Enable and bind position attribute
+		gl.enableVertexAttribArray(positionLocation);
+		gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+		gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+	
+		const resolutionLocation = gl.getUniformLocation(program, "resolution");
+		const timeLocation = gl.getUniformLocation(program, "time");
+		const colorOneLocation = gl.getUniformLocation(program, "COLOUR_1");
+		const colorTwoLocation = gl.getUniformLocation(program, "COLOUR_2");
+		const colorThreeLocation = gl.getUniformLocation(program, "COLOUR_3");
+		const pixelSizeLocation = gl.getUniformLocation(program, "PIXEL_FILTER");
+
+	
+		function render(time) {
+			gl.viewport(0, 0, canvas.width, canvas.height);
+			gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+			gl.uniform1f(timeLocation, time * 0.001);
+
+			//vec4(0.871, 0.267, 0.231, 1.0)
+			// vec4(0.0, 0.42, 0.706, 1.0)
+			//vec4(0.086, 0.137, 0.145, 1.0)
+			gl.uniform4f(colorOneLocation, backgroundColors[0][0],backgroundColors[0][1],backgroundColors[0][2], 1.0);
+			gl.uniform4f(colorTwoLocation, backgroundColors[1][0],backgroundColors[1][1],backgroundColors[1][2], 1.0);
+			gl.uniform4f(colorThreeLocation, backgroundColors[2][0],backgroundColors[2][1],backgroundColors[2][2], 1.0);
+			gl.uniform1f(pixelSizeLocation, pixelSize);
+
+			
+			gl.drawArrays(gl.TRIANGLES, 0, 6);
+			requestAnimationFrame(render);
+		}
+	
+		requestAnimationFrame(render);
+	}
+	
+	window.onload = main;
+	window.onresize = () => {
+		const canvas = document.getElementById("glCanvas");
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+	};
+	
+		</script>
+	</body>
+</html>

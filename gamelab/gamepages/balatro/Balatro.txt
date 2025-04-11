@@ -1,0 +1,541 @@
+// Enable or disable immediate mode for rendering
+const immediateMode = false;
+const info = document.getElementById("Info");
+const storeTopShelf = document.getElementById("upper-shelf");
+
+// Game state and configuration
+const game = {
+	inStore: false,
+	alive: true,
+	round: 0,
+	ante: 0,
+	level: 0,
+	blind: {
+		minimum: 300,
+		currentScore: 0,
+		hands: 4,
+		discards: 4,
+		payout: 3,
+		name: "Initial blind",
+		inPlay: false
+	},
+	player: {
+		initialHands: 4,
+		initialDiscards: 4,
+		handSize: 8,
+		money: 4,
+		topShelfMax : 2,
+		jokers: [],
+		timesPokerHandPlayed: {
+			"Full House" : 0
+		},
+		jokersMaximum: 5,
+		addJoker: function (joker) {
+			if (this.jokers.length < this.jokersMaximum) {
+				document.getElementById("jokers").innerHTML += `<span class="joker in-play" id="${joker.name}_${this.jokers.length}" title="${joker.name}"><img src='img/Jokers/joker_${joker.id}.png'> <span class="tooltiptext">${joker.description}</span></span>`;
+				this.jokers.push(joker);
+			}
+		}
+	}
+};
+
+// Initialize card library
+cards.init({ table: '#card-table', type: STANDARD, cardback: "blue", RULEBOOK: RULEBOOK, acesHigh: true, immediateMode: immediateMode });
+
+// Create deck and adjust position
+const deck = new cards.Deck();
+deck.x += 260;
+deck.y += 140;
+
+// Apply enhancements to cards
+cards.all.forEach(card => {
+	
+	// let randomChoice = Math.floor(Math.random() * 9)
+	// switch (randomChoice) {
+	// 	case 1:
+	// 		card.enhancement = RULEBOOK.enhancements.none;
+	// 		break;
+	// 	case 2:
+	// 		card.enhancement = RULEBOOK.enhancements.bonus;
+	// 		break;
+	// 	case 3:
+	// 		card.enhancement = RULEBOOK.enhancements.mult;
+	// 		break;
+	// 	case 5:
+	// 		card.enhancement = RULEBOOK.enhancements.glass;
+	// 		break;
+	// 	case 6:
+	// 		card.enhancement = RULEBOOK.enhancements.steel;
+	// 		break;
+	// 	case 8:
+	// 		card.enhancement = RULEBOOK.enhancements.gold;
+	// 		break;	
+	// 	case 9:
+	// 		card.enhancement = RULEBOOK.enhancements.lucky;
+	// 		break;
+	// }
+});
+
+deck.addCards(cards.all);
+deck.render({ immediate: true });
+
+// Create player hands and discard pile
+const upperhand = new cards.Hand({ faceUp: true, y: 245 });
+const lowerhand = new cards.Hand({ faceUp: true, y: 340 });
+const discardPile = new cards.Deck({ faceUp: true });
+discardPile.x += 260;
+
+// Deal button event listener
+$('#deal').click(() => {
+	$('#deal').hide();
+	startBlind();
+
+	let jokerKeys = Object.keys(RULEBOOK.jokers)
+	document.querySelector("footer").innerText += `  | AutoUpdate info: [${jokerKeys.length} jokers]`
+
+});
+
+// Start a blind
+function startBlind() {
+	
+	cards.shuffle(deck)
+	document.getElementById('card-table').hidden = false;
+	document.getElementById('store-box').hidden = true;
+	
+	deck.deal(game.player.handSize, [lowerhand], 100, () => {
+		game.blind.inPlay = true;
+		document.getElementById("play").innerText = "Play";
+		setupStore();
+
+	});
+	
+
+}
+
+// Move to next blind
+function nextBlind() {
+	game.level = (game.level === 2) ? 0 : game.level + 1;
+	if (game.level === 0) game.ante++;
+	game.round++;
+	game.blind = RULEBOOK.buildBlind(game.level, game.ante);
+	Object.assign(game.blind, {
+		hands: game.player.initialHands,
+		discards: game.player.initialDiscards,
+		currentScore: 0,
+		inPlay: false
+	});
+	document.getElementById('card-table').hidden = true;
+	document.getElementById('store-box').hidden = false;
+	setupStore();
+}
+function setupStore(){
+	//Empty shop
+	storeTopShelf.innerHTML = "";
+	
+	for (let index = 0; index < game.player.topShelfMax; index++) {
+		let jokerKeys = Object.keys(RULEBOOK.jokers)
+		let randomChoice = jokerKeys[Math.ceil( Math.random() * (jokerKeys.length-1) )]
+		let uid = Math.floor( Math.random() * 10000 )
+		storeTopShelf.innerHTML += `<button class="joker in-shop" title="${RULEBOOK.jokers[randomChoice].name}" onclick="buy('${randomChoice}','store${uid}')" id="store${uid}"><span class="price">$${RULEBOOK.jokers[randomChoice].price}</span><img src='img/Jokers/joker_${RULEBOOK.jokers[randomChoice].id}.png'><span class="tooltiptext">${RULEBOOK.jokers[randomChoice].description}</span></button>`
+	}
+
+	for (let index = 0; index < 3; index++) {
+
+		let planetKeys = Object.keys(RULEBOOK.basePokerHands);
+		let rng = Math.ceil( Math.random() * (planetKeys.length-1) );
+		let randomChoice = planetKeys[rng];
+		let uid = Math.floor( Math.random() * 10000 );
+		let descriptionText = `Upgrade ${randomChoice} to level ${RULEBOOK.basePokerHands[randomChoice].level + 1}:</br> <chips> + ${RULEBOOK.basePokerHands[randomChoice].upgrade[0]} </chips> x <mult> + ${RULEBOOK.basePokerHands[randomChoice].upgrade[1]} </mult>`
+		storeTopShelf.innerHTML += `<button class="joker in-shop" title="${randomChoice}" onclick="buy('${randomChoice}','store${uid}')" id="store${uid}"><span class="price">$${RULEBOOK.basePokerHands[randomChoice].level+3}</span><img src='img/Usables/usable_${RULEBOOK.basePokerHands[randomChoice].id}.png'><span class="tooltiptext">${descriptionText}</span></button>`
+	}
+	storeTopShelf.innerHTML += `<button class="joker in-shop" title="Incantation" onclick="buy('Incantation','store_inc')" id="store_inc"><span class="price">$7</span><img src='img/Usables/usable_42.png'><span class="tooltiptext">Add 10 random enhanced cards to your deck.</span></button>`
+
+}
+
+function buy(key, uid){
+	let planetKeys = Object.keys(RULEBOOK.basePokerHands)
+	let jokerKeys = Object.keys(RULEBOOK.jokers)
+	//alert(key)
+
+	if(planetKeys.includes(key)){
+		buy_planet(key, uid)
+	}else if(jokerKeys.includes(key)){
+		buy_joker(key,uid)
+	}else if(key == "Incantation"){
+		if ( game.player.money < 7){
+			alert("Not enough money!");
+			return;
+		}
+		game.player.money -= 7;
+		_TEMP_incantation();
+	}
+}
+
+function _TEMP_incantation(){
+	try{
+		for (let index = 0; index < 10; index++) {
+
+			let card = new cards.Card('h', Math.ceil(Math.random() * 13), '#card-table');
+			let randomChoice = Math.floor(Math.random() * 9)
+			switch (randomChoice) {
+				case 1:
+					card.enhancement = RULEBOOK.enhancements.none;
+					break;
+				case 2:
+					card.enhancement = RULEBOOK.enhancements.bonus;
+					break;
+				case 3:
+					card.enhancement = RULEBOOK.enhancements.mult;
+					break;
+				case 4:
+				case 5:
+					card.enhancement = RULEBOOK.enhancements.glass;
+					break;
+				case 6:
+				case 7:
+					card.enhancement = RULEBOOK.enhancements.steel;
+					break;
+				case 8:
+					card.enhancement = RULEBOOK.enhancements.gold;
+					break;	
+				case 9:
+					card.enhancement = RULEBOOK.enhancements.lucky;
+					break;
+			}
+			cards.all.push(card)
+			deck.addCard(card);
+			cards.shuffle(deck);
+			deck.render({immediate:true})
+		}
+	}catch(error){
+		alert(error)
+	}
+}
+
+function buy_planet(planetKey, uid){
+	if ( game.player.money < RULEBOOK.basePokerHands[planetKey].level + 3){
+		alert("Not enough money!");
+		return;
+	}
+	game.player.money -= RULEBOOK.basePokerHands[planetKey].level + 3;
+	upgradePokerHand(planetKey, 1)
+	document.getElementById(uid).innerHTML = "SOLD OUT!";
+	document.getElementById(uid).disabled = true;
+}
+
+
+function buy_joker(jokerKey, uid){
+	if ( game.player.money < RULEBOOK.jokers[jokerKey].price ){
+		alert("Not enough money!");
+		return;
+	}
+	if( game.player.jokersMaximum < game.player.jokers.length + 1 ){
+		alert("No more joker slots left!");
+		return;
+	}
+	game.player.money -= RULEBOOK.jokers[jokerKey].price;
+	game.player.addJoker(RULEBOOK.jokers[jokerKey]);
+	document.getElementById(uid).innerHTML = "SOLD OUT!";
+	document.getElementById(uid).disabled = true;
+}
+
+function upgradePokerHand(hand, times = 1){
+	saidHand = RULEBOOK.basePokerHands[hand];
+	saidHand.level += times;
+	saidHand.chips += (times * saidHand.upgrade[0]);
+	saidHand.mult += (times * saidHand.upgrade[1]);
+	alert(`Upgraded ${hand}!`)
+}
+
+// Handle card movement between hands
+upperhand.click(card => transferCard(card, upperhand, lowerhand));
+lowerhand.click(card => {
+	if (upperhand.length < 5) transferCard(card, lowerhand, upperhand);
+});
+
+function transferCard(card, fromHand, toHand) {
+	toHand.addCard(card);
+	fromHand.render({ immediate: true });
+	toHand.render({ immediate: true });
+}
+
+// Keybindings for gameplay actions
+document.addEventListener("keydown", ev => {
+	const keyActions = {
+		'a': () => $("#play").click(),
+		'd': () => $('#discard').click(),
+		'z': () => alert(detectPokerHand(upperhand)),
+		'Enter': () => $("#play").click(),
+		'Backspace': () => deselectCardByPlacement(0)
+	};
+	if (keyActions[ev.key]) keyActions[ev.key]();
+	if (ev.ctrlKey) ev.preventDefault();
+	if (!isNaN(ev.key)) ev.ctrlKey ? deselectCardByPlacement(ev.key - 1) : selectCardByPlacement(ev.key - 1);
+});
+
+// Card selection/deselection functions
+function selectCardByPlacement(id) {
+	if (upperhand.length < 5) transferCard(lowerhand[id], lowerhand, upperhand);
+}
+
+function deselectCardByPlacement(id) {
+	transferCard(upperhand[id], upperhand, lowerhand);
+}
+
+// Button click events
+$('#play').click(() => game.blind.inPlay ? Playhand() : startBlind());
+$('#discard').click(() => {
+	if (game.blind.discards <= 0) return alert("You don't have any discards left!");
+	discardSelected();
+	game.blind.discards--;
+});
+
+// Gameplay mechanics
+function Playhand() {
+	if (upperhand.length === 0) return;
+
+	let handType = detectPokerHand(upperhand);
+	game.blind.currentScore += calculateScore(handType);
+	// upgradePokerHand(handType.hand)
+
+	if( isNaN(game.player.timesPokerHandPlayed[handType.hand]) ){
+		game.player.timesPokerHandPlayed[handType.hand]  = 1;
+	}else{
+		game.player.timesPokerHandPlayed[handType.hand] += 1;
+	}
+
+	discardSelected();
+	game.blind.hands--;
+
+	if (game.blind.currentScore >= game.blind.minimum){
+		winBlind();
+	}else if(game.blind.hands == 0){
+		game.alive = false;
+		info.innerHTML  = `<h1>You failed!</h1> No hands left. Score: ${game.blind.currentScore} / ${game.blind.minimum} <br> <button href="javascript();" onclick="location.reload()">Play again?</button>`
+		document.getElementById('game-box').hidden = true
+	}
+}
+
+function winBlind() {
+	let newMoney = game.blind.payout
+	lowerhand.forEach(card => {
+		if (card.enhancement == RULEBOOK.enhancements.gold){
+			game.player.money += 3;
+		}
+	});
+	newMoney += game.blind.discards
+	game.player.money += newMoney;
+	alert(`${game.blind.name} won! ${newMoney} dollars awarded. Finishing score: ${game.blind.currentScore} / ${game.blind.minimum}`)
+	deck.addCards(cards.all);
+	deck.render();
+	nextBlind();
+	document.getElementById("play").innerText = "Next";
+}
+
+function discardSelected() {
+	if (game.blind.currentScore < game.blind.minimum) deck.deal(upperhand.length, [lowerhand], 50);
+	discardPile.addCards(upperhand);
+	discardPile.render();
+	upperhand.render();
+	lowerhand.render();
+}
+
+// Game information updater
+setInterval(updateInfo, 50);
+function updateInfo() {
+	if (!game.alive) return;
+	$('#discard').prop("disabled", (game.blind.discards <= 0 || !game.blind.inPlay));
+
+	document.getElementById('deck-count').innerText = `${deck.length} / ${cards.all.length}`
+
+	let handType = detectPokerHand(upperhand);
+	
+	info.innerHTML = `{ <money>$${game.player.money}</money> | Ante ${game.ante} | Round ${game.round} } </br> ( <hands>${game.blind.hands} Hands</hands> | <discards>${game.blind.discards} Discards</discards> ) </br> ${game.blind.name} : [${game.blind.currentScore} / <b>${game.blind.minimum}</b>] </br> `;
+	if (upperhand.length > 0){
+		let chips = getPreplayScoreOfCards(handType.scoringCards, RULEBOOK.basePokerHands[handType.hand].chips);
+		let mult = getPreplayMultOfCards(handType.scoringCards, RULEBOOK.basePokerHands[handType.hand].mult);
+	
+
+		info.innerHTML += `${handType.hand} (lvl. ${RULEBOOK.basePokerHands[handType.hand].level}): <chips>${calculateChips(handType, mult, chips)}</chips> x <mult>${calculateMultiplier(handType, mult, chips)}</mult>`;
+	}else{
+		info.innerHTML += "Invalid hand"
+	}
+}
+
+function doesntViolateBlind(card){
+	if(game.blind.cardCheckHook){
+		if(game.blind.cardCheckHook(card)){
+			return true
+		}else{
+			return false
+		}
+	}else{
+		return true
+	}
+}
+
+function getPreplayScoreOfCards(scoringCards, chips){
+	scoringCards.forEach(card => {
+		if(doesntViolateBlind(card)){
+			if(card.rank == 1){
+				chips += 13
+			}
+			if(card.enhancement == RULEBOOK.enhancements.bonus){
+				chips += 50
+			}
+			chips += card.rank 
+		}
+	});
+	return chips
+}
+
+
+function getPreplayMultOfCards(scoringCards, base){
+	var mult = base
+	scoringCards.forEach(card => {
+		if(doesntViolateBlind(card)){
+			if(card.enhancement == RULEBOOK.enhancements.mult){
+				mult += 5
+			}
+			if(card.enhancement == RULEBOOK.enhancements.glass){
+				mult *= 2
+			}
+		}
+	});
+	lowerhand.forEach(card => {
+		if(doesntViolateBlind(card)){
+			if(card.enhancement == RULEBOOK.enhancements.steel){
+				mult *= 1.5
+			}
+		}
+	});
+
+	return mult
+}
+
+function executeLateJokers(handType, mult, chips){
+	var givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+	game.player.jokers.forEach(joker => {
+		joker.hooks.forEach(jHooks => {
+			if(jHooks.in == "afterCardsScoreHook"){
+				var jokerHookOutput = joker.afterCardsScoreHook(givenInformation)
+				if(jHooks.out.includes("currentMultiplier")){
+					mult = jokerHookOutput.currentMultiplier
+					givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+				}
+			}
+		});
+	});
+	return 
+}
+
+
+function calculateMultiplier(handType, mult, chips){
+	var givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+	game.player.jokers.forEach(joker => {
+		joker.hooks.forEach(jHooks => {
+			if(jHooks.in == "afterCardsScoreHook"){
+				var jokerHookOutput = joker.afterCardsScoreHook(givenInformation)
+				if(jHooks.out.includes("currentMultiplier")){
+					mult = jokerHookOutput.currentMultiplier
+					givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+				}
+			}
+		});
+	});
+	return mult
+}
+
+function calculateChips(handType, mult, chips){
+	let givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+	game.player.jokers.forEach(joker => {
+		joker.hooks.forEach(jHooks => {
+			if(jHooks.in == "afterCardsScoreHook"){
+				var jokerHookOutput = joker.afterCardsScoreHook(givenInformation)
+				if(jHooks.out.includes("currentChips")){
+					chips = jokerHookOutput.currentChips
+					givenInformation = {handType:handType, gameObject:game, deck:cards.all, stationaryHand:lowerhand, currentMultiplier:mult, currentChips:chips}
+				}
+			}
+		});
+	});
+	return chips
+}
+
+function calculateScore(handType){
+	var chips = getPreplayScoreOfCards(handType.scoringCards, RULEBOOK.basePokerHands[handType.hand].chips)
+	var mult = getPreplayMultOfCards(handType.scoringCards,RULEBOOK.basePokerHands[handType.hand].mult)
+	return calculateChips(handType, mult, chips) * calculateMultiplier(handType, mult, chips)
+}
+
+function detectPokerHand(cards) {
+    if (cards.length == 0) return { hand: "Invalid hand", scoringCards: [] };
+    
+    let ranks = {}, suits = {};
+    let rankValues = [];
+    let rankMap = {};
+    
+    // Parse cards
+    for (let card of cards) {
+        let suit = card.name[0];
+        let rank = parseInt(card.name.slice(1));
+        
+        ranks[rank] = (ranks[rank] || 0) + 1;
+        suits[suit] = (suits[suit] || 0) + 1;
+        rankValues.push(rank);
+        rankMap[card] = rank;
+    }
+    
+    rankValues.sort((a, b) => a - b);
+    let uniqueRanks = Object.keys(ranks).length;
+    let isFlush = cards.length === 5 && Object.keys(suits).length === 1;
+    let isStraight = uniqueRanks === 5 && (rankValues[4] - rankValues[0] === 4 || rankValues.join() === "2,3,4,5,14");
+    
+    // Identify hands
+    let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+    let hand = "High Card";
+    let scoringRanks = new Set();
+    
+    if (isFlush && isStraight && rankValues.includes(14)) {
+        hand = "Royal Flush";
+        scoringRanks = new Set(rankValues);
+    } else if (isFlush && isStraight) {
+        hand = "Straight Flush";
+        scoringRanks = new Set(rankValues);
+    } else if (rankCounts[0][1] === 4) {
+        hand = "Four of a Kind";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+    } else if (rankCounts.length > 1 && rankCounts[0][1] === 3 && rankCounts[1][1] === 2) {
+        hand = "Full House";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+        scoringRanks.add(parseInt(rankCounts[1][0]));
+    } else if (isFlush) {
+        hand = "Flush";
+        scoringRanks = new Set(rankValues);
+    } else if (isStraight) {
+        hand = "Straight";
+        scoringRanks = new Set(rankValues);
+    } else if (rankCounts[0][1] === 3) {
+        hand = "Three of a Kind";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+    } else if (rankCounts.length > 1 && rankCounts[0][1] === 2 && rankCounts[1][1] === 2) {
+        hand = "Two Pair";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+        scoringRanks.add(parseInt(rankCounts[1][0]));
+    } else if (rankCounts[0][1] === 2) {
+        hand = "One Pair";
+        scoringRanks.add(parseInt(rankCounts[0][0]));
+    }else{
+		scoringRanks.add(parseInt(rankValues[0]))
+	}
+    
+    let scoringCards = cards.filter(card => scoringRanks.has(rankMap[card]));
+    
+    return { hand, scoringCards };
+}
+
+// Auto-start game
+window.addEventListener("load", () => {
+	//game.player.addJoker(RULEBOOK.jokers.jollyJoker);
+	setTimeout(() => $('#deal').click(), 50);
+});

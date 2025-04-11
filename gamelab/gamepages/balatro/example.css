@@ -1,0 +1,446 @@
+@font-face {
+	font-family: "Balatro";
+	src: url("m6x11plus.ttf");
+}
+
+html { 
+	background-color:red; 
+}
+
+body { 
+	position:relative;
+	width: 600px; 
+	background:rgba(100, 100, 100, 0); 
+	color:white;
+	margin:20px auto; 
+	font-family: "Balatro"; 
+	padding:25px;  
+}
+button {
+	text-align:center;
+	font-family: "Balatro"; 
+}
+
+.joker {
+	image-rendering:pixelated;
+}
+
+a img {
+	position: absolute; 
+	top: 0; 
+	right: 0; 
+	border: 0;			
+}
+#deal, #play, #discard {
+	height:30px;
+	width:100px;
+	margin: 8px auto;
+}
+img.preload {
+	display:none;
+}
+h1 {
+	font-size:60px;
+	text-align:center;
+	padding:0px;
+	margin:10px auto;
+}
+
+#glCanvas { 
+	display: block;
+	width: 100vw;
+	height: 100vh; 
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:-999999999;
+	image-rendering: pixelated;
+	/* animation: rotatingHue 60s linear infinite; */
+}
+@keyframes rotatingHue{
+	0%{
+		filter: hue-rotate(0deg);
+	}
+	100%{
+		filter: hue-rotate(360deg);
+	}
+}
+
+#card-table {
+	height:300px;
+	width:600px;
+	border:solid 6px transparent;
+	border-radius:8px;
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	-ms-border-radius:8px;
+	-o-border-radius:8px;
+	/* backdrop-filter: blur(5px); */
+}
+a:visited {color:blue;}
+#controls{
+	margin:auto;
+	width: 50%;
+}
+
+.scoringCard {
+	animation : none !important;
+	translate : 0px -10px !important;
+}
+
+
+.card{
+	image-rendering: pixelated;
+	transition: translate 0.1s;
+}
+[insideType="Hand"]{
+	filter: drop-shadow(8px 8px 0px rgba(0,0,0,0.5));
+	animation: idle 5s ease infinite alternate;
+}
+.card:hover{
+	filter: drop-shadow(8px 8px 10px black);
+}
+[insideType="Hand"].card:hover{
+	translate: 0px -10px !important;
+	border: 3px solid white;
+	border-radius: 5px;
+	transition: translate 0.1s;
+}
+
+@keyframes idle{
+	0%{
+		rotate: -3deg;
+		translate: 0px -3px;
+	}
+	100%{
+		rotate: 3deg;
+		translate: 0px 3px;
+	}
+}
+
+#deal {
+	position: absolute;
+	left:250px;
+	top:0px;
+}
+chips,mult{
+	padding-left:5px;
+	padding-right:5px;
+
+}
+
+blindInfo{
+	margin-top: 5vh;
+	border-radius: 10px;
+	display:block;
+	padding: 5px;
+	padding-top: 1;
+	background-color:rgb(15, 35, 124);
+	font-size: 20px;
+	animation: rotatingHue 60s linear infinite;
+}
+#blindName{
+	background-color:rgb(0, 0, 255);
+	border-radius: 3px;
+	width: 100%;
+}
+
+playingHand{
+	border: 3px solid rgb(48, 48, 48);
+	background-color: rgb(48, 48, 48);
+	border-radius: 10px;
+	font-size: 20px;
+	display:block;
+	padding-bottom: 10px;
+}
+
+#playingHandMult, #playingHandChips{
+	font-size: 30px;
+	text-align: center;
+	width: 25%;
+	display: inline-block;
+	border-radius: 5px;
+}
+
+#playingHandName{
+	font-size: 25px;
+}
+
+#playingHandLevel{
+	font-size: 12.5px;
+}
+
+#rndScr{
+	border: 3px solid rgb(48, 48, 48);
+	border-radius: 10px;
+	font-size: 17.5px;
+}
+#roundScore{
+	font-size: 25px;
+	background-color: rgb(48, 48, 48);
+	width: 100%;
+	display: inline-block;
+}
+
+#blindDescription{
+	background-color: rgb(34, 34, 34);
+	border-radius: 5px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+
+}
+
+#blindDescription b{
+	color:blue;
+}
+
+
+#rndHands, #rndDisc, #plyMon, #gamRnd, #gamAnt{
+	margin-top: 10px;
+	border: 3px solid rgb(48, 48, 48);
+	background-color: rgb(34, 34, 34);
+
+	border-radius: 10px;
+	display: inline-block;
+	width: 5vw;
+	
+}
+#infoHands{
+	color: rgb(0, 128, 255);
+	font-size: 30px;
+	background-color: rgb(48, 48, 48);
+	width: 100%;
+	display: inline-block;
+}
+#play{
+	background-color: rgb(0, 128, 255);
+	color:white;
+	border: 3px gray solid;
+	border-radius: 2px;
+}
+#infoDiscards{
+	color: red;
+	font-size: 30px;
+	background-color: rgb(48, 48, 48);
+	width: 100%;
+	display: inline-block;
+}
+#discard{
+	background-color: red;
+	color:white;
+	border: 3px gray solid;
+	border-radius: 2px;
+}
+#discard:disabled{
+	background-color: dimgray;
+}
+#discard:hover, #play:hover{
+	border: 3px white solid;
+}
+#plyMon{
+	color:gold;
+}
+
+chips{
+	background:blue;
+}
+mult {
+	background: red;
+}
+
+footer {
+	font-size : 12px;
+	color:grey;
+	margin:10px;
+}
+
+footer a, footer a:visited{
+	color:grey;
+}
+
+footer a:hover {
+	color:black;
+}
+
+
+.joker {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  animation: idle 5s ease infinite alternate;
+}
+
+.joker .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#Info{
+	text-align:center;
+	background-color: rgb(34, 34, 34);
+	border-radius: 5px;
+	padding: 10px;
+	position : fixed;
+	z-index: 999;
+	left: 5%;
+	top: -3%;
+	height: 105vh;
+	width: 15vw;
+}
+
+#store-box{
+	backdrop-filter: invert();
+	padding: 10px;
+	margin: 10px;
+	border-radius: 10px;
+	color: black;
+}
+
+hands{
+	color:cyan;
+}
+discards{
+	color:crimson;
+}
+
+money{
+	color:gold;
+}
+
+diamonds,clubs,spades,hearts{
+	background-color:white;
+	border-radius: 3px;
+
+}
+
+diamonds{
+	color:orange;
+}
+diamonds:before{
+	content:'\2666';
+}
+clubs{
+	color:blue;
+}
+clubs:before{
+	content:'\2663';
+}
+spades,spade{
+	color:purple;
+}
+spades:before{
+	content:'\2660';
+}
+hearts{
+	color:red;
+}
+hearts:before{
+	content: '\2665';
+}
+
+u{
+	color:orange;
+	text-decoration:none;
+}
+
+.price{
+	position: absolute;
+	background-color: rgba(255, 208, 0, 0.83);
+	color:black;
+	padding: 2px;
+	padding-left: 4px;
+	border: black solid 0.2px;
+	border-radius: 3px;
+	left: 50%;
+	text-align:center;
+	margin-right: -50%;
+	bottom:0;
+	z-index: 999;
+    transform: translate(-50%, 25%);
+}
+#shopText{
+	color:white;
+}
+#satisfaction{
+	position: fixed;
+	display: inline-block;
+	z-index: 99999;
+	background-color: blue;
+	pointer-events: none;
+	padding: 5px;
+	border: 3px solid white;
+	color: white;
+	/* transition: top 0.1s, left 0.1s; */
+}
+
+#mydiv{
+	height: 50vh;
+	width: 50vw;
+	background-color: black;
+	color:white;
+	text-align: center;
+}
+
+#closingPop{
+	width: 100%;
+}
+
+.in-shop img {
+	animation: idle 5s ease infinite alternate;
+}
+
+.in-shop {
+	border-radius: 5px;
+	background-color: rgba(50,50,50,0.5);
+	box-shadow: 1px 2px 2px 1px black;
+	transition: background-color 1s ease, transform 1s ease;
+	margin: 10px;
+}
+
+.in-shop:hover{
+	background-color: rgba(50, 50, 50, 1);
+	animation: none;
+	transition: background-color 1s ease, transform 1s ease;
+}
+
+.joker:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+#Info:before {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 10%;
+	right: -5%;
+	left: -5%;
+	background: inherit;
+	border-radius: 5% / 60%;
+	border: white solid 3px;
+	height: 105vh;
+	z-index:-5;
+}
+
+button:active, .card:active{
+	outline: black 2px solid;
+}
+*{
+	text-shadow: 2px 2px rgba(0,0,0,0.5);
+}

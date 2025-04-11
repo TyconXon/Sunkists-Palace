@@ -1,0 +1,822 @@
+RULEBOOK = {
+	blinds : {
+		small : {
+			name : "Small Blind",
+			description: "",
+			scaling : 1,
+			payout : 3,
+			colors : [
+				[0.871, 0.267, 0.231],
+				[0.0, 0.42, 0.706],
+				[0.086, 0.137, 0.145],
+			]
+		},
+		big : {
+			name : "Big Blind",
+			description: "",
+			scaling : 1.5,
+			payout : 3,
+			colors : [
+				[0.271, 0.667, 0.231],
+				[0.0, 0.52, 0.306],
+				[0.086, 0.137, 0.145]
+			]
+		},
+		boss : [
+			{
+				name : "The Wall",
+				description: "Extra large blind",
+				minimumAnte : 2,
+				scaling : 4,
+				payout : 5,
+				hooks : ["cardCheckHook"],
+				cardCheckHook : function(card){
+					return true
+				},
+				colors : [
+					[0.871, 0.267, 0.231],
+					[0.0, 0.42, 0.706],
+					[0.086, 0.137, 0.145],
+				]
+			},
+			{
+				name : "The Club",
+				description: "All Club cards are debuffed",
+				scaling : 2,
+				payout : 5,
+				hooks : ["cardCheckHook"],
+				minimumAnte : 1,
+				cardCheckHook : function(card){
+					if(card.suit == "c"){
+						return false
+					}else{
+						return true
+					}
+				},
+				colors : [
+					[0.871, 0.267, 0.231],
+					[0.0, 0.42, 0.706],
+					[0.086, 0.137, 0.145],
+				]
+			},
+			{
+				name : "The Spade",
+				description: "All Spade cards are debuffed",
+				scaling : 2,
+				payout : 5,
+				hooks : ["cardCheckHook"],
+				minimumAnte : 1,
+				cardCheckHook : function(card){
+					if(card.suit == "s"){
+						return false
+					}else{
+						return true
+					}
+				},
+				colors : [
+					[0.871, 0.267, 0.231],
+					[0.0, 0.42, 0.706],
+					[0.086, 0.137, 0.145],
+				]
+			},
+			// {
+			// 	name : "The Hook",
+			// 	description: "Discards 2 random cards per hand played",
+			// 	scaling : 2,
+			// 	payout : 5,
+			// 	hooks : ["afterPlayHook"],
+			// 	minimumAnte : 1,
+			// 	//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			// 	afterPlayHook : function(givenInformation){
+			// 		let lowerhand = givenInformation.stationaryHand;
+			// 		for (let index = 0; index < 2; index++) {
+			// 			let randomChoice = Math.floor(Math.random() * lowerhand.length);
+			// 			givenInformation.deck.addCard(lowerhand[randomChoice]);
+			// 			givenInformation.deck.render();
+			// 		}
+			// 	},
+			// 	colors : [
+			// 		[0.871, 0.267, 0.211],
+			// 		[0.0, 0.32, 0.206],
+			// 		[0.186, 0.137, 0.145]
+			// 	]
+			// },
+			// {
+			// 	name : "The Wheel",
+			// 	description: "1 in 7 cards get drawn face down",
+			// 	scaling : 2,
+			// 	payout : 5,
+			// 	hooks : ["drawCardHook"],
+			// 	minimumAnte : 1,
+			// 	//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			// 	drawCardHook : function(card){
+			// 		if(Math.random() < (1/7)){
+			// 			card.faceDownBLIND = true;
+			// 		}
+			// 	},
+			// 	colors : [
+			// 		[0.871, 0.267, 0.211],
+			// 		[0.0, 0.32, 0.206],
+			// 		[0.186, 0.137, 0.145]
+			// 	]
+			// },
+		]
+	},
+	anteScaling : [300,800,2000,5000,11000,20000,35000,50000],
+	buildBlind : function(level,ante){
+		let returningBlind = {};
+		switch (level) {
+			case 0:
+				returningBlind = this.blinds.small
+				break;
+			case 1:
+				returningBlind = this.blinds.big
+				break;
+			case 2:
+				returningBlind = this.blinds.boss[Math.floor(Math.random()*this.blinds.boss.length)]
+				break;
+			default:
+				alert("err in building blind")
+				break;
+		}
+		returningBlind.minimum = this.anteScaling[ante] * returningBlind.scaling;
+		return returningBlind;
+
+	},
+	enhancements : {
+		none : "Basic Card",
+		bonus : "Bonus Card",
+		mult : "Mult Card",
+		wild : "Wild Card",
+		glass : "Glass Card",
+		steel : "Steel Card",
+		stone : "Stone Card",
+		gold : "Gold Card",
+		lucky : "Lucky Card"
+	},
+	seals : {
+		none : "No seal",
+		gold : "Gold Seal",
+		red : "Red Seal",
+		blue : "Blue Seal",
+		purple : "Purple Seal"
+	},
+	editions : {
+		base : "Base",
+		foil : "Foil",
+		holographic : "Holographic",
+		polychrome : "Polychrome",
+		negative : "Negative"
+	},
+	jokers:{
+		joker:{
+			name : "Joker",
+			description: "<mult>+4</mult> Mult",
+			price: 4,
+			quality:0,
+			id : "000",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + 4}
+				return returningData
+			},
+		},
+		gluttonousJoker:{
+			name : "Gluttonous Joker",
+			description: "Played cards with <clubs>Clubs</clubs> suit give <mult>+3</mult> Mult when scored",
+			price: 4,
+			quality:0,
+			id : "019",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let clubCount = 0
+				givenInformation.handType.scoringCards.forEach(card => {
+					if(card.suit == "c"){
+						clubCount++
+					}
+				});
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (clubCount*3)}
+				return returningData
+			},
+		},
+		wrathfulJoker:{
+			name : "Wrathful Joker",
+			description: "Afton 'feel my' Wrath",
+			price: 4,
+			quality:0,
+			id : "018",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let clubCount = 0
+				givenInformation.handType.scoringCards.forEach(card => {
+					if(card.suit == "s"){
+						clubCount++
+					}
+				});
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (clubCount*3)}
+				return returningData
+			},
+		},
+		lustyJoker:{
+			name : "Lusty Joker",
+			description: "Played cards with <hearts>Hearts</hearts> suit give <mult>+3</mult> Mult when scored",
+			price: 4,
+			quality:0,
+			id : "017",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let clubCount = 0
+				givenInformation.handType.scoringCards.forEach(card => {
+					if(card.suit == "h"){
+						clubCount++
+					}
+				});
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (clubCount*3)}
+				return returningData
+			},
+		},
+		greedyJoker:{
+			name : "Greedy Joker",
+			description: "Played cards with <diamonds>Diamonds</diamonds> suit give <mult>+3</mult> Mult when scored",
+			price: 4,
+			quality:0,
+			id : "016",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let clubCount = 0
+				givenInformation.handType.scoringCards.forEach(card => {
+					if(card.suit == "d"){
+						clubCount++
+					}
+				});
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (clubCount*3)}
+				return returningData
+			},
+		},
+		halfJoker:{
+			name : "Half Joker",
+			description: "<mult>+20</mult> if played hand contains <b>3</b> or fewer cards",
+			price: 5,
+			quality:0,
+			id : "007",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let additionalMult = 0
+				if(givenInformation.handType.scoringCards.length <= 3 && givenInformation.stationaryHand.length >= givenInformation.gameObject.player.handSize - 3){
+					additionalMult = 20
+				} 
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + additionalMult}
+				return returningData
+			},
+		},
+		misprintJoker:{
+			name : "Misprint",
+			description: "<mult>+RANDOM</mult> Mult",
+			price: 5,
+			quality:0,
+			id : "026",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + Math.floor((Math.random()*25))}
+				return returningData
+			},
+		},
+		raisedFistJoker:{
+			name : "Raised Fist",
+			description: "Adds <u>double</u> the rank of the <u>lowest</u> ranked card held in hand to Mult",
+			price: 5,
+			quality:0,
+			id : "028",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				if(givenInformation.stationaryHand.length < 1){
+					let returningData = {currentMultiplier: givenInformation.currentMultiplier};
+					return returningData;
+				}
+
+				let rankValues = [];
+				givenInformation.stationaryHand.forEach(card => {
+					let rank = parseInt(card.name.slice(1));
+					rankValues.push(rank);
+				});
+				rankValues.sort((a, b) => a - b);
+
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (2 * rankValues[0])};
+				return returningData;
+			},
+		},
+		bannerJoker:{
+			name : "Banner",
+			description: "<chips>+30</chips> Chips for each remaining <u>discard</u>",
+			price: 5,
+			quality:0,
+			id : "021",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentChips"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let returningData = {currentChips: givenInformation.currentChips + (30 * givenInformation.gameObject.blind.discards)};
+				return returningData;
+			},
+		},
+		oddToddJoker:{
+			name : "Odd Todd",
+			description: "Played cards with <u>odd</u> rank give <chips>+31</chips> Chips when scored",
+			price: 5,
+			quality:0,
+			id : "039",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentChips"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				
+				let additionalChips = 0
+				givenInformation.handType.scoringCards.forEach(card => {
+					if(card.rank % 2 !== 0){
+						additionalChips += 31;
+					}
+				});
+
+				let returningData = {currentChips: givenInformation.currentChips + additionalChips};
+				return returningData;
+			},
+		},
+		evenStevenJoker:{
+			name : "Even Steven",
+			description: "Played cards with <u>even</u> rank give <mult>+4</mult> Mult when scored",
+			price: 5,
+			quality:0,
+			id : "038",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				
+				let additionalMult = 0
+				givenInformation.handType.scoringCards.forEach(card => {
+					if(card.rank % 2 == 0){
+						additionalMult += 4;
+					}
+				});
+
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + additionalMult};
+				return returningData;
+			},
+		},
+		supernovaJoker:{
+			name : "Supernova",
+			description: "Adds the number of times the played <u>poker hand</u> has been played this run to Mult",
+			price: 5,
+			quality:0,
+			id : "042",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let timesPlayed = givenInformation.gameObject.player.timesPokerHandPlayed[givenInformation.handType.hand] || 0
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (timesPlayed)};
+				return returningData;
+			},
+		},
+		spaceJoker:{
+			name : "Space Joker",
+			description: "<u> 1 in 4 </u> chance to upgrade level of played <u> poker hand </u>",
+			price: 6,
+			quality: 1,
+			id : "053",
+			hooks : [
+				{
+					in:"beforeScoreHook", 
+					out:[]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			beforeScoreHook : (givenInformation)=>{
+				// let timesPlayed = givenInformation.gameObject.player.timesPokerHandPlayed[givenInformation.handType.hand] || 0
+				// let returningData = {currentMultiplier: givenInformation.currentMultiplier + (timesPlayed)};
+				// return returningData;
+				if(Math.random() < 0.25){
+					this.upgradePokerHand(givenInformation.handType.hand);
+				}
+			},
+		},
+		scholarJoker:{
+			name : "Scholar",
+			description: "Played <u>Aces</u> give <chips>+20</chips> Chips and <mult>+4</mult> Mult when scored",
+			price: 5,
+			quality:0,
+			id : "040",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier", "currentChips"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let acesCounted = 0
+				givenInformation.handType.scoringCards.forEach(card => {
+					if(card.rank == 1){
+						acesCounted++
+					}
+				});
+				let returningData = {
+					currentMultiplier: givenInformation.currentMultiplier + (acesCounted * 4),
+					currentChips : givenInformation.currentChips + (acesCounted * 20)
+				}
+				return returningData;   
+			},
+		},
+		smileyFaceJoker:{
+			name : "Smiley Face",
+			description: "Played <u>face cards</u> give <mult>+5</mult> Mult when scored",
+			price: 5,
+			quality:0,
+			id : "154",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let acesCounted = 0
+				givenInformation.handType.scoringCards.forEach(card => {
+					if(card.rank > 10){
+						acesCounted++
+					}
+				});
+				let returningData = {
+					currentMultiplier: givenInformation.currentMultiplier + (acesCounted * 4)
+				}
+				return returningData;   
+			},
+		},
+		jollyJoker:{
+			name : "Jolly Joker",
+			description: "<mult>+8</mult> Mult if played hand contains a <u>Pair</u>",
+			price: 3,
+			quality:0,
+			id : "002",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let hasPair = 0;
+
+				let ranks = {};
+				for (let card of givenInformation.handType.scoringCards) {
+					let rank = parseInt(card.name.slice(1));
+					ranks[rank] = (ranks[rank] || 0) + 1;
+				}
+				let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+				//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+				if (rankCounts[0][1] >= 2) {
+					hasPair = 1
+				}
+				
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (hasPair * 8)}
+				return returningData
+			},
+		},
+		zanyJoker:{
+			name : "Zany Joker",
+			description: "<mult>+12</mult> Mult if played hand contains a <u>Three of a Kind</u>",
+			price: 3,
+			quality:0,
+			id : "003",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let hasPair = 0;
+
+				let ranks = {};
+				for (let card of givenInformation.handType.scoringCards) {
+					let rank = parseInt(card.name.slice(1));
+					ranks[rank] = (ranks[rank] || 0) + 1;
+				}
+				let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+				//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+				if (rankCounts[0][1] >= 3) {
+					hasPair = 1
+				}
+				
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (hasPair * 12)}
+				return returningData
+			},
+		},
+		madJoker:{
+			name : "Mad Joker",
+			description: "<mult>+10</mult> Mult if played hand contains a <u>Two Pair</u>",
+			price: 3,
+			quality:0,
+			id : "004",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let hasPair = 0;
+
+				let ranks = {};
+				for (let card of givenInformation.handType.scoringCards) {
+					let rank = parseInt(card.name.slice(1));
+					ranks[rank] = (ranks[rank] || 0) + 1;
+				}
+				let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+				//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+				if (rankCounts.length > 1 && rankCounts[0][1] >= 2 && rankCounts[1][1] >= 2) {
+					hasPair = 1
+				}
+				
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (hasPair * 12)}
+				return returningData
+			},
+		},
+		slyJoker:{
+			name : "Sly Joker",
+			description: "<chips>+50</chips> Chips if played hand contains a <u>Pair</u>",
+			price: 3,
+			quality:0,
+			id : "138",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentChips"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let hasPair = 0;
+
+				let ranks = {};
+				for (let card of givenInformation.handType.scoringCards) {
+					let rank = parseInt(card.name.slice(1));
+					ranks[rank] = (ranks[rank] || 0) + 1;
+				}
+				let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+				//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+				if (rankCounts[0][1] >= 2) {
+					hasPair = 1
+				}
+				
+				let returningData = {currentChips: givenInformation.currentChips + (hasPair * 50)}
+				return returningData
+			},
+		},
+		wilyJoker:{
+			name : "Wily Joker",
+			description: "<chips>+100</chips> Chips if played hand contains a <u>Three of a Kind</u>",
+			price: 3,
+			quality:0,
+			id : "139",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentChips"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let hasPair = 0;
+
+				let ranks = {};
+				for (let card of givenInformation.handType.scoringCards) {
+					let rank = parseInt(card.name.slice(1));
+					ranks[rank] = (ranks[rank] || 0) + 1;
+				}
+				let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+				//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+				if (rankCounts[0][1] >= 3) {
+					hasPair = 1
+				}
+				
+				let returningData = {currentChips: givenInformation.currentChips + (hasPair * 100)}
+				return returningData
+			},
+		},
+		cleverJoker:{
+			name : "Clever Joker",
+			description: "<chips>+80</chips> chips if played hand contains a <u>Two Pair</u>",
+			price: 3,
+			quality:0,
+			id : "140",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentChips"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let hasPair = 0;
+
+				let ranks = {};
+				for (let card of givenInformation.handType.scoringCards) {
+					let rank = parseInt(card.name.slice(1));
+					ranks[rank] = (ranks[rank] || 0) + 1;
+				}
+				let rankCounts = Object.entries(ranks).sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+				//document.querySelector("h1").innerText = JSON.stringify(ranks) + " | " + JSON.stringify(rankCounts)
+				if (rankCounts.length > 1 && rankCounts[0][1] >= 2 && rankCounts[1][1] >= 2) {
+					hasPair = 1
+				}
+				
+				let returningData = {currentChips: givenInformation.currentChips + (hasPair * 80)}
+				return returningData;
+			},
+		},
+		mysticSummitJoker:{
+			name : "Mystic Summit",
+			description: "<mult>+15</mult> Mult when <u>0</u> discards remaining",
+			price: 5,
+			quality:0,
+			id : "022",
+			hooks : [
+				{
+					in:"afterCardsScoreHook", 
+					out:["currentMultiplier"]
+				},
+			],
+			//givenInformation = {handType, gameObject, deck, stationaryHand, currentMultiplier, currentChips}
+			afterCardsScoreHook : (givenInformation)=>{
+				let qualifies = 0;
+				if ( givenInformation.gameObject.blind.discards == 0 ){
+					qualifies = 15;
+				}
+				let returningData = {currentMultiplier: givenInformation.currentMultiplier + (qualifies)};
+				return returningData;
+			},
+		},
+	},
+	vouchers:{
+		overstockVoucher : {
+			name : "Overstock",
+			description : "Add an additional card slot to the shop.",
+			price : 10,
+			id : '00',
+			effect : function(game){
+				return "not finished";
+			}
+		}
+	},
+
+	basePokerHands : {
+		"Straight Flush" :{
+			level : 1,
+			chips : 100,
+			mult  : 8,
+			upgrade : [40,4],
+			played: 0,
+			id : 37
+		},
+		"Four of a Kind" :{
+			level : 1,
+			chips : 60,
+			mult  : 7,
+			upgrade : [30,3],
+			played: 0,
+			id : 33
+		},
+		"Full House"     :{
+			level : 1,
+			chips : 40,
+			mult  : 4,
+			upgrade : [25,2],
+			played: 0,
+			id: 32,
+		},
+		"Flush"          :{
+			level : 1,
+			chips : 35,
+			mult  : 4,
+			upgrade : [15,2],
+			played: 0,
+			id : 34,
+		},
+		"Straight"       :{
+			level : 1,
+			chips : 30,
+			mult  : 4,
+			upgrade : [30,3],
+			played: 0,
+			id : 35,
+		},
+		"Three of a Kind":{
+			level : 1,
+			chips : 30,
+			mult  : 3,
+			upgrade : [20,2],
+			played: 0,
+			id : 31,
+		},
+		"Two Pair"       :{
+			level : 1,
+			chips : 20,
+			mult  : 2,
+			upgrade : [20,1],
+			played: 0,
+			id : 36
+		},
+		"One Pair"       :{
+			level : 1,
+			chips : 10,
+			mult  : 2,
+			upgrade : [15,1],
+			played: 0,
+			id : 30,
+		},
+		"High Card"      :{
+			level : 1,
+			chips : 5,
+			mult  : 1,
+			upgrade : [10,1],
+			played: 0,
+			id : 38
+		},
+	},
+	upgradePokerHand : (hand, times = 1) => {
+		saidHand = this.basePokerHands[hand];
+		saidHand.level += times;
+		saidHand.chips += (times * saidHand.upgrade[0]);
+		saidHand.mult += (times * saidHand.upgrade[1]);
+		alert(`Upgraded ${hand}!`)
+	}
+  }
