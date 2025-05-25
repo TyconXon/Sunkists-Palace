@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>Boxel</title>
-		<link rel="preload" as="image" href="assets/boxel/images/bg2.jpeg" />
+		<link rel="preload" as="image" href="/users/assets/boxel/images/bg2.jpeg" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa"/>
 		
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
@@ -27,7 +27,7 @@
 			color: white;
 			width: 50vmax;
 			padding-bottom: 30px;
-			background: #38576c url(assets/boxel/images/bg2.jpeg) no-repeat fixed center;
+			background: #38576c url(/users/assets/boxel/images/bg2.jpeg) no-repeat fixed center;
 			background-size: 100% 100%;
 		}
 
@@ -72,7 +72,7 @@
 
 		#featuredQuote {
 			transition: cubic-bezier(.60, .20, .50, .75) 0.3s;
-			user: select initial;;
+			user-select: initial;
 		}
 
 		.animate {
@@ -88,7 +88,7 @@
 			cursor:pointer;
 			border-radius:25px;
 			margin:1%;
-			text: align center;
+			text-align: center;
 			float:left;
 			width:28%;
 			height:28%;
@@ -226,10 +226,10 @@
 	<body onload="quote()">
 		<!-- Header Stuff -->
 		<div>
-			<img src="../images/rain.gif" id="rainbg">
+			<img src="/images/rain.gif" id="rainbg">
 			<h1>Boxel</h1>
 			<hr />
-			<img src="assets/boxel/images/boxelIcon.png" alt="BoxelIcon" id="headerIcon" />
+			<img src="/users/assets/boxel/images/boxelIcon.png" alt="BoxelIcon" id="headerIcon" />
 			<hr />
 			<h3 id="featuredQuote"></h3>
 			<button onclick="quote()">Refresh</button>
@@ -238,7 +238,7 @@
 		<div class="container">
 			<h3>Who am I?</h3>
 			<hr>
-			<p>I'm Boxel/Soapy/Whatever name you wanna use</p>
+			<p>I'm Boxel/Soapy</p>
 		</div>
 		<!-- What do I do? -->
 		<div class="container">
@@ -286,17 +286,17 @@
 				<div class="row">
 
 					<input type="radio" id="none" name="companion" value="none" oninput="giveCSS()" style="opacity:0;">
-					<label for="none"><img  src="assets/boxel/companions/none.png" alt="None"></label>
+					<label for="none"><img  src="/users/assets/boxel/companions/none.png" alt="None"></label>
 					<input type="radio" id="ralsei" name="companion" value="ralsei.png" oninput="giveCSS()">
-					<label for="ralsei"><img  src="assets/boxel/companions/ralsei.png" alt="Ralsei"></label>
+					<label for="ralsei"><img  src="/users/assets/boxel/companions/ralsei.png" alt="Ralsei"></label>
 					<input type="radio" id="sunkist" name="companion" value="sunkist.png" oninput="giveCSS()">
-					<label for="sunkist"><img src="assets/boxel/companions/sunkist.png" alt="Sunkist"></label>
+					<label for="sunkist"><img src="/users/assets/boxel/companions/sunkist.png" alt="Sunkist"></label>
 					<input type="radio" id="lloyd" name="companion" value="lloyd.png" oninput="giveCSS()">
-					<label for="lloyd"><img src="assets/boxel/companions/lloyd.png" alt="Lloyd"></label>
+					<label for="lloyd"><img src="/users/assets/boxel/companions/lloyd.png" alt="Lloyd"></label>
 					<input type="radio" id="boxel" name="companion" value="boxel.png" oninput="giveCSS()">
-					<label for="boxel"><img src="assets/boxel/companions/boxel.png" alt="Boxel"></label>
+					<label for="boxel"><img src="/users/assets/boxel/companions/boxel.png" alt="Boxel"></label>
 					<input type="radio" id="adam" name="companion" value="adam.png" oninput="giveCSS()">
-					<label for="adam"><img src="assets/boxel/companions/adam.png" alt="Adam"></label>
+					<label for="adam"><img src="/users/assets/boxel/companions/adam.png" alt="Adam"></label>
 				
 				</div>
 					
@@ -318,7 +318,7 @@
 
 
 				
-				<textarea style="margin-top:30px;"rows="8" id="CSSOutput" placeholder="Settings first, then Companion." readonly"></textarea>
+				<textarea style="margin-top:30px;"rows="8" id="CSSOutput" placeholder="Settings first, then Companion." readonly></textarea>
 			</details>
 		</div>
 		<hr>
