@@ -184,6 +184,7 @@ const server = http.createServer(function(req, res) {
 		PImage.encodePNGToStream(img1, fs.createWriteStream("out.png"))
 		.then(() => {
 			res.setHeader("Content-Type", "image/png");
+			res.setHeader('Cache-Control', 'no-cache, max-age=0');
 			res.write(fs.readFileSync('./out.png'));
 			res.end();
 			return;
